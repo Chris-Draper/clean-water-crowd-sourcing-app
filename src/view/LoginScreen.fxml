@@ -14,10 +14,10 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="289.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="143.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="143.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -45,7 +45,7 @@
             </HBox>
             <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <Button fx:id="backButton" mnemonicParsing="false" text="Back">
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBackButtonPressed" text="Back">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin>

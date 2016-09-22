@@ -21,6 +21,7 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         mainAppScreen = primaryStage;
+        mainAppScreen.setTitle("Clean Water Application");
         initRootLayout(mainAppScreen);
     }
 
@@ -42,7 +43,7 @@ public class MainApplication extends Application {
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
-            mainAppScreen.setTitle("Clean Water Application");
+            //mainAppScreen.setTitle("Clean Water Application");
             mainAppScreen.setScene(scene);
             mainAppScreen.show();
 
@@ -81,6 +82,10 @@ public class MainApplication extends Application {
             e.printStackTrace();
         }
 
+    }
+
+    public void reloadHomeScreen() {
+        initRootLayout(mainAppScreen);
     }
 
     public static void main(String[] args) {

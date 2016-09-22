@@ -42,6 +42,11 @@ public class LoginScreenController {
     }
 
     @FXML
+    private void handleBackButtonPressed() {
+        mainApplication.reloadHomeScreen();
+    }
+
+    @FXML
     private void handleLogInPressed() {
 
         //check to see if inserted credentials are valid
