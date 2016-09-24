@@ -4,9 +4,8 @@ import fxapp.MainApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import model.User;
 import model.UserType;
 
 /**
@@ -33,12 +32,15 @@ public class LoginScreenController {
     @FXML
     private Button backButton;
 
+    private User newUser;
+
     @FXML
     private void initialize() {
         for (UserType usertype : UserType.values()) {
             usertypes.add(usertype);
         }
         positionComboBox.getItems().addAll(usertypes);
+        newUser = new User("user","pass");
     }
 
     @FXML
@@ -48,7 +50,15 @@ public class LoginScreenController {
 
     @FXML
     private void handleLogInPressed() {
-        mainApplication.switchToHomeScreen();
+        if(isInputValid()) {
+            mainApplication.switchToHomeScreen();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "This Username and Password combination cannot be found", ButtonType.OK);
+            alert.showAndWait();
+            passwordTextField.setText("");
+        }
+
+
         //check to see if inserted credentials are valid
        // if (isInputValid()) {
 
@@ -57,8 +67,11 @@ public class LoginScreenController {
 
     // Check to see if values entered as username and password is acceptable
     private boolean isInputValid() {
-
-        return true; //EDIT LATER
+        if(usernameTextField.getText().equals(newUser.getUsername())
+                && passwordTextField.getText().equals(newUser.getPassword())) {
+            return true;
+        }
+        return false; //EDIT LATER
     }
 
     /**

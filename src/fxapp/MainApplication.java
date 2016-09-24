@@ -93,7 +93,7 @@ public class MainApplication extends Application {
             rootLayout = loader.load();
 
             // Give the controller access to the main app.
-            HomeScreenController ctrl = new HomeScreenController();
+            HomeScreenController ctrl = loader.getController();
             ctrl.setMainApp(this);
 
             /** Creating a new scene to display the login screen
