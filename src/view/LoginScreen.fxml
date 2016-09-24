@@ -27,7 +27,7 @@
             <TextField fx:id="passwordTextField" promptText="Enter Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Button fx:id="loginButton" contentDisplay="RIGHT" defaultButton="true" mnemonicParsing="false" text="Log In">
+                  <Button fx:id="loginButton" contentDisplay="RIGHT" defaultButton="true" mnemonicParsing="false" onAction="#handleLogInPressed" text="Log In">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

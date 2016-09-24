@@ -1,5 +1,6 @@
 package fxapp;
 
+import controller.HomeScreenController;
 import controller.LoginScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -82,6 +83,30 @@ public class MainApplication extends Application {
             e.printStackTrace();
         }
 
+    }
+
+    public void switchToHomeScreen() {
+        try {
+            // Pointing loader to login screen fxml file
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApplication.class.getResource("../view/HomeScreen.fxml"));
+            rootLayout = loader.load();
+
+            // Give the controller access to the main app.
+            HomeScreenController ctrl = new HomeScreenController();
+            ctrl.setMainApp(this);
+
+            /** Creating a new scene to display the login screen
+             *  Ensures that the content of the existing window is changed
+             *  and another window is not created
+             */
+            Scene scene = new Scene(rootLayout);
+            mainAppScreen.setScene(scene);
+            mainAppScreen.show();
+        } catch (IOException e) {
+            System.out.println("Failed to find the fxml file for Home Screen!");
+            e.printStackTrace();
+        }
     }
 
     public void reloadHomeScreen() {

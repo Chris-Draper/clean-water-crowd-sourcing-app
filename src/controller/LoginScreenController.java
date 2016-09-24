@@ -48,11 +48,11 @@ public class LoginScreenController {
 
     @FXML
     private void handleLogInPressed() {
-
+        mainApplication.switchToHomeScreen();
         //check to see if inserted credentials are valid
-        if (isInputValid()) {
-            //log in user
-        }
+       // if (isInputValid()) {
+
+
     }
 
     // Check to see if values entered as username and password is acceptable
