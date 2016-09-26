@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import controller.WelcomeScreenController;
+import model.OverallUser;
 
 public class MainApplication extends Application {
     /** the main container for the application window */
@@ -18,6 +19,8 @@ public class MainApplication extends Application {
 
     /** the main layout for the main window */
     private BorderPane rootLayout;
+
+    private OverallUser authenticatedUser;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -115,5 +118,13 @@ public class MainApplication extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public void setAuthenticatedUser(OverallUser authUser) {
+        authenticatedUser = authUser;
+    }
+
+    public void logoutUser() {
+        authenticatedUser = null;
     }
 }

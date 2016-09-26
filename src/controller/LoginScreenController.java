@@ -17,7 +17,6 @@ public class LoginScreenController {
 
     @FXML
     private ComboBox positionComboBox;
-
     private final ObservableList<UserType> usertypes = FXCollections.observableArrayList();
 
     @FXML
@@ -32,7 +31,7 @@ public class LoginScreenController {
     @FXML
     private Button backButton;
 
-    private User newUser;
+    private User aValidUser;
 
     @FXML
     private void initialize() {
@@ -40,7 +39,8 @@ public class LoginScreenController {
             usertypes.add(usertype);
         }
         positionComboBox.getItems().addAll(usertypes);
-        newUser = new User("user","pass");
+
+        aValidUser = new User("user","pass");
     }
 
     @FXML
@@ -50,28 +50,29 @@ public class LoginScreenController {
 
     @FXML
     private void handleLogInPressed() {
-        if(isInputValid()) {
+        if(usernameTextField.equals("") || passwordTextField.equals("") ||
+                positionComboBox.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "Please complete all fields", ButtonType.OK);
+            alert.showAndWait();
+        } else if(isInputValid()) {
+            mainApplication.setAuthenticatedUser(aValidUser);
             mainApplication.switchToHomeScreen();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "This Username and Password combination cannot be found", ButtonType.OK);
             alert.showAndWait();
             passwordTextField.setText("");
         }
-
-
-        //check to see if inserted credentials are valid
-       // if (isInputValid()) {
-
-
     }
 
     // Check to see if values entered as username and password is acceptable
     private boolean isInputValid() {
-        if(usernameTextField.getText().equals(newUser.getUsername())
-                && passwordTextField.getText().equals(newUser.getPassword())) {
+        if(usernameTextField.getText().equals(aValidUser.getUsername())
+                && passwordTextField.getText().equals(aValidUser.getPassword())
+                && positionComboBox.getValue().equals(aValidUser.getUserType())) {
             return true;
         }
-        return false; //EDIT LATER
+        return false;
     }
 
     /**

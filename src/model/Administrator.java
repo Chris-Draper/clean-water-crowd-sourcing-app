@@ -6,6 +6,6 @@ package model;
 public class Administrator extends OverallUser {
 
     public Administrator(String username, String password) {
-        super(username, password);
+        super(username, password, UserType.Administrator);
     }
 }
