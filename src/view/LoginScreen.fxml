@@ -15,10 +15,10 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="143.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="139.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label alignment="CENTER_RIGHT" text="Username:" />
@@ -52,8 +52,6 @@
                   </Button>
                </children>
             </HBox>
-            <ComboBox fx:id="positionComboBox" prefWidth="150.0" promptText="Select Position" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Position:" GridPane.rowIndex="2" />
          </children>
          <padding>
             <Insets left="125.0" right="95.0" top="40.0" />
