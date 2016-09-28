@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.GenericUser;
 import model.User;
 import model.UserType;
 
@@ -14,10 +15,6 @@ import model.UserType;
 public class LoginScreenController {
 
     private MainApplication mainApplication;
-
-    @FXML
-    private ComboBox positionComboBox;
-    private final ObservableList<UserType> usertypes = FXCollections.observableArrayList();
 
     @FXML
     private TextField usernameTextField;
@@ -35,11 +32,6 @@ public class LoginScreenController {
 
     @FXML
     private void initialize() {
-        for (UserType usertype : UserType.values()) {
-            usertypes.add(usertype);
-        }
-        positionComboBox.getItems().addAll(usertypes);
-
         aValidUser = new User("user","pass");
     }
 
@@ -50,8 +42,7 @@ public class LoginScreenController {
 
     @FXML
     private void handleLogInPressed() {
-        if(usernameTextField.equals("") || passwordTextField.equals("") ||
-                positionComboBox.getValue() == null) {
+        if(usernameTextField.equals("") || passwordTextField.equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();
@@ -67,12 +58,8 @@ public class LoginScreenController {
 
     // Check to see if values entered as username and password is acceptable
     private boolean isInputValid() {
-        if(usernameTextField.getText().equals(aValidUser.getUsername())
-                && passwordTextField.getText().equals(aValidUser.getPassword())
-                && positionComboBox.getValue().equals(aValidUser.getUserType())) {
-            return true;
-        }
-        return false;
+        return usernameTextField.getText().equals(aValidUser.getUsername())
+                && passwordTextField.getText().equals(aValidUser.getPassword());
     }
 
     /**
