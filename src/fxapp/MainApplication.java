@@ -4,14 +4,13 @@ import controller.HomeScreenController;
 import controller.LoginScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import controller.WelcomeScreenController;
-import model.OverallUser;
+import model.GenericUser;
 
 public class MainApplication extends Application {
     /** the main container for the application window */
@@ -20,7 +19,7 @@ public class MainApplication extends Application {
     /** the main layout for the main window */
     private BorderPane rootLayout;
 
-    private OverallUser authenticatedUser;
+    private GenericUser authenticatedUser;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -120,7 +119,7 @@ public class MainApplication extends Application {
         launch(args);
     }
 
-    public void setAuthenticatedUser(OverallUser authUser) {
+    public void setAuthenticatedUser(GenericUser authUser) {
         authenticatedUser = authUser;
     }
 
