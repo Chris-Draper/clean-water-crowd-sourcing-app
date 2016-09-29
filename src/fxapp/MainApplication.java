@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import controller.WelcomeScreenController;
 import model.GenericUser;
+import model.User;
+import model.UserLog;
 
 public class MainApplication extends Application {
     /** the main container for the application window */
@@ -21,6 +23,10 @@ public class MainApplication extends Application {
     private BorderPane rootLayout;
 
     private GenericUser authenticatedUser;
+
+    private UserLog userLog;
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -44,9 +50,12 @@ public class MainApplication extends Application {
             // Give the controller access to the main app.
             WelcomeScreenController ctrl = loader.getController();
             ctrl.setMainApp(this);
+            userLog = new UserLog();
+
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
+
             //mainAppScreen.setTitle("Clean Water Application");
             mainAppScreen.setScene(scene);
             mainAppScreen.show();
@@ -151,4 +160,10 @@ public class MainApplication extends Application {
     public void logoutUser() {
         authenticatedUser = null;
     }
+
+    public UserLog getUserlog() {
+        System.out.println("hi");
+        return userLog;}
+
+
 }

@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.GenericUser;
 import model.User;
+import model.UserLog;
 import model.UserType;
 
 /**
@@ -29,6 +30,8 @@ public class LoginScreenController {
     private Button backButton;
 
     private User aValidUser;
+
+    private UserLog userLog;
 
     @FXML
     private void initialize() {
@@ -68,6 +71,7 @@ public class LoginScreenController {
      * */
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
+        userLog = mainApplication.getUserlog();
     }
 
 }

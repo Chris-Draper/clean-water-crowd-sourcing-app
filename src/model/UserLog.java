@@ -11,7 +11,9 @@ public class UserLog {
 
     public UserLog() {
         this.userLog = new LinkedList<>();
+        this.addDummy();
     }
+
     public void addUser(GenericUser user) {
         userLog.add(user);
     }
@@ -24,8 +26,9 @@ public class UserLog {
     }
 
     public boolean contains(GenericUser user) {
-        return false;
+        return userLog.contains(user);
     }
+
 
 
 }
