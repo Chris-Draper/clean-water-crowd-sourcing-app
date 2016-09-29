@@ -2,6 +2,7 @@ package fxapp;
 
 import controller.HomeScreenController;
 import controller.LoginScreenController;
+import controller.RegistrationScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -98,7 +99,7 @@ public class MainApplication extends Application {
             HomeScreenController ctrl = loader.getController();
             ctrl.setMainApp(this);
 
-            /** Creating a new scene to display the login screen
+            /** Creating a new scene to display the Home Screen
              *  Ensures that the content of the existing window is changed
              *  and another window is not created
              */
@@ -107,6 +108,30 @@ public class MainApplication extends Application {
             mainAppScreen.show();
         } catch (IOException e) {
             System.out.println("Failed to find the fxml file for Home Screen!");
+            e.printStackTrace();
+        }
+    }
+
+    public void switchToRegisterScreen() {
+        try {
+            // Pointing loader to login screen fxml file
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApplication.class.getResource("../view/RegistrationScreen.fxml"));
+            rootLayout = loader.load();
+
+            // Give the controller access to the main app.
+            RegistrationScreenController ctrl = loader.getController();
+            ctrl.setMainApp(this);
+
+            /** Creating a new scene to display the Register Screen
+             *  Ensures that the content of the existing window is changed
+             *  and another window is not created
+             */
+            Scene scene = new Scene(rootLayout);
+            mainAppScreen.setScene(scene);
+            mainAppScreen.show();
+        } catch (IOException e) {
+            System.out.println("Failed to find the fxml file for Registration Screen!");
             e.printStackTrace();
         }
     }
