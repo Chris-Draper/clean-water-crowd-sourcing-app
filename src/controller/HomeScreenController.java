@@ -43,7 +43,7 @@ public class HomeScreenController {
     @FXML
     private void handleLogoutMenuPressed() {
         mainApplication.logoutUser();
-        mainApplication.switchToLoginScreen();
+        mainApplication.reloadHomeScreen();
     }
 
 

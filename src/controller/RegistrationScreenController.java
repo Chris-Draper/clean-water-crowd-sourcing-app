@@ -46,12 +46,13 @@ public class RegistrationScreenController {
     }
     @FXML
     public void handleLogInPressed() {
-        if(usernameTextField.equals("") || passwordTextField.equals("") || positionComboBox.getSelectionModel().selectedItemProperty().getValue() == null ) {
+        UserType type = (UserType) positionComboBox.getSelectionModel().selectedItemProperty().getValue();
+        if(usernameTextField.equals("") || passwordTextField.equals("") || type == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();
         } else {
-            UserType type = (UserType) positionComboBox.getSelectionModel().selectedItemProperty().getValue();
+            type = (UserType) positionComboBox.getSelectionModel().selectedItemProperty().getValue();
             if (type.equals(UserType.User)) {
                 userLog.addUser(new User(usernameTextField.getText(),
                         passwordTextField.getText()));

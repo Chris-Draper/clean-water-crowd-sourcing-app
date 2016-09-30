@@ -162,7 +162,6 @@ public class MainApplication extends Application {
     }
 
     public UserLog getUserlog() {
-        System.out.println("hi");
         return userLog;}
 
 

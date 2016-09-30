@@ -19,7 +19,7 @@ public class UserLog {
     }
 
     public void addDummy() {
-        addUser(new Manager("nhaper32", "harper285"));
+        addUser(new Manager("nharper32", "harper285"));
         addUser(new Worker("cdraper", "draper"));
         addUser(new User("sbuckingham", "buckingham"));
         addUser(new Administrator("cpolack", "polack"));
