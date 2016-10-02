@@ -31,8 +31,14 @@ public abstract class GenericUser {
 
     public void setPassword(String password) { this.password = password; }
 
-    public boolean equals(GenericUser user1, GenericUser user2) {
-        return user1.getUsername().equals(user2.getUsername());
+
+    public boolean equals(Object o) {
+        if(o == null) {
+            return false;
+        } else {
+            GenericUser user = (GenericUser) o;
+            return this.getUsername().equals(user.getUsername()) && this.getPassword().equals(user.getPassword());
+        }
     }
 
 }

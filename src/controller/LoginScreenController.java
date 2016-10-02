@@ -5,9 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.GenericUser;
-import model.User;
-import model.UserType;
+import model.*;
 
 /**
  * Created by sbuck on 9/21/2016.
@@ -30,6 +28,8 @@ public class LoginScreenController {
 
     private User aValidUser;
 
+    private UserLog userLog;
+
     @FXML
     private void initialize() {
         aValidUser = new User("user","pass");
@@ -42,7 +42,7 @@ public class LoginScreenController {
 
     @FXML
     private void handleLogInPressed() {
-        if(usernameTextField.equals("") || passwordTextField.equals("")) {
+        if(usernameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();
@@ -58,8 +58,8 @@ public class LoginScreenController {
 
     // Check to see if values entered as username and password is acceptable
     private boolean isInputValid() {
-        return usernameTextField.getText().equals(aValidUser.getUsername())
-                && passwordTextField.getText().equals(aValidUser.getPassword());
+        GenericUser potentialUser = new User(usernameTextField.getText(),passwordTextField.getText());
+        return userLog.contains(potentialUser);
     }
 
     /**
@@ -68,6 +68,7 @@ public class LoginScreenController {
      * */
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
+        userLog = mainApplication.getUserlog();
     }
 
 }

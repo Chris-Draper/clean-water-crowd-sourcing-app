@@ -5,7 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.UserType;
+import model.*;
 
 import java.util.LinkedList;
 
@@ -32,6 +32,9 @@ public class RegistrationScreenController {
     private ComboBox positionComboBox;
     private final ObservableList<UserType> userTypes = FXCollections.observableArrayList();
 
+    private UserLog userLog;
+
+
     @FXML
     private void initialize() {
         for (UserType userType: UserType.values()) {
@@ -40,14 +43,32 @@ public class RegistrationScreenController {
         positionComboBox.getItems().addAll(userTypes);
 
     }
+
+   // public void handleRegisterPressed() {
+        //if(usernameTextField.equals("") || passwordTextField.equals("")) {
     @FXML
-    public void handleRegisterPressed() {
-        if(usernameTextField.equals("") || passwordTextField.equals("")) {
+    public void handleLogInPressed() {
+        UserType type = (UserType) positionComboBox.getSelectionModel().selectedItemProperty().getValue();
+        if(usernameTextField.equals("") || passwordTextField.equals("") || type == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();
         } else {
-
+            type = (UserType) positionComboBox.getSelectionModel().selectedItemProperty().getValue();
+            if (type.equals(UserType.User)) {
+                userLog.addUser(new User(usernameTextField.getText(),
+                        passwordTextField.getText()));
+            } else if (type.equals(UserType.Worker)) {
+                userLog.addUser(new Worker(usernameTextField.getText(),
+                        passwordTextField.getText()));
+            } else if (type.equals(UserType.Manager)) {
+                userLog.addUser(new Manager(usernameTextField.getText(),
+                        passwordTextField.getText()));
+            } else if (type.equals(UserType.Administrator)) {
+                userLog.addUser(new Administrator(usernameTextField.getText(),
+                        passwordTextField.getText()));
+            }
+            mainApplication.switchToHomeScreen();
         }
     }
 
@@ -74,5 +95,6 @@ public class RegistrationScreenController {
      * */
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
+        userLog = mainApplication.getUserlog();
     }
 }

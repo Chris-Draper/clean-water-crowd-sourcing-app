@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Menu;
+import model.UserLog;
 
 /**
  * Created by nharper32 on 9/24/16.
@@ -25,6 +26,8 @@ public class HomeScreenController {
     @FXML
     private Menu helpMenu;
 
+
+
     /**
      * allow for calling back to the mainApplication application code if necessary
      * @param mainApplication   the reference to the FX Application instance
@@ -40,8 +43,9 @@ public class HomeScreenController {
     @FXML
     private void handleLogoutMenuPressed() {
         mainApplication.logoutUser();
-        mainApplication.switchToLoginScreen();
+        mainApplication.reloadHomeScreen();
     }
+
 
 
 }

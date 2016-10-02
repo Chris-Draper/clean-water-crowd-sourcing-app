@@ -11,21 +11,24 @@ public class UserLog {
 
     public UserLog() {
         this.userLog = new LinkedList<>();
+        this.addDummy();
     }
+
     public void addUser(GenericUser user) {
         userLog.add(user);
     }
 
     public void addDummy() {
-        addUser(new Manager("nhaper32", "harper285"));
+        addUser(new Manager("nharper32", "harper285"));
         addUser(new Worker("cdraper", "draper"));
         addUser(new User("sbuckingham", "buckingham"));
         addUser(new Administrator("cpolack", "polack"));
     }
 
     public boolean contains(GenericUser user) {
-        return false;
+        return userLog.contains(user);
     }
+
 
 
 }
