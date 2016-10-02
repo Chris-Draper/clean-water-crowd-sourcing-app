@@ -32,8 +32,6 @@ public class RegistrationScreenController {
     private ComboBox positionComboBox;
     private final ObservableList<UserType> userTypes = FXCollections.observableArrayList();
 
-
-
     @FXML
     private void initialize() {
         for (UserType userType: UserType.values()) {
@@ -43,7 +41,7 @@ public class RegistrationScreenController {
 
     }
     @FXML
-    public void handleLogInPressed() {
+    public void handleRegisterPressed() {
         if(usernameTextField.equals("") || passwordTextField.equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
@@ -51,6 +49,18 @@ public class RegistrationScreenController {
         } else {
 
         }
+    }
+
+    private boolean isRegistrationInfoAcceptable() {
+        //validate username is a valid username  and check if username is in "database"
+        if (usernameTextField.getText().contains("-'.!@#$%^&*()+=~`{}|:\"<>?[]\';/.,'")
+                || usernameTextField.getText().charAt(0) > 122
+                || usernameTextField.getText().charAt(0) < 65) { //enter another username
+            return false;
+        } else if (userLog.contains(usernameTextField.getText())) {//user is in database ALREADY
+
+        }
+        return true;
     }
 
     @FXML
