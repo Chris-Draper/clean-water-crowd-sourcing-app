@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox fx:id="vbox2" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreenController">
+   <children>
+      <Label alignment="CENTER" prefHeight="107.0" prefWidth="292.0" text="User Profile">
+         <font>
+            <Font name="Helvetica Neue UltraLight" size="46.0" />
+         </font>
+      </Label>
+      <Label text="Full Name">
+         <font>
+            <Font name="Helvetica Neue Light" size="13.0" />
+         </font>
+      </Label>
+      <TextField prefHeight="27.0" prefWidth="413.0" promptText="Full Name">
+         <VBox.margin>
+            <Insets bottom="25.0" left="150.0" right="150.0" top="25.0" />
+         </VBox.margin>
+      </TextField>
+      <Label text="Email Address">
+         <font>
+            <Font name="Helvetica Neue Light" size="13.0" />
+         </font>
+      </Label>
+      <TextField promptText="Enter Email Address">
+         <VBox.margin>
+            <Insets bottom="25.0" left="100.0" right="100.0" top="25.0" />
+         </VBox.margin>
+      </TextField>
+      <Label text="Home Address">
+         <font>
+            <Font name="Helvetica Neue Light" size="13.0" />
+         </font>
+      </Label>
+      <TextField promptText="Enter Home Address">
+         <VBox.margin>
+            <Insets bottom="25.0" left="100.0" right="100.0" top="25.0" />
+         </VBox.margin>
+      </TextField>
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="184.0" prefWidth="660.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="Update Profile">
+               <HBox.margin>
+                  <Insets bottom="50.0" right="25.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Helvetica Neue Light" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>
