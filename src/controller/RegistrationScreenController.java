@@ -66,7 +66,7 @@ public class RegistrationScreenController {
     }
 
     private boolean isRegistrationInfoAcceptable(UserType type) {
-        if (usernameTextField.equals("") || passwordTextField.equals("") || type == null) {
+        if (usernameTextField.getText().equals("") || passwordTextField.getText().equals("") || type == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();
