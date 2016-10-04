@@ -6,14 +6,18 @@ import controller.RegistrationScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+import java.sql.SQLException;
+
 import controller.WelcomeScreenController;
 import model.GenericUser;
 import model.User;
 import model.UserLog;
+import model.DatabaseInterface;
 
 public class MainApplication extends Application {
     /** the main container for the application window */
@@ -26,6 +30,7 @@ public class MainApplication extends Application {
 
     private UserLog userLog = new UserLog();
 
+    private DatabaseInterface database;
 
 
     @Override
@@ -51,16 +56,21 @@ public class MainApplication extends Application {
             WelcomeScreenController ctrl = loader.getController();
             ctrl.setMainApp(this);
 
-            //TEMPORARY DATABASE
-            //userLog = new UserLog();
-
-
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
 
             //mainAppScreen.setTitle("Clean Water Application");
             mainAppScreen.setScene(scene);
             mainAppScreen.show();
+
+            // Attempt to connect to database, display error if failure
+            try {
+                database = new DatabaseInterface();
+            } catch (SQLException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR,
+                        "Error connecting to backend database.", ButtonType.OK);
+                alert.showAndWait();
+            }
 
         } catch (IOException e){
             //error on load, so log it
@@ -88,8 +98,6 @@ public class MainApplication extends Application {
             Scene scene = new Scene(rootLayout);
             mainAppScreen.setScene(scene);
             mainAppScreen.show();
-
-
 
         } catch (IOException e){
             //error on load, so log it
@@ -165,8 +173,9 @@ public class MainApplication extends Application {
         authenticatedUser = null;
     }
 
-    public UserLog getUserlog() {
-        return userLog;}
+    public UserLog getUserlog() { return userLog; }
+
+    public DatabaseInterface getDatabaseConn() { return database; }
 
 
 }

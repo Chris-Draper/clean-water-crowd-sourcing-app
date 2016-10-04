@@ -5,8 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.User;
-import model.UserType;
+import model.*;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * Created by sbuck on 9/21/2016.
@@ -44,6 +46,7 @@ public class LoginScreenController {
 
     @FXML
     private void handleLogInPressed() {
+
         if(usernameTextField.getText().equals("") || passwordField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
@@ -60,8 +63,13 @@ public class LoginScreenController {
 
     // Check to see if values entered as username and password is acceptable
     private boolean isInputValid() {
-        GenericUser potentialUser = new User(usernameTextField.getText(),passwordField.getText());
-        return userLog.contains(potentialUser);
+
+        try {
+            return mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordField.getText());
+        } catch(SQLException e) {
+            System.out.println("Issue connecting: " + e);
+        }
+        return false;
     }
 
     /**
