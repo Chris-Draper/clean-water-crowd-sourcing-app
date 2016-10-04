@@ -1,6 +1,7 @@
 package model;
 
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  * Created by nharper32 on 9/29/16.
@@ -29,6 +30,15 @@ public class UserLog {
         return userLog.contains(user);
     }
 
-
+    public boolean hasAlreadyRegistered(String username) {
+        ListIterator<GenericUser> iterator = userLog.listIterator();
+        while (iterator.hasNext()) {
+            //Checks usernames of all already in system against param
+            if (iterator.next().getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
