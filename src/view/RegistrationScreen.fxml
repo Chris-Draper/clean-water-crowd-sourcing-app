@@ -37,7 +37,7 @@
                 <Label alignment="CENTER_RIGHT" text="Username:" />
                 <Label alignment="CENTER_RIGHT" text="Password:" GridPane.rowIndex="1" />
                 <TextField fx:id="usernameTextField" promptText="Choose a Username" GridPane.columnIndex="1" />
-            <PasswordField fx:id="passwordField" promptText="Choose Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="passwordTextField" promptText="Choose Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <PasswordField fx:id="passwordConfirmField" promptText="Confirm Password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <ComboBox fx:id="positionComboBox" prefWidth="150.0" promptText="Select Your Role" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
