@@ -33,17 +33,10 @@
         </menus>
       </MenuBar>
    </top>
-   <center>
-      <Label text="Welcome, user" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="Helvetica Neue UltraLight" size="51.0" />
-         </font>
-      </Label>
-   </center>
    <left>
       <VBox prefHeight="306.0" prefWidth="140.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-color: grey;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="120.0" text="Edit Profile">
+            <Button fx:id="profileButton" mnemonicParsing="false" onAction="#handleProfileButton" prefHeight="65.0" prefWidth="120.0" text="Edit Profile">
                <VBox.margin>
                   <Insets bottom="25.0" left="10.0" right="10.0" top="25.0" />
                </VBox.margin>
@@ -69,4 +62,18 @@
          </BorderPane.margin>
       </VBox>
    </left>
+   <center>
+      <VBox fx:id="vbox1" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="55.0" prefWidth="400.0" text="Welcome, user">
+               <font>
+                  <Font name="Helvetica Neue UltraLight" size="51.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="130.0" right="130.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </center>
 </BorderPane>

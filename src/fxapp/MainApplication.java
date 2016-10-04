@@ -24,7 +24,7 @@ public class MainApplication extends Application {
 
     private GenericUser authenticatedUser;
 
-    private UserLog userLog;
+    private UserLog userLog = new UserLog();
 
 
 
@@ -50,7 +50,9 @@ public class MainApplication extends Application {
             // Give the controller access to the main app.
             WelcomeScreenController ctrl = loader.getController();
             ctrl.setMainApp(this);
-            userLog = new UserLog();
+
+            //TEMPORARY DATABASE
+            //userLog = new UserLog();
 
 
             // Show the scene containing the root layout.
@@ -144,6 +146,8 @@ public class MainApplication extends Application {
             e.printStackTrace();
         }
     }
+
+    public BorderPane getRootLayout() {return rootLayout;}
 
     public void reloadHomeScreen() {
         initRootLayout(mainAppScreen);
