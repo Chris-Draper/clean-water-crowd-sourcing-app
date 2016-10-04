@@ -2,16 +2,18 @@ package fxapp;
 
 import controller.HomeScreenController;
 import controller.LoginScreenController;
+import controller.RegistrationScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import controller.WelcomeScreenController;
-import model.OverallUser;
+import model.GenericUser;
+import model.User;
+import model.UserLog;
 
 public class MainApplication extends Application {
     /** the main container for the application window */
@@ -20,7 +22,11 @@ public class MainApplication extends Application {
     /** the main layout for the main window */
     private BorderPane rootLayout;
 
-    private OverallUser authenticatedUser;
+    private GenericUser authenticatedUser;
+
+    private UserLog userLog;
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -44,9 +50,12 @@ public class MainApplication extends Application {
             // Give the controller access to the main app.
             WelcomeScreenController ctrl = loader.getController();
             ctrl.setMainApp(this);
+            userLog = new UserLog();
+
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
+
             //mainAppScreen.setTitle("Clean Water Application");
             mainAppScreen.setScene(scene);
             mainAppScreen.show();
@@ -99,7 +108,7 @@ public class MainApplication extends Application {
             HomeScreenController ctrl = loader.getController();
             ctrl.setMainApp(this);
 
-            /** Creating a new scene to display the login screen
+            /** Creating a new scene to display the Home Screen
              *  Ensures that the content of the existing window is changed
              *  and another window is not created
              */
@@ -112,6 +121,30 @@ public class MainApplication extends Application {
         }
     }
 
+    public void switchToRegisterScreen() {
+        try {
+            // Pointing loader to login screen fxml file
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApplication.class.getResource("../view/RegistrationScreen.fxml"));
+            rootLayout = loader.load();
+
+            // Give the controller access to the main app.
+            RegistrationScreenController ctrl = loader.getController();
+            ctrl.setMainApp(this);
+
+            /** Creating a new scene to display the Register Screen
+             *  Ensures that the content of the existing window is changed
+             *  and another window is not created
+             */
+            Scene scene = new Scene(rootLayout);
+            mainAppScreen.setScene(scene);
+            mainAppScreen.show();
+        } catch (IOException e) {
+            System.out.println("Failed to find the fxml file for Registration Screen!");
+            e.printStackTrace();
+        }
+    }
+
     public void reloadHomeScreen() {
         initRootLayout(mainAppScreen);
     }
@@ -120,11 +153,16 @@ public class MainApplication extends Application {
         launch(args);
     }
 
-    public void setAuthenticatedUser(OverallUser authUser) {
+    public void setAuthenticatedUser(GenericUser authUser) {
         authenticatedUser = authUser;
     }
 
     public void logoutUser() {
         authenticatedUser = null;
     }
+
+    public UserLog getUserlog() {
+        return userLog;}
+
+
 }

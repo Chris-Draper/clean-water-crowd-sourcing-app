@@ -32,7 +32,7 @@ public class WelcomeScreenController {
 
     @FXML
     private void handleRegisterPressed() {
-
+        mainApplication.switchToRegisterScreen();
     }
 
 }
