@@ -147,6 +147,8 @@ public class MainApplication extends Application {
         }
     }
 
+    public BorderPane getRootLayout() {return rootLayout;}
+
     public void reloadHomeScreen() {
         initRootLayout(mainAppScreen);
     }

@@ -18,7 +18,7 @@ public class LoginScreenController {
     private TextField usernameTextField;
 
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordField;
 
     @FXML
     private Button loginButton;
@@ -42,7 +42,7 @@ public class LoginScreenController {
 
     @FXML
     private void handleLogInPressed() {
-        if(usernameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
+        if(usernameTextField.getText().equals("") || passwordField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();
@@ -52,13 +52,13 @@ public class LoginScreenController {
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "This Username and Password combination cannot be found", ButtonType.OK);
             alert.showAndWait();
-            passwordTextField.setText("");
+            passwordField.setText("");
         }
     }
 
     // Check to see if values entered as username and password is acceptable
     private boolean isInputValid() {
-        GenericUser potentialUser = new User(usernameTextField.getText(),passwordTextField.getText());
+        GenericUser potentialUser = new User(usernameTextField.getText(),passwordField.getText());
         return userLog.contains(potentialUser);
     }
 
