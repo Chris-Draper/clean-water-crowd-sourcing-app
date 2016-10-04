@@ -11,8 +11,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.GenericUser;
 import model.UserLog;
 import model.UserType;
+import sun.applet.Main;
 
 import java.io.IOException;
 
@@ -58,6 +60,9 @@ public class HomeScreenController {
 
     @FXML
     private TextField emailTextField;
+
+    @FXML
+    private TextField addressNumField;
 
     @FXML
     private TextField zipField;
@@ -112,6 +117,7 @@ public class HomeScreenController {
                 if (rootLayout.getCenter() == vbox1) {
                     rootLayout.setCenter(vbox2);
                     profileButton.setText("Back");
+                    fillProfile();
                 } else {
                     rootLayout.setCenter(vbox1);
                     profileButton.setText("Edit Profile");
@@ -125,9 +131,30 @@ public class HomeScreenController {
 
     }
 
-    @FXML
-    private void handleUpdateProfileButton() {
+    private void fillProfile() {
+        GenericUser currentUser = mainApplication.getAuthenticatedUser();
+        if (currentUser.getFullName() != null) {
+            nameTextField.setText(currentUser.getFullName());
+        }
+        if (currentUser.getEmailAddress() != null) {
+            emailTextField.setText(currentUser.getEmailAddress());
+        }
+        if (currentUser.getHomeAddress() != null) {
+            addressNumField.setText(currentUser.getHomeAddress());
+        }
+        if (currentUser.getPhoneNumber() != null) {
+            phoneNumField.setText(currentUser.getPhoneNumber());
+        }
+    }
 
+    @FXML
+    public void handleUpdateProfileButton() {
+        GenericUser currentUser = mainApplication.getAuthenticatedUser();
+        currentUser.setFullName(nameTextField.getText());
+        currentUser.setEmailAddress(emailTextField.getText());
+        currentUser.setHomeAddress(addressNumField.getText() + streetNameField.getText()
+                + zipField.getText() + cityField.getText() + stateField.getText());
+        currentUser.setPhoneNumber(phoneNumField.getText());
     }
 
 }

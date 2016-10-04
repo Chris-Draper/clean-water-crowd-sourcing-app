@@ -124,7 +124,7 @@
       </GridPane>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="83.0" prefWidth="660.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="Update Profile">
+            <Button fx:id="updateProfileButton" onAction="#handleUpdateProfileButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="Update Profile">
                <HBox.margin>
                   <Insets bottom="25.0" right="25.0" />
                </HBox.margin>

@@ -161,6 +161,8 @@ public class MainApplication extends Application {
         authenticatedUser = authUser;
     }
 
+    public GenericUser getAuthenticatedUser() {return authenticatedUser;}
+
     public void logoutUser() {
         authenticatedUser = null;
     }
