@@ -1,17 +1,18 @@
 package controller;
 
 import fxapp.MainApplication;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Menu;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.UserLog;
+import model.UserType;
 
 import java.io.IOException;
 
@@ -46,11 +47,36 @@ public class HomeScreenController {
     private Button profileButton;
 
     @FXML
-    private Button profileBackButton;
+    private Button updateProfileButton;
+
+    @FXML
+    private TextField nameTextField;
+
+    @FXML
+    private ComboBox titleComboBox;
+    private final ObservableList<UserType> userTypes = FXCollections.observableArrayList();
+
+    @FXML
+    private TextField emailTextField;
+
+    @FXML
+    private TextField zipField;
+
+    @FXML
+    private TextField streetNameField;
+
+    @FXML
+    private TextField cityField;
+
+    @FXML
+    private TextField stateField;
+
+    @FXML
+    private TextField phoneNumField;
 
 
 
-
+    @FXML
     private void initialize() {
     }
 
@@ -63,6 +89,7 @@ public class HomeScreenController {
         this.mainApplication = mainApplication;
         rootLayout = mainApplication.getRootLayout();
         vbox1 = (VBox) rootLayout.getCenter();
+        
     }
 
     @FXML
@@ -95,6 +122,11 @@ public class HomeScreenController {
             System.out.println("Failed to find vbox2!");
             e.printStackTrace();
         }
+
+    }
+
+    @FXML
+    private void handleUpdateProfileButton() {
 
     }
 
