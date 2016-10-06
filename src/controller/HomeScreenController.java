@@ -4,10 +4,7 @@ import fxapp.MainApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Menu;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -48,6 +45,9 @@ public class HomeScreenController {
     @FXML
     private Button profileBackButton;
 
+    @FXML
+    private Label welcomeMsg;
+
 
 
 
@@ -63,6 +63,7 @@ public class HomeScreenController {
         this.mainApplication = mainApplication;
         rootLayout = mainApplication.getRootLayout();
         vbox1 = (VBox) rootLayout.getCenter();
+        welcomeMsg.setText("Welcome, " + mainApplication.getAuthenticatedUser().getUsername());
     }
 
     @FXML

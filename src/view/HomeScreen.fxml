@@ -65,7 +65,7 @@
    <center>
       <VBox fx:id="vbox1" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="55.0" prefWidth="400.0" text="Welcome, user">
+            <Label fx:id="welcomeMsg" alignment="CENTER" prefHeight="55.0" prefWidth="400.0" text="Welcome, user">
                <font>
                   <Font name="Helvetica Neue UltraLight" size="51.0" />
                </font>

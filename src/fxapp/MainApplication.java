@@ -27,7 +27,6 @@ public class MainApplication extends Application {
     private UserLog userLog = new UserLog();
 
 
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         mainAppScreen = primaryStage;
@@ -50,10 +49,6 @@ public class MainApplication extends Application {
             // Give the controller access to the main app.
             WelcomeScreenController ctrl = loader.getController();
             ctrl.setMainApp(this);
-
-            //TEMPORARY DATABASE
-            //userLog = new UserLog();
-
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -157,16 +152,14 @@ public class MainApplication extends Application {
         launch(args);
     }
 
-    public void setAuthenticatedUser(GenericUser authUser) {
-        authenticatedUser = authUser;
-    }
+    public void setAuthenticatedUser(GenericUser authUser) { authenticatedUser = authUser; }
 
     public void logoutUser() {
         authenticatedUser = null;
     }
 
-    public UserLog getUserlog() {
-        return userLog;}
+    public GenericUser getAuthenticatedUser() {return authenticatedUser;}
 
+    public UserLog getUserlog() { return userLog; }
 
 }

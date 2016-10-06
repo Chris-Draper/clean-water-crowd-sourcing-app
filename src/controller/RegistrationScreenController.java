@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.*;
+import sun.security.util.Password;
 
 import java.util.LinkedList;
 
@@ -20,7 +21,10 @@ public class RegistrationScreenController {
     private TextField usernameTextField;
 
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordTextField;
+
+    @FXML
+    private PasswordField passwordConfirmField;
 
     @FXML
     private Button registerButton;
@@ -47,21 +51,31 @@ public class RegistrationScreenController {
     @FXML
     public void handleRegisterPressed() {
         UserType type = (UserType) positionComboBox.getSelectionModel().selectedItemProperty().getValue();
+        GenericUser newUser = null;
         if (isRegistrationInfoAcceptable(type)) {
             if (type.equals(UserType.User)) {
-                userLog.addUser(new User(usernameTextField.getText(),
-                        passwordTextField.getText()));
+                newUser = new User(usernameTextField.getText(),
+                        passwordTextField.getText());
             } else if (type.equals(UserType.Worker)) {
-                userLog.addUser(new Worker(usernameTextField.getText(),
-                        passwordTextField.getText()));
+                newUser = new Worker(usernameTextField.getText(),
+                        passwordTextField.getText());
             } else if (type.equals(UserType.Manager)) {
-                userLog.addUser(new Manager(usernameTextField.getText(),
-                        passwordTextField.getText()));
+                newUser = new Manager(usernameTextField.getText(),
+                        passwordTextField.getText());
             } else if (type.equals(UserType.Administrator)) {
-                userLog.addUser(new Administrator(usernameTextField.getText(),
-                        passwordTextField.getText()));
+                newUser = new Administrator(usernameTextField.getText(),
+                        passwordTextField.getText());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR,
+                        "Error creating user.", ButtonType.OK);
+                alert.showAndWait();
             }
+            userLog.addUser(newUser);
+            mainApplication.setAuthenticatedUser(newUser);
             mainApplication.switchToHomeScreen();
+        } else {
+            passwordTextField.setText("");
+            passwordConfirmField.setText("");
         }
     }
 
@@ -72,8 +86,7 @@ public class RegistrationScreenController {
             alert.showAndWait();
             return false;
         }
-        //validate username is a valid username  and check if username is in "database"
-        //else if (usernameTextField.getText().contains("-'.!@#$%^&*()+=~`{}|:\"<>?[]\';/.,'")) {
+        // Validate username is a valid username and check if username is in "database"
          else if (!usernameTextField.getText().matches("[a-zA-Z0-9]+$")) { //enter another username
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please re-enter username. Your username" +
@@ -91,6 +104,11 @@ public class RegistrationScreenController {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please choose another username. The username" +
                             " entered is already in the system.", ButtonType.OK);
+            alert.showAndWait();
+            return false;
+        } else if (!passwordTextField.getText().equals(passwordConfirmField.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "Passwords do not match.", ButtonType.OK);
             alert.showAndWait();
             return false;
         }

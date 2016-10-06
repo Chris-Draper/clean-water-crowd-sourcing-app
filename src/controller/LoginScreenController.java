@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.User;
 import model.UserType;
+import model.UserLog;
+import model.GenericUser;
 
 /**
  * Created by sbuck on 9/21/2016.
