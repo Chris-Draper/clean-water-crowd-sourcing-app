@@ -5,8 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.User;
-import model.UserType;
+import model.*;
 
 /**
  * Created by sbuck on 9/21/2016.
