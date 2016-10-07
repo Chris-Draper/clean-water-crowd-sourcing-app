@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vbox2" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreenController">
+<VBox fx:id="vbox2" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserProfileController">
    <children>
       <Label alignment="CENTER" prefHeight="107.0" prefWidth="292.0" text="User Profile">
          <font>
@@ -56,7 +56,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <TextField promptText="Enter Email Address" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="emailTextField" promptText="Enter Email Address" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="40.0" right="40.0" />
                </GridPane.margin></TextField>
@@ -79,11 +79,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField promptText="##" />
-                  <TextField promptText="Street Name" GridPane.columnIndex="1" />
-                  <TextField promptText="Zip" GridPane.rowIndex="1" />
-                  <TextField promptText="City" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField promptText="State" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <TextField fx:id="addressNumField" promptText="##" />
+                  <TextField fx:id="streetNameField" promptText="Street Name" GridPane.columnIndex="1" />
+                  <TextField fx:id="zipField" promptText="Zip" GridPane.rowIndex="1" />
+                  <TextField fx:id="cityField" promptText="City" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="stateField" promptText="State" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" right="100.0" />
                      </GridPane.margin></TextField>
@@ -94,7 +94,7 @@
             </GridPane>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <TextField prefHeight="27.0" prefWidth="283.0" promptText="Full Name">
+                  <TextField fx:id="nameTextField" prefHeight="27.0" prefWidth="283.0" promptText="Full Name">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
@@ -104,10 +104,10 @@
                         <Insets left="7.0" right="7.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox prefHeight="27.0" prefWidth="129.0" />
+                  <ComboBox fx:id="titleComboBox" prefHeight="27.0" prefWidth="129.0" />
                </children>
             </HBox>
-            <TextField prefHeight="27.0" prefWidth="292.0" promptText="(###)-###-####" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="phoneNumField" prefHeight="27.0" prefWidth="292.0" promptText="(###)-###-####" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="40.0" right="207.0" />
                </GridPane.margin>
@@ -124,7 +124,7 @@
       </GridPane>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="83.0" prefWidth="660.0">
          <children>
-            <Button fx:id="updateProfileButton" onAction="#handleUpdateProfileButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="Update Profile">
+            <Button fx:id="updateProfileButton" mnemonicParsing="false" onAction="#handleUpdateProfileButton" prefHeight="40.0" prefWidth="110.0" text="Update Profile">
                <HBox.margin>
                   <Insets bottom="25.0" right="25.0" />
                </HBox.margin>

@@ -1,5 +1,7 @@
 package controller;
 
+import com.sun.tools.javac.jvm.Gen;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import fxapp.MainApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +17,7 @@ import model.GenericUser;
 import model.UserLog;
 import model.UserType;
 import sun.applet.Main;
+import sun.net.www.content.text.Generic;
 
 import java.io.IOException;
 
@@ -40,44 +43,18 @@ public class HomeScreenController {
     private Menu helpMenu;
 
     @FXML
+    private MenuItem fileLogout;
+
+    @FXML
+    private MenuItem fileClose;
+
+    @FXML
+    private ToggleButton profileButton;
+
+    @FXML
     private VBox vbox1;
 
-    @FXML
     private VBox vbox2;
-
-    @FXML
-    private Button profileButton;
-
-    @FXML
-    private Button updateProfileButton;
-
-    @FXML
-    private TextField nameTextField;
-
-    @FXML
-    private ComboBox titleComboBox;
-    private final ObservableList<UserType> userTypes = FXCollections.observableArrayList();
-
-    @FXML
-    private TextField emailTextField;
-
-    @FXML
-    private TextField addressNumField;
-
-    @FXML
-    private TextField zipField;
-
-    @FXML
-    private TextField streetNameField;
-
-    @FXML
-    private TextField cityField;
-
-    @FXML
-    private TextField stateField;
-
-    @FXML
-    private TextField phoneNumField;
 
 
 
@@ -85,16 +62,9 @@ public class HomeScreenController {
     private void initialize() {
     }
 
-    /**
-     * allow for calling back to the mainApplication application code if necessary
-     * @param mainApplication   the reference to the FX Application instance
-     * */
-
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
         rootLayout = mainApplication.getRootLayout();
-        vbox1 = (VBox) rootLayout.getCenter();
-        
     }
 
     @FXML
@@ -111,18 +81,20 @@ public class HomeScreenController {
     @FXML
     private void handleProfileButton(ActionEvent event) {
         try {
+            vbox1 = FXMLLoader.load(getClass().getResource("../view/InitHomeScreen.fxml"));
+            vbox2 = FXMLLoader.load(getClass().getResource("../view/HomeScreenUser.fxml"));
+            System.out.println(vbox1);
+            System.out.println(vbox2);
             if (event.getSource() == profileButton) {
-                vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreenUser.fxml"));
-                String oldText = profileButton.getText();
-                if (rootLayout.getCenter() == vbox1) {
-                    rootLayout.setCenter(vbox2);
-                    profileButton.setText("Back");
-                    fillProfile();
-                } else {
-                    rootLayout.setCenter(vbox1);
-                    profileButton.setText("Edit Profile");
+                if (profileButton.isSelected()) {
+                    mainApplication.switchToUserProfile(vbox2, profileButton);
 
+                } else {
+                    mainApplication.switchToUserProfile(vbox1, profileButton);
                 }
+
+            } else {
+                throw new IOException();
             }
         } catch (IOException e) {
             System.out.println("Failed to find vbox2!");
@@ -131,30 +103,10 @@ public class HomeScreenController {
 
     }
 
-    private void fillProfile() {
-        GenericUser currentUser = mainApplication.getAuthenticatedUser();
-        if (currentUser.getFullName() != null) {
-            nameTextField.setText(currentUser.getFullName());
-        }
-        if (currentUser.getEmailAddress() != null) {
-            emailTextField.setText(currentUser.getEmailAddress());
-        }
-        if (currentUser.getHomeAddress() != null) {
-            addressNumField.setText(currentUser.getHomeAddress());
-        }
-        if (currentUser.getPhoneNumber() != null) {
-            phoneNumField.setText(currentUser.getPhoneNumber());
-        }
-    }
 
-    @FXML
-    public void handleUpdateProfileButton() {
-        GenericUser currentUser = mainApplication.getAuthenticatedUser();
-        currentUser.setFullName(nameTextField.getText());
-        currentUser.setEmailAddress(emailTextField.getText());
-        currentUser.setHomeAddress(addressNumField.getText() + streetNameField.getText()
-                + zipField.getText() + cityField.getText() + stateField.getText());
-        currentUser.setPhoneNumber(phoneNumField.getText());
+    public void setProfileButton(String newText, boolean selected) {
+        this.profileButton.setSelected(selected);
+        this.profileButton.setText(newText);
     }
 
 }
