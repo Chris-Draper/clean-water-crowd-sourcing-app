@@ -17,10 +17,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.UserLog;
+import model.WaterSourceReport;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+
+//reference http://stackoverflow.com/questions/19342259/how-to-create-multiple-javafx-controllers-with-different-fxml-files to fix issues
 
 /**
  * Created by nharper32 on 9/24/16.
@@ -56,10 +59,14 @@ public class HomeScreenController {
     private Button profileBackButton;
 
     @FXML
+    public Button waterSourceReportButton;
+
+    @FXML
     private Button listButton;
 
     @FXML
     private ListView listView;
+
     private ObservableList listItems = FXCollections.observableArrayList();
     private TextArea textArea;
 
@@ -155,6 +162,24 @@ public class HomeScreenController {
             }
         } catch (IOException e) {
             System.out.println("Failed to find list button!");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleWaterSourceReportButton(ActionEvent event) {
+        try {
+            if (event.getSource() == waterSourceReportButton) {
+                vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/SubmitReportView.fxml"));
+                if (rootLayout.getCenter() == vbox1) {
+                    rootLayout.setCenter(vbox2);
+                    waterSourceReportButton.setText("Back");
+                } else {
+                    rootLayout.setCenter(vbox1);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Failed to find vbox2!");
             e.printStackTrace();
         }
     }
