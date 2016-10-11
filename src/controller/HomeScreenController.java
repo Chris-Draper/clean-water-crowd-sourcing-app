@@ -48,10 +48,20 @@ public class HomeScreenController {
     @FXML
     private Label welcomeMsg;
 
+    @FXML
+    private TextField nameField;
+
+    @FXML
+    private TextField addressField;
+
+    @FXML
+    private TextField emailField;
+
 
 
 
     private void initialize() {
+
     }
 
     /**
@@ -86,16 +96,20 @@ public class HomeScreenController {
                 if (rootLayout.getCenter() == vbox1) {
                     rootLayout.setCenter(vbox2);
                     profileButton.setText("Back");
+
+
                 } else {
                     rootLayout.setCenter(vbox1);
                     profileButton.setText("Edit Profile");
-
                 }
             }
         } catch (IOException e) {
             System.out.println("Failed to find vbox2!");
             e.printStackTrace();
         }
+    }
+
+    @FXML void handleUpdateProfileButton() {
 
     }
 

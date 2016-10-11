@@ -26,6 +26,10 @@ public class MainApplication extends Application {
 
     private UserLog userLog = new UserLog();
 
+    public String name;
+    public String addr;
+    public String email;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
