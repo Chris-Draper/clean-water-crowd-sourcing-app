@@ -7,13 +7,14 @@ import java.util.ArrayList;
  */
 public class WaterSourceReport {
 
-    private String dateTime;
+    private String date;
+    private String time;
     private String reportNum;
     private String reporterName;
     private String location;
-    private WaterType waterType;
-    private WaterCondition condition;
-    private ArrayList<WaterSourceReport> waterSourceReportList = new ArrayList<>();
+    private Object waterType;
+    private Object condition;
+    private static ArrayList<WaterSourceReport> waterSourceReportList = new ArrayList<>();
 
     public enum WaterType {
         Bottled, Well, Stream, Lake, Spring, Other
@@ -23,10 +24,11 @@ public class WaterSourceReport {
         Waste, TreatableClear, TreatableMuddy, Potable
     }
 
-    public WaterSourceReport(String dateTime, String reportNum,
+    public WaterSourceReport(String date, String time, String reportNum,
                              String reporterName, String location,
-                             WaterType sourceType, WaterCondition condition) {
-        this.dateTime = dateTime;
+                             Object sourceType, Object condition) {
+        this.date = date;
+        this.time = time;
         this.reportNum = reportNum;
         this.reporterName = reporterName;
         this.location = location;
@@ -34,16 +36,24 @@ public class WaterSourceReport {
         this.condition = condition;
     }
 
-    public void addWaterSourceReportToList(WaterSourceReport sourceReport) {
+    public static void addReportToList(WaterSourceReport sourceReport) {
         waterSourceReportList.add(sourceReport);
     }
 
-    public String getDateTime() {
-        return dateTime;
+    public String getDate() {
+        return date;
     }
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(String dateTime) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String dateTime) {
+        this.time = time;
     }
 
     public String getReportNum() {
@@ -70,7 +80,7 @@ public class WaterSourceReport {
         this.location = location;
     }
 
-    public WaterType getSourceType() {
+    public Object getSourceType() {
         return waterType;
     }
 
@@ -78,7 +88,7 @@ public class WaterSourceReport {
         this.waterType = waterType;
     }
 
-    public WaterCondition getCondition() {
+    public Object getCondition() {
         return condition;
     }
 

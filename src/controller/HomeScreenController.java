@@ -171,6 +171,7 @@ public class HomeScreenController {
         try {
             if (event.getSource() == waterSourceReportButton) {
                 vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/SubmitReportView.fxml"));
+
                 if (rootLayout.getCenter() == vbox1) {
                     rootLayout.setCenter(vbox2);
                     waterSourceReportButton.setText("Back");

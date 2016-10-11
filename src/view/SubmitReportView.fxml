@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WaterSourceReportController">
    <children>
       <Label text="User Water Report">
          <font>
@@ -66,29 +65,29 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <TextField prefHeight="27.0" prefWidth="100.0" promptText="Full Name" GridPane.columnIndex="1">
+            <TextField fx:id="reporterName" prefHeight="27.0" prefWidth="100.0" promptText="Full Name" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" />
                </GridPane.margin>
             </TextField>
-            <TextField promptText="Address of Source Location" GridPane.columnIndex="3">
+            <TextField  fx:id="reportSourceLocation" promptText="Address of Source Location" GridPane.columnIndex="3">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" />
                </GridPane.margin>
             </TextField>
-            <TextField promptText="Report Number" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <TextField fx:id="reportNumber" promptText="Report Number" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" />
                </GridPane.margin>
             </TextField>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <TextField promptText="Date">
+                  <TextField fx:id="reportDate" promptText="Date">
                      <HBox.margin>
                         <Insets left="15.0" right="7.5" />
                      </HBox.margin>
                   </TextField>
-                  <TextField promptText="Time">
+                  <TextField fx:id="reportTime" promptText="Time">
                      <HBox.margin>
                         <Insets left="7.5" right="15.0" />
                      </HBox.margin>
@@ -98,19 +97,19 @@
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <ComboBox prefWidth="190.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <ComboBox fx:id="reportWaterCondition" prefWidth="190.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" />
                </GridPane.margin>
             </ComboBox>
-            <ComboBox prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ComboBox fx:id="reportWaterType" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" />
                </GridPane.margin>
             </ComboBox>
          </children>
       </GridPane>
-      <Button fx:id="submitReportButton" mnemonicParsing="false" onAction="#handleSubmitReportButton" prefHeight="46.0" prefWidth="111.0" text="Submit Report">
+      <Button fx:id="submitWaterSourceReportButton" mnemonicParsing="false" onAction="#handleSubmitWaterSourceReport" prefHeight="46.0" prefWidth="111.0" text="Submit Report">
          <VBox.margin>
             <Insets left="450.0" />
          </VBox.margin>
