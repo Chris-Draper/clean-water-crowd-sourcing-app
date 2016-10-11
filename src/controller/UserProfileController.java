@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -12,12 +13,16 @@ import javafx.scene.layout.VBox;
 import model.GenericUser;
 import model.UserType;
 
+import java.io.IOException;
+
 /**
  * Created by nharper32 on 10/6/16.
  */
 public class UserProfileController {
 
     private MainApplication mainApplication;
+
+    private VBox rootLayout;
 
     @FXML
     private Button updateProfileButton;
@@ -62,6 +67,7 @@ public class UserProfileController {
     }
 
     public void setMainApp(MainApplication mainApplication) {
+        System.out.println("First");
         this.mainApplication = mainApplication;
     }
 
@@ -82,6 +88,7 @@ public class UserProfileController {
 
     @FXML
     public void handleUpdateProfileButton() {
+        System.out.println("Second");
         mainApplication.updateUserInfo(nameTextField, emailTextField, addressNumField,
                 streetNameField, zipField, cityField, stateField);
     }

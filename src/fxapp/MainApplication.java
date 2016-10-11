@@ -165,19 +165,14 @@ public class MainApplication extends Application {
             HomeScreenController ctrl = loader.getController();
             UserProfileController ctrl2 = loader2.getController();
 
-            ctrl2.setMainApp(this);
             ctrl.setMainApp(this);
-            System.out.println(authenticatedUser);
+            ctrl2.setMainApp(this);
 
             //if (vbox.equals())
             if(!profileButton.isSelected()) {
                 ctrl.setProfileButton("Edit Profile", false);
-
-                System.out.println("1");
             } else {
                 ctrl.setProfileButton("Back", true);
-                authenticatedUser.setFullName(ctrl2.getNameTextField().getText());
-                System.out.println("2");
             }
 
             Scene scene = mainAppScreen.getScene();

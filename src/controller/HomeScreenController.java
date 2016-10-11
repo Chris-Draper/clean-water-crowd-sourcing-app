@@ -30,6 +30,8 @@ public class HomeScreenController {
 
     private BorderPane rootLayout;
 
+    private VBox rootVbox;
+
     @FXML
     private MenuBar topNavigation;
 
@@ -83,8 +85,7 @@ public class HomeScreenController {
         try {
             vbox1 = FXMLLoader.load(getClass().getResource("../view/InitHomeScreen.fxml"));
             vbox2 = FXMLLoader.load(getClass().getResource("../view/HomeScreenUser.fxml"));
-            System.out.println(vbox1);
-            System.out.println(vbox2);
+
             if (event.getSource() == profileButton) {
                 if (profileButton.isSelected()) {
                     mainApplication.switchToUserProfile(vbox2, profileButton);
