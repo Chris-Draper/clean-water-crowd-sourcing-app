@@ -5,11 +5,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+<<<<<<< HEAD
+import model.*;
+=======
 import model.GenericUser;
 import model.User;
 import model.UserType;
 import model.UserLog;
 
+>>>>>>> master
 
 /**
  * Created by sbuck on 9/21/2016.
