@@ -1,18 +1,25 @@
 package controller;
 
 import fxapp.MainApplication;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.UserLog;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -48,8 +55,13 @@ public class HomeScreenController {
     @FXML
     private Button profileBackButton;
 
+    @FXML
+    private Button listButton;
 
-
+    @FXML
+    private ListView listView;
+    private ObservableList listItems = FXCollections.observableArrayList();
+    private TextArea textArea;
 
     private void initialize() {
     }
@@ -80,6 +92,7 @@ public class HomeScreenController {
     private void handleProfileButton(ActionEvent event) {
         try {
             if (event.getSource() == profileButton) {
+                listButton.setText("List Reports");
                 vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreenUser.fxml"));
                 String oldText = profileButton.getText();
                 if (rootLayout.getCenter() == vbox1) {
@@ -96,6 +109,54 @@ public class HomeScreenController {
             e.printStackTrace();
         }
 
+    }
+
+    @FXML
+    private void handleListButtonPressed(ActionEvent event) {
+        try {
+            if (event.getSource() == listButton) {
+                profileButton.setText("Edit Profile");
+                vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
+                if (rootLayout.getCenter() == vbox1) {
+                    for (int i = 0; i < 30; i++) listItems.add("Fake Water Source Report #" + i); //change later, fill with water source report objects
+                    listView = new ListView<>(listItems);
+                    listView.setPrefHeight(490);
+                    vbox2.getChildren().addAll(listView);
+                    rootLayout.setCenter(vbox2);
+                    listButton.setText("Back");
+                    listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                        @Override
+                        public void handle(MouseEvent event) {
+                            listView.setPrefHeight(230);
+                            if (textArea != null) vbox2.getChildren().remove(textArea);
+                            textArea = new TextArea(
+                                    "Title: " + listView.getSelectionModel().getSelectedItem().toString() +
+                                    "\n\nLocation: Atlanta, Georgia\n" +
+                                            "Time of report: 9:43 pm EST\n" +
+                                            "Reported By: Sean Buckingham\n\n" +
+                                            "General Information:\n" +
+                                            "The water was extra cloudy. Definitely not drinkable but hey its good" +
+                                            " I reported this water in Clean Water Crowdsourcing right, I mean if i hadn't " +
+                                            "said anything no one would even know there was water here. THANKS CLEAN WATER " +
+                                            "CROWDSOURCING. YOU ROCK!!!"
+                            );
+                            textArea.setWrapText(true);
+                            textArea.setPrefHeight(260);
+                            vbox2.getChildren().addAll(textArea);
+
+                        }
+                    });
+
+                } else {
+                    rootLayout.setCenter(vbox1);
+                    listButton.setText("List Reports");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Failed to find list button!");
+            e.printStackTrace();
+        }
     }
 
 }
