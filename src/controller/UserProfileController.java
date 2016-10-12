@@ -105,6 +105,7 @@ public class UserProfileController {
         }
     }
 
+    
     @FXML
     public void handleUpdateProfileButton() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Profile information saved.", ButtonType.OK);
