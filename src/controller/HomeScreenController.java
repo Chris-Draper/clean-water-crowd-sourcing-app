@@ -10,23 +10,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-=======
->>>>>>> user-profile-update
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import model.GenericUser;
-import model.UserLog;
-import model.UserType;
-import sun.applet.Main;
-import sun.net.www.content.text.Generic;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,28 +46,31 @@ public class HomeScreenController {
     private Menu helpMenu;
 
     @FXML
-    private MenuItem fileLogout;
+    private javafx.scene.control.MenuItem fileLogout;
 
     @FXML
-    private MenuItem fileClose;
+    private javafx.scene.control.MenuItem fileClose;
 
     @FXML
-    private ToggleButton profileButton;
+    private VBox welcomeVBox;
 
     @FXML
-    private VBox vbox1;
+    private VBox listWaterReportVBox;
 
-<<<<<<< HEAD
     @FXML
-    private Button listButton;
-=======
-    private VBox vbox2;
->>>>>>> user-profile-update
+    private VBox userProfileVBox;
 
     @FXML
     private ListView listView;
+
     private ObservableList listItems = FXCollections.observableArrayList();
     private TextArea textArea;
+
+    @FXML
+    private ToggleButton listButton;
+
+    @FXML
+    private ToggleButton profileButton;
 
     @FXML
     private void initialize() {
@@ -102,28 +95,14 @@ public class HomeScreenController {
 
     @FXML
     private void handleProfileButton(ActionEvent event) {
-<<<<<<< HEAD
-        try {
-            if (event.getSource() == profileButton) {
-                listButton.setText("List Reports");
-                vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreenUser.fxml"));
-                String oldText = profileButton.getText();
-                if (rootLayout.getCenter() == vbox1) {
-                    rootLayout.setCenter(vbox2);
-                    profileButton.setText("Back");
-                } else {
-                    rootLayout.setCenter(vbox1);
-                    profileButton.setText("Edit Profile");
-
-                }
-=======
-        if (event.getSource() == profileButton) {
+        if (profileButton.isSelected()) {
             if (profileButton.isSelected()) {
-                rootLayout.setCenter(vbox2);
+                rootLayout.setCenter(userProfileVBox);
             } else {
-                rootLayout.setCenter(vbox1);
->>>>>>> user-profile-update
+                rootLayout.setCenter(welcomeVBox);
             }
+        } else {
+            profileButton.setSelected(true);
         }
     }
 
@@ -131,7 +110,7 @@ public class HomeScreenController {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApplication.class.getResource("../view/HomeScreenUser.fxml"));
-            vbox2 = loader.load();
+            userProfileVBox = loader.load();
 
             // Give the controller access to the main app.
             UserProfileController ctrl = loader.getController();
@@ -149,44 +128,41 @@ public class HomeScreenController {
     @FXML
     private void handleListButtonPressed(ActionEvent event) {
         try {
-            if (event.getSource() == listButton) {
+            if (listButton.isSelected()) {
                 profileButton.setText("Edit Profile");
-                vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
-                if (rootLayout.getCenter() == vbox1) {
-                    for (int i = 0; i < 30; i++) listItems.add("Fake Water Source Report #" + i); //change later, fill with water source report objects
-                    listView = new ListView<>(listItems);
-                    listView.setPrefHeight(490);
-                    vbox2.getChildren().addAll(listView);
-                    rootLayout.setCenter(vbox2);
-                    listButton.setText("Back");
-                    listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
 
-                        @Override
-                        public void handle(MouseEvent event) {
-                            listView.setPrefHeight(230);
-                            if (textArea != null) vbox2.getChildren().remove(textArea);
-                            textArea = new TextArea(
-                                    "Title: " + listView.getSelectionModel().getSelectedItem().toString() +
-                                    "\n\nLocation: Atlanta, Georgia\n" +
-                                            "Time of report: 9:43 pm EST\n" +
-                                            "Reported By: Sean Buckingham\n\n" +
-                                            "General Information:\n" +
-                                            "The water was extra cloudy. Definitely not drinkable but hey its good" +
-                                            " I reported this water in Clean Water Crowdsourcing right, I mean if i hadn't " +
-                                            "said anything no one would even know there was water here. THANKS CLEAN WATER " +
-                                            "CROWDSOURCING. YOU ROCK!!!"
-                            );
-                            textArea.setWrapText(true);
-                            textArea.setPrefHeight(260);
-                            vbox2.getChildren().addAll(textArea);
+                for (int i = 0; i < 30; i++)
+                    listItems.add("Fake Water Source Report #" + i); //change later, fill with water source report objects
+                listView = new ListView<>(listItems);
+                listView.setPrefHeight(490);
+                listWaterReportVBox.getChildren().addAll(listView);
+                rootLayout.setCenter(listWaterReportVBox);
+                listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-                        }
-                    });
+                    @Override
+                    public void handle(MouseEvent event) {
+                        listView.setPrefHeight(230);
+                        if (textArea != null) listWaterReportVBox.getChildren().remove(textArea);
+                        textArea = new TextArea(
+                                "Title: " + listView.getSelectionModel().getSelectedItem().toString() +
+                                        "\n\nLocation: Atlanta, Georgia\n" +
+                                        "Time of report: 9:43 pm EST\n" +
+                                        "Reported By: Sean Buckingham\n\n" +
+                                        "General Information:\n" +
+                                        "The water was extra cloudy. Definitely not drinkable but hey its good" +
+                                        " I reported this water in Clean Water Crowdsourcing right, I mean if i hadn't " +
+                                        "said anything no one would even know there was water here. THANKS CLEAN WATER " +
+                                        "CROWDSOURCING. YOU ROCK!!!"
+                        );
+                        textArea.setWrapText(true);
+                        textArea.setPrefHeight(260);
+                        listWaterReportVBox.getChildren().addAll(textArea);
 
-                } else {
-                    rootLayout.setCenter(vbox1);
-                    listButton.setText("List Reports");
-                }
+                    }
+                });
+            } else {
+                listButton.setSelected(true);
             }
         } catch (IOException e) {
             System.out.println("Failed to find list button!");
