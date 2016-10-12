@@ -84,8 +84,20 @@ public class UserProfileController {
         if (currentUser.getEmailAddress() != null) {
             emailTextField.setText(currentUser.getEmailAddress());
         }
-        if (currentUser.getHomeAddress() != null) {
-            addressNumField.setText(currentUser.getHomeAddress());
+        if (currentUser.getHomeAddressNum() != null) {
+            addressNumField.setText(currentUser.getHomeAddressNum());
+        }
+        if (currentUser.getHomeAddressStreet() != null) {
+            streetNameField.setText(currentUser.getHomeAddressStreet());
+        }
+        if (currentUser.getHomeAddressCity() != null) {
+            cityField.setText(currentUser.getHomeAddressCity());
+        }
+        if (currentUser.getHomeAddressState() != null) {
+            stateField.setText(currentUser.getHomeAddressState());
+        }
+        if (currentUser.getHomeAddressZip() != null) {
+            zipField.setText(currentUser.getHomeAddressZip());
         }
         if (currentUser.getPhoneNumber() != null) {
             phoneNumField.setText(currentUser.getPhoneNumber());

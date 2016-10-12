@@ -85,9 +85,9 @@ public class HomeScreenController {
     private void handleProfileButton(ActionEvent event) {
         if (event.getSource() == profileButton) {
             if (profileButton.isSelected()) {
-                mainApplication.switchToUserProfile(vbox2);
+                rootLayout.setCenter(vbox2);
             } else {
-                mainApplication.switchToUserProfile(vbox1);
+                rootLayout.setCenter(vbox1);
             }
         }
     }

@@ -151,15 +151,14 @@ public class MainApplication extends Application {
         }
     }
 
-    public void switchToUserProfile(VBox vbox) {
-        rootLayout.setCenter(vbox);
-    }
-
     public void updateUserInfo(TextField... fields) {
         authenticatedUser.setFullName(fields[0].getText());
         authenticatedUser.setEmailAddress((fields[1].getText()));
-        authenticatedUser.setHomeAddress(fields[2].getText() + fields[3].getText()
-                + fields[4].getText() + fields[5].getText() + fields[6].getText());
+        authenticatedUser.setHomeAddressNum(fields[2].getText());
+        authenticatedUser.setHomeAddressStreet(fields[3].getText());
+        authenticatedUser.setHomeAddressZip(fields[4].getText());
+        authenticatedUser.setHomeAddressCity(fields[5].getText());
+        authenticatedUser.setHomeAddressState(fields[6].getText());
         authenticatedUser.setPhoneNumber(fields[7].getText());
     }
 

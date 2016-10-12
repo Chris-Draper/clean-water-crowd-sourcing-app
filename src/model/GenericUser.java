@@ -12,7 +12,11 @@ public abstract class GenericUser {
     private UserType userType;
     private String fullName;
     private String emailAddress;
-    private String homeAddress;
+    private String homeAddressNum;
+    private String homeAddressStreet;
+    private String homeAddressCity;
+    private String homeAddressState;
+    private String homeAddressZip;
     private String phoneNumber;
     private final Date date;
 
@@ -43,9 +47,25 @@ public abstract class GenericUser {
 
     public String getEmailAddress() {return emailAddress; }
 
-    public void setHomeAddress(String homeAddress) {this.homeAddress = homeAddress; }
+    public void setHomeAddressNum(String homeAddressNum) {this.homeAddressNum = homeAddressNum; }
 
-    public String getHomeAddress() {return homeAddress; }
+    public String getHomeAddressNum() {return homeAddressNum; }
+
+    public void setHomeAddressStreet(String homeAddressStreet) {this.homeAddressStreet = homeAddressStreet; }
+
+    public String getHomeAddressStreet() {return homeAddressStreet; }
+
+    public void setHomeAddressCity(String homeAddressCity) {this.homeAddressCity = homeAddressCity; }
+
+    public String getHomeAddressCity() {return homeAddressCity; }
+
+    public void setHomeAddressState(String homeAddressState) {this.homeAddressState = homeAddressState; }
+
+    public String getHomeAddressState() {return homeAddressState; }
+
+    public void setHomeAddressZip(String homeAddressZip) {this.homeAddressZip = homeAddressZip; }
+
+    public String getHomeAddressZip() {return homeAddressZip; }
 
     public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber; }
 
