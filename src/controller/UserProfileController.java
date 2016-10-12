@@ -91,6 +91,7 @@ public class UserProfileController {
             phoneNumField.setText(currentUser.getPhoneNumber());
         }
         if (currentUser.getUserType() != null) {
+            System.out.println(currentUser.getUserType());
             titleComboBox.setValue(currentUser.getUserType());
         }
     }

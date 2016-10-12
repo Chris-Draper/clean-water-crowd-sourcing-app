@@ -153,8 +153,6 @@ public class MainApplication extends Application {
 
     public void switchToUserProfile(VBox vbox) {
         rootLayout.setCenter(vbox);
-
-
     }
 
     public void updateUserInfo(TextField... fields) {
