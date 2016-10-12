@@ -7,9 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import model.GenericUser;
 import model.UserType;
@@ -103,13 +101,14 @@ public class UserProfileController {
             phoneNumField.setText(currentUser.getPhoneNumber());
         }
         if (currentUser.getUserType() != null) {
-            System.out.println(currentUser.getUserType());
             titleComboBox.setValue(currentUser.getUserType());
         }
     }
 
     @FXML
     public void handleUpdateProfileButton() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Profile information saved.", ButtonType.OK);
+        alert.showAndWait();
         mainApplication.updateUserInfo(nameTextField, emailTextField, addressNumField,
                 streetNameField, zipField, cityField, stateField, phoneNumField);
     }
