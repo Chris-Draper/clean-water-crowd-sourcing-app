@@ -30,6 +30,16 @@ public class UserLog {
         return userLog.contains(user);
     }
 
+    public GenericUser getCurrentUser(String userName) {
+        GenericUser currentUser = null;
+        for(int i = 0; i < userLog.size(); i++) {
+            if(userLog.get(i).getUsername().equals(userName)) {
+                currentUser = userLog.get(i);
+            }
+        }
+        return currentUser;
+    }
+
     public boolean hasAlreadyRegistered(String username) {
         ListIterator<GenericUser> iterator = userLog.listIterator();
         while (iterator.hasNext()) {

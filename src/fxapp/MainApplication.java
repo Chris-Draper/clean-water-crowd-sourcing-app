@@ -1,16 +1,18 @@
 package fxapp;
 
-import controller.HomeScreenController;
-import controller.LoginScreenController;
-import controller.RegistrationScreenController;
+import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import controller.WelcomeScreenController;
+
 import model.GenericUser;
 import model.User;
 import model.UserLog;
@@ -25,6 +27,8 @@ public class MainApplication extends Application {
     private GenericUser authenticatedUser;
 
     private UserLog userLog = new UserLog();
+
+    private VBox rootVbox;
 
 
 
@@ -147,6 +151,18 @@ public class MainApplication extends Application {
         }
     }
 
+    public void updateUserInfo(TextField... fields) {
+        authenticatedUser.setFullName(fields[0].getText());
+        authenticatedUser.setEmailAddress((fields[1].getText()));
+        authenticatedUser.setHomeAddressNum(fields[2].getText());
+        authenticatedUser.setHomeAddressStreet(fields[3].getText());
+        authenticatedUser.setHomeAddressZip(fields[4].getText());
+        authenticatedUser.setHomeAddressCity(fields[5].getText());
+        authenticatedUser.setHomeAddressState(fields[6].getText());
+        authenticatedUser.setPhoneNumber(fields[7].getText());
+    }
+
+
     public BorderPane getRootLayout() {return rootLayout;}
 
     public void reloadHomeScreen() {
@@ -160,6 +176,8 @@ public class MainApplication extends Application {
     public void setAuthenticatedUser(GenericUser authUser) {
         authenticatedUser = authUser;
     }
+
+    public GenericUser getAuthenticatedUser() {return authenticatedUser;}
 
     public void logoutUser() {
         authenticatedUser = null;

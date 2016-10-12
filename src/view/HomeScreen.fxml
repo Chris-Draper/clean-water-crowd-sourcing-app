@@ -11,6 +11,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -39,8 +40,9 @@
       </MenuBar>
    </top>
    <left>
-      <VBox prefHeight="306.0" prefWidth="140.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-color: grey;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="306.0" prefWidth="140.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-color: grey;" BorderPane.alignment="CENTER">
          <children>
+<<<<<<< HEAD
             <Button fx:id="listButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleListButtonPressed" prefHeight="32.0" prefWidth="116.0" text="List Reports">
                <font>
                   <Font size="17.0" />
@@ -58,8 +60,13 @@
                </VBox.margin>
                <font>
                   <Font size="18.0" />
+=======
+            <ToggleButton fx:id="profileButton" mnemonicParsing="false" onAction="#handleProfileButton" prefHeight="65.0" prefWidth="120.0" text="Edit Profile">
+               <font>
+                  <Font name="Helvetica Neue Light" size="20.0" />
+>>>>>>> user-profile-update
                </font>
-            </Button>
+            </ToggleButton>
             <VBox alignment="BOTTOM_CENTER" prefHeight="456.0" prefWidth="140.0">
                <children>
                   <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="120.0" text="Submit Report">

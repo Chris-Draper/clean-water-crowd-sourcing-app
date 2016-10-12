@@ -1,5 +1,7 @@
 package controller;
 
+import com.sun.tools.javac.jvm.Gen;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import fxapp.MainApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,15 +10,23 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+=======
+>>>>>>> user-profile-update
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.GenericUser;
 import model.UserLog;
+import model.UserType;
+import sun.applet.Main;
+import sun.net.www.content.text.Generic;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,6 +41,8 @@ public class HomeScreenController {
 
     private BorderPane rootLayout;
 
+    private VBox rootVbox;
+
     @FXML
     private MenuBar topNavigation;
 
@@ -44,37 +56,37 @@ public class HomeScreenController {
     private Menu helpMenu;
 
     @FXML
+    private MenuItem fileLogout;
+
+    @FXML
+    private MenuItem fileClose;
+
+    @FXML
+    private ToggleButton profileButton;
+
+    @FXML
     private VBox vbox1;
 
-    @FXML
-    private VBox vbox2;
-
-    @FXML
-    private Button profileButton;
-
-    @FXML
-    private Button profileBackButton;
-
+<<<<<<< HEAD
     @FXML
     private Button listButton;
+=======
+    private VBox vbox2;
+>>>>>>> user-profile-update
 
     @FXML
     private ListView listView;
     private ObservableList listItems = FXCollections.observableArrayList();
     private TextArea textArea;
 
+    @FXML
     private void initialize() {
     }
-
-    /**
-     * allow for calling back to the mainApplication application code if necessary
-     * @param mainApplication   the reference to the FX Application instance
-     * */
 
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
         rootLayout = mainApplication.getRootLayout();
-        vbox1 = (VBox) rootLayout.getCenter();
+        loadVBoxs();
     }
 
     @FXML
@@ -90,6 +102,7 @@ public class HomeScreenController {
 
     @FXML
     private void handleProfileButton(ActionEvent event) {
+<<<<<<< HEAD
         try {
             if (event.getSource() == profileButton) {
                 listButton.setText("List Reports");
@@ -103,12 +116,34 @@ public class HomeScreenController {
                     profileButton.setText("Edit Profile");
 
                 }
+=======
+        if (event.getSource() == profileButton) {
+            if (profileButton.isSelected()) {
+                rootLayout.setCenter(vbox2);
+            } else {
+                rootLayout.setCenter(vbox1);
+>>>>>>> user-profile-update
             }
-        } catch (IOException e) {
-            System.out.println("Failed to find vbox2!");
-            e.printStackTrace();
         }
+    }
 
+    private void loadVBoxs() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApplication.class.getResource("../view/HomeScreenUser.fxml"));
+            vbox2 = loader.load();
+
+            // Give the controller access to the main app.
+            UserProfileController ctrl = loader.getController();
+            ctrl.setMainApp(mainApplication);
+        } catch (IOException e) {
+            System.out.println("Can't find Vboxs");
+        }
+    }
+
+
+    public void setProfileButton(boolean selected) {
+        this.profileButton.setSelected(selected);
     }
 
     @FXML
