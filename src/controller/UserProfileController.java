@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -64,36 +65,41 @@ public class UserProfileController {
 
     @FXML
     private void initialize() {
+        for (UserType userType: UserType.values()) {
+            userTypes.add(userType);
+        }
+        titleComboBox.getItems().addAll(userTypes);
     }
 
     public void setMainApp(MainApplication mainApplication) {
-        System.out.println("First");
         this.mainApplication = mainApplication;
+        fillProfile();
     }
 
     private void fillProfile() {
+        currentUser = mainApplication.getAuthenticatedUser();
         if (currentUser.getFullName() != null) {
-         //   nameTextField.setText(currentUser.getFullName());
+            nameTextField.setText(currentUser.getFullName());
         }
         if (currentUser.getEmailAddress() != null) {
-          //  emailTextField.setText(currentUser.getEmailAddress());
+            emailTextField.setText(currentUser.getEmailAddress());
         }
         if (currentUser.getHomeAddress() != null) {
-          //  addressNumField.setText(currentUser.getHomeAddress());
+            addressNumField.setText(currentUser.getHomeAddress());
         }
         if (currentUser.getPhoneNumber() != null) {
-         //   phoneNumField.setText(currentUser.getPhoneNumber());
+            phoneNumField.setText(currentUser.getPhoneNumber());
+        }
+        if (currentUser.getUserType() != null) {
+            titleComboBox.setValue(currentUser.getUserType());
         }
     }
 
     @FXML
     public void handleUpdateProfileButton() {
-        System.out.println("Second");
         mainApplication.updateUserInfo(nameTextField, emailTextField, addressNumField,
-                streetNameField, zipField, cityField, stateField);
+                streetNameField, zipField, cityField, stateField, phoneNumField);
     }
-
-    public TextField getNameTextField() {return nameTextField;}
 
 
 

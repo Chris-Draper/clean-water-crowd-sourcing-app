@@ -151,48 +151,19 @@ public class MainApplication extends Application {
         }
     }
 
-    public void switchToUserProfile(VBox vbox, ToggleButton profileButton) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/HomeScreen.fxml"));
-            FXMLLoader loader2 = new FXMLLoader();
-            loader2.setLocation(MainApplication.class.getResource("../view/HomeScreenUser.fxml"));
+    public void switchToUserProfile(VBox vbox) {
+        rootLayout.setCenter(vbox);
 
-            rootLayout = loader.load();
-            rootLayout.setCenter(vbox);
-            rootVbox = loader2.load();
 
-            HomeScreenController ctrl = loader.getController();
-            UserProfileController ctrl2 = loader2.getController();
-
-            ctrl.setMainApp(this);
-            ctrl2.setMainApp(this);
-
-            //if (vbox.equals())
-            if(!profileButton.isSelected()) {
-                ctrl.setProfileButton("Edit Profile", false);
-            } else {
-                ctrl.setProfileButton("Back", true);
-            }
-
-            Scene scene = mainAppScreen.getScene();
-            scene.setRoot(rootLayout);
-            mainAppScreen.show();
-
-        } catch (IOException e) {
-            System.out.println("Failed to find the fxml file for User Profile");
-        }
     }
 
     public void updateUserInfo(TextField... fields) {
-        System.out.println(fields[0]);
         authenticatedUser.setFullName(fields[0].getText());
         authenticatedUser.setEmailAddress((fields[1].getText()));
         authenticatedUser.setHomeAddress(fields[2].getText() + fields[3].getText()
                 + fields[4].getText() + fields[5].getText() + fields[6].getText());
         authenticatedUser.setPhoneNumber(fields[7].getText());
     }
-
 
 
     public BorderPane getRootLayout() {return rootLayout;}

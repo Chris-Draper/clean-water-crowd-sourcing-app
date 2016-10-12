@@ -67,6 +67,7 @@ public class HomeScreenController {
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
         rootLayout = mainApplication.getRootLayout();
+        loadVBoxs();
     }
 
     @FXML
@@ -82,32 +83,32 @@ public class HomeScreenController {
 
     @FXML
     private void handleProfileButton(ActionEvent event) {
-        try {
-            vbox1 = FXMLLoader.load(getClass().getResource("../view/InitHomeScreen.fxml"));
-            vbox2 = FXMLLoader.load(getClass().getResource("../view/HomeScreenUser.fxml"));
-
-            if (event.getSource() == profileButton) {
-                if (profileButton.isSelected()) {
-                    mainApplication.switchToUserProfile(vbox2, profileButton);
-
-                } else {
-                    mainApplication.switchToUserProfile(vbox1, profileButton);
-                }
-
+        if (event.getSource() == profileButton) {
+            if (profileButton.isSelected()) {
+                mainApplication.switchToUserProfile(vbox2);
             } else {
-                throw new IOException();
+                mainApplication.switchToUserProfile(vbox1);
             }
-        } catch (IOException e) {
-            System.out.println("Failed to find vbox2!");
-            e.printStackTrace();
         }
+    }
 
+    private void loadVBoxs() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApplication.class.getResource("../view/HomeScreenUser.fxml"));
+            vbox2 = loader.load();
+
+            // Give the controller access to the main app.
+            UserProfileController ctrl = loader.getController();
+            ctrl.setMainApp(mainApplication);
+        } catch (IOException e) {
+            System.out.println("Can't find Vboxs");
+        }
     }
 
 
-    public void setProfileButton(String newText, boolean selected) {
+    public void setProfileButton(boolean selected) {
         this.profileButton.setSelected(selected);
-        this.profileButton.setText(newText);
     }
 
 }
