@@ -39,7 +39,7 @@ public class WaterSourceReportController {
     @FXML
     private Button submitWaterSourceReportButton;
 
-    private Integer reportSystemCount = 1001;
+    private static Integer reportSystemCount = 1001;
 
     @FXML
     private void initialize() {
