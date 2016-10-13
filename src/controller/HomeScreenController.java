@@ -63,11 +63,9 @@ public class HomeScreenController {
     @FXML
     private VBox welcomeVBox;
 
-
     private VBox listWaterReportVBox;
     private VBox userProfileVBox;
     private VBox homeScreenVBox;
-
 
     @FXML
     private ListView listView;
@@ -173,8 +171,8 @@ public class HomeScreenController {
                 profileButton.setText("Edit Profile");
                 listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
                 ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReportController.getWaterSourceReportList();
-                System.out.println(waterSourceReports);
 
+                    listItems = FXCollections.observableArrayList();
                     for (int i = 0; i < waterSourceReports.size(); i++) {
                         listItems.add(waterSourceReports.get(i).getReportNum()); //change later, fill with water source report objects
                         reportDisplayCounter = waterSourceReports.size();
