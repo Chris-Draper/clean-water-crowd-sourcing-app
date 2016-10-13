@@ -75,11 +75,11 @@
                   <Insets left="15.0" right="15.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="reportNumber" promptText="Report Number" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Label fx:id="reportNumber" text="" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" />
                </GridPane.margin>
-            </TextField>
+            </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <TextField fx:id="reportDate" promptText="Date">
