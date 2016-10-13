@@ -40,6 +40,8 @@ public class WaterSourceReport {
         waterSourceReportList.add(sourceReport);
     }
 
+    //all the getter and setter methods are for future manager accounts
+
     public String getDate() {
         return date;
     }
