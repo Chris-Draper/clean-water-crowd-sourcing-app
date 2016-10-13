@@ -1,5 +1,7 @@
 package controller;
 
+import com.sun.tools.javac.jvm.Gen;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import fxapp.MainApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,6 +39,8 @@ public class HomeScreenController {
 
     private BorderPane rootLayout;
 
+    private VBox rootVbox;
+
     @FXML
     private MenuBar topNavigation;
 
@@ -50,22 +54,23 @@ public class HomeScreenController {
     private Menu helpMenu;
 
     @FXML
-    private VBox vbox1;
+    private javafx.scene.control.MenuItem fileLogout;
 
     @FXML
-    private VBox vbox2;
+    private javafx.scene.control.MenuItem fileClose;
+
+    @FXML
+    private VBox welcomeVBox;
+
+    @FXML
+    private VBox listWaterReportVBox;
+
+    @FXML
+    private VBox userProfileVBox;
 
     @FXML
     private Button profileButton;
 
-    @FXML
-    private Button profileBackButton;
-
-    @FXML
-    public Button waterSourceReportButton;
-
-    @FXML
-    private Button listButton;
 
     @FXML
     private ListView listView;
@@ -77,17 +82,24 @@ public class HomeScreenController {
     private TextArea textArea;
 
     @FXML
-    private void initialize() {}
+    private ToggleButton listButton;
+
+    @FXML
+    private ToggleButton profileButton;
+
+    @FXML
+    private void initialize() {
+    }
 
     /**
      * allow for calling back to the mainApplication application code if necessary
      * @param mainApplication   the reference to the FX Application instance
-     **/
+     * */
 
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
         rootLayout = mainApplication.getRootLayout();
-        vbox1 = (VBox) rootLayout.getCenter();
+        loadVBoxs();
     }
 
     @FXML
@@ -103,30 +115,40 @@ public class HomeScreenController {
 
     @FXML
     private void handleProfileButton(ActionEvent event) {
-        try {
-            if (event.getSource() == profileButton) {
-                listButton.setText("List Reports");
-                vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreenUser.fxml"));
-                String oldText = profileButton.getText();
-                if (rootLayout.getCenter() == vbox1) {
-                    rootLayout.setCenter(vbox2);
-                    profileButton.setText("Back");
-                } else {
-                    rootLayout.setCenter(vbox1);
-                    profileButton.setText("Edit Profile");
-                }
+        if (profileButton.isSelected()) {
+            if (profileButton.isSelected()) {
+                rootLayout.setCenter(userProfileVBox);
+            } else {
+                rootLayout.setCenter(welcomeVBox);
             }
-        } catch (IOException e) {
-            System.out.println("Failed to find vbox2!");
-            e.printStackTrace();
+        } else {
+            profileButton.setSelected(true);
         }
+    }
 
+    private void loadVBoxs() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApplication.class.getResource("../view/HomeScreenUser.fxml"));
+            userProfileVBox = loader.load();
+
+            // Give the controller access to the main app.
+            UserProfileController ctrl = loader.getController();
+            ctrl.setMainApp(mainApplication);
+        } catch (IOException e) {
+            System.out.println("Can't find Vboxs");
+        }
+    }
+
+
+    public void setProfileButton(boolean selected) {
+        this.profileButton.setSelected(selected);
     }
 
     @FXML
     private void handleListButtonPressed(ActionEvent event) {
         try {
-            if (event.getSource() == listButton) {
+            if (listButton.isSelected()) {
                 profileButton.setText("Edit Profile");
                 vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
                 ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReport.getReportList();
@@ -166,36 +188,17 @@ public class HomeScreenController {
                             textArea.setWrapText(true);
                             textArea.setPrefHeight(260);
                             vbox2.getChildren().addAll(textArea);
+
                         }
                     });
 
-                } else {
-                    rootLayout.setCenter(vbox1);
-                    listButton.setText("List Reports");
-                }
+                    }
+                });
+            } else {
+                listButton.setSelected(true);
             }
         } catch (IOException e) {
             System.out.println("Failed to find list button!");
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void handleWaterSourceReportButton(ActionEvent event) {
-        try {
-            if (event.getSource() == waterSourceReportButton) {
-                vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/SubmitReportView.fxml"));
-
-                if (rootLayout.getCenter() == vbox1) {
-                    rootLayout.setCenter(vbox2);
-                    waterSourceReportButton.setText("Cancel Report");
-                } else {
-                    rootLayout.setCenter(vbox1);
-                    waterSourceReportButton.setText("Water Report");
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Failed to find vbox2!");
             e.printStackTrace();
         }
     }

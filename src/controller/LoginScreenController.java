@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.GenericUser;
 import model.User;
+import model.UserLog;
 import model.UserType;
 import model.UserLog;
 
@@ -30,14 +31,12 @@ public class LoginScreenController {
     @FXML
     private Button backButton;
 
-    private User aValidUser;
+    private GenericUser aValidUser;
 
     private UserLog userLog;
 
     @FXML
     private void initialize() {
-
-        aValidUser = new User("user","pass");
     }
 
     @FXML
@@ -52,6 +51,7 @@ public class LoginScreenController {
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();
         } else if(isInputValid()) {
+            aValidUser = userLog.getCurrentUser(usernameTextField.getText());
             mainApplication.setAuthenticatedUser(aValidUser);
             mainApplication.switchToHomeScreen();
         } else {

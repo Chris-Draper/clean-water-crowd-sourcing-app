@@ -47,20 +47,26 @@ public class RegistrationScreenController {
     @FXML
     public void handleRegisterPressed() {
         UserType type = (UserType) positionComboBox.getSelectionModel().selectedItemProperty().getValue();
+        GenericUser newUser = null;
         if (isRegistrationInfoAcceptable(type)) {
             if (type.equals(UserType.User)) {
-                userLog.addUser(new User(usernameTextField.getText(),
-                        passwordTextField.getText()));
+                newUser = new User(usernameTextField.getText(),
+                        passwordTextField.getText());
+                userLog.addUser(newUser);
             } else if (type.equals(UserType.Worker)) {
-                userLog.addUser(new Worker(usernameTextField.getText(),
-                        passwordTextField.getText()));
+                newUser = new Worker(usernameTextField.getText(),
+                        passwordTextField.getText());
+                userLog.addUser(newUser);
             } else if (type.equals(UserType.Manager)) {
-                userLog.addUser(new Manager(usernameTextField.getText(),
-                        passwordTextField.getText()));
+                newUser = new Manager(usernameTextField.getText(),
+                        passwordTextField.getText());
+                userLog.addUser(newUser);
             } else if (type.equals(UserType.Administrator)) {
-                userLog.addUser(new Administrator(usernameTextField.getText(),
-                        passwordTextField.getText()));
+                newUser = new Administrator(usernameTextField.getText(),
+                        passwordTextField.getText());
+                userLog.addUser(newUser);
             }
+            mainApplication.setAuthenticatedUser(newUser);
             mainApplication.switchToHomeScreen();
         }
     }
