@@ -14,7 +14,6 @@ public class WaterSourceReport {
     private String location;
     private Object waterType;
     private Object condition;
-    private static ArrayList<WaterSourceReport> waterSourceReportList = new ArrayList<>();
 
     public enum WaterType { //go back and implement enums
         Bottled, Well, Stream, Lake, Spring, Other
@@ -47,6 +46,7 @@ public class WaterSourceReport {
                 "\nReport Condition : " + this.condition;
     }
 
+    /*
     public static String waterSourceReportsString() {
         String output = "";
         for (int i = 0; i < waterSourceReportList.size(); i++) {
@@ -54,6 +54,7 @@ public class WaterSourceReport {
         }
         return output;
     }
+    */
 
     public static void createDummyData(ArrayList<WaterSourceReport> waterSourceReports) {
         WaterSourceReport report1 = new WaterSourceReport(
@@ -78,13 +79,17 @@ public class WaterSourceReport {
         waterSourceReports.add(report4);
     }
 
+    /*
     public static void addReportToList(WaterSourceReport sourceReport) {
         waterSourceReportList.add(sourceReport);
     }
+    /*
 
+    /*
     public static ArrayList<WaterSourceReport> getReportList() {
         return waterSourceReportList;
     }
+    */
 
     //all the getter and setter methods are for future manager accounts
 

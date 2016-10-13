@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.org.glassfish.gmbal.Description;
 import com.sun.tools.javac.jvm.Gen;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import fxapp.MainApplication;
@@ -62,14 +63,10 @@ public class HomeScreenController {
     @FXML
     private VBox welcomeVBox;
 
-    @FXML
+
     private VBox listWaterReportVBox;
-
-    @FXML
     private VBox userProfileVBox;
-
-    @FXML
-    private Button profileButton;
+    private VBox homeScreenVBox;
 
 
     @FXML
@@ -77,15 +74,20 @@ public class HomeScreenController {
 
     private static int reportDisplayCounter = 0;
 
-    private ObservableList waterSourceReportsOList = FXCollections.observableArrayList(WaterSourceReport.getReportList());
     private ObservableList listItems = FXCollections.observableArrayList();
     private TextArea textArea;
+
+    @FXML
+    private ToggleButton homeButton;
 
     @FXML
     private ToggleButton listButton;
 
     @FXML
     private ToggleButton profileButton;
+
+    @FXML
+    private ToggleButton waterSourceReportButton;
 
     @FXML
     private void initialize() {
@@ -99,6 +101,7 @@ public class HomeScreenController {
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
         rootLayout = mainApplication.getRootLayout();
+        homeButton.setSelected(true);
         loadVBoxs();
     }
 
@@ -116,6 +119,7 @@ public class HomeScreenController {
     @FXML
     private void handleProfileButton(ActionEvent event) {
         if (profileButton.isSelected()) {
+            waterSourceReportButton.setText("Water Report");
             if (profileButton.isSelected()) {
                 rootLayout.setCenter(userProfileVBox);
             } else {
@@ -146,29 +150,47 @@ public class HomeScreenController {
     }
 
     @FXML
+    private void handleHomeButtonPressed() {
+        try {
+            if (!homeButton.isSelected()) {
+                homeButton.setSelected(true);
+            } else {
+                waterSourceReportButton.setText("Water Report");
+                homeScreenVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/InitHomeScreen.fxml"));
+                rootLayout.setCenter(homeScreenVBox);
+            }
+
+        } catch(Exception e) {
+            System.out.println("Can't find home: " + e);
+        }
+    }
+
+    @FXML
     private void handleListButtonPressed(ActionEvent event) {
         try {
             if (listButton.isSelected()) {
+                waterSourceReportButton.setText("Water Report");
                 profileButton.setText("Edit Profile");
-                vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
-                ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReport.getReportList();
-                if (rootLayout.getCenter() == vbox1) {
-                    for (int i = reportDisplayCounter; i < waterSourceReports.size(); i++) {
+                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
+                ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReportController.getWaterSourceReportList();
+                System.out.println(waterSourceReports);
+
+                    for (int i = 0; i < waterSourceReports.size(); i++) {
                         listItems.add(waterSourceReports.get(i).getReportNum()); //change later, fill with water source report objects
                         reportDisplayCounter = waterSourceReports.size();
                     } //see if you can directly insert the waterSourceReports into the ListView<> parameter
                     listView = new ListView<>(listItems);
                     listView.setPrefHeight(490);
-                    vbox2.getChildren().addAll(listView);
-                    rootLayout.setCenter(vbox2);
-                    listButton.setText("Back");
+                    listWaterReportVBox.getChildren().addAll(listView);
+                    rootLayout.setCenter(listWaterReportVBox);
+
                     listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                         @Override
                         public void handle(MouseEvent event) {
                             listView.setPrefHeight(230);
                             if (textArea != null) {
-                                vbox2.getChildren().remove(textArea);
+                                listWaterReportVBox.getChildren().remove(textArea);
                             }
                             WaterSourceReport waterSourceReportData = null;
                             for (int i = 0; i < waterSourceReports.size(); i++) { //doing this is hella jank and NEEDS to be refactored
@@ -187,18 +209,35 @@ public class HomeScreenController {
                             );
                             textArea.setWrapText(true);
                             textArea.setPrefHeight(260);
-                            vbox2.getChildren().addAll(textArea);
+                            listWaterReportVBox.getChildren().addAll(textArea);
 
                         }
                     });
-
-                    }
-                });
             } else {
                 listButton.setSelected(true);
             }
         } catch (IOException e) {
             System.out.println("Failed to find list button!");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleWaterSourceReportButton(ActionEvent event) {
+        try {
+
+            if(waterSourceReportButton.getText().equals("Cancel Report")) {
+                rootLayout.setCenter(homeScreenVBox);
+                homeButton.setSelected(true);
+                waterSourceReportButton.setText("Water Report");
+            } else {
+
+                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/SubmitReportView.fxml"));
+                rootLayout.setCenter(listWaterReportVBox);
+                waterSourceReportButton.setText("Cancel Report");
+            }
+        } catch (IOException e) {
+            System.out.println("Failed to find vbox2!");
             e.printStackTrace();
         }
     }

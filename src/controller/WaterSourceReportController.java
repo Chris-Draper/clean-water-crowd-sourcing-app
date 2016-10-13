@@ -6,6 +6,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import model.WaterSourceReport;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,6 +42,8 @@ public class WaterSourceReportController {
     private Button submitWaterSourceReportButton;
 
     private static Integer reportSystemCount = 1001;
+
+    private static ArrayList<WaterSourceReport> waterSourceReportList;
 
     @FXML
     private void initialize() {
@@ -78,16 +82,14 @@ public class WaterSourceReportController {
 
     @FXML
     private void handleSubmitWaterSourceReport(ActionEvent event) {
-        if (event.getSource() == submitWaterSourceReportButton) {
-            WaterSourceReport.addReportToList(
-                new WaterSourceReport(
-                    reportDate.getText(), reportTime.getText(),
-                    reportNumber.getText(), reporterName.getText(),
-                    reportSourceLocation.getText(), reportWaterCondition.getValue(),
-                    reportWaterType.getValue()
-                )
-            );
-        }
+
+        waterSourceReportList.add(new WaterSourceReport(
+                reportDate.getText(), reportTime.getText(),
+                reportNumber.getText(), reporterName.getText(),
+                reportSourceLocation.getText(), reportWaterCondition.getValue(),
+                reportWaterType.getValue()
+        ));
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
@@ -101,5 +103,14 @@ public class WaterSourceReportController {
         reportSourceLocation.clear();
         this.setReportWaterConditionData();
         this.setReportWaterType();
+    }
+
+    public static ArrayList<WaterSourceReport> getWaterSourceReportList() {
+
+        return waterSourceReportList;
+    }
+
+    public static void initWaterReportList() {
+        waterSourceReportList = new ArrayList<WaterSourceReport>();
     }
 }

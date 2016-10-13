@@ -37,6 +37,8 @@ public class MainApplication extends Application {
         mainAppScreen = primaryStage;
         mainAppScreen.setTitle("Clean Water Application");
         initRootLayout(mainAppScreen);
+
+        WaterSourceReportController.initWaterReportList();
     }
 
     /**
