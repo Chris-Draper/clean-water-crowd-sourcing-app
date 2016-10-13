@@ -70,6 +70,8 @@ public class HomeScreenController {
     @FXML
     private ListView listView;
 
+    private static int reportDisplayCounter = 0;
+
     private ObservableList waterSourceReportsOList = FXCollections.observableArrayList(WaterSourceReport.getReportList());
     private ObservableList listItems = FXCollections.observableArrayList();
     private TextArea textArea;
@@ -129,8 +131,9 @@ public class HomeScreenController {
                 vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
                 ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReport.getReportList();
                 if (rootLayout.getCenter() == vbox1) {
-                    for (int i = 0; i < waterSourceReports.size(); i++) {
+                    for (int i = reportDisplayCounter; i < waterSourceReports.size(); i++) {
                         listItems.add(waterSourceReports.get(i).getReportNum()); //change later, fill with water source report objects
+                        reportDisplayCounter = waterSourceReports.size();
                     } //see if you can directly insert the waterSourceReports into the ListView<> parameter
                     listView = new ListView<>(listItems);
                     listView.setPrefHeight(490);
