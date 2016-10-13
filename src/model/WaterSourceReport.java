@@ -16,11 +16,11 @@ public class WaterSourceReport {
     private Object condition;
     private static ArrayList<WaterSourceReport> waterSourceReportList = new ArrayList<>();
 
-    public enum WaterType {
+    public enum WaterType { //go back and implement enums
         Bottled, Well, Stream, Lake, Spring, Other
     }
 
-    public enum WaterCondition {
+    public enum WaterCondition { //go back and implement enums
         Waste, TreatableClear, TreatableMuddy, Potable
     }
 
@@ -36,8 +36,54 @@ public class WaterSourceReport {
         this.condition = condition;
     }
 
+    public String toString() {
+        return "\n----------------------\n" +
+                "Report Number : " + this.reportNum +
+                "\nReport Date : " + this.date +
+                "\nReport Time : " + this.time +
+                "\nReporter Name : " + this.reporterName +
+                "\nReport Location : " + this.location +
+                "\nReport Water Type : " + this.waterType +
+                "\nReport Condition : " + this.condition;
+    }
+
+    public static String waterSourceReportsString() {
+        String output = "";
+        for (int i = 0; i < waterSourceReportList.size(); i++) {
+            output += waterSourceReportList.get(i).toString();
+        }
+        return output;
+    }
+
+    public static void createDummyData(ArrayList<WaterSourceReport> waterSourceReports) {
+        WaterSourceReport report1 = new WaterSourceReport(
+                "10/12/16", "22:16", "2001", "Chris Draper", "Georgia Tech",
+                "Lake", "Treatable Clear"
+        );
+        WaterSourceReport report2 = new WaterSourceReport(
+                "10/15/16", "22:16", "2002", "Don Draper", "Georgia Tech",
+                "Well", "Potable"
+        );
+        WaterSourceReport report3 = new WaterSourceReport(
+                "10/17/16", "22:16", "2003", "Cynthia Draper", "Georgia Tech",
+                "Spring", "Treatable Muddy"
+        );
+        WaterSourceReport report4 = new WaterSourceReport(
+                "9/12/16", "22:16", "2004", "Zach Draper", "Georgia Tech",
+                "Bottled", "Waste"
+        );
+        waterSourceReports.add(report1);
+        waterSourceReports.add(report2);
+        waterSourceReports.add(report3);
+        waterSourceReports.add(report4);
+    }
+
     public static void addReportToList(WaterSourceReport sourceReport) {
         waterSourceReportList.add(sourceReport);
+    }
+
+    public static ArrayList<WaterSourceReport> getReportList() {
+        return waterSourceReportList;
     }
 
     //all the getter and setter methods are for future manager accounts

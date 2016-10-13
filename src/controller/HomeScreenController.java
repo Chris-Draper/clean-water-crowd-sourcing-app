@@ -22,6 +22,9 @@ import model.WaterSourceReport;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import model.WaterSourceReport;
 
 //reference http://stackoverflow.com/questions/19342259/how-to-create-multiple-javafx-controllers-with-different-fxml-files to fix issues
 
@@ -67,16 +70,17 @@ public class HomeScreenController {
     @FXML
     private ListView listView;
 
+    private ObservableList waterSourceReportsOList = FXCollections.observableArrayList(WaterSourceReport.getReportList());
     private ObservableList listItems = FXCollections.observableArrayList();
     private TextArea textArea;
 
-    private void initialize() {
-    }
+    @FXML
+    private void initialize() {}
 
     /**
      * allow for calling back to the mainApplication application code if necessary
      * @param mainApplication   the reference to the FX Application instance
-     * */
+     **/
 
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
@@ -123,8 +127,11 @@ public class HomeScreenController {
             if (event.getSource() == listButton) {
                 profileButton.setText("Edit Profile");
                 vbox2 = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
+                ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReport.getReportList();
                 if (rootLayout.getCenter() == vbox1) {
-                    for (int i = 0; i < 30; i++) listItems.add("Fake Water Source Report #" + i); //change later, fill with water source report objects
+                    for (int i = 0; i < waterSourceReports.size(); i++) {
+                        listItems.add(waterSourceReports.get(i).getReportNum()); //change later, fill with water source report objects
+                    } //see if you can directly insert the waterSourceReports into the ListView<> parameter
                     listView = new ListView<>(listItems);
                     listView.setPrefHeight(490);
                     vbox2.getChildren().addAll(listView);
@@ -135,22 +142,27 @@ public class HomeScreenController {
                         @Override
                         public void handle(MouseEvent event) {
                             listView.setPrefHeight(230);
-                            if (textArea != null) vbox2.getChildren().remove(textArea);
+                            if (textArea != null) {
+                                vbox2.getChildren().remove(textArea);
+                            }
+                            WaterSourceReport waterSourceReportData = null;
+                            for (int i = 0; i < waterSourceReports.size(); i++) { //doing this is hella jank and NEEDS to be refactored
+                                if (waterSourceReports.get(i).getReportNum().equals( listView.getSelectionModel().getSelectedItem().toString())) {
+                                    waterSourceReportData = waterSourceReports.get(i);
+                                }
+                            }
                             textArea = new TextArea(
-                                    "Title: " + listView.getSelectionModel().getSelectedItem().toString() +
-                                    "\n\nLocation: Atlanta, Georgia\n" +
-                                            "Time of report: 9:43 pm EST\n" +
-                                            "Reported By: Sean Buckingham\n\n" +
-                                            "General Information:\n" +
-                                            "The water was extra cloudy. Definitely not drinkable but hey its good" +
-                                            " I reported this water in Clean Water Crowdsourcing right, I mean if i hadn't " +
-                                            "said anything no one would even know there was water here. THANKS CLEAN WATER " +
-                                            "CROWDSOURCING. YOU ROCK!!!"
+                                "Report Number: " + waterSourceReportData.getReportNum() + "\n\n" +
+                                "Location: " + waterSourceReportData.getLocation() + "\n" +
+                                "Date of report: " + waterSourceReportData.getDate() + "\n" +
+                                "Time of report: " + waterSourceReportData.getTime() + "\n" +
+                                "Reported By: " + waterSourceReportData.getReporterName() + "\n" +
+                                "Source Type: " + waterSourceReportData.getSourceType() + "\n" +
+                                "Water Condition: " + waterSourceReportData.getCondition()
                             );
                             textArea.setWrapText(true);
                             textArea.setPrefHeight(260);
                             vbox2.getChildren().addAll(textArea);
-
                         }
                     });
 

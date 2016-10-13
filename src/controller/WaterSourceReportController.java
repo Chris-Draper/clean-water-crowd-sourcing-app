@@ -102,5 +102,4 @@ public class WaterSourceReportController {
         this.setReportWaterConditionData();
         this.setReportWaterType();
     }
-
 }
