@@ -108,7 +108,6 @@ public class HomeScreenController {
                 } else {
                     rootLayout.setCenter(vbox1);
                     profileButton.setText("Edit Profile");
-
                 }
             }
         } catch (IOException e) {
@@ -174,9 +173,10 @@ public class HomeScreenController {
 
                 if (rootLayout.getCenter() == vbox1) {
                     rootLayout.setCenter(vbox2);
-                    waterSourceReportButton.setText("Back");
+                    waterSourceReportButton.setText("Cancel Report");
                 } else {
                     rootLayout.setCenter(vbox1);
+                    waterSourceReportButton.setText("Water Report");
                 }
             }
         } catch (IOException e) {
