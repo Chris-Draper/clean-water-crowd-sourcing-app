@@ -1,5 +1,6 @@
 package fxapp;
 
+import com.jcraft.jsch.JSchException;
 import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
 
 import model.DatabaseInterface;
 import model.GenericUser;
@@ -55,10 +59,6 @@ public class MainApplication extends Application {
             WelcomeScreenController ctrl = loader.getController();
             ctrl.setMainApp(this);
 
-            //TEMPORARY DATABASE
-            //userLog = new UserLog();
-
-
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
 
@@ -66,22 +66,25 @@ public class MainApplication extends Application {
             mainAppScreen.setScene(scene);
             mainAppScreen.show();
 
-            // Attempt to connect to database, display error if failure
-            try {
-                database = new DatabaseInterface();
-            } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR,
-                        "Error connecting to backend database.", ButtonType.OK);
-                alert.showAndWait();
+            if (database == null) {
+
+                // Attempt to connect to database, display error if failure
+                try {
+
+                    database = new DatabaseInterface();
+
+                } catch (SQLException e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR,
+                            "Error connecting to backend database.", ButtonType.OK);
+                    alert.showAndWait();
+                }
             }
 
-
-        } catch (IOException e){
+        } catch (IOException e) {
             //error on load, so log it
-            System.out.println("Failed to find the fxml file for MainScreen!!");
+            System.out.println("Failed to find the fxml file for MainScreen.");
             e.printStackTrace();
         }
-
     }
 
     public void switchToLoginScreen() {
@@ -199,6 +202,10 @@ public class MainApplication extends Application {
 
     public DatabaseInterface getDatabaseConn() {
         return database;
+    }
+
+    public void stop() {
+        database.close();
     }
 
 

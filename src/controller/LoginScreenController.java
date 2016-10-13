@@ -11,6 +11,8 @@ import model.UserLog;
 import model.UserType;
 import model.UserLog;
 
+import java.sql.SQLException;
+
 
 /**
  * Created by sbuck on 9/21/2016.
@@ -51,7 +53,7 @@ public class LoginScreenController {
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();
         } else if(isInputValid()) {
-            aValidUser = userLog.getCurrentUser(usernameTextField.getText());
+            aValidUser = new User(usernameTextField.getText(), passwordField.getText());
             mainApplication.setAuthenticatedUser(aValidUser);
             mainApplication.switchToHomeScreen();
         } else {
@@ -63,8 +65,12 @@ public class LoginScreenController {
 
     // Check to see if values entered as username and password is acceptable
     private boolean isInputValid() {
-        GenericUser potentialUser = new User(usernameTextField.getText(),passwordField.getText());
-        return userLog.contains(potentialUser);
+        try {
+            return mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordField.getText());
+        } catch(SQLException e) {
+            System.out.println("Issue connecting: " + e);
+        }
+        return false;
     }
 
     /**

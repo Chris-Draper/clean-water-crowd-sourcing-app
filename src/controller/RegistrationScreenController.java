@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.*;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 /**
@@ -66,6 +67,13 @@ public class RegistrationScreenController {
                         passwordTextField.getText());
                 userLog.addUser(newUser);
             }
+
+            try {
+                mainApplication.getDatabaseConn().registerUser(usernameTextField.getText(), passwordTextField.getText(),type);
+            } catch (SQLException e) {
+                System.out.println("Error adding user to database: " + e);
+            }
+
             mainApplication.setAuthenticatedUser(newUser);
             mainApplication.switchToHomeScreen();
         }
