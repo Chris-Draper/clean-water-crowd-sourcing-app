@@ -4,15 +4,15 @@ import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
+import model.DatabaseInterface;
 import model.GenericUser;
 import model.User;
 import model.UserLog;
@@ -28,9 +28,7 @@ public class MainApplication extends Application {
 
     private UserLog userLog = new UserLog();
 
-    private VBox rootVbox;
-
-
+    private DatabaseInterface database;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -67,6 +65,16 @@ public class MainApplication extends Application {
             //mainAppScreen.setTitle("Clean Water Application");
             mainAppScreen.setScene(scene);
             mainAppScreen.show();
+
+            // Attempt to connect to database, display error if failure
+            try {
+                database = new DatabaseInterface();
+            } catch (SQLException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR,
+                        "Error connecting to backend database.", ButtonType.OK);
+                alert.showAndWait();
+            }
+
 
         } catch (IOException e){
             //error on load, so log it
@@ -186,7 +194,12 @@ public class MainApplication extends Application {
     }
 
     public UserLog getUserlog() {
-        return userLog;}
+        return userLog;
+    }
+
+    public DatabaseInterface getDatabaseConn() {
+        return database;
+    }
 
 
 }
