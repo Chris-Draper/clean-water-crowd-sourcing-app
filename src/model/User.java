@@ -5,12 +5,12 @@ package model;
  */
 public class User extends GenericUser {
 
-    public User(String username, String password) {
-        super(username, password, UserType.User);
+    public User(String username, int id) {
+        super(username, UserType.User, id);
     }
 
-    public User(String username, String password, UserType userType) {
-        super(username, password, userType);
+    public User(String username, UserType userType, int id) {
+        super(username, userType, id);
     }
 
     private void submitWaterSourceReport() {}

@@ -65,27 +65,40 @@ public class DatabaseInterface {
         }
     }
 
-    public boolean verifyUser(String username, String password) throws SQLException {
+    public GenericUser verifyUser(String username, String password) throws SQLException {
 
+        GenericUser loggedInUser = null;
         Statement stmt = null;
-        String query = "SELECT position FROM cleanwater.users" +
+        String query = "SELECT id, position FROM cleanwater.users" +
                 " WHERE username='" + username +
                 "' AND password='" + password + "'";
 
         try {
             stmt = dbConn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
+            String position;
+            int id;
 
-            if (rs.next() && rs.getString("position") != "") {
-                return true;
-            } else {
-                return false;
+            if (rs.next()) {
+                id = rs.getInt("id");
+                position = rs.getString("position");
+
+                if (position.equals("U")) {
+                    loggedInUser = new User(username, id);
+                } else if (position.equals("W")) {
+                    loggedInUser = new Worker(username, id);
+                } else if (position.equals("M")) {
+                    loggedInUser = new Manager(username, id);
+                } else if (position.equals("A")) {
+                    loggedInUser = new Administrator(username, id);
+                }
             }
         } catch (SQLException e ) {
             System.out.println(e);
-            return false;
+            return null;
         } finally {
             if (stmt != null) { stmt.close(); }
+            return loggedInUser;
         }
     }
 
@@ -107,6 +120,48 @@ public class DatabaseInterface {
         } finally {
             if (stmt != null) { stmt.close(); }
         }
+    }
+
+    public void updateProfileInfo(int userID, String fullName, String email,
+                                  String addrNum, String street, String zip,
+                                  String city, String state, String phoneNum) throws SQLException {
+
+        Statement stmt = null;
+
+
+    }
+
+    public String[] getProfileInfo(int userID) throws SQLException {
+
+        String[] profileInfo = new String[8];
+        Statement stmt = null;
+
+        String query =
+                "SELECT * FROM cleanwater.users " +
+                        "WHERE id = " + userID + ";";
+        try {
+            stmt = dbConn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            if (rs.next()) {
+                profileInfo[0] = rs.getString("name");
+                profileInfo[1] = rs.getString("email");
+                profileInfo[2] = rs.getString("street_no");
+                profileInfo[3] = rs.getString("street");
+                profileInfo[4] = rs.getString("zip");
+                profileInfo[5] = rs.getString("city");
+                profileInfo[6] = rs.getString("state");
+                profileInfo[7] = rs.getString("phone");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error updating profile information: " + e);
+        } finally {
+            if (stmt != null) { stmt.close(); }
+        }
+
+        return profileInfo;
+
     }
 
     public void close() {

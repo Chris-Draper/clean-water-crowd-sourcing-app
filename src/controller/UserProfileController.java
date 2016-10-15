@@ -13,6 +13,7 @@ import model.GenericUser;
 import model.UserType;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by nharper32 on 10/6/16.
@@ -57,8 +58,6 @@ public class UserProfileController {
     @FXML
     private VBox vbox2;
 
-
-
     private GenericUser currentUser;
 
     @FXML
@@ -71,38 +70,44 @@ public class UserProfileController {
 
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
-        fillProfile();
+        try {
+            fillProfile();
+        } catch (SQLException e) {
+            System.out.println("Error closing statement after updating profile: " + e);
+        }
     }
 
-    private void fillProfile() {
-        currentUser = mainApplication.getAuthenticatedUser();
-        if (currentUser.getFullName() != null) {
-            nameTextField.setText(currentUser.getFullName());
+    private void fillProfile() throws SQLException {
+
+        int userID = mainApplication.getAuthenticatedUser().getID();
+        String[] infoFields = mainApplication.getDatabaseConn().getProfileInfo(userID);
+
+        if (infoFields[0] != null) {
+            nameTextField.setText(infoFields[0]);
         }
-        if (currentUser.getEmailAddress() != null) {
-            emailTextField.setText(currentUser.getEmailAddress());
+        if (infoFields[1] != null) {
+            emailTextField.setText(infoFields[1]);
         }
-        if (currentUser.getHomeAddressNum() != null) {
-            addressNumField.setText(currentUser.getHomeAddressNum());
+        if (infoFields[2] != null) {
+            addressNumField.setText(infoFields[2]);
         }
-        if (currentUser.getHomeAddressStreet() != null) {
-            streetNameField.setText(currentUser.getHomeAddressStreet());
+        if (infoFields[3] != null) {
+            streetNameField.setText(infoFields[3]);
         }
-        if (currentUser.getHomeAddressCity() != null) {
-            cityField.setText(currentUser.getHomeAddressCity());
+        if (infoFields[4] != null) {
+            zipField.setText(infoFields[4]);
         }
-        if (currentUser.getHomeAddressState() != null) {
-            stateField.setText(currentUser.getHomeAddressState());
+        if (infoFields[5] != null) {
+            cityField.setText(infoFields[5]);
         }
-        if (currentUser.getHomeAddressZip() != null) {
-            zipField.setText(currentUser.getHomeAddressZip());
+        if (infoFields[6] != null) {
+            stateField.setText(infoFields[6]);
         }
-        if (currentUser.getPhoneNumber() != null) {
-            phoneNumField.setText(currentUser.getPhoneNumber());
+        if (infoFields[7] != null) {
+            phoneNumField.setText(infoFields[7]);
         }
-        if (currentUser.getUserType() != null) {
-            titleComboBox.setValue(currentUser.getUserType());
-        }
+
+        titleComboBox.setValue(mainApplication.getAuthenticatedUser().getUserType());
     }
 
     @FXML
@@ -112,8 +117,4 @@ public class UserProfileController {
         mainApplication.updateUserInfo(nameTextField, emailTextField, addressNumField,
                 streetNameField, zipField, cityField, stateField, phoneNumField);
     }
-
-
-
-
 }
