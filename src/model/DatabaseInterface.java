@@ -128,6 +128,25 @@ public class DatabaseInterface {
 
         Statement stmt = null;
 
+        String query =
+                "UPDATE cleanwater.users " +
+                "SET name=" + fullName + ", " +
+                "street_no=" + addrNum + ", " +
+                "street=" + street + ", " +
+                "email=" + email + ", " +
+                "zip=" + zip + ", " +
+                "city=" + city + ", " +
+                "state=" + state + ", " +
+                "phone=" + phoneNum +
+                " WHERE id=" + userID + ";";
+        try {
+            stmt = dbConn.createStatement();
+            stmt.executeUpdate(query);
+        } catch (SQLException e) {
+            System.out.println("Error creating new user: " + e);
+        } finally {
+            if (stmt != null) { stmt.close(); }
+        }
 
     }
 

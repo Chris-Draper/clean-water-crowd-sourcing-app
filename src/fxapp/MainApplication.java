@@ -167,12 +167,23 @@ public class MainApplication extends Application {
     public void updateUserInfo(TextField... fields) {
 
         int userID = authenticatedUser.getID();
+        String[] fieldText = new String[8];
 
-        /*
-        database.updateProfileInfo(userID, fields[0].getText(), fields[1].getText(),
-                fields[2].getText(), fields[3].getText(), fields[4].getText(),
-                fields[5].getText(), fields[6].getText(), fields[7].getText());
-                */
+        for (int i=0; i < 8; i++) {
+            String curField = fields[i].getText();
+            if (curField.equals(""))
+                fieldText[i] = "NULL";
+            else {
+                fieldText[i] = "'" + curField + "'";
+            }
+        }
+         try {
+             database.updateProfileInfo(userID, fieldText[0], fieldText[1],
+                     fieldText[2], fieldText[3], fieldText[4], fieldText[5],
+                     fieldText[6], fieldText[7]);
+         } catch (SQLException e) {
+             System.out.println("Failed to update user info: " + e);
+         }
     }
 
     public BorderPane getRootLayout() {return rootLayout;}

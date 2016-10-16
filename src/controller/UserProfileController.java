@@ -112,9 +112,11 @@ public class UserProfileController {
 
     @FXML
     public void handleUpdateProfileButton() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Profile information saved.", ButtonType.OK);
-        alert.showAndWait();
+
         mainApplication.updateUserInfo(nameTextField, emailTextField, addressNumField,
                 streetNameField, zipField, cityField, stateField, phoneNumField);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Profile information saved.", ButtonType.OK);
+        alert.showAndWait();
     }
 }
