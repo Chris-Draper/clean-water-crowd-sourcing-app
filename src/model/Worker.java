@@ -5,12 +5,12 @@ package model;
  */
 public class Worker extends User {
 
-    public Worker(String username, String password) {
-        super(username, password, UserType.Worker);
+    public Worker(String username, int id) {
+        super(username, UserType.Worker, id);
     }
 
-    public Worker(String username, String password, UserType userType) {
-        super(username, password, userType);
+    public Worker(String username, UserType userType, int id) {
+        super(username, userType, id);
     }
 
     private void submitWaterPurityReport() {}

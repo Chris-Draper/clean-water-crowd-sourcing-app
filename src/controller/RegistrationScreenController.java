@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.*;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 /**
@@ -49,25 +50,16 @@ public class RegistrationScreenController {
         UserType type = (UserType) positionComboBox.getSelectionModel().selectedItemProperty().getValue();
         GenericUser newUser = null;
         if (isRegistrationInfoAcceptable(type)) {
-            if (type.equals(UserType.User)) {
-                newUser = new User(usernameTextField.getText(),
-                        passwordTextField.getText());
-                userLog.addUser(newUser);
-            } else if (type.equals(UserType.Worker)) {
-                newUser = new Worker(usernameTextField.getText(),
-                        passwordTextField.getText());
-                userLog.addUser(newUser);
-            } else if (type.equals(UserType.Manager)) {
-                newUser = new Manager(usernameTextField.getText(),
-                        passwordTextField.getText());
-                userLog.addUser(newUser);
-            } else if (type.equals(UserType.Administrator)) {
-                newUser = new Administrator(usernameTextField.getText(),
-                        passwordTextField.getText());
-                userLog.addUser(newUser);
+
+            GenericUser loggedInUser;
+            try {
+                mainApplication.getDatabaseConn().registerUser(usernameTextField.getText(), passwordTextField.getText(), type);
+                loggedInUser = mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordTextField.getText());
+                mainApplication.setAuthenticatedUser(loggedInUser);
+                mainApplication.switchToHomeScreen();
+            } catch (SQLException e) {
+                System.out.println("Error adding user to database: " + e);
             }
-            mainApplication.setAuthenticatedUser(newUser);
-            mainApplication.switchToHomeScreen();
         }
     }
 

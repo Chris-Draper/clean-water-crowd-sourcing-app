@@ -8,8 +8,8 @@ import java.util.Date;
 public abstract class GenericUser {
 
     private String username;
-    private String password;
     private UserType userType;
+    private int id;
     private String fullName;
     private String emailAddress;
     private String homeAddressNum;
@@ -20,24 +20,20 @@ public abstract class GenericUser {
     private String phoneNumber;
     private final Date date;
 
-    public GenericUser(String username, String password, UserType userType) {
+    public GenericUser(String username, UserType userType, int id) {
         this.username = username;
-        this.password = password;
         this.userType = userType;
+        this.id = id;
         this.date = new Date();
     }
 
     public String getUsername() { return username; }
 
-    public String getPassword() { return password; }
+    public int getID() { return id; }
 
     public UserType getUserType() { return userType; }
 
     public Date getDate() { return date; }
-
-    public void setUsername(String username) { this.username = username; }
-
-    public void setPassword(String password) { this.password = password; }
 
     public void setFullName(String name) {this.fullName = name; }
 
@@ -71,14 +67,12 @@ public abstract class GenericUser {
 
     public String getPhoneNumber() {return phoneNumber; }
 
-
-
     public boolean equals(Object o) {
         if(o == null) {
             return false;
         } else {
             GenericUser user = (GenericUser) o;
-            return this.getUsername().equals(user.getUsername()) && this.getPassword().equals(user.getPassword());
+            return (this.getUsername().equals(user.getUsername()) && this.id == user.getID());
         }
     }
 

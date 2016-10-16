@@ -12,18 +12,10 @@ public class UserLog {
 
     public UserLog() {
         this.userLog = new LinkedList<>();
-        this.addDummy();
     }
 
     public void addUser(GenericUser user) {
         userLog.add(user);
-    }
-
-    public void addDummy() {
-        addUser(new Manager("nharper32", "harper285"));
-        addUser(new Worker("cdraper", "draper"));
-        addUser(new User("s", "s"));
-        addUser(new Administrator("cpolack", "polack"));
     }
 
     public boolean contains(GenericUser user) {
