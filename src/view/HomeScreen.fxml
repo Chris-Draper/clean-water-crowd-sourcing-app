@@ -70,6 +70,14 @@
                     <Insets left="5.0" top="10.0" />
                 </VBox.margin>
             </ToggleButton>
+             <ToggleButton fx:id="googleMapsButton" mnemonicParsing="false" onAction="#handleGoogleMapsButton" prefHeight="65.0" prefWidth="120.0" text="View Map" toggleGroup="$sideNavigation">
+                 <font>
+                     <Font name="Helvetica Neue Light" size="17.0" />
+                 </font>
+                 <VBox.margin>
+                     <Insets left="5.0" top="10.0" />
+                 </VBox.margin>
+             </ToggleButton>
             <VBox alignment="BOTTOM_CENTER" prefHeight="456.0" prefWidth="140.0">
                <children>
                   <ToggleButton fx:id="waterSourceReportButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleWaterSourceReportButton" prefHeight="65.0" prefWidth="120.0" text="Water Report" toggleGroup="$sideNavigation">
@@ -91,9 +99,9 @@
    <center>
       <VBox fx:id="welcomeVBox" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="55.0" prefWidth="400.0" text="Welcome, user">
+            <Label alignment="CENTER" prefHeight="55.0" prefWidth="400.0" text="Welcome, user HomeScreen">
                <font>
-                  <Font name="Helvetica Neue UltraLight" size="51.0" />
+                  <Font name="Helvetica Neue UltraLight" size="20.0" />
                </font>
                <VBox.margin>
                   <Insets left="130.0" right="130.0" />

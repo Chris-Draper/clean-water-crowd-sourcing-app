@@ -34,6 +34,10 @@ public class MainApplication extends Application {
 
     private DatabaseInterface database;
 
+    /*
+    Initialize water source reports ArrayList here
+    Create water source report dummy data here
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         mainAppScreen = primaryStage;
@@ -41,6 +45,7 @@ public class MainApplication extends Application {
         initRootLayout(mainAppScreen);
 
         WaterSourceReportController.initWaterReportList();
+        WaterSourceReportController.makeWaterSrcReportDummyData();
     }
 
     /**
