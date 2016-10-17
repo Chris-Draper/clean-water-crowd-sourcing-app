@@ -5,13 +5,10 @@ package model;
  */
 public class Manager extends Worker {
 
-    public Manager(String username, String password) {
-        super(username, password, UserType.Manager);
+    public Manager(String username, int id) {
+        super(username, UserType.Manager, id);
     }
 
-    public Manager(String username, String password, UserType userType) {
-        super(username, password, userType);
-    }
 
     private void viewHistoricalReports() {}
 

@@ -40,6 +40,21 @@
             <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <TextField fx:id="nameTextField" prefHeight="27.0" prefWidth="283.0" promptText="Full Name">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label alignment="CENTER" text="Title">
+                     <HBox.margin>
+                        <Insets left="7.0" right="7.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="titleComboBox" prefHeight="27.0" prefWidth="129.0" />
+               </children>
+            </HBox>
             <Label text="Full Name">
                <font>
                   <Font name="Helvetica Neue Light" size="13.0" />
@@ -70,43 +85,58 @@
             </Label>
             <GridPane hgap="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="10.0" prefWidth="217.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="194.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="10.0" prefWidth="259.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
-               <children>
-                  <TextField fx:id="addressNumField" promptText="##" />
-                  <TextField fx:id="streetNameField" promptText="Street Name" GridPane.columnIndex="1" />
-                  <TextField fx:id="zipField" promptText="Zip" GridPane.rowIndex="1" />
-                  <TextField fx:id="cityField" promptText="City" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="stateField" promptText="State" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets left="10.0" right="100.0" />
-                     </GridPane.margin></TextField>
-               </children>
                <GridPane.margin>
                   <Insets left="40.0" />
                </GridPane.margin>
-            </GridPane>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <TextField fx:id="nameTextField" prefHeight="27.0" prefWidth="283.0" promptText="Full Name">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Label alignment="CENTER" text="Title">
-                     <HBox.margin>
-                        <Insets left="7.0" right="7.0" />
-                     </HBox.margin>
-                  </Label>
-                  <ComboBox fx:id="titleComboBox" prefHeight="27.0" prefWidth="129.0" />
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="addressNumField" promptText="##">
+                           <GridPane.margin>
+                              <Insets right="10.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="streetNameField" promptText="Street Name" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
+                  <GridPane GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <TextField fx:id="cityField" promptText="City">
+                           <GridPane.margin>
+                              <Insets right="10.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="stateField" prefHeight="27.0" prefWidth="159.0" promptText="State" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets right="10.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="zipField" prefHeight="27.0" prefWidth="142.0" promptText="Zip" GridPane.columnIndex="2" />
+                     </children>
+                  </GridPane>
                </children>
-            </HBox>
+            </GridPane>
             <TextField fx:id="phoneNumField" prefHeight="27.0" prefWidth="292.0" promptText="(###)-###-####" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="40.0" right="207.0" />

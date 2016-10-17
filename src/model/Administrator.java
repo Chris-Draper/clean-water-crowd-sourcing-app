@@ -5,8 +5,8 @@ package model;
  */
 public class Administrator extends GenericUser {
 
-    public Administrator(String username, String password) {
-        super(username, password, UserType.Administrator);
+    public Administrator(String username, int id) {
+        super(username, UserType.Administrator, id);
     }
 
     /**

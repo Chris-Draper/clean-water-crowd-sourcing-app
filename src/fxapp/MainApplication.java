@@ -1,18 +1,22 @@
 package fxapp;
 
+import com.jcraft.jsch.JSchException;
 import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
+
+import model.DatabaseInterface;
 import model.GenericUser;
 import model.User;
 import model.UserLog;
@@ -28,9 +32,7 @@ public class MainApplication extends Application {
 
     private UserLog userLog = new UserLog();
 
-    private VBox rootVbox;
-
-
+    private DatabaseInterface database;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -57,10 +59,6 @@ public class MainApplication extends Application {
             WelcomeScreenController ctrl = loader.getController();
             ctrl.setMainApp(this);
 
-            //TEMPORARY DATABASE
-            //userLog = new UserLog();
-
-
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
 
@@ -68,12 +66,25 @@ public class MainApplication extends Application {
             mainAppScreen.setScene(scene);
             mainAppScreen.show();
 
-        } catch (IOException e){
+            if (database == null) {
+
+                // Attempt to connect to database, display error if failure
+                try {
+
+                    database = new DatabaseInterface();
+
+                } catch (SQLException e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR,
+                            "Error connecting to backend database.", ButtonType.OK);
+                    alert.showAndWait();
+                }
+            }
+
+        } catch (IOException e) {
             //error on load, so log it
-            System.out.println("Failed to find the fxml file for MainScreen!!");
+            System.out.println("Failed to find the fxml file for MainScreen.");
             e.printStackTrace();
         }
-
     }
 
     public void switchToLoginScreen() {
@@ -154,16 +165,26 @@ public class MainApplication extends Application {
     }
 
     public void updateUserInfo(TextField... fields) {
-        authenticatedUser.setFullName(fields[0].getText());
-        authenticatedUser.setEmailAddress((fields[1].getText()));
-        authenticatedUser.setHomeAddressNum(fields[2].getText());
-        authenticatedUser.setHomeAddressStreet(fields[3].getText());
-        authenticatedUser.setHomeAddressZip(fields[4].getText());
-        authenticatedUser.setHomeAddressCity(fields[5].getText());
-        authenticatedUser.setHomeAddressState(fields[6].getText());
-        authenticatedUser.setPhoneNumber(fields[7].getText());
-    }
 
+        int userID = authenticatedUser.getID();
+        String[] fieldText = new String[8];
+
+        for (int i=0; i < 8; i++) {
+            String curField = fields[i].getText();
+            if (curField.equals(""))
+                fieldText[i] = "NULL";
+            else {
+                fieldText[i] = "'" + curField + "'";
+            }
+        }
+         try {
+             database.updateProfileInfo(userID, fieldText[0], fieldText[1],
+                     fieldText[2], fieldText[3], fieldText[4], fieldText[5],
+                     fieldText[6], fieldText[7]);
+         } catch (SQLException e) {
+             System.out.println("Failed to update user info: " + e);
+         }
+    }
 
     public BorderPane getRootLayout() {return rootLayout;}
 
@@ -186,7 +207,16 @@ public class MainApplication extends Application {
     }
 
     public UserLog getUserlog() {
-        return userLog;}
+        return userLog;
+    }
+
+    public DatabaseInterface getDatabaseConn() {
+        return database;
+    }
+
+    public void stop() {
+        database.close();
+    }
 
 
 }

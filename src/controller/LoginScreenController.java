@@ -10,6 +10,9 @@ import model.User;
 import model.UserLog;
 import model.UserType;
 import model.UserLog;
+import sun.net.www.content.text.Generic;
+
+import java.sql.SQLException;
 
 
 /**
@@ -50,21 +53,29 @@ public class LoginScreenController {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();
-        } else if(isInputValid()) {
-            aValidUser = userLog.getCurrentUser(usernameTextField.getText());
-            mainApplication.setAuthenticatedUser(aValidUser);
-            mainApplication.switchToHomeScreen();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "This Username and Password combination cannot be found", ButtonType.OK);
-            alert.showAndWait();
-            passwordField.setText("");
+
+            GenericUser loggedInUser = isInputValid();
+
+            if(loggedInUser != null) {
+                mainApplication.setAuthenticatedUser(loggedInUser);
+                mainApplication.switchToHomeScreen();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "This Username and Password combination cannot be found", ButtonType.OK);
+                alert.showAndWait();
+                passwordField.setText("");
+            }
         }
     }
 
     // Check to see if values entered as username and password is acceptable
-    private boolean isInputValid() {
-        GenericUser potentialUser = new User(usernameTextField.getText(),passwordField.getText());
-        return userLog.contains(potentialUser);
+    private GenericUser isInputValid() {
+        try {
+            return mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordField.getText());
+        } catch(SQLException e) {
+            System.out.println("Issue connecting: " + e);
+        }
+        return null;
     }
 
     /**
