@@ -66,6 +66,7 @@ public class HomeScreenController {
     private VBox listWaterReportVBox;
     private VBox userProfileVBox;
     private VBox homeScreenVBox;
+    private BorderPane googleMapBorderPane;
 
     @FXML
     private ListView listView;
@@ -88,13 +89,17 @@ public class HomeScreenController {
     private ToggleButton waterSourceReportButton;
 
     @FXML
+    private ToggleButton googleMapsButton;
+
+    @FXML
     private void initialize() {
     }
 
     /**
      * allow for calling back to the mainApplication application code if necessary
-     * @param mainApplication   the reference to the FX Application instance
-     * */
+     *
+     * @param mainApplication the reference to the FX Application instance
+     */
 
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
@@ -158,7 +163,7 @@ public class HomeScreenController {
                 rootLayout.setCenter(homeScreenVBox);
             }
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Can't find home: " + e);
         }
     }
@@ -172,46 +177,47 @@ public class HomeScreenController {
                 listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
                 ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReportController.getWaterSourceReportList();
 
-                    listItems = FXCollections.observableArrayList();
-                    for (int i = 0; i < waterSourceReports.size(); i++) {
-                        listItems.add(waterSourceReports.get(i).getReportNum()); //change later, fill with water source report objects
-                        reportDisplayCounter = waterSourceReports.size();
-                    } //see if you can directly insert the waterSourceReports into the ListView<> parameter
-                    listView = new ListView<>(listItems);
-                    listView.setPrefHeight(490);
-                    listWaterReportVBox.getChildren().addAll(listView);
-                    rootLayout.setCenter(listWaterReportVBox);
+                listItems = FXCollections.observableArrayList();
+                for (int i = 0; i < waterSourceReports.size(); i++) {
+                    listItems.add(waterSourceReports.get(i).getReportNum()); //change later, fill with water source report objects
+                    reportDisplayCounter = waterSourceReports.size();
+                } //see if you can directly insert the waterSourceReports into the ListView<> parameter
+                listView = new ListView<>(listItems);
+                listView.setPrefHeight(490);
+                listWaterReportVBox.getChildren().addAll(listView);
+                rootLayout.setCenter(listWaterReportVBox);
 
-                    listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-                        @Override
-                        public void handle(MouseEvent event) {
-                            listView.setPrefHeight(230);
-                            if (textArea != null) {
-                                listWaterReportVBox.getChildren().remove(textArea);
-                            }
-                            WaterSourceReport waterSourceReportData = null;
-                            for (int i = 0; i < waterSourceReports.size(); i++) { //doing this is hella jank and NEEDS to be refactored
-                                if (waterSourceReports.get(i).getReportNum().equals( listView.getSelectionModel().getSelectedItem().toString())) {
-                                    waterSourceReportData = waterSourceReports.get(i);
-                                }
-                            }
-                            if (waterSourceReportData != null) {
-                                textArea = new TextArea(
-                                        "Report Number: " + waterSourceReportData.getReportNum() + "\n\n" +
-                                                "Location: " + waterSourceReportData.getLocation() + "\n" +
-                                                "Date of report: " + waterSourceReportData.getDate() + "\n" +
-                                                "Time of report: " + waterSourceReportData.getTime() + "\n" +
-                                                "Reported By: " + waterSourceReportData.getReporterName() + "\n" +
-                                                "Source Type: " + waterSourceReportData.getSourceType() + "\n" +
-                                                "Water Condition: " + waterSourceReportData.getCondition()
-                                );
-                                textArea.setWrapText(true);
-                                textArea.setPrefHeight(260);
-                                listWaterReportVBox.getChildren().addAll(textArea);
+                    @Override
+                    public void handle(MouseEvent event) {
+                        listView.setPrefHeight(230);
+                        if (textArea != null) {
+                            listWaterReportVBox.getChildren().remove(textArea);
+                        }
+                        WaterSourceReport waterSourceReportData = null;
+                        for (int i = 0; i < waterSourceReports.size(); i++) { //doing this is hella jank and NEEDS to be refactored
+                            if (waterSourceReports.get(i).getReportNum().equals(listView.getSelectionModel().getSelectedItem().toString())) {
+                                waterSourceReportData = waterSourceReports.get(i);
                             }
                         }
-                    });
+                        if (waterSourceReportData != null) {
+                            textArea = new TextArea(
+                                    "Report Number: " + waterSourceReportData.getReportNum() + "\n\n" +
+                                            "Location Lat: " + waterSourceReportData.getLat() + "\n" +
+                                            "Location Long: " + waterSourceReportData.getLong() + "\n" +
+                                            "Date of report: " + waterSourceReportData.getDate() + "\n" +
+                                            "Time of report: " + waterSourceReportData.getTime() + "\n" +
+                                            "Reported By: " + waterSourceReportData.getReporterName() + "\n" +
+                                            "Source Type: " + waterSourceReportData.getSourceType() + "\n" +
+                                            "Water Condition: " + waterSourceReportData.getCondition()
+                            );
+                            textArea.setWrapText(true);
+                            textArea.setPrefHeight(260);
+                            listWaterReportVBox.getChildren().addAll(textArea);
+                        }
+                    }
+                });
             } else {
                 listButton.setSelected(true);
             }
@@ -224,19 +230,29 @@ public class HomeScreenController {
     @FXML
     private void handleWaterSourceReportButton(ActionEvent event) {
         try {
-
-            if(waterSourceReportButton.getText().equals("Cancel Report")) {
+            if (waterSourceReportButton.getText().equals("Cancel Report")) {
                 rootLayout.setCenter(homeScreenVBox);
                 homeButton.setSelected(true);
                 waterSourceReportButton.setText("Water Report");
             } else {
-
                 listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/SubmitReportView.fxml"));
                 rootLayout.setCenter(listWaterReportVBox);
                 waterSourceReportButton.setText("Cancel Report");
             }
         } catch (IOException e) {
             System.out.println("Failed to find vbox2!");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleGoogleMapsButton(ActionEvent event) {
+        try {
+            googleMapBorderPane = FXMLLoader.load(getClass().getResource("../view/GoogleMapsView.fxml"));
+            rootLayout.setCenter(googleMapBorderPane);
+            googleMapsButton.setSelected(true);
+        } catch (IOException e) {
+            System.out.println("Failed to open Google Maps View!");
             e.printStackTrace();
         }
     }
