@@ -1,8 +1,6 @@
 package controller;
 
-import com.sun.org.glassfish.gmbal.Description;
 //import com.sun.tools.javac.jvm.Gen;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import fxapp.MainApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,23 +9,16 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
+        import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import model.UserLog;
-import model.WaterSourceReport;
+        import model.WaterSourceReport;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
+        import java.io.IOException;
 import java.util.ArrayList;
-
-import model.WaterSourceReport;
 
 //reference http://stackoverflow.com/questions/19342259/how-to-create-multiple-javafx-controllers-with-different-fxml-files to fix issues
 
@@ -136,7 +127,7 @@ public class HomeScreenController {
     private void loadVBoxs() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/HomeScreenUser.fxml"));
+            loader.setLocation(MainApplication.class.getResource("../view/HomeScreen_UserProfile.fxml"));
             userProfileVBox = loader.load();
 
             // Give the controller access to the main app.
@@ -174,7 +165,7 @@ public class HomeScreenController {
             if (listButton.isSelected()) {
                 //waterSourceReportButton.setText("Water Report");
                 //profileButton.setText("Edit Profile");
-                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
+                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListReports.fxml"));
                 ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReportController.getWaterSourceReportList();
 
                 listItems = FXCollections.observableArrayList();
@@ -235,7 +226,7 @@ public class HomeScreenController {
                 homeButton.setSelected(true);
                 waterSourceReportButton.setText("Water Report");
             } else {
-                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/SubmitReportView.fxml"));
+                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_WaterSourceReport.fxml"));
                 rootLayout.setCenter(listWaterReportVBox);
                 waterSourceReportButton.setText("Cancel Report");
             }
@@ -248,7 +239,7 @@ public class HomeScreenController {
     @FXML
     private void handleGoogleMapsButton(ActionEvent event) {
         try {
-            googleMapBorderPane = FXMLLoader.load(getClass().getResource("../view/GoogleMapsView.fxml"));
+            googleMapBorderPane = FXMLLoader.load(getClass().getResource("../view/HomeScreen_GoogleMaps.fxml"));
             rootLayout.setCenter(googleMapBorderPane);
             googleMapsButton.setSelected(true);
         } catch (IOException e) {

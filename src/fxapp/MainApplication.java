@@ -125,7 +125,7 @@ public class MainApplication extends Application {
         try {
             // Pointing loader to login screen fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/HomeScreen.fxml"));
+            loader.setLocation(MainApplication.class.getResource("../view/HomeScreen_Main.fxml"));
             rootLayout = loader.load();
 
             // Give the controller access to the main app.
