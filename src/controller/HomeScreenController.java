@@ -1,7 +1,7 @@
 package controller;
 
 import com.sun.org.glassfish.gmbal.Description;
-import com.sun.tools.javac.jvm.Gen;
+//import com.sun.tools.javac.jvm.Gen;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import fxapp.MainApplication;
 import javafx.collections.FXCollections;
@@ -167,8 +167,8 @@ public class HomeScreenController {
     private void handleListButtonPressed(ActionEvent event) {
         try {
             if (listButton.isSelected()) {
-                waterSourceReportButton.setText("Water Report");
-                profileButton.setText("Edit Profile");
+                //waterSourceReportButton.setText("Water Report");
+                //profileButton.setText("Edit Profile");
                 listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
                 ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReportController.getWaterSourceReportList();
 
@@ -196,19 +196,20 @@ public class HomeScreenController {
                                     waterSourceReportData = waterSourceReports.get(i);
                                 }
                             }
-                            textArea = new TextArea(
-                                "Report Number: " + waterSourceReportData.getReportNum() + "\n\n" +
-                                "Location: " + waterSourceReportData.getLocation() + "\n" +
-                                "Date of report: " + waterSourceReportData.getDate() + "\n" +
-                                "Time of report: " + waterSourceReportData.getTime() + "\n" +
-                                "Reported By: " + waterSourceReportData.getReporterName() + "\n" +
-                                "Source Type: " + waterSourceReportData.getSourceType() + "\n" +
-                                "Water Condition: " + waterSourceReportData.getCondition()
-                            );
-                            textArea.setWrapText(true);
-                            textArea.setPrefHeight(260);
-                            listWaterReportVBox.getChildren().addAll(textArea);
-
+                            if (waterSourceReportData != null) {
+                                textArea = new TextArea(
+                                        "Report Number: " + waterSourceReportData.getReportNum() + "\n\n" +
+                                                "Location: " + waterSourceReportData.getLocation() + "\n" +
+                                                "Date of report: " + waterSourceReportData.getDate() + "\n" +
+                                                "Time of report: " + waterSourceReportData.getTime() + "\n" +
+                                                "Reported By: " + waterSourceReportData.getReporterName() + "\n" +
+                                                "Source Type: " + waterSourceReportData.getSourceType() + "\n" +
+                                                "Water Condition: " + waterSourceReportData.getCondition()
+                                );
+                                textArea.setWrapText(true);
+                                textArea.setPrefHeight(260);
+                                listWaterReportVBox.getChildren().addAll(textArea);
+                            }
                         }
                     });
             } else {
