@@ -1,31 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import com.lynden.gmapsfx.*?>
 
-<!-- <AnchorPane id="AnchorPane" fx:controller="controller.GoogleMapsController" prefHeight="570.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
-    <children>
-        <GoogleMapView fx:id="mapView" prefHeight="750.0" prefWidth="761.0" AnchorPane.bottomAnchor="-185.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-441.0" AnchorPane.topAnchor="0.0"/>
-    </children>
-</AnchorPane> -->
-
-<VBox fx:id="vbox1" prefHeight="570.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreenController">
-    <children>
-      <Label alignment="CENTER" prefHeight="55.0" prefWidth="400.0" text="Welcome, user">
-         <font>
-            <Font name="Helvetica Neue UltraLight" size="51.0" />
-         </font>
-         <VBox.margin>
-            <Insets left="130.0" right="130.0" />
-         </VBox.margin>
-      </Label>
-   </children>
-</VBox>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0"
+            prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.GoogleMapsController">
+    <center>
+        <GoogleMapView fx:id="mapView" prefHeight="660.0" prefWidth="570.0" BorderPane.alignment="CENTER" />
+    </center>
+</BorderPane>
