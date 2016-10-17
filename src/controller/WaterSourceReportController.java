@@ -21,7 +21,10 @@ public class WaterSourceReportController {
     private TextField reporterName;
 
     @FXML
-    private TextField reportSourceLocation;
+    private TextField reportSourceLat;
+
+    @FXML
+    private TextField reportSourceLong;
 
     @FXML
     private Label reportNumber;
@@ -83,10 +86,13 @@ public class WaterSourceReportController {
     @FXML
     private void handleSubmitWaterSourceReport(ActionEvent event) {
 
+        double reportLat = Double.parseDouble(reportSourceLat.getText());
+        double reportLong = Double.parseDouble(reportSourceLong.getText());
+
         waterSourceReportList.add(new WaterSourceReport(
                 reportDate.getText(), reportTime.getText(),
                 reportNumber.getText(), reporterName.getText(),
-                reportSourceLocation.getText(), reportWaterCondition.getValue(),
+                reportLat, reportLong, reportWaterCondition.getValue(),
                 reportWaterType.getValue()
         ));
 
@@ -100,17 +106,42 @@ public class WaterSourceReportController {
         reportTime.setText(this.getTime());
         reportNumber.setText(reportSystemCount.toString());
         reporterName.clear();
-        reportSourceLocation.clear();
+        reportSourceLat.clear();
+        reportSourceLong.clear();
         this.setReportWaterConditionData();
         this.setReportWaterType();
     }
 
     public static ArrayList<WaterSourceReport> getWaterSourceReportList() {
-
         return waterSourceReportList;
     }
 
     public static void initWaterReportList() {
         waterSourceReportList = new ArrayList<WaterSourceReport>();
     }
+
+    public static void makeWaterSrcReportDummyData() {
+        WaterSourceReport report1 = new WaterSourceReport( //top
+                "10/12/16", "22:16", "2001", "Chris Draper", 33.78, -84.15,
+                "Lake", "Treatable Clear"
+        );
+        WaterSourceReport report2 = new WaterSourceReport( //right
+                "10/15/16", "22:16", "2002", "Don Draper", 34.03, -84.40,
+                "Well", "Potable"
+        );
+        WaterSourceReport report3 = new WaterSourceReport( //bottom
+                "10/17/16", "22:16", "2003", "Cynthia Draper", 33.78, -84.65,
+                "Spring", "Treatable Muddy"
+        );
+        WaterSourceReport report4 = new WaterSourceReport( //left
+                "9/12/16", "22:16", "2004", "Zach Draper", 33.53, -84.40,
+                "Bottled", "Waste"
+        );
+        waterSourceReportList.add(report1);
+        waterSourceReportList.add(report2);
+        waterSourceReportList.add(report3);
+        waterSourceReportList.add(report4);
+    }
+
+
 }
