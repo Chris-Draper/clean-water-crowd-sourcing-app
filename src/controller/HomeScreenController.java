@@ -15,10 +15,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import model.WaterSourceReport;
-<<<<<<< HEAD
-
-=======
->>>>>>> e64984d7da836d934e6df5b474a4440e2cc4523c
 import java.io.IOException;
 import java.util.ArrayList;
 
