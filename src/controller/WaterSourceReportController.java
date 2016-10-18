@@ -6,7 +6,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import model.WaterSourceReport;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.DateFormat;

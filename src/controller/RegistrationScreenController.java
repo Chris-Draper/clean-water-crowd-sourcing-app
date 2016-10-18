@@ -6,9 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.*;
-
 import java.sql.SQLException;
-import java.util.LinkedList;
 
 /**
  * Created by ChrisPolack on 9/27/16.

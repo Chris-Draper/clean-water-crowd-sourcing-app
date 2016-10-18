@@ -15,11 +15,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import model.WaterSourceReport;
+<<<<<<< HEAD
 
+=======
+>>>>>>> e64984d7da836d934e6df5b474a4440e2cc4523c
 import java.io.IOException;
 import java.util.ArrayList;
-
-//reference http://stackoverflow.com/questions/19342259/how-to-create-multiple-javafx-controllers-with-different-fxml-files to fix issues
 
 /**
  * Created by nharper32 on 9/24/16.
