@@ -8,7 +8,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
@@ -127,7 +126,7 @@ public class HomeScreenController {
     private void loadVBoxs() {
         try {
             FXMLLoader loader_1 = new FXMLLoader();
-            loader_1.setLocation(MainApplication.class.getResource("../view/HomeScreenUser.fxml"));
+            loader_1.setLocation(MainApplication.class.getResource("../view/HomeScreen_UserProfile.fxml"));
             userProfileVBox = loader_1.load();
 
             // Give the controller access to the main app.
@@ -171,7 +170,7 @@ public class HomeScreenController {
     private void handleListButtonPressed(ActionEvent event) {
         try {
             if (listButton.isSelected()) {
-                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
+                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListReports.fxml"));
                 ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReportController.getWaterSourceReportList();
 
                 listItems = FXCollections.observableArrayList();
@@ -232,7 +231,7 @@ public class HomeScreenController {
                 homeButton.setSelected(true);
                 waterSourceReportButton.setText("Water Report");
             } else {
-                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/SubmitReportView.fxml"));
+                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_WaterSourceReport.fxml"));
                 rootLayout.setCenter(listWaterReportVBox);
                 waterSourceReportButton.setText("Cancel Report");
             }
@@ -245,7 +244,7 @@ public class HomeScreenController {
     @FXML
     private void handleGoogleMapsButton(ActionEvent event) {
         try {
-            googleMapBorderPane = FXMLLoader.load(getClass().getResource("../view/GoogleMapsView.fxml"));
+            googleMapBorderPane = FXMLLoader.load(getClass().getResource("../view/HomeScreen_GoogleMaps.fxml"));
             rootLayout.setCenter(googleMapBorderPane);
             googleMapsButton.setSelected(true);
         } catch (IOException e) {

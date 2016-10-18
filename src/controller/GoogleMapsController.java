@@ -27,7 +27,6 @@ public class GoogleMapsController implements Initializable, MapComponentInitiali
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapView.addMapInializedListener(this);
-        System.out.println(WaterSourceReportController.getWaterSourceReportList().toString());
     }
 
     @Override

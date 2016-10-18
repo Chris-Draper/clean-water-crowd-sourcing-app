@@ -70,16 +70,6 @@
                   <Insets left="15.0" right="15.0" />
                </GridPane.margin>
             </TextField>
-            <TextField  fx:id="reportSourceLat" promptText="Latitude" GridPane.columnIndex="3">
-               <GridPane.margin>
-                  <Insets left="15.0" right="15.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField  fx:id="reportSourceLong" promptText="Longitude" GridPane.columnIndex="3">
-               <GridPane.margin>
-                  <Insets left="15.0" right="15.0" />
-               </GridPane.margin>
-            </TextField>
             <Label fx:id="reportNumber" text="" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" />
@@ -112,6 +102,20 @@
                   <Insets left="15.0" right="15.0" />
                </GridPane.margin>
             </ComboBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
+               <children>
+                  <TextField fx:id="reportSourceLong" promptText="Longitude">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="15.0" right="15.0" top="25.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="reportSourceLat" promptText="Latitude">
+                     <VBox.margin>
+                        <Insets bottom="25.0" left="15.0" right="15.0" top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+            </VBox>
          </children>
       </GridPane>
       <Button fx:id="submitWaterSourceReportButton" mnemonicParsing="false" onAction="#handleSubmitWaterSourceReport" prefHeight="46.0" prefWidth="111.0" text="Submit Report">
