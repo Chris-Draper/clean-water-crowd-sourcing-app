@@ -8,7 +8,6 @@ import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.event.UIEventType;
 import com.lynden.gmapsfx.javascript.object.*;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;

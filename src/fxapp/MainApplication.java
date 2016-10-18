@@ -1,24 +1,16 @@
 package fxapp;
 
-import com.jcraft.jsch.JSchException;
 import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
-
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-
 import model.DatabaseInterface;
 import model.GenericUser;
-import model.User;
 import model.UserLog;
 
 public class MainApplication extends Application {

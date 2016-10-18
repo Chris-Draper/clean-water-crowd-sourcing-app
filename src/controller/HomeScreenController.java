@@ -1,6 +1,5 @@
 package controller;
 
-//import com.sun.tools.javac.jvm.Gen;
 import fxapp.MainApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,18 +8,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-        import javafx.scene.control.Menu;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-        import model.WaterSourceReport;
-
-        import java.io.IOException;
+import model.WaterSourceReport;
+import java.io.IOException;
 import java.util.ArrayList;
-
-//reference http://stackoverflow.com/questions/19342259/how-to-create-multiple-javafx-controllers-with-different-fxml-files to fix issues
 
 /**
  * Created by nharper32 on 9/24/16.

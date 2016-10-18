@@ -3,16 +3,11 @@ package controller;
 import fxapp.MainApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import model.GenericUser;
 import model.UserType;
-
-import java.io.IOException;
 import java.sql.SQLException;
 
 /**

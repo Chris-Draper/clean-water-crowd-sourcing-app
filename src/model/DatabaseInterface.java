@@ -1,9 +1,8 @@
 package model;
 
 import com.jcraft.jsch.*;
-
-import java.io.ByteArrayInputStream;
 import java.sql.*;
+import java.io.ByteArrayInputStream;
 import java.util.Base64;
 import java.util.Properties;
 
