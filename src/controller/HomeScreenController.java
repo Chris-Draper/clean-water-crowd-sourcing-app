@@ -131,13 +131,21 @@ public class HomeScreenController {
 
     private void loadVBoxs() {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/HomeScreen_UserProfile.fxml"));
-            userProfileVBox = loader.load();
+            FXMLLoader loader_1 = new FXMLLoader();
+            loader_1.setLocation(MainApplication.class.getResource("../view/HomeScreen_UserProfile.fxml"));
+            userProfileVBox = loader_1.load();
 
             // Give the controller access to the main app.
-            UserProfileController ctrl = loader.getController();
+            UserProfileController ctrl = loader_1.getController();
             ctrl.setMainApp(mainApplication);
+
+            FXMLLoader loader_2 = new FXMLLoader();
+            loader_2.setLocation(MainApplication.class.getResource("../view/HomeScreen_WaterPurityReport.fxml"));
+            userProfileVBox = loader_2.load();
+
+            ListReportsController ctrl_2 = loader_2.getController();
+            ctrl_2.setMainApp(mainApplication);
+
         } catch (IOException e) {
             System.out.println("Can't find Vboxs");
         }
@@ -168,8 +176,6 @@ public class HomeScreenController {
     private void handleListButtonPressed(ActionEvent event) {
         try {
             if (listButton.isSelected()) {
-                //waterSourceReportButton.setText("Water Report");
-                //profileButton.setText("Edit Profile");
                 listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListReports.fxml"));
                 ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReportController.getWaterSourceReportList();
 
