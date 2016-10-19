@@ -14,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import model.UserType;
 import model.WaterSourceReport;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -93,6 +94,14 @@ public class HomeScreenController {
         rootLayout = mainApplication.getRootLayout();
         homeButton.setSelected(true);
         loadVBoxs();
+        if (mainApplication.getAuthenticatedUser().getUserType().equals(UserType.User)
+                || mainApplication.getAuthenticatedUser().getUserType().equals(UserType.Administrator)) {
+            waterSourceReportButton.setVisible(false);
+            System.out.println("1");
+        } else {
+            waterSourceReportButton.setVisible(true);
+            System.out.println("2");
+        }
     }
 
     @FXML

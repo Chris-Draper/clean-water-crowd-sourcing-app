@@ -54,6 +54,7 @@ public class WaterSourceReportController {
         reportDate.setText(this.getDate());
         reportTime.setText(this.getTime());
         reportNumber.setText(reportSystemCount.toString());
+
     }
 
     private void setReportWaterConditionData() {
