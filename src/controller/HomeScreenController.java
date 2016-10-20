@@ -189,7 +189,7 @@ public class HomeScreenController {
                             listWaterReportVBox.getChildren().remove(textArea);
                         }
                         WaterSourceReport waterSourceReportData = null;
-                        for (int i = 0; i < waterSourceReports.size(); i++) { //doing this is hella jank and NEEDS to be refactored
+                        for (int i = 0; i < waterSourceReports.size(); i++) {
                             if (waterSourceReports.get(i).getReportNum().equals(listView.getSelectionModel().getSelectedItem().toString())) {
                                 waterSourceReportData = waterSourceReports.get(i);
                             }
