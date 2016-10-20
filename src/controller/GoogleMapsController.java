@@ -59,7 +59,7 @@ public class GoogleMapsController implements Initializable, MapComponentInitiali
                     UIEventType.click,
                     (JSObject obj) -> {
                         InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-                        infoWindowOptions.content(waterSource.toString());
+                        infoWindowOptions.content(waterSource.toHtmlFormat());
 
                         InfoWindow window = new InfoWindow(infoWindowOptions);
                         window.open(map, marker);
