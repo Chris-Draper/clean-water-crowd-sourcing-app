@@ -51,6 +51,7 @@ public class LoginScreenController {
 
             if(loggedInUser != null) {
                 mainApplication.setAuthenticatedUser(loggedInUser);
+                //System.out.println(mainApplication.getAuthenticatedUser());
                 mainApplication.switchToHomeScreen();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "This Username and Password combination cannot be found", ButtonType.OK);

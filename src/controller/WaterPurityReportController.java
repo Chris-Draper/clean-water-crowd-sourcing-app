@@ -61,7 +61,7 @@ public class WaterPurityReportController {
 
     private static Integer reportNum = 2001;
 
-    private GenericUser currentUser = mainApplication.getAuthenticatedUser();
+    //private GenericUser currentUser = mainApplication.getAuthenticatedUser();
 
     private static ArrayList<WaterPurityReport> waterPurityReportList;
 
@@ -69,11 +69,12 @@ public class WaterPurityReportController {
 
     @FXML
     private void initialize() {
+        System.out.println(mainApplication.getAuthenticatedUser());
         //set text for all labels based on person doing this
         reportNumLabel.setText(reportNum.toString());
-        reporterNameLabel.setText(currentUser.getUsername());
+        //reporterNameLabel.setText(currentUser.getUsername());
         date = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
         dateLabel.setText(dateFormat.format(date));
         dateFormat = new SimpleDateFormat("HH:mm");
         timeLabel.setText(dateFormat.format(date));
@@ -103,7 +104,8 @@ public class WaterPurityReportController {
             double virus = Double.parseDouble(virusTextField.getText());
             double cont = Double.parseDouble(contTextField.getText());
 
-            waterPurityReportList.add(new WaterPurityReport(reportNum, currentUser.getUsername(),
+            //waterPurityReportList.add(new WaterPurityReport(reportNum, currentUser.getUsername(),
+            waterPurityReportList.add(new WaterPurityReport(reportNum, "TETERT",
                     lat, longit, cond, virus, cont));
             reportNum++;
         }
