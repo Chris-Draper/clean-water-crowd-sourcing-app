@@ -1,25 +1,17 @@
 package controller;
 
 import fxapp.MainApplication;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import model.UserType;
-import model.WaterSourceReport;
-import sun.applet.Main;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by nharper32 on 9/24/16.
@@ -128,10 +120,10 @@ public class HomeScreenController {
             ctrl.setMainApp(mainApplication);
 
             FXMLLoader loader_2 = new FXMLLoader();
-            loader_2.setLocation(MainApplication.class.getResource("../view/HomeScreen_ListReports.fxml"));
+            loader_2.setLocation(MainApplication.class.getResource("../view/HomeScreen_ListWaterReports.fxml"));
             listWaterReportVBox = loader_2.load();
 
-            ListReportsController ctrl_2 = loader_2.getController();
+            ListWaterReportsController ctrl_2 = loader_2.getController();
             ctrl_2.setMainApp(mainApplication);
 
 

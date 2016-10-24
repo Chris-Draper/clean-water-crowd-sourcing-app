@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by sbuck on 10/17/2016.
  */
-public class ListReportsController {
+public class ListWaterReportsController {
 
     @FXML
     private VBox listWaterReportVBox;
