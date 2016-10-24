@@ -4,6 +4,7 @@ import fxapp.MainApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import model.GenericUser;
 import model.WaterPurityReport;
 import model.WaterSourceReport;
@@ -56,6 +57,15 @@ public class WaterPurityReportController {
 
     @FXML
     private RadioButton unsafeButton;
+
+    @FXML
+    private VBox vbox2;
+
+    @FXML
+    private Button submitButton;
+
+    @FXML
+    private Button cancelButton;
 
     private ToggleGroup conditionGroup;
 
