@@ -47,17 +47,16 @@ public class WaterSourceReport {
                 "\nReport Condition : " + this.condition;
     }
 
-    /*
-    public static void addReportToList(WaterSourceReport sourceReport) {
-        waterSourceReportList.add(sourceReport);
+    public String toHtmlFormat() {
+        return  "<strong>Report Number : " + this.reportNum + "</strong><br>" +
+                "<br>Report Date : " + this.date +
+                "<br>Report Time : " + this.time +
+                "<br>Reporter Name : " + this.reporterName +
+                "<br>Report Location Latitude : " + this.latitude +
+                "<br>Report Location Longitude : " + this.longitude +
+                "<br>Report Water Type : " + this.waterType +
+                "<br>Report Condition : " + this.condition;
     }
-    /*
-
-    /*
-    public static ArrayList<WaterSourceReport> getReportList() {
-        return waterSourceReportList;
-    }
-    */
 
     //all the getter and setter methods are for future manager accounts
 

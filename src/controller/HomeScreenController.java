@@ -50,19 +50,10 @@ public class HomeScreenController {
 
     @FXML
     private VBox welcomeVBox;
-
     private VBox listWaterReportVBox;
     private VBox userProfileVBox;
     private VBox homeScreenVBox;
     private BorderPane googleMapBorderPane;
-
-    @FXML
-    private ListView listView;
-
-    private static int reportDisplayCounter = 0;
-
-    private ObservableList listItems = FXCollections.observableArrayList();
-    private TextArea textArea;
 
     @FXML
     private ToggleButton homeButton;
@@ -115,20 +106,6 @@ public class HomeScreenController {
         mainApplication.reloadHomeScreen();
     }
 
-    @FXML
-    private void handleProfileButton(ActionEvent event) {
-        if (profileButton.isSelected()) {
-            waterSourceReportButton.setText("Water Report");
-            if (profileButton.isSelected()) {
-                rootLayout.setCenter(userProfileVBox);
-            } else {
-                rootLayout.setCenter(welcomeVBox);
-            }
-        } else {
-            profileButton.setSelected(true);
-        }
-    }
-
     private void loadVBoxs() {
         try {
             FXMLLoader loader_1 = new FXMLLoader();
@@ -140,8 +117,8 @@ public class HomeScreenController {
             ctrl.setMainApp(mainApplication);
 
             FXMLLoader loader_2 = new FXMLLoader();
-            loader_2.setLocation(MainApplication.class.getResource("../view/HomeScreen_WaterPurityReport.fxml"));
-            userProfileVBox = loader_2.load();
+            loader_2.setLocation(MainApplication.class.getResource("../view/HomeScreen_ListReports.fxml"));
+            listWaterReportVBox = loader_2.load();
 
             ListReportsController ctrl_2 = loader_2.getController();
             ctrl_2.setMainApp(mainApplication);
@@ -172,60 +149,31 @@ public class HomeScreenController {
         }
     }
 
+
+    @FXML
+    private void handleProfileButton(ActionEvent event) {
+        if (profileButton.isSelected()) {
+            waterSourceReportButton.setText("Water Report");
+            if (profileButton.isSelected()) {
+                rootLayout.setCenter(userProfileVBox);
+            } else {
+                rootLayout.setCenter(welcomeVBox);
+            }
+        } else {
+            profileButton.setSelected(true);
+        }
+    }
+
     @FXML
     private void handleListButtonPressed(ActionEvent event) {
-        try {
+        if (listButton.isSelected()) {
             if (listButton.isSelected()) {
-                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListReports.fxml"));
-                ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReportController.getWaterSourceReportList();
-
-                listItems = FXCollections.observableArrayList();
-                for (int i = 0; i < waterSourceReports.size(); i++) {
-                    listItems.add(waterSourceReports.get(i).getReportNum()); //change later, fill with water source report objects
-                    reportDisplayCounter = waterSourceReports.size();
-                } //see if you can directly insert the waterSourceReports into the ListView<> parameter
-                listView = new ListView<>(listItems);
-                listView.setPrefHeight(490);
-                listWaterReportVBox.getChildren().addAll(listView);
                 rootLayout.setCenter(listWaterReportVBox);
-
-                listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-                    @Override
-                    public void handle(MouseEvent event) {
-                        listView.setPrefHeight(230);
-                        if (textArea != null) {
-                            listWaterReportVBox.getChildren().remove(textArea);
-                        }
-                        WaterSourceReport waterSourceReportData = null;
-                        for (int i = 0; i < waterSourceReports.size(); i++) { //doing this is hella jank and NEEDS to be refactored
-                            if (waterSourceReports.get(i).getReportNum().equals(listView.getSelectionModel().getSelectedItem().toString())) {
-                                waterSourceReportData = waterSourceReports.get(i);
-                            }
-                        }
-                        if (waterSourceReportData != null) {
-                            textArea = new TextArea(
-                                    "Report Number: " + waterSourceReportData.getReportNum() + "\n\n" +
-                                            "Location Lat: " + waterSourceReportData.getLat() + "\n" +
-                                            "Location Long: " + waterSourceReportData.getLong() + "\n" +
-                                            "Date of report: " + waterSourceReportData.getDate() + "\n" +
-                                            "Time of report: " + waterSourceReportData.getTime() + "\n" +
-                                            "Reported By: " + waterSourceReportData.getReporterName() + "\n" +
-                                            "Source Type: " + waterSourceReportData.getSourceType() + "\n" +
-                                            "Water Condition: " + waterSourceReportData.getCondition()
-                            );
-                            textArea.setWrapText(true);
-                            textArea.setPrefHeight(260);
-                            listWaterReportVBox.getChildren().addAll(textArea);
-                        }
-                    }
-                });
             } else {
-                listButton.setSelected(true);
+                rootLayout.setCenter(welcomeVBox);
             }
-        } catch (IOException e) {
-            System.out.println("Failed to find list button!");
-            e.printStackTrace();
+        } else {
+            listButton.setSelected(true);
         }
     }
 
