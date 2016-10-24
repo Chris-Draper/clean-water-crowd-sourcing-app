@@ -16,6 +16,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import model.UserType;
 import model.WaterSourceReport;
+import sun.applet.Main;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -54,6 +56,8 @@ public class HomeScreenController {
     private VBox purityReportVBox;
     private VBox userProfileVBox;
     private VBox homeScreenVBox;
+    private VBox waterReportVbox;
+    private VBox listPurityReportsVbox;
     private BorderPane googleMapBorderPane;
 
     @FXML
@@ -130,7 +134,7 @@ public class HomeScreenController {
             ListReportsController ctrl_2 = loader_2.getController();
             ctrl_2.setMainApp(mainApplication);
 
-            System.out.println("here");
+
             FXMLLoader loader_3 = new FXMLLoader();
             loader_3.setLocation(MainApplication.class.getResource("../view/HomeScreen_WaterPurityReport.fxml"));
             purityReportVBox = loader_3.load();
@@ -138,29 +142,29 @@ public class HomeScreenController {
             WaterPurityReportController ctrl_3 = loader_3.getController();
             ctrl_3.setMainApp(mainApplication);
 
+            FXMLLoader loader_4 = new FXMLLoader();
+            loader_4.setLocation((MainApplication.class.getResource("../view/HomeScreen_WaterSourceReport.fxml")));
+            waterReportVbox = loader_4.load();
+
+            FXMLLoader loader_5 = new FXMLLoader();
+            loader_5.setLocation((MainApplication.class.getResource("../view/InitHomeScreen.fxml")));
+            homeScreenVBox = loader_5.load();
+
         } catch (IOException e) {
             System.out.println("Can't find Vboxs");
         }
     }
 
-
-    public void setProfileButton(boolean selected) {
-        this.profileButton.setSelected(selected);
-    }
-
     @FXML
     private void handleHomeButtonPressed() {
-        try {
-            if (!homeButton.isSelected()) {
-                homeButton.setSelected(true);
-            } else {
-                waterSourceReportButton.setText("Water Report");
-                homeScreenVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/InitHomeScreen.fxml"));
+        if (homeButton.isSelected()) {
+            if (homeButton.isSelected()) {
                 rootLayout.setCenter(homeScreenVBox);
+            } else {
+                rootLayout.setCenter(welcomeVBox);
             }
-
-        } catch (Exception e) {
-            System.out.println("Can't find home: " + e);
+        } else {
+            homeButton.setSelected(true);
         }
     }
 
@@ -192,29 +196,6 @@ public class HomeScreenController {
     }
 
     @FXML
-    private void handleListPurityButtonPressed(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void handleWaterSourceReportButton(ActionEvent event) {
-        try {
-            if (waterSourceReportButton.getText().equals("Cancel Report")) {
-                rootLayout.setCenter(homeScreenVBox);
-                homeButton.setSelected(true);
-                waterSourceReportButton.setText("    Submit    Water Report");
-            } else {
-                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_WaterSourceReport.fxml"));
-                rootLayout.setCenter(listWaterReportVBox);
-                waterSourceReportButton.setText("Cancel Report");
-            }
-        } catch (IOException e) {
-            System.out.println("Failed to find vbox2!");
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
     private void handlePurityReportButton(ActionEvent event) {
         if (purityReportButton.isSelected()) {
             if (purityReportButton.isSelected()) {
@@ -226,6 +207,33 @@ public class HomeScreenController {
             purityReportButton.setSelected(true);
         }
     }
+
+    @FXML
+    private void handleWaterSourceReportButton(ActionEvent event) {
+        if(waterSourceReportButton.isSelected()) {
+            if(waterSourceReportButton.isSelected()) {
+                rootLayout.setCenter(waterReportVbox);
+            } else {
+                rootLayout.setCenter(welcomeVBox);
+            }
+        } else {
+            waterSourceReportButton.setSelected(true);
+        }
+    }
+
+    @FXML
+    private void handleListPurityButtonPressed(ActionEvent event) {
+        if(listPurityButton.isSelected()) {
+            if(listPurityButton.isSelected()) {
+                rootLayout.setCenter(listPurityReportsVbox);
+            } else {
+                rootLayout.setCenter(welcomeVBox);
+            }
+        } else {
+            listPurityButton.setSelected(true);
+        }
+    }
+
 
     @FXML
     private void handleGoogleMapsButton(ActionEvent event) {

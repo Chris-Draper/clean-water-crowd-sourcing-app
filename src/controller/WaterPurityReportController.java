@@ -79,7 +79,6 @@ public class WaterPurityReportController {
 
     @FXML
     private void initialize() {
-        System.out.println(mainApplication.getAuthenticatedUser());
         //set text for all labels based on person doing this
         reportNumLabel.setText(reportNum.toString());
         //reporterNameLabel.setText(currentUser.getUsername());
