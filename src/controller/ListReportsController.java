@@ -33,7 +33,6 @@ public class ListReportsController {
 
     @FXML
     private void initialize() {
-        //listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListReports.fxml"));
         ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReportController.getWaterSourceReportList();
 
         listItems = FXCollections.observableArrayList();
