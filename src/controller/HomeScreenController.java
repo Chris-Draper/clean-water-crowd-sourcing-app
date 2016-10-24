@@ -130,12 +130,12 @@ public class HomeScreenController {
             ListReportsController ctrl_2 = loader_2.getController();
             ctrl_2.setMainApp(mainApplication);
 
-            FXMLLoader loader_3 = new FXMLLoader();
+           /* FXMLLoader loader_3 = new FXMLLoader();
             loader_3.setLocation(MainApplication.class.getResource("../view/HomeScreen_WaterPurityReport.fxml"));
             purityReportVBox = loader_3.load();
             System.out.println(loader_3.getController().toString());
             WaterPurityReportController ctrl_3 = loader_3.getController();
-            ctrl_3.setMainApp(mainApplication);
+            ctrl_3.setMainApp(mainApplication);*/
 
         } catch (IOException e) {
             System.out.println("Can't find Vboxs");
@@ -215,20 +215,20 @@ public class HomeScreenController {
 
     @FXML
     private void handlePurityReportButton(ActionEvent event) {
-       // try {
+       try {
             if (purityReportButton.getText().equals("Cancel Report")) {
                 rootLayout.setCenter(homeScreenVBox);
                 homeButton.setSelected(true);
                 purityReportButton.setText("    Submit    Purity Report");
             } else {
-                //purityReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_WaterPurityReport.fxml"));
+                purityReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_WaterPurityReport.fxml"));
                 rootLayout.setCenter(purityReportVBox);
                 purityReportButton.setText("Cancel Report");
             }
-        /*} catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Failed to find vbox2!");
             e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML
