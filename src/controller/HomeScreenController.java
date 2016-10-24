@@ -51,6 +51,7 @@ public class HomeScreenController {
     @FXML
     private VBox welcomeVBox;
     private VBox listWaterReportVBox;
+    private VBox purityReportVBox;
     private VBox userProfileVBox;
     private VBox homeScreenVBox;
     private BorderPane googleMapBorderPane;
@@ -66,6 +67,12 @@ public class HomeScreenController {
 
     @FXML
     private ToggleButton waterSourceReportButton;
+
+    @FXML
+    private ToggleButton purityReportButton;
+
+    @FXML
+    private ToggleButton listPurityButton;
 
     @FXML
     private ToggleButton googleMapsButton;
@@ -87,10 +94,10 @@ public class HomeScreenController {
         loadVBoxs();
         if (mainApplication.getAuthenticatedUser().getUserType().equals(UserType.User)
                 || mainApplication.getAuthenticatedUser().getUserType().equals(UserType.Administrator)) {
-            waterSourceReportButton.setVisible(false);
+            purityReportButton.setVisible(false);
             System.out.println("1");
         } else {
-            waterSourceReportButton.setVisible(true);
+            purityReportButton.setVisible(true);
             System.out.println("2");
         }
     }
@@ -153,7 +160,6 @@ public class HomeScreenController {
     @FXML
     private void handleProfileButton(ActionEvent event) {
         if (profileButton.isSelected()) {
-            waterSourceReportButton.setText("Water Report");
             if (profileButton.isSelected()) {
                 rootLayout.setCenter(userProfileVBox);
             } else {
@@ -178,16 +184,39 @@ public class HomeScreenController {
     }
 
     @FXML
+    private void handleListPurityButtonPressed(ActionEvent event) {
+
+    }
+
+    @FXML
     private void handleWaterSourceReportButton(ActionEvent event) {
         try {
             if (waterSourceReportButton.getText().equals("Cancel Report")) {
                 rootLayout.setCenter(homeScreenVBox);
                 homeButton.setSelected(true);
-                waterSourceReportButton.setText("Water Report");
+                waterSourceReportButton.setText("    Submit    Water Report");
             } else {
                 listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_WaterSourceReport.fxml"));
                 rootLayout.setCenter(listWaterReportVBox);
                 waterSourceReportButton.setText("Cancel Report");
+            }
+        } catch (IOException e) {
+            System.out.println("Failed to find vbox2!");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handlePurityReportButton(ActionEvent event) {
+        try {
+            if (purityReportButton.getText().equals("Cancel Report")) {
+                rootLayout.setCenter(homeScreenVBox);
+                homeButton.setSelected(true);
+                purityReportButton.setText("    Submit    Purity Report");
+            } else {
+                purityReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_WaterPurityReport.fxml"));
+                rootLayout.setCenter(purityReportVBox);
+                purityReportButton.setText("Cancel Report");
             }
         } catch (IOException e) {
             System.out.println("Failed to find vbox2!");

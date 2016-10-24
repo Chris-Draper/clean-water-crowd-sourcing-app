@@ -9,9 +9,6 @@ import model.WaterPurityReport;
 import model.WaterSourceReport;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.Label;
-import java.awt.TextField;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,15 +49,15 @@ public class WaterPurityReportController {
     private TextField contTextField;
 
     @FXML
-    private AbstractButton safeButton;
+    private RadioButton safeButton;
 
     @FXML
-    private AbstractButton treatableButton;
+    private RadioButton treatableButton;
 
     @FXML
-    private AbstractButton unsafeButton;
+    private RadioButton unsafeButton;
 
-    private ButtonGroup conditionGroup;
+    private ToggleGroup conditionGroup;
 
     private static Integer reportNum = 2001;
 
@@ -81,9 +78,9 @@ public class WaterPurityReportController {
         dateFormat = new SimpleDateFormat("HH:mm");
         timeLabel.setText(dateFormat.format(date));
 
-        conditionGroup.add(safeButton);
-        conditionGroup.add(treatableButton);
-        conditionGroup.add(unsafeButton);
+        safeButton.setToggleGroup(conditionGroup);
+        treatableButton.setToggleGroup(conditionGroup);
+        unsafeButton.setToggleGroup(conditionGroup);
 
         //set visbility to false for now until we add functionality to input
         //street address and come up with a pin instead of long lat nums
@@ -94,9 +91,9 @@ public class WaterPurityReportController {
     private void handleSubmitButton() {
         if(isCompleted()) {
             WaterPurityReport.Condition cond;
-            if (conditionGroup.getSelection() == safeButton) {
+            if (conditionGroup.getSelectedToggle() == safeButton) {
                 cond = WaterPurityReport.Condition.safe;
-            } else if (conditionGroup.getSelection() == treatableButton){
+            } else if (conditionGroup.getSelectedToggle() == treatableButton){
                 cond = WaterPurityReport.Condition.treatable;
             } else {
                 cond = WaterPurityReport.Condition.unsafe;
@@ -123,7 +120,7 @@ public class WaterPurityReportController {
         boolean ans = true;
         if (latTextField.getText().equals("") || longTextField.getText().equals("")
                 || virusTextField.getText().equals("") || contTextField.getText().equals("")
-                || conditionGroup.getSelection() == null) {
+                || conditionGroup.getSelectedToggle() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();
