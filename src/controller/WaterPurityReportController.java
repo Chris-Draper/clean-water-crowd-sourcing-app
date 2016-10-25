@@ -71,23 +71,24 @@ public class WaterPurityReportController {
 
     private static Integer reportNum = 2001;
 
-    //private GenericUser currentUser = mainApplication.getAuthenticatedUser();
+    private GenericUser currentUser;
 
-    private static ArrayList<WaterPurityReport> waterPurityReportList;
+    private static ArrayList<WaterPurityReport> waterPurityReportList = new ArrayList<>();
 
     private Date date;
 
     @FXML
     private void initialize() {
+
         //set text for all labels based on person doing this
         reportNumLabel.setText(reportNum.toString());
-        //reporterNameLabel.setText(currentUser.getUsername());
         date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
         dateLabel.setText(dateFormat.format(date));
         dateFormat = new SimpleDateFormat("HH:mm");
         timeLabel.setText(dateFormat.format(date));
 
+        conditionGroup = new ToggleGroup();
         safeButton.setToggleGroup(conditionGroup);
         treatableButton.setToggleGroup(conditionGroup);
         unsafeButton.setToggleGroup(conditionGroup);
@@ -113,10 +114,16 @@ public class WaterPurityReportController {
             double virus = Double.parseDouble(virusTextField.getText());
             double cont = Double.parseDouble(contTextField.getText());
 
-            //waterPurityReportList.add(new WaterPurityReport(reportNum, currentUser.getUsername(),
-            waterPurityReportList.add(new WaterPurityReport(reportNum, "TETERT",
+            waterPurityReportList.add(new WaterPurityReport(reportNum, currentUser.getUsername(),
                     lat, longit, cond, virus, cont));
             reportNum++;
+            reportNumLabel.setText(reportNum.toString());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Congratulations! Your Purity Report was submitted.", ButtonType.OK);
+            alert.showAndWait();
+            System.out.println(waterPurityReportList);
+
+            //switch to map vbox
+
         }
     }
 
@@ -148,6 +155,8 @@ public class WaterPurityReportController {
 
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
+        currentUser = this.mainApplication.getAuthenticatedUser();
+        reporterNameLabel.setText(currentUser.getUsername());
     }
 
 }

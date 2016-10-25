@@ -133,6 +133,8 @@ public class HomeScreenController {
             purityReportVBox = loader_3.load();
 
             WaterPurityReportController ctrl_3 = loader_3.getController();
+            //System.out.println("ctrl_3: " + ctrl_3);
+            //System.out.println("main app: " + mainApplication);
             ctrl_3.setMainApp(mainApplication);
 
             FXMLLoader loader_4 = new FXMLLoader();

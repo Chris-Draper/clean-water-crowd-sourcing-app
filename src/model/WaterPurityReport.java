@@ -56,5 +56,9 @@ public class WaterPurityReport {
 
     public String getReporterName() {return reporterName;}
 
-
+    public String toString() {
+        return new String("Report #: " + reportNum + "\tDate/Time: " + date + "\tUser: " + reporterName
+                + "\t(Long, Lat): (" + longitude + ", " + latitude + ")" + "\tCondition: " + condition
+                + "\t Virus PPM: " + virusPPM + "\t Cont PPM: " + contamPPM);
+    }
 }

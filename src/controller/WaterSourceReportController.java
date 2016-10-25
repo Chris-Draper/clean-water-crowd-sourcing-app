@@ -59,7 +59,7 @@ public class WaterSourceReportController {
 
     public void setMainApplication(MainApplication mainApplication1) {
         this.mainApplication = mainApplication1;
-        reporterName.setText(mainApplication.getAuthenticatedUser().getFullName());
+        reporterName.setText(mainApplication.getAuthenticatedUser().getUsername());
     }
     @FXML
     private void initialize() {
