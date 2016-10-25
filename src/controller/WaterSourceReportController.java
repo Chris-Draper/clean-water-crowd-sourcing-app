@@ -1,11 +1,15 @@
 package controller;
 
+import fxapp.MainApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import model.WaterSourceReport;
+import sun.applet.Main;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.DateFormat;
@@ -16,8 +20,13 @@ import java.text.SimpleDateFormat;
  */
 public class WaterSourceReportController {
 
+    private MainApplication mainApplication;
+
     @FXML
-    private TextField reporterName;
+    private GridPane addressGridPane;
+
+    @FXML
+    private Label reporterName;
 
     @FXML
     private TextField reportSourceLat;
@@ -26,13 +35,13 @@ public class WaterSourceReportController {
     private TextField reportSourceLong;
 
     @FXML
-    private Label reportNumber;
+    private Label reportNumLabel;
 
     @FXML
-    private TextField reportDate;
+    private Label reportDate;
 
     @FXML
-    private TextField reportTime;
+    private Label reportTime;
 
     @FXML
     private ComboBox reportWaterCondition;
@@ -47,13 +56,18 @@ public class WaterSourceReportController {
 
     private static ArrayList<WaterSourceReport> waterSourceReportList;
 
+
+    public void setMainApplication(MainApplication mainApplication1) {
+        this.mainApplication = mainApplication1;
+        reporterName.setText(mainApplication.getAuthenticatedUser().getFullName());
+    }
     @FXML
     private void initialize() {
         this.setReportWaterConditionData();
         this.setReportWaterType();
         reportDate.setText(this.getDate());
         reportTime.setText(this.getTime());
-        reportNumber.setText(reportSystemCount.toString());
+        reportNumLabel.setText(reportSystemCount.toString());
 
     }
 
@@ -84,32 +98,47 @@ public class WaterSourceReportController {
     }
 
     @FXML
-    private void handleSubmitWaterSourceReport(ActionEvent event) {
+    private void handleSubmitWaterSourceReport() {
+        if (isCompleted()) {
+            double reportLat = Double.parseDouble(reportSourceLat.getText());
+            double reportLong = Double.parseDouble(reportSourceLong.getText());
 
-        double reportLat = Double.parseDouble(reportSourceLat.getText());
-        double reportLong = Double.parseDouble(reportSourceLong.getText());
+            waterSourceReportList.add(new WaterSourceReport(
+                    reportDate.getText(), reportTime.getText(),
+                    reportNumLabel.getText(), reporterName.getText(),
+                    reportLat, reportLong, reportWaterCondition.getValue(),
+                    reportWaterType.getValue()
+            ));
 
-        waterSourceReportList.add(new WaterSourceReport(
-                reportDate.getText(), reportTime.getText(),
-                reportNumber.getText(), reporterName.getText(),
-                reportLat, reportLong, reportWaterCondition.getValue(),
-                reportWaterType.getValue()
-        ));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Your water source report was submitted successfully");
+            alert.showAndWait();
+            reportSystemCount++;
+            reportDate.setText(this.getDate());
+            reportTime.setText(this.getTime());
+            reportNumLabel.setText(reportSystemCount.toString());
+            reporterName.setText(mainApplication.getAuthenticatedUser().getFullName());
+            reportSourceLat.clear();
+            reportSourceLong.clear();
+            this.setReportWaterConditionData();
+            this.setReportWaterType();
+        }
+    }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Your water source report was submitted successfully");
-        alert.showAndWait();
-        reportSystemCount++;
-        reportDate.setText(this.getDate());
-        reportTime.setText(this.getTime());
-        reportNumber.setText(reportSystemCount.toString());
-        reporterName.clear();
-        reportSourceLat.clear();
-        reportSourceLong.clear();
-        this.setReportWaterConditionData();
-        this.setReportWaterType();
+    private boolean isCompleted() {
+        //ensure all text boxes are filled in
+        boolean ans = true;
+        if (reportSourceLat.getText().equals("") || reportSourceLong.getText().equals("")
+                || reportWaterType.getValue() == null
+                || reportWaterCondition.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "Please complete all fields", ButtonType.OK);
+            alert.showAndWait();
+            ans = false;
+        }
+        return ans;
     }
 
     public static ArrayList<WaterSourceReport> getWaterSourceReportList() {

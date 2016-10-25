@@ -138,6 +138,9 @@ public class HomeScreenController {
             loader_4.setLocation((MainApplication.class.getResource("../view/HomeScreen_WaterSourceReport.fxml")));
             waterReportVbox = loader_4.load();
 
+            WaterSourceReportController ctrl_4 = loader_4.getController();
+            ctrl_4.setMainApplication(mainApplication);
+
             FXMLLoader loader_5 = new FXMLLoader();
             loader_5.setLocation((MainApplication.class.getResource("../view/InitHomeScreen.fxml")));
             homeScreenVBox = loader_5.load();
