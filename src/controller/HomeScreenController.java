@@ -95,6 +95,7 @@ public class HomeScreenController {
         if (mainApplication.getAuthenticatedUser().getUserType().equals(UserType.User)
                 || mainApplication.getAuthenticatedUser().getUserType().equals(UserType.Administrator)) {
             purityReportButton.setVisible(false);
+            listPurityButton.setVisible(false);
         }
     }
 
@@ -156,7 +157,7 @@ public class HomeScreenController {
             if (homeButton.isSelected()) {
                 rootLayout.setCenter(homeScreenVBox);
             } else {
-                rootLayout.setCenter(welcomeVBox);
+                rootLayout.setCenter(homeScreenVBox);
             }
         } else {
             homeButton.setSelected(true);
@@ -170,7 +171,7 @@ public class HomeScreenController {
             if (profileButton.isSelected()) {
                 rootLayout.setCenter(userProfileVBox);
             } else {
-                rootLayout.setCenter(welcomeVBox);
+                rootLayout.setCenter(homeScreenVBox);
             }
         } else {
             profileButton.setSelected(true);
@@ -183,7 +184,7 @@ public class HomeScreenController {
             if (listButton.isSelected()) {
                 rootLayout.setCenter(listWaterReportVBox);
             } else {
-                rootLayout.setCenter(welcomeVBox);
+                rootLayout.setCenter(homeScreenVBox);
             }
         } else {
             listButton.setSelected(true);
@@ -196,7 +197,7 @@ public class HomeScreenController {
             if (purityReportButton.isSelected()) {
                 rootLayout.setCenter(purityReportVBox);
             } else {
-                rootLayout.setCenter(welcomeVBox);
+                rootLayout.setCenter(homeScreenVBox);
             }
         } else {
             purityReportButton.setSelected(true);
@@ -209,7 +210,7 @@ public class HomeScreenController {
             if(waterSourceReportButton.isSelected()) {
                 rootLayout.setCenter(waterReportVbox);
             } else {
-                rootLayout.setCenter(welcomeVBox);
+                rootLayout.setCenter(homeScreenVBox);
             }
         } else {
             waterSourceReportButton.setSelected(true);
@@ -222,7 +223,7 @@ public class HomeScreenController {
             if(listPurityButton.isSelected()) {
                 rootLayout.setCenter(listPurityReportsVbox);
             } else {
-                rootLayout.setCenter(welcomeVBox);
+                rootLayout.setCenter(homeScreenVBox);
             }
         } else {
             listPurityButton.setSelected(true);
