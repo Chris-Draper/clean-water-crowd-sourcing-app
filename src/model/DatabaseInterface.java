@@ -101,6 +101,38 @@ public class DatabaseInterface {
         }
     }
 
+    public boolean hasAlreadyRegistered(String username) {
+
+        Statement stmt = null;
+        String query = "SELECT id FROM cleanwater.users" +
+                " WHERE username='" + username + "'";
+
+        try {
+            stmt = dbConn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e ) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+
+                    System.out.println("Failed to close statement.");
+                }
+            }
+        }
+
+        return false;
+
+    }
+
     public boolean registerUser(String username, String password, UserType position) throws SQLException {
 
         Statement stmt = null;
