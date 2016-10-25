@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -112,18 +111,4 @@
          </BorderPane.margin>
       </VBox>
    </left>
-   <center>
-      <VBox fx:id="welcomeVBox" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="welcomeMsg" alignment="CENTER" prefHeight="55.0" prefWidth="400.0" text="Welcome, user">
-               <font>
-                  <Font name="Helvetica Neue UltraLight" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="130.0" right="130.0" />
-               </VBox.margin>
-            </Label>
-         </children>
-      </VBox>
-   </center>
 </BorderPane>

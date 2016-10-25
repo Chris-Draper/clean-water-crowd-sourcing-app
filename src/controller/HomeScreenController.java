@@ -42,12 +42,10 @@ public class HomeScreenController {
     @FXML
     private javafx.scene.control.MenuItem fileClose;
 
-    @FXML
-    private VBox welcomeVBox;
     private VBox listWaterReportVBox;
     private VBox purityReportVBox;
     private VBox userProfileVBox;
-    private VBox homeScreenVBox;
+    private VBox welcomeMsgVBox;
     private VBox waterReportVbox;
     private VBox listPurityReportsVbox;
     private BorderPane googleMapBorderPane;
@@ -88,7 +86,6 @@ public class HomeScreenController {
 
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
-        welcomeMsg.setText("Welcome " + mainApplication.getAuthenticatedUser().getUsername());
         rootLayout = mainApplication.getRootLayout();
         homeButton.setSelected(true);
         loadVBoxs();
@@ -127,7 +124,6 @@ public class HomeScreenController {
             ListWaterReportsController ctrl_2 = loader_2.getController();
             ctrl_2.setMainApp(mainApplication);
 
-
             FXMLLoader loader_3 = new FXMLLoader();
             loader_3.setLocation(MainApplication.class.getResource("../view/HomeScreen_WaterPurityReport.fxml"));
             purityReportVBox = loader_3.load();
@@ -146,7 +142,7 @@ public class HomeScreenController {
 
             FXMLLoader loader_5 = new FXMLLoader();
             loader_5.setLocation((MainApplication.class.getResource("../view/InitHomeScreen.fxml")));
-            homeScreenVBox = loader_5.load();
+            welcomeMsgVBox = loader_5.load();
 
         } catch (IOException e) {
             System.out.println("Can't find Vboxs");
@@ -156,11 +152,7 @@ public class HomeScreenController {
     @FXML
     private void handleHomeButtonPressed() {
         if (homeButton.isSelected()) {
-            if (homeButton.isSelected()) {
-                rootLayout.setCenter(homeScreenVBox);
-            } else {
-                rootLayout.setCenter(homeScreenVBox);
-            }
+            rootLayout.setCenter(welcomeMsgVBox);
         } else {
             homeButton.setSelected(true);
         }
@@ -173,7 +165,7 @@ public class HomeScreenController {
             if (profileButton.isSelected()) {
                 rootLayout.setCenter(userProfileVBox);
             } else {
-                rootLayout.setCenter(homeScreenVBox);
+                rootLayout.setCenter(welcomeMsgVBox);
             }
         } else {
             profileButton.setSelected(true);
@@ -186,7 +178,7 @@ public class HomeScreenController {
             if (listButton.isSelected()) {
                 rootLayout.setCenter(listWaterReportVBox);
             } else {
-                rootLayout.setCenter(homeScreenVBox);
+                rootLayout.setCenter(welcomeMsgVBox);
             }
         } else {
             listButton.setSelected(true);
@@ -199,7 +191,7 @@ public class HomeScreenController {
             if (purityReportButton.isSelected()) {
                 rootLayout.setCenter(purityReportVBox);
             } else {
-                rootLayout.setCenter(homeScreenVBox);
+                rootLayout.setCenter(welcomeMsgVBox);
             }
         } else {
             purityReportButton.setSelected(true);
@@ -212,7 +204,7 @@ public class HomeScreenController {
             if(waterSourceReportButton.isSelected()) {
                 rootLayout.setCenter(waterReportVbox);
             } else {
-                rootLayout.setCenter(homeScreenVBox);
+                rootLayout.setCenter(welcomeMsgVBox);
             }
         } else {
             waterSourceReportButton.setSelected(true);
@@ -225,7 +217,7 @@ public class HomeScreenController {
             if(listPurityButton.isSelected()) {
                 rootLayout.setCenter(listPurityReportsVbox);
             } else {
-                rootLayout.setCenter(homeScreenVBox);
+                rootLayout.setCenter(welcomeMsgVBox);
             }
         } else {
             listPurityButton.setSelected(true);
