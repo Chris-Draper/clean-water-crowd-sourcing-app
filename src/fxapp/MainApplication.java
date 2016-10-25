@@ -131,6 +131,7 @@ public class MainApplication extends Application {
             Scene scene = new Scene(rootLayout);
             mainAppScreen.setScene(scene);
             mainAppScreen.show();
+
         } catch (IOException e) {
             System.out.println("Failed to find the fxml file for Home Screen!");
             e.printStackTrace();

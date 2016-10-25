@@ -74,6 +74,9 @@ public class HomeScreenController {
     private ToggleButton googleMapsButton;
 
     @FXML
+    private Label welcomeMsg;
+
+    @FXML
     private void initialize() {
     }
 
@@ -85,16 +88,13 @@ public class HomeScreenController {
 
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
+        welcomeMsg.setText("Welcome " + mainApplication.getAuthenticatedUser().getUsername());
         rootLayout = mainApplication.getRootLayout();
         homeButton.setSelected(true);
         loadVBoxs();
         if (mainApplication.getAuthenticatedUser().getUserType().equals(UserType.User)
                 || mainApplication.getAuthenticatedUser().getUserType().equals(UserType.Administrator)) {
             purityReportButton.setVisible(false);
-            System.out.println("1");
-        } else {
-            purityReportButton.setVisible(true);
-            System.out.println("2");
         }
     }
 

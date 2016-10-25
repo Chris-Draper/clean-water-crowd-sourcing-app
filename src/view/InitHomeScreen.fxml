@@ -20,7 +20,7 @@
 <VBox fx:id="vbox1" prefHeight="570.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreenController">
     <children>
         <!-- This is a bug and needs to be fixed - multiple welcome home screens -->
-      <Label alignment="CENTER" prefHeight="55.0" prefWidth="400.0" text="Welcome, user InitHomeScreen">
+      <Label fx:id="welcomeMsg" alignment="CENTER" prefHeight="55.0" prefWidth="400.0" text="Welcome, user">
          <font>
             <Font name="Helvetica Neue UltraLight" size="20.0" />
          </font>
