@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 /**
  * Created by Chris on 10/10/2016.
  */
@@ -11,7 +9,8 @@ public class WaterSourceReport {
     private String time;
     private String reportNum;
     private String reporterName;
-    private String location;
+    private double latitude;
+    private double longitude;
     private Object waterType;
     private Object condition;
 
@@ -24,13 +23,14 @@ public class WaterSourceReport {
     }
 
     public WaterSourceReport(String date, String time, String reportNum,
-                             String reporterName, String location,
+                             String reporterName, double latitude, double longitude,
                              Object sourceType, Object condition) {
         this.date = date;
         this.time = time;
         this.reportNum = reportNum;
         this.reporterName = reporterName;
-        this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.waterType = sourceType;
         this.condition = condition;
     }
@@ -41,55 +41,22 @@ public class WaterSourceReport {
                 "\nReport Date : " + this.date +
                 "\nReport Time : " + this.time +
                 "\nReporter Name : " + this.reporterName +
-                "\nReport Location : " + this.location +
+                "\nReport Location Latitude : " + this.latitude +
+                "\nReport Location Longitude : " + this.longitude +
                 "\nReport Water Type : " + this.waterType +
                 "\nReport Condition : " + this.condition;
     }
 
-    /*
-    public static String waterSourceReportsString() {
-        String output = "";
-        for (int i = 0; i < waterSourceReportList.size(); i++) {
-            output += waterSourceReportList.get(i).toString();
-        }
-        return output;
+    public String toHtmlFormat() {
+        return  "<strong>Report Number : " + this.reportNum + "</strong><br>" +
+                "<br>Report Date : " + this.date +
+                "<br>Report Time : " + this.time +
+                "<br>Reporter Name : " + this.reporterName +
+                "<br>Report Location Latitude : " + this.latitude +
+                "<br>Report Location Longitude : " + this.longitude +
+                "<br>Report Water Type : " + this.waterType +
+                "<br>Report Condition : " + this.condition;
     }
-    */
-
-    public static void createDummyData(ArrayList<WaterSourceReport> waterSourceReports) {
-        WaterSourceReport report1 = new WaterSourceReport(
-                "10/12/16", "22:16", "2001", "Chris Draper", "Georgia Tech",
-                "Lake", "Treatable Clear"
-        );
-        WaterSourceReport report2 = new WaterSourceReport(
-                "10/15/16", "22:16", "2002", "Don Draper", "Georgia Tech",
-                "Well", "Potable"
-        );
-        WaterSourceReport report3 = new WaterSourceReport(
-                "10/17/16", "22:16", "2003", "Cynthia Draper", "Georgia Tech",
-                "Spring", "Treatable Muddy"
-        );
-        WaterSourceReport report4 = new WaterSourceReport(
-                "9/12/16", "22:16", "2004", "Zach Draper", "Georgia Tech",
-                "Bottled", "Waste"
-        );
-        waterSourceReports.add(report1);
-        waterSourceReports.add(report2);
-        waterSourceReports.add(report3);
-        waterSourceReports.add(report4);
-    }
-
-    /*
-    public static void addReportToList(WaterSourceReport sourceReport) {
-        waterSourceReportList.add(sourceReport);
-    }
-    /*
-
-    /*
-    public static ArrayList<WaterSourceReport> getReportList() {
-        return waterSourceReportList;
-    }
-    */
 
     //all the getter and setter methods are for future manager accounts
 
@@ -125,12 +92,20 @@ public class WaterSourceReport {
         this.reporterName = reporterName;
     }
 
-    public String getLocation() {
-        return location;
+    public double getLat() {
+        return latitude;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLat(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLong() {
+        return longitude;
+    }
+
+    public void setLong(double longitude) {
+        this.longitude = longitude;
     }
 
     public Object getSourceType() {

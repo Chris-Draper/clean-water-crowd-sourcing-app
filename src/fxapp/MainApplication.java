@@ -1,24 +1,16 @@
 package fxapp;
 
-import com.jcraft.jsch.JSchException;
 import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
-
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-
 import model.DatabaseInterface;
 import model.GenericUser;
-import model.User;
 import model.UserLog;
 
 public class MainApplication extends Application {
@@ -34,6 +26,10 @@ public class MainApplication extends Application {
 
     private DatabaseInterface database;
 
+    /*
+    Initialize water source reports ArrayList here
+    Create water source report dummy data here
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         mainAppScreen = primaryStage;
@@ -41,6 +37,7 @@ public class MainApplication extends Application {
         initRootLayout(mainAppScreen);
 
         WaterSourceReportController.initWaterReportList();
+        WaterSourceReportController.makeWaterSrcReportDummyData();
     }
 
     /**
@@ -120,7 +117,7 @@ public class MainApplication extends Application {
         try {
             // Pointing loader to login screen fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/HomeScreen.fxml"));
+            loader.setLocation(MainApplication.class.getResource("../view/HomeScreen_Main.fxml"));
             rootLayout = loader.load();
 
             // Give the controller access to the main app.

@@ -1,19 +1,11 @@
 package controller;
 
 import fxapp.MainApplication;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.GenericUser;
-import model.User;
 import model.UserLog;
-import model.UserType;
-import model.UserLog;
-import sun.net.www.content.text.Generic;
-
 import java.sql.SQLException;
-
 
 /**
  * Created by sbuck on 9/21/2016.
