@@ -145,7 +145,7 @@ public class HomeScreenController {
             welcomeMsgVBox = loader_5.load();
 
         } catch (IOException e) {
-            System.out.println("Can't find Vboxs");
+            System.out.println("Error: " + e);
         }
     }
 

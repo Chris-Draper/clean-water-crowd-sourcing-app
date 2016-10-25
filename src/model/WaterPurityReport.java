@@ -33,7 +33,18 @@ public class WaterPurityReport {
     }
 
     public enum Condition {
-        safe, treatable, unsafe
+
+        safe('S'), treatable('T'), unsafe('U');
+
+        Condition(char code) {
+            this.code = code;
+        }
+
+        public char getCode() {
+            return code;
+        }
+
+        char code;
     }
 
     private String getDate() {

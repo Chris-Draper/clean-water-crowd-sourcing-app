@@ -15,16 +15,36 @@ public class WaterSourceReport {
     private Object condition;
 
     public enum WaterType { //go back and implement enums
-        Bottled, Well, Stream, Lake, Spring, Other
+        Bottled("BT"), Well("WL"), Stream("ST"), Lake("LK"), Spring("SP"), Other("OT");
+
+        WaterType(String code) {
+            this.code = code;
+        }
+
+        String code;
+
+        public String getCode() {
+            return code;
+        }
     }
 
     public enum WaterCondition { //go back and implement enums
-        Waste, TreatableClear, TreatableMuddy, Potable
+        Waste('W'), TreatableClear('C'), TreatableMuddy('M'), Potable('P');
+
+        WaterCondition(char code) {
+            this.code = code;
+        }
+
+        char code;
+
+        public char getCode() {
+            return code;
+        }
     }
 
     public WaterSourceReport(String date, String time, String reportNum,
                              String reporterName, double latitude, double longitude,
-                             Object sourceType, Object condition) {
+                             WaterType sourceType, WaterCondition condition) {
         this.date = date;
         this.time = time;
         this.reportNum = reportNum;

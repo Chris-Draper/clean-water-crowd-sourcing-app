@@ -4,6 +4,7 @@ import com.jcraft.jsch.*;
 import java.sql.*;
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
+import java.util.DoubleSummaryStatistics;
 import java.util.Properties;
 
 /**
@@ -141,6 +142,8 @@ public class DatabaseInterface {
                 "INSERT INTO cleanwater.users" +
                 "(username, password, position)" +
                 "VALUES ('" + username + "', '" + password + "', '" + position.getCode() + "');";
+        System.out.println(query);
+
         try {
             stmt = dbConn.createStatement();
             stmt.executeUpdate(query);
@@ -211,6 +214,74 @@ public class DatabaseInterface {
         }
 
         return profileInfo;
+
+    }
+
+    public boolean submitWaterSourceReport(String date, String time, String num,
+                                           String reporter, Double latitude, Double longitude,
+                                           String type, char condition) {
+
+        Statement stmt = null;
+
+        String query =
+                "INSERT INTO cleanwater.source_reports" +
+                        " (`id`, `date`, `time`, `reporter`, `latitude`, `longitude`, `type`, `condition`) " +
+                        "VALUES (" + num + ", '" + date + "', '" + time +
+                        "', '" + reporter + "', " + latitude + ", " + longitude +
+                        ", '" + type + "', '" + condition + "');";
+        System.out.println(query);
+        try {
+            stmt = dbConn.createStatement();
+            stmt.executeUpdate(query);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error creating new water report: " + e);
+            return false;
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Error closing statement.");
+                }
+            }
+        }
+    }
+
+    public int getReportNum() {
+
+        Statement stmt = null;
+        String query = "SELECT max(id) FROM cleanwater.source_reports";
+
+        System.out.println(query);
+
+        try {
+            stmt = dbConn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            int maxNum;
+
+            if (rs.next()) {
+                maxNum = rs.getInt("max(id)");
+                System.out.println(maxNum);
+                return maxNum;
+            } else {
+                System.out.println("Error");
+                return 0;
+            }
+        } catch (SQLException e ) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Failed to close statement.");
+                }
+            }
+        }
+
+        return 0;
 
     }
 
