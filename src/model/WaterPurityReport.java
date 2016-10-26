@@ -143,7 +143,7 @@ public class WaterPurityReport {
         return condition;
     }
 
-    public void setDateTime(Condition condition) {
+    public void setCondition(char c) {
         this.condition = condition;
     }
 }

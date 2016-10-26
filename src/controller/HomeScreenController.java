@@ -74,6 +74,13 @@ public class HomeScreenController {
     @FXML
     private Label welcomeMsg;
 
+    private UserProfileController ctrl;
+    private ListWaterReportsController ctrl_2;
+    private WaterPurityReportController ctrl_3;
+    private WaterSourceReportController ctrl_4;
+    private ListPurityReportsController ctrl_5;
+
+
     @FXML
     private void initialize() {
     }
@@ -114,41 +121,37 @@ public class HomeScreenController {
             userProfileVBox = loader_1.load();
 
             // Give the controller access to the main app.
-            UserProfileController ctrl = loader_1.getController();
+            ctrl = loader_1.getController();
             ctrl.setMainApp(mainApplication);
 
             FXMLLoader loader_2 = new FXMLLoader();
             loader_2.setLocation(MainApplication.class.getResource("../view/HomeScreen_ListWaterReports.fxml"));
             listWaterReportVBox = loader_2.load();
 
-            ListWaterReportsController ctrl_2 = loader_2.getController();
+            ctrl_2 = loader_2.getController();
             ctrl_2.setMainApp(mainApplication);
 
             FXMLLoader loader_3 = new FXMLLoader();
             loader_3.setLocation(MainApplication.class.getResource("../view/HomeScreen_WaterPurityReport.fxml"));
             purityReportVBox = loader_3.load();
 
-            WaterPurityReportController ctrl_3 = loader_3.getController();
-            //System.out.println("ctrl_3: " + ctrl_3);
-            //System.out.println("main app: " + mainApplication);
+            ctrl_3 = loader_3.getController();
             ctrl_3.setMainApp(mainApplication);
 
             FXMLLoader loader_4 = new FXMLLoader();
             loader_4.setLocation(MainApplication.class.getResource("../view/HomeScreen_WaterSourceReport.fxml"));
             waterReportVbox = loader_4.load();
 
-            WaterSourceReportController ctrl_4 = loader_4.getController();
+            ctrl_4 = loader_4.getController();
             ctrl_4.setMainApplication(mainApplication);
 
-            System.out.println("1");
             FXMLLoader loader_5 = new FXMLLoader();
             loader_5.setLocation(MainApplication.class.getResource("../view/HomeScreen_ListPurityReports.fxml"));
             listPurityReportVbox = loader_5.load();
 
-            ListPurityReportsController ctrl_5 = loader_5.getController();
+            ctrl_5 = loader_5.getController();
             ctrl_5.setMainApplication(mainApplication);
 
-            System.out.println("2");
             FXMLLoader loader_6 = new FXMLLoader();
             loader_6.setLocation((MainApplication.class.getResource("../view/InitHomeScreen.fxml")));
             welcomeMsgVBox = loader_6.load();
@@ -187,6 +190,8 @@ public class HomeScreenController {
         if (listButton.isSelected()) {
             if (listButton.isSelected()) {
                 rootLayout.setCenter(listWaterReportVBox);
+                ctrl_2.clearList();
+                ctrl_2.populateList();
             } else {
                 rootLayout.setCenter(welcomeMsgVBox);
             }
@@ -226,6 +231,8 @@ public class HomeScreenController {
         if(listPurityButton.isSelected()) {
             if(listPurityButton.isSelected()) {
                 rootLayout.setCenter(listPurityReportVbox);
+                ctrl_5.clearList();
+                ctrl_5.populateList();
             } else {
                 rootLayout.setCenter(welcomeMsgVBox);
             }

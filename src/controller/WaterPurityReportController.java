@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.RadioButton;
 import model.GenericUser;
 import model.WaterPurityReport;
 import model.WaterSourceReport;
@@ -68,9 +69,9 @@ public class WaterPurityReportController {
     private Button cancelButton;
 
     @FXML
-    private ToggleGroup conditionGroup;
+    private ComboBox<WaterPurityReport.Condition> conditionComboBox;
 
-    private static Integer reportNum = 2001;
+    private static Integer reportNum = 1001;
 
     private static ArrayList<WaterPurityReport> waterPurityReportList;
 
@@ -94,11 +95,7 @@ public class WaterPurityReportController {
         dateLabel.setText(dateFormat.format(date));
         dateFormat = new SimpleDateFormat("HH:mm");
         timeLabel.setText(dateFormat.format(date));
-
-        conditionGroup = new ToggleGroup();
-        safeButton.setToggleGroup(conditionGroup);
-        treatableButton.setToggleGroup(conditionGroup);
-        unsafeButton.setToggleGroup(conditionGroup);
+        this.setReporPurityConditionData();
 
         //set visbility to false for now until we add functionality to input
         //street address and come up with a pin instead of long lat nums
@@ -113,9 +110,10 @@ public class WaterPurityReportController {
 
             waterPurityReportList.add(new WaterPurityReport(
                     reportNum.toString(), reporterNameLabel.getText(),
-                    reportLat, reportLong, (WaterPurityReport.Condition) conditionGroup.getSelectedToggle().getUserData(), Double.parseDouble(virusTextField.getText()),
+                    reportLat, reportLong, conditionComboBox.getValue(), Double.parseDouble(virusTextField.getText()),
                     Double.parseDouble(contTextField.getText())
             ));
+
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
@@ -129,6 +127,9 @@ public class WaterPurityReportController {
             reporterNameLabel.setText(mainApplication.getAuthenticatedUser().getFullName());
             latTextField.clear();
             longTextField.clear();
+            virusTextField.clear();
+            contTextField.clear();
+
         }
     }
 
@@ -141,10 +142,9 @@ public class WaterPurityReportController {
     private boolean isCompleted() {
         //ensure all text boxes are filled in
         boolean ans = true;
-        System.out.println(conditionGroup.getSelectedToggle());
         if (latTextField.getText().equals("") || longTextField.getText().equals("")
                 || virusTextField.getText().equals("") || contTextField.getText().equals("")
-                || conditionGroup.getSelectedToggle() == null) {
+                || conditionComboBox.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();
@@ -169,8 +169,13 @@ public class WaterPurityReportController {
         waterPurityReportList.add(report1);
         waterPurityReportList.add(report2);
         waterPurityReportList.add(report3);
-        System.out.println(waterPurityReportList.size());
-        System.out.println(waterPurityReportList);
+    }
+
+    private void setReporPurityConditionData() {
+        conditionComboBox.getItems().clear();
+        conditionComboBox.getItems().addAll(
+                WaterPurityReport.Condition.values()
+        );
     }
 
     public String getDate() {

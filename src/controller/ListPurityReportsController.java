@@ -20,67 +20,65 @@ import java.util.ArrayList;
  */
 public class ListPurityReportsController {
 
+    private MainApplication mainApplication;
+
     @FXML
     private VBox listPurityReportVBox;
 
     @FXML
-    private ListView listView;
-    private ObservableList listItems = FXCollections.observableArrayList();
-    private TextArea textArea;
-    private static int reportDisplayCounter = 0;
+    private ListView reportList;
 
-    private MainApplication mainApplication;
+    @FXML
+    private TextArea textArea;
+
+    private ObservableList listItems = FXCollections.observableArrayList();
+
+    private ArrayList<WaterPurityReport> waterPurityReports = WaterPurityReportController.getWaterPurityReportList();
+
+    private int reportDisplayCounter = 0;
 
     @FXML
     private void initialize() {
-        ArrayList<WaterPurityReport> waterPurityReports = WaterPurityReportController.getWaterPurityReportList();
+        populateList();
+    }
 
-        listItems = FXCollections.observableArrayList();
-        System.out.println("Size is " + waterPurityReports.size());
+    public void clearList() {
+        listItems.clear();
+    }
+    public void populateList() {
         for (int i = 0; i < waterPurityReports.size(); i++) {
-            listItems.add(waterPurityReports.get(i).getReportNum()); //change later, fill with water source report objects
+            listItems.add(waterPurityReports.get(i).getReportNum());
             reportDisplayCounter = waterPurityReports.size();
-        } //see if you can directly insert the waterSourceReports into the ListView<> parameter
-        listView = new ListView<>(listItems);
-        listView.setPrefHeight(490);
-        listPurityReportVBox.getChildren().addAll(listView);
-        // rootLayout.setCenter(listWaterReportVBox);
+            reportList.setItems(listItems);
+        }
+    }
 
-        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                listView.setPrefHeight(230);
-                if (textArea != null) {
-                    listPurityReportVBox.getChildren().remove(textArea);
-                }
-                WaterPurityReport waterPurityReportData = null;
-                for (int i = 0; i < waterPurityReports.size(); i++) {
-                    if (waterPurityReports.get(i).getReportNum().equals(listView.getSelectionModel().getSelectedItem().toString())) {
-                        waterPurityReportData = waterPurityReports.get(i);
-                    }
-                }
-                if (waterPurityReportData != null) {
-                    textArea = new TextArea(
-                            "Report Number: " + waterPurityReportData.getReportNum() + "\n\n" +
-                                    "Location Lat: " + waterPurityReportData.getLat() + "\n" +
-                                    "Location Long: " + waterPurityReportData.getLong() + "\n" +
-                                    "Date of report: " + waterPurityReportData.getDate() + "\n" +
-                                    "Time of report: " + waterPurityReportData.getTime() + "\n" +
-                                    "Reported By: " + waterPurityReportData.getReporterName() + "\n" +
-                                    "Report Virus : " + waterPurityReportData.getVirusPPM() + "\n" +
-                                    "Report contaminant : " + waterPurityReportData.getContamPPM() +"\n" +
-                                    "Water Condition: " + waterPurityReportData.getCondition()
-                    );
-                    textArea.setWrapText(true);
-                    textArea.setPrefHeight(260);
-                    listPurityReportVBox.getChildren().addAll(textArea);
-                }
+    @FXML
+    public void handleMouseClicked() {
+        WaterPurityReport waterPurityReportData = null;
+        for (int i = 0; i < waterPurityReports.size(); i++) {
+            if (waterPurityReports.get(i).getReportNum().equals(reportList.getSelectionModel().getSelectedItem().toString())) {
+                waterPurityReportData = waterPurityReports.get(i);
             }
-        });
+        }
+        if (waterPurityReportData != null) {
+            textArea.setText(
+                    "Report Number: " + waterPurityReportData.getReportNum() + "\n\n" +
+                            "Location Lat: " + waterPurityReportData.getLat() + "\n" +
+                            "Location Long: " + waterPurityReportData.getLong() + "\n" +
+                            "Date of report: " + waterPurityReportData.getDate() + "\n" +
+                            "Time of report: " + waterPurityReportData.getTime() + "\n" +
+                            "Reported By: " + waterPurityReportData.getReporterName() + "\n" +
+                            "Report Virus : " + waterPurityReportData.getVirusPPM() + "\n" +
+                            "Report contaminant : " + waterPurityReportData.getContamPPM() + "\n" +
+                            "Water Condition: " + waterPurityReportData.getCondition()
+            );
+            textArea.setWrapText(true);
+        }
+
     }
 
     public void setMainApplication(MainApplication main) {
-        this.mainApplication = mainApplication;
+        this.mainApplication = main;
     }
  }
