@@ -67,15 +67,20 @@ public class WaterPurityReportController {
     @FXML
     private Button cancelButton;
 
+    @FXML
     private ToggleGroup conditionGroup;
 
     private static Integer reportNum = 2001;
 
-    //private GenericUser currentUser = mainApplication.getAuthenticatedUser();
-
     private static ArrayList<WaterPurityReport> waterPurityReportList;
 
+    public static void initWaterPurityList() {
+        waterPurityReportList = new ArrayList<>();
+    }
+
     private Date date;
+
+
 
     @FXML
     private void initialize() {
@@ -100,23 +105,27 @@ public class WaterPurityReportController {
     @FXML
     private void handleSubmitButton() {
         if(isCompleted()) {
-            WaterPurityReport.Condition cond;
-            if (conditionGroup.getSelectedToggle() == safeButton) {
-                cond = WaterPurityReport.Condition.safe;
-            } else if (conditionGroup.getSelectedToggle() == treatableButton){
-                cond = WaterPurityReport.Condition.treatable;
-            } else {
-                cond = WaterPurityReport.Condition.unsafe;
-            }
-            double lat = Double.parseDouble(latTextField.getText());
-            double longit = Double.parseDouble(longTextField.getText());
-            double virus = Double.parseDouble(virusTextField.getText());
-            double cont = Double.parseDouble(contTextField.getText());
+            double reportLat = Double.parseDouble(latTextField.getText());
+            double reportLong = Double.parseDouble(longTextField.getText());
 
-            //waterPurityReportList.add(new WaterPurityReport(reportNum, currentUser.getUsername(),
-            waterPurityReportList.add(new WaterPurityReport(reportNum, "TETERT",
-                    lat, longit, cond, virus, cont));
+            waterPurityReportList.add(new WaterPurityReport(
+                    reportNum.toString(), reporterNameLabel.getText(),
+                    reportLat, reportLong, (WaterPurityReport.Condition) conditionGroup.getSelectedToggle().getUserData(), Double.parseDouble(virusTextField.getText()),
+                    Double.parseDouble(contTextField.getText())
+            ));
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Your water Purity report was submitted successfully");
+            alert.showAndWait();
             reportNum++;
+            dateLabel.setText(this.getDate());
+            timeLabel.setText(this.getTime());
+            reportNumLabel.setText(reportNum.toString());
+            reporterNameLabel.setText(mainApplication.getAuthenticatedUser().getFullName());
+            latTextField.clear();
+            longTextField.clear();
         }
     }
 
@@ -129,6 +138,7 @@ public class WaterPurityReportController {
     private boolean isCompleted() {
         //ensure all text boxes are filled in
         boolean ans = true;
+        System.out.println(conditionGroup.getSelectedToggle());
         if (latTextField.getText().equals("") || longTextField.getText().equals("")
                 || virusTextField.getText().equals("") || contTextField.getText().equals("")
                 || conditionGroup.getSelectedToggle() == null) {
@@ -138,6 +148,46 @@ public class WaterPurityReportController {
             ans = false;
         }
         return ans;
+    }
+
+    public static void makeWaterSrcReportDummyData() {
+        WaterPurityReport report1 = new WaterPurityReport( //top
+                "2001", "Sean Buckingham", 33.68, -84.15, WaterPurityReport.Condition.safe, 200,
+                200
+        );
+        WaterPurityReport report2 = new WaterPurityReport( //right
+                "2002", "Noah Harper", 33.88, -84.75, WaterPurityReport.Condition.treatable, 210,
+                210
+        );
+        WaterPurityReport report3 = new WaterPurityReport( //bottom
+                "2003", "Chris Polack", 33.98, -84.15, WaterPurityReport.Condition.unsafe, 300,
+                240
+        );
+        waterPurityReportList.add(report1);
+        waterPurityReportList.add(report2);
+        waterPurityReportList.add(report3);
+        System.out.println(waterPurityReportList.size());
+        System.out.println(waterPurityReportList);
+    }
+
+    public String getDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        Date dateObject = new Date();
+        return dateFormat.format(dateObject);
+    }
+
+    public void setDate(String dateTime) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date dateObject = new Date();
+        return dateFormat.format(dateObject);
+    }
+
+    public static ArrayList<WaterPurityReport> getWaterPurityReportList() {
+        return waterPurityReportList;
     }
 
     /**

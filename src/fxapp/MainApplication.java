@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import model.DatabaseInterface;
 import model.GenericUser;
 import model.UserLog;
+import model.WaterPurityReport;
 
 public class MainApplication extends Application {
     /** the main container for the application window */
@@ -37,6 +38,8 @@ public class MainApplication extends Application {
         initRootLayout(mainAppScreen);
 
         WaterSourceReportController.initWaterReportList();
+        WaterPurityReportController.initWaterPurityList();
+        WaterPurityReportController.makeWaterSrcReportDummyData();
         WaterSourceReportController.makeWaterSrcReportDummyData();
     }
 

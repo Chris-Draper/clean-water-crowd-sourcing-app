@@ -42,12 +42,12 @@ public class HomeScreenController {
     @FXML
     private javafx.scene.control.MenuItem fileClose;
 
+    private VBox listPurityReportVbox;
     private VBox listWaterReportVBox;
     private VBox purityReportVBox;
     private VBox userProfileVBox;
     private VBox welcomeMsgVBox;
     private VBox waterReportVbox;
-    private VBox listPurityReportsVbox;
     private BorderPane googleMapBorderPane;
 
     @FXML
@@ -132,18 +132,29 @@ public class HomeScreenController {
             ctrl_3.setMainApp(mainApplication);
 
             FXMLLoader loader_4 = new FXMLLoader();
-            loader_4.setLocation((MainApplication.class.getResource("../view/HomeScreen_WaterSourceReport.fxml")));
+            loader_4.setLocation(MainApplication.class.getResource("../view/HomeScreen_WaterSourceReport.fxml"));
             waterReportVbox = loader_4.load();
 
             WaterSourceReportController ctrl_4 = loader_4.getController();
             ctrl_4.setMainApplication(mainApplication);
 
+            System.out.println("1");
             FXMLLoader loader_5 = new FXMLLoader();
-            loader_5.setLocation((MainApplication.class.getResource("../view/InitHomeScreen.fxml")));
-            welcomeMsgVBox = loader_5.load();
+            loader_5.setLocation(MainApplication.class.getResource("../view/HomeScreen_ListPurityReports.fxml"));
+            listPurityReportVbox = loader_5.load();
+
+            ListPurityReportsController ctrl_5 = loader_5.getController();
+            ctrl_5.setMainApplication(mainApplication);
+
+            System.out.println("2");
+            FXMLLoader loader_6 = new FXMLLoader();
+            loader_6.setLocation((MainApplication.class.getResource("../view/InitHomeScreen.fxml")));
+            welcomeMsgVBox = loader_6.load();
 
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Can't find Vboxs");
+
         }
     }
 
@@ -213,7 +224,7 @@ public class HomeScreenController {
     private void handleListPurityButtonPressed(ActionEvent event) {
         if(listPurityButton.isSelected()) {
             if(listPurityButton.isSelected()) {
-                rootLayout.setCenter(listPurityReportsVbox);
+                rootLayout.setCenter(listPurityReportVbox);
             } else {
                 rootLayout.setCenter(welcomeMsgVBox);
             }
