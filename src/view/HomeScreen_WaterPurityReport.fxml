@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vbox2" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WaterPurityReportController">
+<VBox fx:id="vbox2" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WaterPurityReportController">
     <children>
         <Label alignment="CENTER" prefHeight="107.0" prefWidth="454.0" text="Water Purity Report">
             <font>
@@ -167,13 +168,16 @@
             <Label text="Overall Condition:" />
             <HBox GridPane.columnIndex="1">
                <children>
-                  <RadioButton fx:id="safeButton" mnemonicParsing="false" text="Safe" />
-                  <RadioButton fx:id="treatableButton" mnemonicParsing="false" text="Treatable">
+                  <RadioButton fx:id="safeButton" mnemonicParsing="false" text="Safe">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="conditionGroup" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="treatableButton" mnemonicParsing="false" text="Treatable" toggleGroup="$conditionGroup">
                      <padding>
                         <Insets left="30.0" right="30.0" />
                      </padding>
                   </RadioButton>
-                  <RadioButton fx:id="unsafeButton" mnemonicParsing="false" text="Unsafe" />
+                  <RadioButton fx:id="unsafeButton" mnemonicParsing="false" text="Unsafe" toggleGroup="$conditionGroup" />
                </children>
                <GridPane.margin>
                   <Insets top="5.0" />

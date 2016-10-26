@@ -20,7 +20,7 @@ public class WaterPurityReport {
     private double virusPPM;
     private double contamPPM;
 
-    public WaterPurityReport(String reportNum, String reporterName, double lat, double longit, Condition condition, double virusPPM, double contamPPM) {
+    public WaterPurityReport(String reportNum, String reporterName, double lat, double longit, WaterPurityReport.Condition condition, double virusPPM, double contamPPM) {
         this.date = getDate();
         this.time = getTime();
         this.reportNum = reportNum;
@@ -31,6 +31,7 @@ public class WaterPurityReport {
         this.virusPPM = virusPPM;
         this.contamPPM = contamPPM;
     }
+
     public String toString() {
         return "\n----------------------\n" +
                 "Report Number : " + this.reportNum +
@@ -42,6 +43,21 @@ public class WaterPurityReport {
                 "\nReport Virus : " + this.virusPPM +
                 "\nReport contaminant : " + this.contamPPM +
                 "\nReport Condition : " + this.condition;
+    }
+
+    public enum Condition {
+
+        safe('S'), treatable('T'), unsafe('U');
+
+        Condition(char code) {
+            this.code = code;
+        }
+
+        public char getCode() {
+            return code;
+        }
+
+        char code;
     }
 
     public String toHtmlFormat() {
@@ -91,10 +107,6 @@ public class WaterPurityReport {
         this.virusPPM = virusPPM;
     }
 
-    public enum Condition {
-        safe, treatable, unsafe
-    }
-
     public String getReportNum() {
         return reportNum;
     }
@@ -134,8 +146,4 @@ public class WaterPurityReport {
     public void setDateTime(Condition condition) {
         this.condition = condition;
     }
-
-
-
-
 }

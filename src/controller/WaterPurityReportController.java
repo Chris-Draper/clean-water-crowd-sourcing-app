@@ -74,6 +74,8 @@ public class WaterPurityReportController {
 
     private static ArrayList<WaterPurityReport> waterPurityReportList;
 
+    private GenericUser currentUser;
+
     public static void initWaterPurityList() {
         waterPurityReportList = new ArrayList<>();
     }
@@ -84,15 +86,16 @@ public class WaterPurityReportController {
 
     @FXML
     private void initialize() {
+
         //set text for all labels based on person doing this
         reportNumLabel.setText(reportNum.toString());
-        //reporterNameLabel.setText(currentUser.getUsername());
         date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
         dateLabel.setText(dateFormat.format(date));
         dateFormat = new SimpleDateFormat("HH:mm");
         timeLabel.setText(dateFormat.format(date));
 
+        conditionGroup = new ToggleGroup();
         safeButton.setToggleGroup(conditionGroup);
         treatableButton.setToggleGroup(conditionGroup);
         unsafeButton.setToggleGroup(conditionGroup);
@@ -198,6 +201,8 @@ public class WaterPurityReportController {
 
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
+        currentUser = this.mainApplication.getAuthenticatedUser();
+        reporterNameLabel.setText(currentUser.getUsername());
     }
 
 }
