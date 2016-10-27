@@ -47,8 +47,8 @@ public class ListWaterReportsController {
 
     public void populateList() {
 
-        int startReport = mainApplication.getDatabaseConn().getMinReportNum();
-        int endReport = mainApplication.getDatabaseConn().getMaxReportNum();
+        int startReport = mainApplication.getDatabaseConn().getMinSourceReportNum();
+        int endReport = mainApplication.getDatabaseConn().getMaxSourceReportNum();
 
         for (int i = startReport; i <= endReport; i++) {
             listItems.add(i);

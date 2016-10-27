@@ -22,16 +22,8 @@ public class RegistrationScreenController {
     private TextField passwordTextField;
 
     @FXML
-    private Button registerButton;
-
-    @FXML
-    private Button backButton;
-
-    @FXML
     private ComboBox positionComboBox;
     private final ObservableList<UserType> userTypes = FXCollections.observableArrayList();
-
-    private UserLog userLog;
 
 
     @FXML
@@ -46,18 +38,13 @@ public class RegistrationScreenController {
     @FXML
     public void handleRegisterPressed() {
         UserType type = (UserType) positionComboBox.getSelectionModel().selectedItemProperty().getValue();
-        GenericUser newUser = null;
         if (isRegistrationInfoAcceptable(type)) {
 
             GenericUser loggedInUser;
-            try {
-                mainApplication.getDatabaseConn().registerUser(usernameTextField.getText(), passwordTextField.getText(), type);
-                loggedInUser = mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordTextField.getText());
-                mainApplication.setAuthenticatedUser(loggedInUser);
-                mainApplication.switchToHomeScreen();
-            } catch (SQLException e) {
-                System.out.println("Error adding user to database: " + e);
-            }
+            mainApplication.getDatabaseConn().registerUser(usernameTextField.getText(), passwordTextField.getText(), type);
+            loggedInUser = mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordTextField.getText());
+            mainApplication.setAuthenticatedUser(loggedInUser);
+            mainApplication.switchToHomeScreen();
         }
     }
 
@@ -105,6 +92,5 @@ public class RegistrationScreenController {
      * */
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
-        userLog = mainApplication.getUserlog();
     }
 }

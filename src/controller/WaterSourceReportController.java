@@ -10,7 +10,6 @@ import javafx.scene.layout.GridPane;
 import model.WaterSourceReport;
 import sun.applet.Main;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.DateFormat;
@@ -62,19 +61,15 @@ public class WaterSourceReportController {
         this.mainApplication = mainApplication1;
 
         int userID = mainApplication.getAuthenticatedUser().getID();
-        try {
-            String[] infoFields = mainApplication.getDatabaseConn().getProfileInfo(userID);
+        String[] infoFields = mainApplication.getDatabaseConn().getProfileInfo(userID);
 
-            if (infoFields[0] != null) {
-                reporterName.setText(infoFields[0]);
-            } else {
-                reporterName.setText(mainApplication.getAuthenticatedUser().getUsername());
-            }
-        } catch (SQLException e) {
-            System.out.println("Failed to get user information.");
+        if (infoFields[0] != null) {
+            reporterName.setText(infoFields[0]);
+        } else {
+            reporterName.setText(mainApplication.getAuthenticatedUser().getUsername());
         }
 
-        reportSystemCount = mainApplication.getDatabaseConn().getMaxReportNum() + 1;
+        reportSystemCount = mainApplication.getDatabaseConn().getMaxSourceReportNum() + 1;
         reportNumLabel.setText(reportSystemCount.toString());
     }
     @FXML

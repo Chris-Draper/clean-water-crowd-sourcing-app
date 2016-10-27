@@ -80,11 +80,6 @@ public class HomeScreenController {
     private WaterSourceReportController ctrl_4;
     private ListPurityReportsController ctrl_5;
 
-
-    @FXML
-    private void initialize() {
-    }
-
     /**
      * allow for calling back to the mainApplication application code if necessary
      *

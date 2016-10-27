@@ -20,6 +20,12 @@ public class DatabaseInterface {
     static int rport;
     Session session;
 
+    /**
+     * Creates a new connection interface that the main application
+     * will use to communicate with the database backend.
+     *
+     * @throws SQLException
+     */
     public DatabaseInterface() throws SQLException {
 
         establishSSH();
@@ -38,7 +44,7 @@ public class DatabaseInterface {
         }
     }
 
-    public void establishSSH() {
+    private void establishSSH() {
 
         String sshUser = "root";
         String sshPassword = "hackstreet1234";
@@ -65,7 +71,16 @@ public class DatabaseInterface {
         }
     }
 
-    public GenericUser verifyUser(String username, String password) throws SQLException {
+    /**
+     * Queries the database with the provided username and
+     * password to attempt to login.
+     *
+     * @param username username of the user attempting to login
+     * @param password password of the user attempting to login
+     * @return A user object of the appropriate role if the username and password
+     * are valid, and null otherwise.
+     */
+    public GenericUser verifyUser(String username, String password) {
 
         GenericUser loggedInUser = null;
         Statement stmt = null;
@@ -97,11 +112,24 @@ public class DatabaseInterface {
             System.out.println(e);
             return null;
         } finally {
-            if (stmt != null) { stmt.close(); }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Failed to close statement.");
+                }
+            }
             return loggedInUser;
         }
     }
 
+    /**
+     * Queries the database to see if a username
+     * already exists in the system.
+     *
+     * @param username username to check the existence of
+     * @return true if the username already exists, false otherwise
+     */
     public boolean hasAlreadyRegistered(String username) {
 
         Statement stmt = null;
@@ -124,17 +152,23 @@ public class DatabaseInterface {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-
                     System.out.println("Failed to close statement.");
                 }
             }
         }
 
         return false;
-
     }
 
-    public boolean registerUser(String username, String password, UserType position) throws SQLException {
+    /**
+     * Registers the provided user in the database.
+     *
+     * @param username username of the user attempting to register
+     * @param password password that will be associated with the account
+     * @param position role of the account to be registered
+     * @return true if successfully registered, false otherwise
+     */
+    public boolean registerUser(String username, String password, UserType position) {
 
         Statement stmt = null;
 
@@ -151,13 +185,32 @@ public class DatabaseInterface {
             System.out.println("Error creating new user: " + e);
             return false;
         } finally {
-            if (stmt != null) { stmt.close(); }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Failed to close statement.");
+                }
+            }
         }
     }
 
+    /**
+     * Updates the profile information for the provided user.
+     *
+     * @param userID ID number associated with the current user
+     * @param fullName Full name (First Last) for the current user
+     * @param email Email address of the current user
+     * @param addrNum Address number for the current user
+     * @param street Street name for the current user
+     * @param zip Zip code for the address of the current user
+     * @param city City for the address of the current user
+     * @param state State for the address of the current user
+     * @param phoneNum Phone number of the current user
+     */
     public void updateProfileInfo(int userID, String fullName, String email,
                                   String addrNum, String street, String zip,
-                                  String city, String state, String phoneNum) throws SQLException {
+                                  String city, String state, String phoneNum) {
 
         Statement stmt = null;
 
@@ -178,12 +231,26 @@ public class DatabaseInterface {
         } catch (SQLException e) {
             System.out.println("Error creating new user: " + e);
         } finally {
-            if (stmt != null) { stmt.close(); }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Failed to close statement.");
+                }
+            }
         }
 
     }
 
-    public String[] getProfileInfo(int userID) throws SQLException {
+    /**
+     * Queries the database to get the profile information
+     * associated with the given user.
+     *
+     * @param userID ID number associated with the current user
+     * @return String array containing all available information
+     * for the current user
+     */
+    public String[] getProfileInfo(int userID) {
 
         String[] profileInfo = new String[8];
         Statement stmt = null;
@@ -209,13 +276,33 @@ public class DatabaseInterface {
         } catch (SQLException e) {
             System.out.println("Error updating profile information: " + e);
         } finally {
-            if (stmt != null) { stmt.close(); }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Failed to close statement.");
+                }
+            }
         }
 
         return profileInfo;
 
     }
 
+    /**
+     * Inserts the given Water Source Report information into the
+     * database.
+     *
+     * @param date Date at which the report was submitted
+     * @param time Time at which the report was submitted
+     * @param num System-generated ID number for the report
+     * @param reporter username of the user who submitted the report
+     * @param latitude latitude of the water source
+     * @param longitude longitude of the water source
+     * @param type type of the water source
+     * @param condition condition of the water source
+     * @return
+     */
     public boolean submitWaterSourceReport(String date, String time, String num,
                                            String reporter, Double latitude, Double longitude,
                                            String type, String condition) {
@@ -246,7 +333,13 @@ public class DatabaseInterface {
         }
     }
 
-    public int getMaxReportNum() {
+    /**
+     * Queries the database to get the largest ID
+     * number of all water source reports in the database.
+     *
+     * @return maximum ID number of all water source reports
+     */
+    public int getMaxSourceReportNum() {
 
         Statement stmt = null;
         String query = "SELECT max(id) FROM cleanwater.source_reports";
@@ -280,7 +373,13 @@ public class DatabaseInterface {
 
     }
 
-    public int getMinReportNum() {
+    /**
+     * Queries the database to get the smallest ID
+     * number of all water source reports in the database.
+     *
+     * @return minimum ID number of all water source reports
+     */
+    public int getMinSourceReportNum() {
 
         Statement stmt = null;
         String query = "SELECT min(id) FROM cleanwater.source_reports";
@@ -314,9 +413,16 @@ public class DatabaseInterface {
 
     }
 
+    /**
+     * Queries the database to obtain the details of a
+     * given water source report.
+     *
+     * @param reportNum ID number associated with the report
+     * @return WaterSourceReport object containing all of the
+     * report details available.
+     */
     public WaterSourceReport getReportInfo(int reportNum) {
 
-        String[] reportInfo = new String[7];
         Statement stmt = null;
 
         String query =
@@ -364,6 +470,9 @@ public class DatabaseInterface {
         return null;
     }
 
+    /**
+     * Closes the database connection.
+     */
     public void close() {
         session.disconnect();
     }

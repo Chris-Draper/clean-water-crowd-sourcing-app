@@ -21,20 +21,6 @@ public class LoginScreenController {
     private PasswordField passwordField;
 
     @FXML
-    private Button loginButton;
-
-    @FXML
-    private Button backButton;
-
-    private GenericUser aValidUser;
-
-    private UserLog userLog;
-
-    @FXML
-    private void initialize() {
-    }
-
-    @FXML
     private void handleBackButtonPressed() {
         mainApplication.reloadHomeScreen();
     }
@@ -63,12 +49,7 @@ public class LoginScreenController {
 
     // Check to see if values entered as username and password is acceptable
     private GenericUser isInputValid() {
-        try {
-            return mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordField.getText());
-        } catch(SQLException e) {
-            System.out.println("Issue connecting: " + e);
-        }
-        return null;
+        return mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordField.getText());
     }
 
     /**
@@ -77,7 +58,6 @@ public class LoginScreenController {
      * */
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
-        userLog = mainApplication.getUserlog();
     }
 
 }

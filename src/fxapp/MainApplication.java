@@ -178,13 +178,9 @@ public class MainApplication extends Application {
                 fieldText[i] = "'" + curField + "'";
             }
         }
-         try {
-             database.updateProfileInfo(userID, fieldText[0], fieldText[1],
-                     fieldText[2], fieldText[3], fieldText[4], fieldText[5],
-                     fieldText[6], fieldText[7]);
-         } catch (SQLException e) {
-             System.out.println("Failed to update user info: " + e);
-         }
+         database.updateProfileInfo(userID, fieldText[0], fieldText[1],
+                 fieldText[2], fieldText[3], fieldText[4], fieldText[5],
+                 fieldText[6], fieldText[7]);
     }
 
     public BorderPane getRootLayout() {return rootLayout;}
