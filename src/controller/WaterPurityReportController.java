@@ -155,15 +155,15 @@ public class WaterPurityReportController {
 
     public static void makeWaterSrcReportDummyData() {
         WaterPurityReport report1 = new WaterPurityReport( //top
-                "2001", "Sean Buckingham", 33.68, -84.15, WaterPurityReport.Condition.safe, 200,
+                "998", "Sean Buckingham", 33.68, -84.15, WaterPurityReport.Condition.safe, 200,
                 200
         );
         WaterPurityReport report2 = new WaterPurityReport( //right
-                "2002", "Noah Harper", 33.88, -84.75, WaterPurityReport.Condition.treatable, 210,
+                "999", "Noah Harper", 33.88, -84.75, WaterPurityReport.Condition.treatable, 210,
                 210
         );
         WaterPurityReport report3 = new WaterPurityReport( //bottom
-                "2003", "Chris Polack", 33.98, -84.15, WaterPurityReport.Condition.unsafe, 300,
+                "1000", "Chris Polack", 33.98, -84.15, WaterPurityReport.Condition.unsafe, 300,
                 240
         );
         waterPurityReportList.add(report1);

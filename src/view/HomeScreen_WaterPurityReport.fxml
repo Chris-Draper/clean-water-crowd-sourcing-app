@@ -188,7 +188,7 @@
                <children>
                   <Button fx:id="submitButton" defaultButton="true" mnemonicParsing="false" onAction="#handleSubmitButton" text="Submit">
                      <font>
-                        <Font size="27.0" />
+                        <Font size="20.0" />
                      </font>
                      <VBox.margin>
                         <Insets top="10.0" />
