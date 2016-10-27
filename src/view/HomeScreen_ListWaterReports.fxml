@@ -17,7 +17,7 @@
             <Insets left="240.0" />
          </VBox.margin>
       </Label>
-      <ListView fx:id="listView" prefHeight="240.0" prefWidth="615.0" />
-      <TextArea fx:id="textArea" onMouseClicked="#handleMouseClicked" prefHeight="226.0" prefWidth="200.0" />
+      <ListView fx:id="listView" onMouseClicked="#handleMouseClicked" prefHeight="240.0" prefWidth="615.0" />
+      <TextArea fx:id="textArea" prefHeight="226.0" prefWidth="200.0" />
    </children>
 </VBox>

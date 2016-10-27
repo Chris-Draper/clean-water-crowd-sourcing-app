@@ -74,7 +74,7 @@ public class WaterSourceReportController {
             System.out.println("Failed to get user information.");
         }
 
-        reportSystemCount = mainApplication.getDatabaseConn().getReportNum() + 1;
+        reportSystemCount = mainApplication.getDatabaseConn().getMaxReportNum() + 1;
         reportNumLabel.setText(reportSystemCount.toString());
     }
     @FXML
@@ -119,7 +119,7 @@ public class WaterSourceReportController {
 
             waterSourceReportList.add(new WaterSourceReport(
                     reportDate.getText(), reportTime.getText(),
-                    reportNumLabel.getText(), reporterName.getText(),
+                    Integer.parseInt(reportNumLabel.getText()), reporterName.getText(),
                     reportLat, reportLong, reportWaterType.getValue(),
                     reportWaterCondition.getValue()
             ));
@@ -127,8 +127,8 @@ public class WaterSourceReportController {
             mainApplication.getDatabaseConn().submitWaterSourceReport(
                     reportDate.getText(), reportTime.getText(),
                     reportNumLabel.getText(), reporterName.getText(),
-                    reportLat, reportLong, reportWaterType.getValue().getCode(),
-                    reportWaterCondition.getValue().getCode()
+                    reportLat, reportLong, reportWaterType.getValue().name(),
+                    reportWaterCondition.getValue().name()
             );
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -162,6 +162,11 @@ public class WaterSourceReportController {
     }
 
     public static ArrayList<WaterSourceReport> getWaterSourceReportList() {
+
+        ArrayList<WaterSourceReport> curReports;
+
+
+
         return waterSourceReportList;
     }
 
@@ -170,26 +175,7 @@ public class WaterSourceReportController {
     }
 
     public static void makeWaterSrcReportDummyData() {
-        WaterSourceReport report1 = new WaterSourceReport( //top
-                "10/12/16", "22:16", "2001", "Chris Draper", 33.78, -84.15,
-                WaterSourceReport.WaterType.Lake, WaterSourceReport.WaterCondition.TreatableClear
-        );
-        WaterSourceReport report2 = new WaterSourceReport( //right
-                "10/15/16", "22:16", "2002", "Don Draper", 34.03, -84.40,
-                WaterSourceReport.WaterType.Well, WaterSourceReport.WaterCondition.Potable
-        );
-        WaterSourceReport report3 = new WaterSourceReport( //bottom
-                "10/17/16", "22:16", "2003", "Cynthia Draper", 33.78, -84.65,
-                WaterSourceReport.WaterType.Spring, WaterSourceReport.WaterCondition.TreatableMuddy
-        );
-        WaterSourceReport report4 = new WaterSourceReport( //left
-                "9/12/16", "22:16", "2004", "Zach Draper", 33.53, -84.40,
-                WaterSourceReport.WaterType.Bottled, WaterSourceReport.WaterCondition.Waste
-        );
-        waterSourceReportList.add(report1);
-        waterSourceReportList.add(report2);
-        waterSourceReportList.add(report3);
-        waterSourceReportList.add(report4);
+
     }
 
 

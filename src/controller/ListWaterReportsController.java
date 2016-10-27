@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
@@ -39,34 +41,38 @@ public class ListWaterReportsController {
     private ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReportController.getWaterSourceReportList();
 
 
-    @FXML
-    private void initialize() {
-        populateList();
-    }
-
     public void clearList() {
         listItems.clear();
     }
 
     public void populateList() {
-        for (int i = 0; i < waterSourceReports.size(); i++) {
-            listItems.add(waterSourceReports.get(i).getReportNum());
-            reportDisplayCounter = waterSourceReports.size();
+
+        int startReport = mainApplication.getDatabaseConn().getMinReportNum();
+        int endReport = mainApplication.getDatabaseConn().getMaxReportNum();
+
+        for (int i = startReport; i <= endReport; i++) {
+            listItems.add(i);
             listView.setItems(listItems);
         }
+
+        reportDisplayCounter = endReport - startReport;
     }
 
 
     @FXML
     public void handleMouseClicked() {
-        WaterSourceReport waterSourceReportData = null;
-        for (int i = 0; i < waterSourceReports.size(); i++) {
-            if (waterSourceReports.get(i).getReportNum().equals(listView.getSelectionModel().getSelectedItem().toString())) {
-                waterSourceReportData = waterSourceReports.get(i);
-            }
-        }
-        if (waterSourceReportData != null) {
-            System.out.println("hi");
+
+        WaterSourceReport waterSourceReportData =
+                mainApplication.getDatabaseConn().getReportInfo((int) listView.getSelectionModel().getSelectedItem());
+
+        if (waterSourceReportData == null) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "Error downloading report from database.", ButtonType.OK);
+            alert.showAndWait();
+
+        } else {
+
             textArea.setText(
                     "Report Number: " + waterSourceReportData.getReportNum() + "\n\n" +
                             "Location Lat: " + waterSourceReportData.getLat() + "\n" +
@@ -79,7 +85,6 @@ public class ListWaterReportsController {
             );
             textArea.setWrapText(true);
         }
-
     }
 
     public void setMainApp(MainApplication mainApplication) {

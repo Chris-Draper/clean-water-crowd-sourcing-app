@@ -142,7 +142,6 @@ public class DatabaseInterface {
                 "INSERT INTO cleanwater.users" +
                 "(username, password, position)" +
                 "VALUES ('" + username + "', '" + password + "', '" + position.getCode() + "');";
-        System.out.println(query);
 
         try {
             stmt = dbConn.createStatement();
@@ -219,7 +218,7 @@ public class DatabaseInterface {
 
     public boolean submitWaterSourceReport(String date, String time, String num,
                                            String reporter, Double latitude, Double longitude,
-                                           String type, char condition) {
+                                           String type, String condition) {
 
         Statement stmt = null;
 
@@ -229,7 +228,6 @@ public class DatabaseInterface {
                         "VALUES (" + num + ", '" + date + "', '" + time +
                         "', '" + reporter + "', " + latitude + ", " + longitude +
                         ", '" + type + "', '" + condition + "');";
-        System.out.println(query);
         try {
             stmt = dbConn.createStatement();
             stmt.executeUpdate(query);
@@ -248,12 +246,10 @@ public class DatabaseInterface {
         }
     }
 
-    public int getReportNum() {
+    public int getMaxReportNum() {
 
         Statement stmt = null;
         String query = "SELECT max(id) FROM cleanwater.source_reports";
-
-        System.out.println(query);
 
         try {
             stmt = dbConn.createStatement();
@@ -263,7 +259,6 @@ public class DatabaseInterface {
 
             if (rs.next()) {
                 maxNum = rs.getInt("max(id)");
-                System.out.println(maxNum);
                 return maxNum;
             } else {
                 System.out.println("Error");
@@ -283,6 +278,90 @@ public class DatabaseInterface {
 
         return 0;
 
+    }
+
+    public int getMinReportNum() {
+
+        Statement stmt = null;
+        String query = "SELECT min(id) FROM cleanwater.source_reports";
+
+        try {
+            stmt = dbConn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            int minNum;
+
+            if (rs.next()) {
+                minNum = rs.getInt("min(id)");
+                return minNum;
+            } else {
+                System.out.println("Error");
+                return 0;
+            }
+        } catch (SQLException e ) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Failed to close statement.");
+                }
+            }
+        }
+
+        return 0;
+
+    }
+
+    public WaterSourceReport getReportInfo(int reportNum) {
+
+        String[] reportInfo = new String[7];
+        Statement stmt = null;
+
+        String query =
+                "SELECT * FROM cleanwater.source_reports " +
+                        "WHERE id = " + reportNum + ";";
+        try {
+            stmt = dbConn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            String date;
+            String time;
+            String reporter;
+            Double latitude;
+            Double longitude;
+            WaterSourceReport.WaterType type;
+            WaterSourceReport.WaterCondition condition;
+
+            if (rs.next()) {
+                date = rs.getString("date");
+                time = rs.getString("time");
+                reporter = rs.getString("reporter");
+                latitude = rs.getDouble("latitude");
+                longitude = rs.getDouble("longitude");
+                type = WaterSourceReport.WaterType.valueOf(rs.getString("type"));
+                condition = WaterSourceReport.WaterCondition.valueOf(rs.getString("condition"));
+
+                WaterSourceReport report = new WaterSourceReport(date, time, reportNum, reporter,
+                        latitude, longitude, type, condition);
+
+                return report;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error updating profile information: " + e);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Error closing connection");
+                }
+            }
+        }
+
+        return null;
     }
 
     public void close() {
