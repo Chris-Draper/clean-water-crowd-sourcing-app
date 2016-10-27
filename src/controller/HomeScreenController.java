@@ -215,17 +215,9 @@ public class HomeScreenController {
 
     @FXML
     private void handleWaterSourceReportButton(ActionEvent event) {
-<<<<<<< HEAD
-        try {
-            if(waterSourceReportButton.getText().equals("Cancel Report")) {
-                rootLayout.setCenter(homeScreenVBox);
-                homeButton.setSelected(true);
-                waterSourceReportButton.setText("Water Report");
-=======
         if(waterSourceReportButton.isSelected()) {
             if(waterSourceReportButton.isSelected()) {
                 rootLayout.setCenter(waterReportVbox);
->>>>>>> m7-demo
             } else {
                 rootLayout.setCenter(welcomeMsgVBox);
             }
