@@ -7,24 +7,44 @@ public class WaterSourceReport {
 
     private String date;
     private String time;
-    private String reportNum;
+    private int reportNum;
     private String reporterName;
     private double latitude;
     private double longitude;
-    private Object waterType;
-    private Object condition;
+    private WaterType waterType;
+    private WaterCondition condition;
 
-    public enum WaterType { //go back and implement enums
-        Bottled, Well, Stream, Lake, Spring, Other
+    public enum WaterType {
+        BT("Bottled"), WL("Well"), ST("Stream"), LK("Lake"), SP("Spring"), OT("Other");
+
+        WaterType(String description) {
+            this.description = description;
+        }
+
+        String description;
+
+        public String toString() {
+            return description;
+        }
     }
 
-    public enum WaterCondition { //go back and implement enums
-        Waste, TreatableClear, TreatableMuddy, Potable
+    public enum WaterCondition {
+        W("Waste"), C("Treatable Clear"), M("Treatable Muddy"), P("Potable");
+
+        WaterCondition(String description) {
+            this.description = description;
+        }
+
+        String description;
+
+        public String toString() {
+            return description;
+        }
     }
 
-    public WaterSourceReport(String date, String time, String reportNum,
+    public WaterSourceReport(String date, String time, int reportNum,
                              String reporterName, double latitude, double longitude,
-                             Object sourceType, Object condition) {
+                             WaterType sourceType, WaterCondition condition) {
         this.date = date;
         this.time = time;
         this.reportNum = reportNum;
@@ -76,11 +96,11 @@ public class WaterSourceReport {
         this.time = time;
     }
 
-    public String getReportNum() {
+    public int getReportNum() {
         return reportNum;
     }
 
-    public void setReportNum(String reportNum) {
+    public void setReportNum(int reportNum) {
         this.reportNum = reportNum;
     }
 
@@ -108,7 +128,7 @@ public class WaterSourceReport {
         this.longitude = longitude;
     }
 
-    public Object getSourceType() {
+    public WaterType getSourceType() {
         return waterType;
     }
 
@@ -116,11 +136,11 @@ public class WaterSourceReport {
         this.waterType = waterType;
     }
 
-    public Object getCondition() {
+    public WaterCondition getCondition() {
         return condition;
     }
 
-    public void setDateTime(WaterCondition condition) {
+    public void setCondition(WaterCondition condition) {
         this.condition = condition;
     }
 

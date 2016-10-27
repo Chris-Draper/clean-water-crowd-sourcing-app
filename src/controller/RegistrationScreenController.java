@@ -68,8 +68,7 @@ public class RegistrationScreenController {
             alert.showAndWait();
             return false;
         }
-        //validate username is a valid username  and check if username is in "database"
-        //else if (usernameTextField.getText().contains("-'.!@#$%^&*()+=~`{}|:\"<>?[]\';/.,'")) {
+        // Validate username is a valid username
          else if (!usernameTextField.getText().matches("[a-zA-Z0-9]+$")) { //enter another username
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please re-enter username. Your username" +
@@ -83,7 +82,9 @@ public class RegistrationScreenController {
                             " of your username must be a letter", ButtonType.OK);
             alert.showAndWait();
             return false;
-        } else if (userLog.hasAlreadyRegistered(usernameTextField.getText())) {//user is in database ALREADY
+
+            // Check database to see if user already exists
+        } else if (mainApplication.getDatabaseConn().hasAlreadyRegistered(usernameTextField.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please choose another username. The username" +
                             " entered is already in the system.", ButtonType.OK);
