@@ -35,8 +35,8 @@ public class HistoryGraphController {
     @FXML
     private Button displayGraphButton;
 
-    private HashSet<String> locationList;
-    private HashSet<String> yearList;
+    private HashSet<String> locationList = new HashSet<>();
+    private HashSet<String> yearList = new HashSet<>();
 
 
     public void setMainApplication(MainApplication mainApplication) {
@@ -48,21 +48,23 @@ public class HistoryGraphController {
 
     @FXML
     public void initialize() {
-
     }
 
-    private void fillLocationList() {
+    public void fillLocationList() {
+        locationCombo.getItems().clear();
         int maxNum = database.getMaxPurityReportNum();
         int minNum = database.getMinPurityReportNum();
         for (int i = minNum; i <= maxNum; i++) {
             WaterPurityReport purityReport = database.getPurityReportInfo(i);
             String location = purityReport.getLat() + " " + purityReport.getLong();
             locationList.add(location);
+            System.out.println(i);
         }
         locationCombo.getItems().addAll(locationList);
     }
 
     private void fillYearList(String location) {
+        yearCombo.getItems().clear();
         int maxNum = database.getMaxPurityReportNum();
         int minNum = database.getMinPurityReportNum();
         for (int i = minNum; i <= maxNum; i++) {

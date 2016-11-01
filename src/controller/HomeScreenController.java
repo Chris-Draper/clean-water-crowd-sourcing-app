@@ -5,12 +5,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import model.UserType;
 
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -48,8 +51,11 @@ public class HomeScreenController {
     private VBox userProfileVBox;
     private VBox welcomeMsgVBox;
     private VBox waterReportVbox;
+    private VBox historyGraphVbox;
     private BorderPane googleMapBorderPane;
 
+    @FXML
+    private ToggleGroup sideNavigation;
     @FXML
     private ToggleButton homeButton;
 
@@ -72,6 +78,9 @@ public class HomeScreenController {
     private ToggleButton googleMapsButton;
 
     @FXML
+    private ToggleButton viewHistoryGraphButton;
+
+    @FXML
     private Label welcomeMsg;
 
     private UserProfileController ctrl;
@@ -79,6 +88,7 @@ public class HomeScreenController {
     private WaterPurityReportController ctrl_3;
     private WaterSourceReportController ctrl_4;
     private ListPurityReportsController ctrl_5;
+    private HistoryGraphController ctrl_7;
 
     /**
      * allow for calling back to the mainApplication application code if necessary
@@ -150,6 +160,13 @@ public class HomeScreenController {
             FXMLLoader loader_6 = new FXMLLoader();
             loader_6.setLocation((MainApplication.class.getResource("../view/InitHomeScreen.fxml")));
             welcomeMsgVBox = loader_6.load();
+
+            FXMLLoader loader_7 = new FXMLLoader();
+            loader_7.setLocation(MainApplication.class.getResource("../view/HomeScreen_HistoryGraph.fxml"));
+            historyGraphVbox = loader_7.load();
+
+            ctrl_7 = loader_7.getController();
+            ctrl_7.setMainApplication(mainApplication);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -226,8 +243,8 @@ public class HomeScreenController {
 
     @FXML
     private void handleListPurityButtonPressed(ActionEvent event) {
-        if(listPurityButton.isSelected()) {
-            if(listPurityButton.isSelected()) {
+        if (listPurityButton.isSelected()) {
+            if (listPurityButton.isSelected()) {
                 rootLayout.setCenter(listPurityReportVbox);
                 ctrl_5.clearList();
                 ctrl_5.populateList();
@@ -236,6 +253,20 @@ public class HomeScreenController {
             }
         } else {
             listPurityButton.setSelected(true);
+        }
+    }
+
+    @FXML
+    private void handleViewHistoryGraph(ActionEvent event) {
+        if (viewHistoryGraphButton.isSelected()) {
+            if (viewHistoryGraphButton.isSelected()) {
+                rootLayout.setCenter(historyGraphVbox);
+                ctrl_7.fillLocationList();
+            } else {
+                rootLayout.setCenter(welcomeMsgVBox);
+            }
+        } else {
+            viewHistoryGraphButton.setSelected(true);
         }
     }
 
