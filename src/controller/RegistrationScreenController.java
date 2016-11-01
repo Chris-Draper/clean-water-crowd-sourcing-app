@@ -36,7 +36,7 @@ public class RegistrationScreenController {
     }
 
     @FXML
-    public void handleRegisterPressed() {
+    private void handleRegisterPressed() {
         UserType type = (UserType) positionComboBox.getSelectionModel().selectedItemProperty().getValue();
         if (isRegistrationInfoAcceptable(type)) {
 
