@@ -154,6 +154,7 @@ public class HomeScreenController {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Can't find Vboxs");
+            System.out.println(e);
         }
     }
 
@@ -200,6 +201,8 @@ public class HomeScreenController {
         if (purityReportButton.isSelected()) {
             if (purityReportButton.isSelected()) {
                 rootLayout.setCenter(purityReportVBox);
+                ctrl_5.clearList();
+                ctrl_5.populateList();
             } else {
                 rootLayout.setCenter(welcomeMsgVBox);
             }

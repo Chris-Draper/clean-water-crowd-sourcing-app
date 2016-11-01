@@ -301,7 +301,7 @@ public class DatabaseInterface {
      * @param longitude longitude of the water source
      * @param type type of the water source
      * @param condition condition of the water source
-     * @return
+     * @return whether or not the report was successfully stored
      */
     public boolean submitWaterSourceReport(String date, String time, String num,
                                            String reporter, Double latitude, Double longitude,
@@ -421,7 +421,7 @@ public class DatabaseInterface {
      * @return WaterSourceReport object containing all of the
      * report details available.
      */
-    public WaterSourceReport getReportInfo(int reportNum) {
+    public WaterSourceReport getSourceReportInfo(int reportNum) {
 
         Statement stmt = null;
 
@@ -451,6 +451,191 @@ public class DatabaseInterface {
 
                 WaterSourceReport report = new WaterSourceReport(date, time, reportNum, reporter,
                         latitude, longitude, type, condition);
+
+                return report;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error updating profile information: " + e);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Error closing connection");
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Inserts the given Water Purity Report information into the
+     * database.
+     *
+     * @param date Date at which the report was submitted
+     * @param time Time at which the report was submitted
+     * @param num System-generated ID number for the report
+     * @param reporter username of the user who submitted the report
+     * @param latitude latitude of the purity report
+     * @param longitude longitude of the purity report
+     * @param condition condition of the water
+     * @param virus ppm of viruses in the water
+     * @param contaminant ppm of contaminants in the water
+     * @return whether or not the report was successfully stored
+     */
+    public boolean submitWaterPurityReport(String date, String time, String num,
+                                           String reporter, Double latitude, Double longitude,
+                                           String condition, String virus, String contaminant) {
+
+        Statement stmt = null;
+
+        String query =
+                "INSERT INTO cleanwater.purity_reports" +
+                        " (`id`, `date`, `time`, `reporter`, `latitude`, `longitude`, `virus`, `contaminant`, `condition`) " +
+                        "VALUES (" + num + ", '" + date + "', '" + time +
+                        "', '" + reporter + "', " + latitude + ", " + longitude +
+                        ", " + virus + ", " + contaminant + ", '" + condition + "');";
+
+        try {
+            stmt = dbConn.createStatement();
+            stmt.executeUpdate(query);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error creating new water purity report: " + e);
+            return false;
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Error closing statement.");
+                }
+            }
+        }
+    }
+
+    /**
+     * Queries the database to get the smallest ID
+     * number of all water purity reports in the database.
+     *
+     * @return minimum ID number of all water purity reports
+     */
+    public int getMinPurityReportNum() {
+
+        Statement stmt = null;
+        String query = "SELECT min(id) FROM cleanwater.purity_reports";
+
+        try {
+            stmt = dbConn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            int minNum;
+
+            if (rs.next()) {
+                minNum = rs.getInt("min(id)");
+                return minNum;
+            } else {
+                System.out.println("Error");
+                return 0;
+            }
+        } catch (SQLException e ) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Failed to close statement.");
+                }
+            }
+        }
+
+        return 0;
+
+    }
+
+    /**
+     * Queries the database to get the largest ID
+     * number of all water purity reports in the database.
+     *
+     * @return maximum ID number of all water purity reports
+     */
+    public int getMaxPurityReportNum() {
+
+        Statement stmt = null;
+        String query = "SELECT max(id) FROM cleanwater.purity_reports";
+
+        try {
+            stmt = dbConn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            int maxNum;
+
+            if (rs.next()) {
+                maxNum = rs.getInt("max(id)");
+                return maxNum;
+            } else {
+                System.out.println("Error");
+                return 0;
+            }
+        } catch (SQLException e ) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.out.println("Failed to close statement.");
+                }
+            }
+        }
+
+        return 0;
+
+    }
+
+    /**
+     * Queries the database to obtain the details of a
+     * given water source report.
+     *
+     * @param reportNum ID number associated with the report
+     * @return WaterSourceReport object containing all of the
+     * report details available.
+     */
+    public WaterPurityReport getPurityReportInfo(int reportNum) {
+
+        Statement stmt = null;
+
+        String query =
+                "SELECT * FROM cleanwater.purity_reports " +
+                        "WHERE id = " + reportNum + ";";
+        try {
+            stmt = dbConn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            String date;
+            String time;
+            String reporter;
+            Double latitude;
+            Double longitude;
+            WaterPurityReport.Condition condition;
+            int virusPPM;
+            int contaminantPPM;
+
+            if (rs.next()) {
+                date = rs.getString("date");
+                time = rs.getString("time");
+                reporter = rs.getString("reporter");
+                latitude = rs.getDouble("latitude");
+                longitude = rs.getDouble("longitude");
+                condition = WaterPurityReport.Condition.valueOf(rs.getString("condition"));
+                virusPPM = rs.getInt("virus");
+                contaminantPPM = rs.getInt("contaminant");
+
+                WaterPurityReport report = new WaterPurityReport(date, time, reportNum, reporter,
+                        latitude, longitude, condition, virusPPM, contaminantPPM);
 
                 return report;
             }

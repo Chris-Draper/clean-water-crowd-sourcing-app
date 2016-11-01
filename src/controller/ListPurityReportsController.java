@@ -5,6 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
@@ -37,31 +39,39 @@ public class ListPurityReportsController {
 
     private int reportDisplayCounter = 0;
 
-    @FXML
-    private void initialize() {
-        populateList();
-    }
-
     public void clearList() {
         listItems.clear();
     }
+
     public void populateList() {
-        for (int i = 0; i < waterPurityReports.size(); i++) {
-            listItems.add(waterPurityReports.get(i).getReportNum());
-            reportDisplayCounter = waterPurityReports.size();
+
+        int startReport = mainApplication.getDatabaseConn().getMinPurityReportNum();
+        int endReport = mainApplication.getDatabaseConn().getMaxPurityReportNum();
+
+        for (int i = startReport; i <= endReport; i++) {
+            listItems.add(i);
             reportList.setItems(listItems);
         }
+
+        reportDisplayCounter = endReport - startReport;
+
     }
 
     @FXML
     public void handleMouseClicked() {
-        WaterPurityReport waterPurityReportData = null;
-        for (int i = 0; i < waterPurityReports.size(); i++) {
-            if (waterPurityReports.get(i).getReportNum().equals(reportList.getSelectionModel().getSelectedItem().toString())) {
-                waterPurityReportData = waterPurityReports.get(i);
-            }
-        }
-        if (waterPurityReportData != null) {
+
+
+        WaterPurityReport waterPurityReportData =
+                mainApplication.getDatabaseConn().getPurityReportInfo((int) reportList.getSelectionModel().getSelectedItem());
+
+        if (waterPurityReportData == null) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "Error downloading report from database.", ButtonType.OK);
+            alert.showAndWait();
+
+        } else {
+
             textArea.setText(
                     "Report Number: " + waterPurityReportData.getReportNum() + "\n\n" +
                             "Location Lat: " + waterPurityReportData.getLat() + "\n" +
@@ -71,7 +81,7 @@ public class ListPurityReportsController {
                             "Reported By: " + waterPurityReportData.getReporterName() + "\n" +
                             "Report Virus : " + waterPurityReportData.getVirusPPM() + "\n" +
                             "Report contaminant : " + waterPurityReportData.getContamPPM() + "\n" +
-                            "Water Condition: " + waterPurityReportData.getCondition()
+                            "Water Condition: " + waterPurityReportData.getCondition().getDescription()
             );
             textArea.setWrapText(true);
         }

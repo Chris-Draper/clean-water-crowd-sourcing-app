@@ -39,8 +39,6 @@ public class MainApplication extends Application {
 
         WaterSourceReportController.initWaterReportList();
         WaterPurityReportController.initWaterPurityList();
-        WaterPurityReportController.makeWaterSrcReportDummyData();
-        WaterSourceReportController.makeWaterSrcReportDummyData();
     }
 
     /**

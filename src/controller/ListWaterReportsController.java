@@ -63,7 +63,7 @@ public class ListWaterReportsController {
     public void handleMouseClicked() {
 
         WaterSourceReport waterSourceReportData =
-                mainApplication.getDatabaseConn().getReportInfo((int) listView.getSelectionModel().getSelectedItem());
+                mainApplication.getDatabaseConn().getSourceReportInfo((int) listView.getSelectionModel().getSelectedItem());
 
         if (waterSourceReportData == null) {
 

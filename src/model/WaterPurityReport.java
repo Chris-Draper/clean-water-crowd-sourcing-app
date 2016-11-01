@@ -12,7 +12,7 @@ public class WaterPurityReport {
 
     private String date;
     private String time;
-    private String reportNum;
+    private int reportNum;
     private String reporterName;
     private double latitude;
     private double longitude;
@@ -20,9 +20,9 @@ public class WaterPurityReport {
     private double virusPPM;
     private double contamPPM;
 
-    public WaterPurityReport(String reportNum, String reporterName, double lat, double longit, WaterPurityReport.Condition condition, double virusPPM, double contamPPM) {
-        this.date = getDate();
-        this.time = getTime();
+    public WaterPurityReport(String date, String time, int reportNum, String reporterName, double lat, double longit, WaterPurityReport.Condition condition, double virusPPM, double contamPPM) {
+        this.date = date;
+        this.time = time;
         this.reportNum = reportNum;
         this.reporterName = reporterName;
         this.latitude = lat;
@@ -47,17 +47,21 @@ public class WaterPurityReport {
 
     public enum Condition {
 
-        safe('S'), treatable('T'), unsafe('U');
+        S("Safe"), T("Treatable"), U("Unsafe");
 
-        Condition(char code) {
-            this.code = code;
+        Condition (String description) {
+            this.description = description;
         }
 
-        public char getCode() {
-            return code;
+        public String getDescription() {
+            return description;
         }
 
-        char code;
+        String description;
+
+        public String toString() {
+            return description;
+        }
     }
 
     public String toHtmlFormat() {
@@ -72,7 +76,7 @@ public class WaterPurityReport {
                 "<br>Report Condition : " + this.condition;
     }
     public String getDate() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
         Date dateObject = new Date();
         return dateFormat.format(dateObject);
     }
@@ -82,7 +86,7 @@ public class WaterPurityReport {
     }
 
     public String getTime() {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date dateObject = new Date();
         return dateFormat.format(dateObject);
     }
@@ -107,11 +111,11 @@ public class WaterPurityReport {
         this.virusPPM = virusPPM;
     }
 
-    public String getReportNum() {
+    public int getReportNum() {
         return reportNum;
     }
 
-    public void setReportNum(String reportNum) {
+    public void setReportNum(int reportNum) {
         this.reportNum = reportNum;
     }
 
@@ -139,7 +143,7 @@ public class WaterPurityReport {
         this.longitude = longitude;
     }
 
-    public Object getCondition() {
+    public Condition getCondition() {
         return condition;
     }
 

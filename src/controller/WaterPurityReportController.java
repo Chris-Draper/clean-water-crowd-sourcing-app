@@ -71,7 +71,7 @@ public class WaterPurityReportController {
     @FXML
     private ComboBox<WaterPurityReport.Condition> conditionComboBox;
 
-    private static Integer reportNum = 1001;
+    private static Integer reportNum;
 
     private static ArrayList<WaterPurityReport> waterPurityReportList;
 
@@ -84,18 +84,16 @@ public class WaterPurityReportController {
     private Date date;
 
 
-
     @FXML
     private void initialize() {
 
         //set text for all labels based on person doing this
-        reportNumLabel.setText(reportNum.toString());
         date = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateLabel.setText(dateFormat.format(date));
-        dateFormat = new SimpleDateFormat("HH:mm");
+        dateFormat = new SimpleDateFormat("HH:mm:ss");
         timeLabel.setText(dateFormat.format(date));
-        this.setReporPurityConditionData();
+        this.setReportPurityConditionData();
 
         //set visbility to false for now until we add functionality to input
         //street address and come up with a pin instead of long lat nums
@@ -109,11 +107,18 @@ public class WaterPurityReportController {
             double reportLong = Double.parseDouble(longTextField.getText());
 
             waterPurityReportList.add(new WaterPurityReport(
-                    reportNum.toString(), reporterNameLabel.getText(),
+                    dateLabel.getText(), timeLabel.getText(),
+                    reportNum, reporterNameLabel.getText(),
                     reportLat, reportLong, conditionComboBox.getValue(), Double.parseDouble(virusTextField.getText()),
                     Double.parseDouble(contTextField.getText())
             ));
 
+            mainApplication.getDatabaseConn().submitWaterPurityReport(
+                    dateLabel.getText(), timeLabel.getText(),
+                    reportNumLabel.getText(), reporterNameLabel.getText(),
+                    reportLat, reportLong, conditionComboBox.getValue().name(),
+                    virusTextField.getText(), contTextField.getText()
+            );
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
@@ -124,7 +129,6 @@ public class WaterPurityReportController {
             dateLabel.setText(this.getDate());
             timeLabel.setText(this.getTime());
             reportNumLabel.setText(reportNum.toString());
-            reporterNameLabel.setText(mainApplication.getAuthenticatedUser().getFullName());
             latTextField.clear();
             longTextField.clear();
             virusTextField.clear();
@@ -153,25 +157,7 @@ public class WaterPurityReportController {
         return ans;
     }
 
-    public static void makeWaterSrcReportDummyData() {
-        WaterPurityReport report1 = new WaterPurityReport( //top
-                "998", "Sean Buckingham", 33.68, -84.15, WaterPurityReport.Condition.safe, 200,
-                200
-        );
-        WaterPurityReport report2 = new WaterPurityReport( //right
-                "999", "Noah Harper", 33.88, -84.75, WaterPurityReport.Condition.treatable, 210,
-                210
-        );
-        WaterPurityReport report3 = new WaterPurityReport( //bottom
-                "1000", "Chris Polack", 33.98, -84.15, WaterPurityReport.Condition.unsafe, 300,
-                240
-        );
-        waterPurityReportList.add(report1);
-        waterPurityReportList.add(report2);
-        waterPurityReportList.add(report3);
-    }
-
-    private void setReporPurityConditionData() {
+    private void setReportPurityConditionData() {
         conditionComboBox.getItems().clear();
         conditionComboBox.getItems().addAll(
                 WaterPurityReport.Condition.values()
@@ -208,6 +194,9 @@ public class WaterPurityReportController {
         this.mainApplication = mainApplication;
         currentUser = this.mainApplication.getAuthenticatedUser();
         reporterNameLabel.setText(currentUser.getUsername());
+
+        reportNum = mainApplication.getDatabaseConn().getMaxPurityReportNum() + 1;
+        reportNumLabel.setText(reportNum.toString());
     }
 
 }
