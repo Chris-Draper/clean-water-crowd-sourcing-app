@@ -1,25 +1,18 @@
 package fxapp;
 
-import com.jcraft.jsch.JSchException;
 import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
-
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-
 import model.DatabaseInterface;
 import model.GenericUser;
-import model.User;
 import model.UserLog;
+import model.WaterPurityReport;
 
 public class MainApplication extends Application {
     /** the main container for the application window */
@@ -34,6 +27,10 @@ public class MainApplication extends Application {
 
     private DatabaseInterface database;
 
+    /*
+    Initialize water source reports ArrayList here
+    Create water source report dummy data here
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         mainAppScreen = primaryStage;
@@ -41,6 +38,7 @@ public class MainApplication extends Application {
         initRootLayout(mainAppScreen);
 
         WaterSourceReportController.initWaterReportList();
+        WaterPurityReportController.initWaterPurityList();
     }
 
     /**
@@ -120,7 +118,7 @@ public class MainApplication extends Application {
         try {
             // Pointing loader to login screen fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/HomeScreen.fxml"));
+            loader.setLocation(MainApplication.class.getResource("../view/HomeScreen_Main.fxml"));
             rootLayout = loader.load();
 
             // Give the controller access to the main app.
@@ -134,6 +132,7 @@ public class MainApplication extends Application {
             Scene scene = new Scene(rootLayout);
             mainAppScreen.setScene(scene);
             mainAppScreen.show();
+
         } catch (IOException e) {
             System.out.println("Failed to find the fxml file for Home Screen!");
             e.printStackTrace();
@@ -177,13 +176,9 @@ public class MainApplication extends Application {
                 fieldText[i] = "'" + curField + "'";
             }
         }
-         try {
-             database.updateProfileInfo(userID, fieldText[0], fieldText[1],
-                     fieldText[2], fieldText[3], fieldText[4], fieldText[5],
-                     fieldText[6], fieldText[7]);
-         } catch (SQLException e) {
-             System.out.println("Failed to update user info: " + e);
-         }
+         database.updateProfileInfo(userID, fieldText[0], fieldText[1],
+                 fieldText[2], fieldText[3], fieldText[4], fieldText[5],
+                 fieldText[6], fieldText[7]);
     }
 
     public BorderPane getRootLayout() {return rootLayout;}

@@ -6,9 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.*;
-
 import java.sql.SQLException;
-import java.util.LinkedList;
 
 /**
  * Created by ChrisPolack on 9/27/16.
@@ -24,16 +22,8 @@ public class RegistrationScreenController {
     private TextField passwordTextField;
 
     @FXML
-    private Button registerButton;
-
-    @FXML
-    private Button backButton;
-
-    @FXML
     private ComboBox positionComboBox;
     private final ObservableList<UserType> userTypes = FXCollections.observableArrayList();
-
-    private UserLog userLog;
 
 
     @FXML
@@ -46,20 +36,15 @@ public class RegistrationScreenController {
     }
 
     @FXML
-    public void handleRegisterPressed() {
+    private void handleRegisterPressed() {
         UserType type = (UserType) positionComboBox.getSelectionModel().selectedItemProperty().getValue();
-        GenericUser newUser = null;
         if (isRegistrationInfoAcceptable(type)) {
 
             GenericUser loggedInUser;
-            try {
-                mainApplication.getDatabaseConn().registerUser(usernameTextField.getText(), passwordTextField.getText(), type);
-                loggedInUser = mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordTextField.getText());
-                mainApplication.setAuthenticatedUser(loggedInUser);
-                mainApplication.switchToHomeScreen();
-            } catch (SQLException e) {
-                System.out.println("Error adding user to database: " + e);
-            }
+            mainApplication.getDatabaseConn().registerUser(usernameTextField.getText(), passwordTextField.getText(), type);
+            loggedInUser = mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordTextField.getText());
+            mainApplication.setAuthenticatedUser(loggedInUser);
+            mainApplication.switchToHomeScreen();
         }
     }
 
@@ -70,8 +55,7 @@ public class RegistrationScreenController {
             alert.showAndWait();
             return false;
         }
-        //validate username is a valid username  and check if username is in "database"
-        //else if (usernameTextField.getText().contains("-'.!@#$%^&*()+=~`{}|:\"<>?[]\';/.,'")) {
+        // Validate username is a valid username
          else if (!usernameTextField.getText().matches("[a-zA-Z0-9]+$")) { //enter another username
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please re-enter username. Your username" +
@@ -85,7 +69,9 @@ public class RegistrationScreenController {
                             " of your username must be a letter", ButtonType.OK);
             alert.showAndWait();
             return false;
-        } else if (userLog.hasAlreadyRegistered(usernameTextField.getText())) {//user is in database ALREADY
+
+            // Check database to see if user already exists
+        } else if (mainApplication.getDatabaseConn().hasAlreadyRegistered(usernameTextField.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please choose another username. The username" +
                             " entered is already in the system.", ButtonType.OK);
@@ -106,6 +92,5 @@ public class RegistrationScreenController {
      * */
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
-        userLog = mainApplication.getUserlog();
     }
 }

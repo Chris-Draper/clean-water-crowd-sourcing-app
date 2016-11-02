@@ -1,19 +1,11 @@
 package controller;
 
 import fxapp.MainApplication;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.GenericUser;
-import model.User;
 import model.UserLog;
-import model.UserType;
-import model.UserLog;
-import sun.net.www.content.text.Generic;
-
 import java.sql.SQLException;
-
 
 /**
  * Created by sbuck on 9/21/2016.
@@ -27,20 +19,6 @@ public class LoginScreenController {
 
     @FXML
     private PasswordField passwordField;
-
-    @FXML
-    private Button loginButton;
-
-    @FXML
-    private Button backButton;
-
-    private GenericUser aValidUser;
-
-    private UserLog userLog;
-
-    @FXML
-    private void initialize() {
-    }
 
     @FXML
     private void handleBackButtonPressed() {
@@ -59,6 +37,7 @@ public class LoginScreenController {
 
             if(loggedInUser != null) {
                 mainApplication.setAuthenticatedUser(loggedInUser);
+                //System.out.println(mainApplication.getAuthenticatedUser());
                 mainApplication.switchToHomeScreen();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "This Username and Password combination cannot be found", ButtonType.OK);
@@ -70,12 +49,7 @@ public class LoginScreenController {
 
     // Check to see if values entered as username and password is acceptable
     private GenericUser isInputValid() {
-        try {
-            return mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordField.getText());
-        } catch(SQLException e) {
-            System.out.println("Issue connecting: " + e);
-        }
-        return null;
+        return mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordField.getText());
     }
 
     /**
@@ -84,7 +58,6 @@ public class LoginScreenController {
      * */
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
-        userLog = mainApplication.getUserlog();
     }
 
 }

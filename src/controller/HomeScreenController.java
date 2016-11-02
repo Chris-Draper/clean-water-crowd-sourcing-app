@@ -1,35 +1,20 @@
 package controller;
 
-import com.sun.org.glassfish.gmbal.Description;
-import com.sun.tools.javac.jvm.Gen;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import fxapp.MainApplication;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import model.UserLog;
-import model.WaterSourceReport;
+import model.UserType;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
-
-import model.WaterSourceReport;
-
-//reference http://stackoverflow.com/questions/19342259/how-to-create-multiple-javafx-controllers-with-different-fxml-files to fix issues
 
 /**
  * Created by nharper32 on 9/24/16.
@@ -60,21 +45,17 @@ public class HomeScreenController {
     @FXML
     private javafx.scene.control.MenuItem fileClose;
 
-    @FXML
-    private VBox welcomeVBox;
-
+    private VBox listPurityReportVbox;
     private VBox listWaterReportVBox;
+    private VBox purityReportVBox;
     private VBox userProfileVBox;
-    private VBox homeScreenVBox;
+    private VBox welcomeMsgVBox;
+    private VBox waterReportVbox;
+    private VBox historyGraphVbox;
+    private BorderPane googleMapBorderPane;
 
     @FXML
-    private ListView listView;
-
-    private static int reportDisplayCounter = 0;
-
-    private ObservableList listItems = FXCollections.observableArrayList();
-    private TextArea textArea;
-
+    private ToggleGroup sideNavigation;
     @FXML
     private ToggleButton homeButton;
 
@@ -88,19 +69,43 @@ public class HomeScreenController {
     private ToggleButton waterSourceReportButton;
 
     @FXML
-    private void initialize() {
-    }
+    private ToggleButton purityReportButton;
+
+    @FXML
+    private ToggleButton listPurityButton;
+
+    @FXML
+    private ToggleButton googleMapsButton;
+
+    @FXML
+    private ToggleButton viewHistoryGraphButton;
+
+    @FXML
+    private Label welcomeMsg;
+
+    private UserProfileController ctrl;
+    private ListWaterReportsController ctrl_2;
+    private WaterPurityReportController ctrl_3;
+    private WaterSourceReportController ctrl_4;
+    private ListPurityReportsController ctrl_5;
+    private HistoryGraphController ctrl_7;
 
     /**
      * allow for calling back to the mainApplication application code if necessary
-     * @param mainApplication   the reference to the FX Application instance
-     * */
+     *
+     * @param mainApplication the reference to the FX Application instance
+     */
 
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
         rootLayout = mainApplication.getRootLayout();
         homeButton.setSelected(true);
         loadVBoxs();
+        if (mainApplication.getAuthenticatedUser().getUserType().equals(UserType.User)
+                || mainApplication.getAuthenticatedUser().getUserType().equals(UserType.Administrator)) {
+            purityReportButton.setVisible(false);
+            listPurityButton.setVisible(false);
+        }
     }
 
     @FXML
@@ -114,128 +119,166 @@ public class HomeScreenController {
         mainApplication.reloadHomeScreen();
     }
 
+    private void loadVBoxs() {
+        try {
+            FXMLLoader loader_1 = new FXMLLoader();
+            loader_1.setLocation(MainApplication.class.getResource("../view/HomeScreen_UserProfile.fxml"));
+            userProfileVBox = loader_1.load();
+
+            // Give the controller access to the main app.
+            ctrl = loader_1.getController();
+            ctrl.setMainApp(mainApplication);
+
+            FXMLLoader loader_2 = new FXMLLoader();
+            loader_2.setLocation(MainApplication.class.getResource("../view/HomeScreen_ListWaterReports.fxml"));
+            listWaterReportVBox = loader_2.load();
+
+            ctrl_2 = loader_2.getController();
+            ctrl_2.setMainApp(mainApplication);
+
+            FXMLLoader loader_3 = new FXMLLoader();
+            loader_3.setLocation(MainApplication.class.getResource("../view/HomeScreen_WaterPurityReport.fxml"));
+            purityReportVBox = loader_3.load();
+
+            ctrl_3 = loader_3.getController();
+            ctrl_3.setMainApp(mainApplication);
+
+            FXMLLoader loader_4 = new FXMLLoader();
+            loader_4.setLocation(MainApplication.class.getResource("../view/HomeScreen_WaterSourceReport.fxml"));
+            waterReportVbox = loader_4.load();
+
+            ctrl_4 = loader_4.getController();
+            ctrl_4.setMainApplication(mainApplication);
+
+            FXMLLoader loader_5 = new FXMLLoader();
+            loader_5.setLocation(MainApplication.class.getResource("../view/HomeScreen_ListPurityReports.fxml"));
+            listPurityReportVbox = loader_5.load();
+
+            ctrl_5 = loader_5.getController();
+            ctrl_5.setMainApplication(mainApplication);
+
+            FXMLLoader loader_6 = new FXMLLoader();
+            loader_6.setLocation((MainApplication.class.getResource("../view/InitHomeScreen.fxml")));
+            welcomeMsgVBox = loader_6.load();
+
+            FXMLLoader loader_7 = new FXMLLoader();
+            loader_7.setLocation(MainApplication.class.getResource("../view/HomeScreen_HistoryGraph.fxml"));
+            historyGraphVbox = loader_7.load();
+
+            ctrl_7 = loader_7.getController();
+            ctrl_7.setMainApplication(mainApplication);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Can't find Vboxs");
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void handleHomeButtonPressed() {
+        if (homeButton.isSelected()) {
+            rootLayout.setCenter(welcomeMsgVBox);
+        } else {
+            homeButton.setSelected(true);
+        }
+    }
+
+
     @FXML
     private void handleProfileButton(ActionEvent event) {
         if (profileButton.isSelected()) {
-            waterSourceReportButton.setText("Water Report");
             if (profileButton.isSelected()) {
                 rootLayout.setCenter(userProfileVBox);
             } else {
-                rootLayout.setCenter(welcomeVBox);
+                rootLayout.setCenter(welcomeMsgVBox);
             }
         } else {
             profileButton.setSelected(true);
         }
     }
 
-    private void loadVBoxs() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/HomeScreenUser.fxml"));
-            userProfileVBox = loader.load();
-
-            // Give the controller access to the main app.
-            UserProfileController ctrl = loader.getController();
-            ctrl.setMainApp(mainApplication);
-        } catch (IOException e) {
-            System.out.println("Can't find Vboxs");
-        }
-    }
-
-
-    public void setProfileButton(boolean selected) {
-        this.profileButton.setSelected(selected);
-    }
-
-    @FXML
-    private void handleHomeButtonPressed() {
-        try {
-            if (!homeButton.isSelected()) {
-                homeButton.setSelected(true);
-            } else {
-                waterSourceReportButton.setText("Water Report");
-                homeScreenVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/InitHomeScreen.fxml"));
-                rootLayout.setCenter(homeScreenVBox);
-            }
-
-        } catch(Exception e) {
-            System.out.println("Can't find home: " + e);
-        }
-    }
-
     @FXML
     private void handleListButtonPressed(ActionEvent event) {
-        try {
+        if (listButton.isSelected()) {
             if (listButton.isSelected()) {
-                waterSourceReportButton.setText("Water Report");
-                profileButton.setText("Edit Profile");
-                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/HomeScreen_ListView.fxml"));
-                ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReportController.getWaterSourceReportList();
-
-                    listItems = FXCollections.observableArrayList();
-                    for (int i = 0; i < waterSourceReports.size(); i++) {
-                        listItems.add(waterSourceReports.get(i).getReportNum()); //change later, fill with water source report objects
-                        reportDisplayCounter = waterSourceReports.size();
-                    } //see if you can directly insert the waterSourceReports into the ListView<> parameter
-                    listView = new ListView<>(listItems);
-                    listView.setPrefHeight(490);
-                    listWaterReportVBox.getChildren().addAll(listView);
-                    rootLayout.setCenter(listWaterReportVBox);
-
-                    listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-                        @Override
-                        public void handle(MouseEvent event) {
-                            listView.setPrefHeight(230);
-                            if (textArea != null) {
-                                listWaterReportVBox.getChildren().remove(textArea);
-                            }
-                            WaterSourceReport waterSourceReportData = null;
-                            for (int i = 0; i < waterSourceReports.size(); i++) { //doing this is hella jank and NEEDS to be refactored
-                                if (waterSourceReports.get(i).getReportNum().equals( listView.getSelectionModel().getSelectedItem().toString())) {
-                                    waterSourceReportData = waterSourceReports.get(i);
-                                }
-                            }
-                            textArea = new TextArea(
-                                "Report Number: " + waterSourceReportData.getReportNum() + "\n\n" +
-                                "Location: " + waterSourceReportData.getLocation() + "\n" +
-                                "Date of report: " + waterSourceReportData.getDate() + "\n" +
-                                "Time of report: " + waterSourceReportData.getTime() + "\n" +
-                                "Reported By: " + waterSourceReportData.getReporterName() + "\n" +
-                                "Source Type: " + waterSourceReportData.getSourceType() + "\n" +
-                                "Water Condition: " + waterSourceReportData.getCondition()
-                            );
-                            textArea.setWrapText(true);
-                            textArea.setPrefHeight(260);
-                            listWaterReportVBox.getChildren().addAll(textArea);
-
-                        }
-                    });
+                rootLayout.setCenter(listWaterReportVBox);
+                ctrl_2.clearList();
+                ctrl_2.populateList();
             } else {
-                listButton.setSelected(true);
+                rootLayout.setCenter(welcomeMsgVBox);
             }
-        } catch (IOException e) {
-            System.out.println("Failed to find list button!");
-            e.printStackTrace();
+        } else {
+            listButton.setSelected(true);
+        }
+    }
+
+    @FXML
+    private void handlePurityReportButton(ActionEvent event) {
+        if (purityReportButton.isSelected()) {
+            if (purityReportButton.isSelected()) {
+                rootLayout.setCenter(purityReportVBox);
+                ctrl_5.clearList();
+                ctrl_5.populateList();
+            } else {
+                rootLayout.setCenter(welcomeMsgVBox);
+            }
+        } else {
+            purityReportButton.setSelected(true);
         }
     }
 
     @FXML
     private void handleWaterSourceReportButton(ActionEvent event) {
-        try {
-
-            if(waterSourceReportButton.getText().equals("Cancel Report")) {
-                rootLayout.setCenter(homeScreenVBox);
-                homeButton.setSelected(true);
-                waterSourceReportButton.setText("Water Report");
+        if(waterSourceReportButton.isSelected()) {
+            if(waterSourceReportButton.isSelected()) {
+                rootLayout.setCenter(waterReportVbox);
             } else {
-
-                listWaterReportVBox = (VBox) FXMLLoader.load(getClass().getResource("../view/SubmitReportView.fxml"));
-                rootLayout.setCenter(listWaterReportVBox);
-                waterSourceReportButton.setText("Cancel Report");
+                rootLayout.setCenter(welcomeMsgVBox);
             }
+        } else {
+            waterSourceReportButton.setSelected(true);
+        }
+    }
+
+    @FXML
+    private void handleListPurityButtonPressed(ActionEvent event) {
+        if (listPurityButton.isSelected()) {
+            if (listPurityButton.isSelected()) {
+                rootLayout.setCenter(listPurityReportVbox);
+                ctrl_5.clearList();
+                ctrl_5.populateList();
+            } else {
+                rootLayout.setCenter(welcomeMsgVBox);
+            }
+        } else {
+            listPurityButton.setSelected(true);
+        }
+    }
+
+    @FXML
+    private void handleViewHistoryGraph(ActionEvent event) {
+        if (viewHistoryGraphButton.isSelected()) {
+            if (viewHistoryGraphButton.isSelected()) {
+                rootLayout.setCenter(historyGraphVbox);
+                ctrl_7.fillLocationList();
+            } else {
+                rootLayout.setCenter(welcomeMsgVBox);
+            }
+        } else {
+            viewHistoryGraphButton.setSelected(true);
+        }
+    }
+
+
+    @FXML
+    private void handleGoogleMapsButton(ActionEvent event) {
+        try {
+            googleMapBorderPane = FXMLLoader.load(getClass().getResource("../view/HomeScreen_GoogleMaps.fxml"));
+            rootLayout.setCenter(googleMapBorderPane);
+            googleMapsButton.setSelected(true);
         } catch (IOException e) {
-            System.out.println("Failed to find vbox2!");
+            System.out.println("Failed to open Google Maps View!");
             e.printStackTrace();
         }
     }

@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 /**
  * Created by Chris on 10/10/2016.
  */
@@ -9,28 +7,50 @@ public class WaterSourceReport {
 
     private String date;
     private String time;
-    private String reportNum;
+    private int reportNum;
     private String reporterName;
-    private String location;
-    private Object waterType;
-    private Object condition;
+    private double latitude;
+    private double longitude;
+    private WaterType waterType;
+    private WaterCondition condition;
 
-    public enum WaterType { //go back and implement enums
-        Bottled, Well, Stream, Lake, Spring, Other
+    public enum WaterType {
+        BT("Bottled"), WL("Well"), ST("Stream"), LK("Lake"), SP("Spring"), OT("Other");
+
+        WaterType(String description) {
+            this.description = description;
+        }
+
+        String description;
+
+        public String toString() {
+            return description;
+        }
     }
 
-    public enum WaterCondition { //go back and implement enums
-        Waste, TreatableClear, TreatableMuddy, Potable
+    public enum WaterCondition {
+        W("Waste"), C("Treatable Clear"), M("Treatable Muddy"), P("Potable");
+
+        WaterCondition(String description) {
+            this.description = description;
+        }
+
+        String description;
+
+        public String toString() {
+            return description;
+        }
     }
 
-    public WaterSourceReport(String date, String time, String reportNum,
-                             String reporterName, String location,
-                             Object sourceType, Object condition) {
+    public WaterSourceReport(String date, String time, int reportNum,
+                             String reporterName, double latitude, double longitude,
+                             WaterType sourceType, WaterCondition condition) {
         this.date = date;
         this.time = time;
         this.reportNum = reportNum;
         this.reporterName = reporterName;
-        this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.waterType = sourceType;
         this.condition = condition;
     }
@@ -41,55 +61,22 @@ public class WaterSourceReport {
                 "\nReport Date : " + this.date +
                 "\nReport Time : " + this.time +
                 "\nReporter Name : " + this.reporterName +
-                "\nReport Location : " + this.location +
+                "\nReport Location Latitude : " + this.latitude +
+                "\nReport Location Longitude : " + this.longitude +
                 "\nReport Water Type : " + this.waterType +
                 "\nReport Condition : " + this.condition;
     }
 
-    /*
-    public static String waterSourceReportsString() {
-        String output = "";
-        for (int i = 0; i < waterSourceReportList.size(); i++) {
-            output += waterSourceReportList.get(i).toString();
-        }
-        return output;
+    public String toHtmlFormat() {
+        return  "<strong>Report Number : " + this.reportNum + "</strong><br>" +
+                "<br>Report Date : " + this.date +
+                "<br>Report Time : " + this.time +
+                "<br>Reporter Name : " + this.reporterName +
+                "<br>Report Location Latitude : " + this.latitude +
+                "<br>Report Location Longitude : " + this.longitude +
+                "<br>Report Water Type : " + this.waterType +
+                "<br>Report Condition : " + this.condition;
     }
-    */
-
-    public static void createDummyData(ArrayList<WaterSourceReport> waterSourceReports) {
-        WaterSourceReport report1 = new WaterSourceReport(
-                "10/12/16", "22:16", "2001", "Chris Draper", "Georgia Tech",
-                "Lake", "Treatable Clear"
-        );
-        WaterSourceReport report2 = new WaterSourceReport(
-                "10/15/16", "22:16", "2002", "Don Draper", "Georgia Tech",
-                "Well", "Potable"
-        );
-        WaterSourceReport report3 = new WaterSourceReport(
-                "10/17/16", "22:16", "2003", "Cynthia Draper", "Georgia Tech",
-                "Spring", "Treatable Muddy"
-        );
-        WaterSourceReport report4 = new WaterSourceReport(
-                "9/12/16", "22:16", "2004", "Zach Draper", "Georgia Tech",
-                "Bottled", "Waste"
-        );
-        waterSourceReports.add(report1);
-        waterSourceReports.add(report2);
-        waterSourceReports.add(report3);
-        waterSourceReports.add(report4);
-    }
-
-    /*
-    public static void addReportToList(WaterSourceReport sourceReport) {
-        waterSourceReportList.add(sourceReport);
-    }
-    /*
-
-    /*
-    public static ArrayList<WaterSourceReport> getReportList() {
-        return waterSourceReportList;
-    }
-    */
 
     //all the getter and setter methods are for future manager accounts
 
@@ -109,11 +96,11 @@ public class WaterSourceReport {
         this.time = time;
     }
 
-    public String getReportNum() {
+    public int getReportNum() {
         return reportNum;
     }
 
-    public void setReportNum(String reportNum) {
+    public void setReportNum(int reportNum) {
         this.reportNum = reportNum;
     }
 
@@ -125,15 +112,23 @@ public class WaterSourceReport {
         this.reporterName = reporterName;
     }
 
-    public String getLocation() {
-        return location;
+    public double getLat() {
+        return latitude;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLat(double latitude) {
+        this.latitude = latitude;
     }
 
-    public Object getSourceType() {
+    public double getLong() {
+        return longitude;
+    }
+
+    public void setLong(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public WaterType getSourceType() {
         return waterType;
     }
 
@@ -141,11 +136,11 @@ public class WaterSourceReport {
         this.waterType = waterType;
     }
 
-    public Object getCondition() {
+    public WaterCondition getCondition() {
         return condition;
     }
 
-    public void setDateTime(WaterCondition condition) {
+    public void setCondition(WaterCondition condition) {
         this.condition = condition;
     }
 
