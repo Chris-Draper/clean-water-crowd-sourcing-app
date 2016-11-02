@@ -26,7 +26,7 @@
             <NumberAxis label="Months" prefHeight="50.0" prefWidth="509.0" side="LEFT" fx:id="xAxis" />
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="yAxis" prefHeight="239.0" prefWidth="40.0" side="LEFT" />
+          <NumberAxis fx:id="yAxis" prefHeight="287.0" prefWidth="60.0" side="LEFT" />
         </yAxis>
          <VBox.margin>
             <Insets right="30.0" top="30.0" />

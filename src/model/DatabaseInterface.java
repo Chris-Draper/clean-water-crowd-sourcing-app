@@ -633,7 +633,6 @@ public class DatabaseInterface {
                 condition = WaterPurityReport.Condition.valueOf(rs.getString("condition"));
                 virusPPM = rs.getInt("virus");
                 contaminantPPM = rs.getInt("contaminant");
-
                 WaterPurityReport report = new WaterPurityReport(date, time, reportNum, reporter,
                         latitude, longitude, condition, virusPPM, contaminantPPM);
 

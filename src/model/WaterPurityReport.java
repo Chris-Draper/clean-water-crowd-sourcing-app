@@ -3,6 +3,7 @@ package model;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -12,6 +13,7 @@ public class WaterPurityReport {
 
     private String date;
     private Date actualDate;
+    private Calendar calendar;
     private String time;
     private int reportNum;
     private String reporterName;
@@ -21,9 +23,7 @@ public class WaterPurityReport {
     private double virusPPM;
     private double contamPPM;
 
-    public WaterPurityReport(String date, String time, int reportNum, String reporterName, double lat, double longit, WaterPurityReport.Condition condition, double virusPPM, double contamPPM) {
-        this.date = date;
-        this.actualDate = new Date();
+    public WaterPurityReport(String time, int reportNum, String reporterName, double lat, double longit, WaterPurityReport.Condition condition, double virusPPM, double contamPPM) {
         this.time = time;
         this.reportNum = reportNum;
         this.reporterName = reporterName;
@@ -34,10 +34,26 @@ public class WaterPurityReport {
         this.contamPPM = contamPPM;
     }
 
+    public WaterPurityReport(Date date, String time, int reportNum, String reporterName, double lat, double longit, WaterPurityReport.Condition condition, double virusPPM, double contamPPM) {
+        this(time, reportNum, reporterName, lat, longit, condition, virusPPM, contamPPM);
+        this.actualDate = date;
+    }
+
+    public WaterPurityReport(String date, String time, int reportNum, String reporterName, double lat, double longit, WaterPurityReport.Condition condition, double virusPPM, double contamPPM) {
+        this(time, reportNum, reporterName, lat, longit, condition, virusPPM, contamPPM);
+        String[] arr = date.split("[-]");
+        int year = Integer.parseInt(arr[0]);
+        int month = Integer.parseInt(arr[1]);
+        int day = Integer.parseInt(arr[2]);
+        this.actualDate = new Date(year - 1900, month, day);
+
+    }
+
+
     public String toString() {
         return "\n----------------------\n" +
                 "Report Number : " + this.reportNum +
-                "\nReport Date : " + this.date +
+                "\nReport Date : " + this.actualDate +
                 "\nReport Time : " + this.time +
                 "\nReporter Name : " + this.reporterName +
                 "\nReport Location Latitude : " + this.latitude +
@@ -79,27 +95,25 @@ public class WaterPurityReport {
     }
     public String getDate() {
         DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
-        Date dateObject = new Date();
-        return dateFormat.format(dateObject);
+        return dateFormat.format(actualDate);
     }
 
-    public int getYear() {
-        return actualDate.getYear();
+    public int getMonth() {
+        return actualDate.getMonth();
     }
 
-    public void setDate(String dateTime) {
+    /*public void setDate(String dateTime) {
         this.date = date;
-    }
+    }*/
 
     public String getTime() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-        Date dateObject = new Date();
-        return dateFormat.format(dateObject);
+        return dateFormat.format(actualDate);
     }
 
-    public void setTime(String dateTime) {
+    /*public void setTime(String dateTime) {
         this.time = time;
-    }
+    }*/
 
     public double getContamPPM() {
         return contamPPM;

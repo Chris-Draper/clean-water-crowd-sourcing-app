@@ -106,8 +106,15 @@ public class WaterPurityReportController {
             double reportLat = Double.parseDouble(latTextField.getText());
             double reportLong = Double.parseDouble(longTextField.getText());
 
-            waterPurityReportList.add(new WaterPurityReport(
+           /* waterPurityReportList.add(new WaterPurityReport(
                     dateLabel.getText(), timeLabel.getText(),
+                    reportNum, reporterNameLabel.getText(),
+                    reportLat, reportLong, conditionComboBox.getValue(), Double.parseDouble(virusTextField.getText()),
+                    Double.parseDouble(contTextField.getText())
+            ));*/
+
+            waterPurityReportList.add(new WaterPurityReport(
+                    date, timeLabel.getText(),
                     reportNum, reporterNameLabel.getText(),
                     reportLat, reportLong, conditionComboBox.getValue(), Double.parseDouble(virusTextField.getText()),
                     Double.parseDouble(contTextField.getText())
