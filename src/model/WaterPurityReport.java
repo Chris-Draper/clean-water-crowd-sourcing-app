@@ -11,6 +11,7 @@ import java.util.Date;
 public class WaterPurityReport {
 
     private String date;
+    private Date actualDate;
     private String time;
     private int reportNum;
     private String reporterName;
@@ -22,6 +23,7 @@ public class WaterPurityReport {
 
     public WaterPurityReport(String date, String time, int reportNum, String reporterName, double lat, double longit, WaterPurityReport.Condition condition, double virusPPM, double contamPPM) {
         this.date = date;
+        this.actualDate = new Date();
         this.time = time;
         this.reportNum = reportNum;
         this.reporterName = reporterName;
@@ -79,6 +81,10 @@ public class WaterPurityReport {
         DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
         Date dateObject = new Date();
         return dateFormat.format(dateObject);
+    }
+
+    public int getYear() {
+        return actualDate.getYear();
     }
 
     public void setDate(String dateTime) {
