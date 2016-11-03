@@ -97,6 +97,9 @@
                <VBox.margin>
                   <Insets left="5.0" top="10.0" />
                </VBox.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
             </ToggleButton>
             <VBox alignment="BOTTOM_CENTER" prefHeight="295.0" prefWidth="136.0">
                <children>

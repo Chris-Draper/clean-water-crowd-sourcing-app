@@ -26,10 +26,10 @@ public class HistoryGraphController {
     private LineChart historyGraph;
 
     @FXML
-    private Axis xAxis;
+    private NumberAxis xAxis;
 
     @FXML
-    private Axis yAxis;
+    private NumberAxis yAxis;
 
     @FXML
     private ComboBox locationCombo;
@@ -105,7 +105,8 @@ public class HistoryGraphController {
     private void handleDisplayGraphButton() {
         boolean contam = ppmCombo.getSelectionModel().getSelectedItem().equals("Contaminant");
         yAxis.setLabel("Contaminant/Virus PPM");
-
+        xAxis.setLowerBound(0);
+        xAxis.setUpperBound(12);
         String locationEntry = (String) locationCombo.getSelectionModel().getSelectedItem();
         String[] locationArr = locationEntry.split("[,]");
         double specifiedLat = Double.parseDouble(locationArr[0]);
