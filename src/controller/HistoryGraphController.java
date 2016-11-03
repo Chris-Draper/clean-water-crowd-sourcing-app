@@ -45,7 +45,7 @@ public class HistoryGraphController {
 
     private HashSet<String> locationList = new HashSet<>();
     private HashSet<String> yearList = new HashSet<>();
-    private HashSet<WaterPurityReport> matchList = new HashSet<>();
+    private HashSet<WaterPurityReport> matchList;
     private XYChart.Series series;
 
     public void setMainApplication(MainApplication mainApplication) {
@@ -111,13 +111,13 @@ public class HistoryGraphController {
         String[] locationArr = locationEntry.split("[,]");
         double specifiedLat = Double.parseDouble(locationArr[0]);
         double specifiedLong = Double.parseDouble(locationArr[1]);
-        //System.out.println("lat: " + specifiedLat + " long: "  + specifiedLong);
         int specifiedYear = Integer.parseInt((String) yearCombo.getSelectionModel().getSelectedItem());
+
+        matchList = new HashSet<>();
 
         int maxNum = database.getMaxPurityReportNum();
         int minNum = database.getMinPurityReportNum();
         for (int i = minNum; i <= maxNum; i++) {
-            //System.out.println(i);
             WaterPurityReport purityReport = database.getPurityReportInfo(i);
             String date = purityReport.getDate();
             int tempYear = Integer.parseInt(date.substring(0,4));
@@ -129,44 +129,17 @@ public class HistoryGraphController {
         }
         HashMap<Integer, WaterPurityReport> monthList = new HashMap<>();
         for (WaterPurityReport purityReport : matchList) {
-            //System.out.println(purityReport.getMonth()+ 1);
             int currMonth = purityReport.getMonth()+ 1;
-            switch (currMonth) {
-                case 1:  monthList.put(currMonth, purityReport);
-                    break;
-                case 2:  monthList.put(currMonth, purityReport);
-                    break;
-                case 3:  monthList.put(currMonth, purityReport);
-                    break;
-                case 4:  monthList.put(currMonth, purityReport);
-                    break;
-                case 5:  monthList.put(currMonth, purityReport);
-                    break;
-                case 6:  monthList.put(currMonth, purityReport);
-                    break;
-                case 7:  monthList.put(currMonth, purityReport);
-                    break;
-                case 8:  monthList.put(currMonth, purityReport);
-                    break;
-                case 9:  monthList.put(currMonth, purityReport);
-                    break;
-                case 10: monthList.put(currMonth, purityReport);
-                    break;
-                case 11: monthList.put(currMonth, purityReport);
-                    break;
-                case 12: monthList.put(currMonth, purityReport);
-                    break;
-                default: monthList.put(currMonth, purityReport);
-                    break;
-            }
+            monthList.put(currMonth, purityReport);
         }
-        if (series != null) historyGraph.getData().removeAll(series);
+        if (series != null) {
+            historyGraph.getData().clear();
+        }
         series = new XYChart.Series();
         List templist = new ArrayList<>(monthList.keySet());
         Collections.sort(templist);
 
         for (Object key: templist) {
-            System.out.println(monthList.get(key));
             WaterPurityReport temp = monthList.get(key);
             if (contam) {
                 if (temp != null) series.getData().add(new XYChart.Data(key, temp.getContamPPM()));
@@ -180,7 +153,6 @@ public class HistoryGraphController {
         } else {
             series.setName("Location's (" + specifiedLat + ", " + specifiedLong + ") Virus PPM in Year " + specifiedYear);
         }
-
 
         historyGraph.getData().add(series);
     }
