@@ -106,6 +106,9 @@ public class HomeScreenController {
             purityReportButton.setVisible(false);
             listPurityButton.setVisible(false);
         }
+        if (!mainApplication.getAuthenticatedUser().getUserType().equals(UserType.Manager)) {
+            viewHistoryGraphButton.setVisible(false);
+        }
     }
 
     @FXML

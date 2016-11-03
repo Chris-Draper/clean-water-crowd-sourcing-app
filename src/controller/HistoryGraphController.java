@@ -48,6 +48,11 @@ public class HistoryGraphController {
     private HashSet<WaterPurityReport> matchList;
     private XYChart.Series series;
 
+    /**
+     * allow for calling back to the mainApplication application code if necessary
+     *
+     * @param mainApplication the reference to the FX Application instance
+     */
     public void setMainApplication(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
         this.database = mainApplication.getDatabaseConn();
@@ -60,6 +65,10 @@ public class HistoryGraphController {
         xAxis.setLabel("Months");
     }
 
+    /**
+     * Method for initializing the combox that lists available locations for history graph
+     *
+     */
     public void fillLocationList() {
         locationCombo.getItems().clear();
         int maxNum = database.getMaxPurityReportNum();
@@ -73,6 +82,11 @@ public class HistoryGraphController {
         locationCombo.getItems().addAll(locationList);
     }
 
+    /**
+     * Helper method for filling year combo box. Called when user selects location
+     *
+     * @param location location selected by user
+     */
     private void fillYearList(String location) {
         yearCombo.getItems().clear();
         int maxNum = database.getMaxPurityReportNum();
@@ -80,16 +94,10 @@ public class HistoryGraphController {
         for (int i = minNum; i <= maxNum; i++) {
             WaterPurityReport purityReport = database.getPurityReportInfo(i);
             String tempLocal = purityReport.getLat() + ", " + purityReport.getLong();
-            /*System.out.println(tempLocal);
-            System.out.println(purityReport);
-            System.out.println("location: " + location);*/
             if (tempLocal.equals(location)) {
-                //System.out.println("inside fi");
                 String date = purityReport.getDate();
-                //System.out.println(date);
                 String year = date.substring(0,4);
                 yearList.add(year);
-                //System.out.println(year);
             }
         }
         yearCombo.getItems().addAll(yearList);
