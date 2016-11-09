@@ -3,10 +3,13 @@
 <?import javafx.scene.layout.*?>
 <?import com.lynden.gmapsfx.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0"
-            prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="570.0" prefWidth="660.0"
+            xmlns="http://javafx.com/javafx/8.0.76-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controller.GoogleMapsController">
     <center>
-        <GoogleMapView fx:id="mapView" prefHeight="660.0" prefWidth="570.0" BorderPane.alignment="CENTER" />
+        <GoogleMapView fx:id="mapView" prefHeight="660.0" prefWidth="570.0"
+                       BorderPane.alignment="CENTER" />
     </center>
 </BorderPane>

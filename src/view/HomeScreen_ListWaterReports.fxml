@@ -7,8 +7,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="listWaterReportVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="615.0" spacing="15" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListWaterReportsController">
-   <children>
+<VBox fx:id="listWaterReportVBox" maxHeight="-Infinity" maxWidth="-Infinity"
+      minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0"
+      prefWidth="615.0" spacing="15" xmlns="http://javafx.com/javafx/8.0.65"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.ListWaterReportsController">
       <Label alignment="CENTER" contentDisplay="CENTER" text="Water Reports">
          <font>
             <Font size="22.0" />
@@ -17,7 +20,7 @@
             <Insets left="240.0" />
          </VBox.margin>
       </Label>
-      <ListView fx:id="listView" onMouseClicked="#handleMouseClicked" prefHeight="240.0" prefWidth="615.0" />
+      <ListView fx:id="listView" onMouseClicked="#handleMouseClicked"
+                prefHeight="240.0" prefWidth="615.0" />
       <TextArea fx:id="textArea" prefHeight="226.0" prefWidth="200.0" />
-   </children>
 </VBox>

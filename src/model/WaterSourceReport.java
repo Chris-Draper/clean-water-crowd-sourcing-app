@@ -15,7 +15,8 @@ public class WaterSourceReport {
     private WaterCondition condition;
 
     public enum WaterType {
-        BT("Bottled"), WL("Well"), ST("Stream"), LK("Lake"), SP("Spring"), OT("Other");
+        BT("Bottled"), WL("Well"), ST("Stream"), LK("Lake"), SP("Spring"),
+        OT("Other");
 
         WaterType(String description) {
             this.description = description;
@@ -43,8 +44,9 @@ public class WaterSourceReport {
     }
 
     public WaterSourceReport(String date, String time, int reportNum,
-                             String reporterName, double latitude, double longitude,
-                             WaterType sourceType, WaterCondition condition) {
+                             String reporterName, double latitude,
+                             double longitude, WaterType sourceType,
+                             WaterCondition condition) {
         this.date = date;
         this.time = time;
         this.reportNum = reportNum;

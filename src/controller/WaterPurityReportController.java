@@ -97,8 +97,8 @@ public class WaterPurityReportController {
         timeLabel.setText(dateFormat.format(date));
         this.setReportPurityConditionData();
 
-        //set visbility to false for now until we add functionality to input
-        //street address and come up with a pin instead of long lat nums
+        //set visibility to false for now until we add functionality to input
+        //street address and come up with a pin instead of long lat numbers
         //addressGridPane.setVisible(false);
     }
 

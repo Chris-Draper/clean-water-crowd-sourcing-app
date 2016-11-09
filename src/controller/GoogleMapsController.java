@@ -52,7 +52,7 @@ public class GoogleMapsController implements Initializable,
 
         map = mapView.createMap(mapOptions);
 
-        ArrayList<WaterSourceReport> sourceList =
+        Iterable<WaterSourceReport> sourceList =
                 WaterSourceReportController.getWaterSourceReportList();
         for (WaterSourceReport waterSource: sourceList) {
             MarkerOptions markerOptions = new MarkerOptions();

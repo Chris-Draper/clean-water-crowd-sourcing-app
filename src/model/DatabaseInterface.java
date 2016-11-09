@@ -1,7 +1,13 @@
 package model;
 
-import com.jcraft.jsch.*;
-import java.sql.*;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
 import java.util.DoubleSummaryStatistics;

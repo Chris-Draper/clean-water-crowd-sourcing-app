@@ -22,6 +22,18 @@ public class WaterPurityReport {
     private double virusPPM;
     private double contamPPM;
 
+    /**
+     * Creates a water purity report object
+     *
+     * @param time the time the report is submitted
+     * @param reportNum the number of the report
+     * @param reporterName the name of the person submitting the report
+     * @param lat the latitude position of the report location
+     * @param longit the longitude position of the report location
+     * @param condition the condition of the water
+     * @param virusPPM the virus parts per million value of the water
+     * @param contamPPM the contaminant parts per million value of the water
+     */
     public WaterPurityReport(String time, int reportNum, String reporterName,
                              double lat, double longit,
                              WaterPurityReport.Condition condition,
@@ -36,6 +48,19 @@ public class WaterPurityReport {
         this.contamPPM = contamPPM;
     }
 
+    /**
+     * Creates a water purity report object
+     *
+     * @param date the date of the water purity report
+     * @param time the time the report is submitted
+     * @param reportNum the number of the report
+     * @param reporterName the name of the person submitting the report
+     * @param lat the latitude position of the report location
+     * @param longit the longitude position of the report location
+     * @param condition the condition of the water
+     * @param virusPPM the virus parts per million value of the water
+     * @param contamPPM the contaminant parts per million value of the water
+     */
     public WaterPurityReport(Date date, String time, int reportNum,
                              String reporterName, double lat, double longit,
                              WaterPurityReport.Condition condition,
@@ -46,6 +71,19 @@ public class WaterPurityReport {
         this.actualDate = date;
     }
 
+    /**
+     * Creates a water purity report object
+     *
+     * @param date the date of the water purity report
+     * @param time the time the report is submitted
+     * @param reportNum the number of the report
+     * @param reporterName the name of the person submitting the report
+     * @param lat the latitude position of the report location
+     * @param longit the longitude position of the report location
+     * @param condition the condition of the water
+     * @param virusPPM the virus parts per million value of the water
+     * @param contamPPM the contaminant parts per million value of the water
+     */
     public WaterPurityReport(String date, String time, int reportNum,
                              String reporterName, double lat, double longit,
                              WaterPurityReport.Condition condition,
@@ -58,9 +96,12 @@ public class WaterPurityReport {
         int month = Integer.parseInt(arr[1]);
         int day = Integer.parseInt(arr[2]);
         this.actualDate = new Date(year - 1900, month, day);
-
     }
 
+    /**
+     *
+     * @return a formatted string of the data in a water purity report
+     */
     public String toString() {
         return "\n----------------------\n" +
                 "Report Number : " + this.reportNum +
@@ -75,7 +116,6 @@ public class WaterPurityReport {
     }
 
     public enum Condition {
-
         S("Safe"), T("Treatable"), U("Unsafe");
 
         Condition (String description) {
@@ -93,6 +133,11 @@ public class WaterPurityReport {
         }
     }
 
+    /**
+     *
+     * @return the html formatted string displaying water purity report data in
+     * the Google Map
+     */
     public String toHtmlFormat() {
         return  "<strong>Report Number : " + this.reportNum + "</strong><br>" +
                 "<br>Report Date : " + this.date +
@@ -104,11 +149,20 @@ public class WaterPurityReport {
                 "<br>Report contaminant : " + this.contamPPM +
                 "<br>Report Condition : " + this.condition;
     }
+
+    /**
+     *
+     * @return the date of the water purity report
+     */
     public String getDate() {
         DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
         return dateFormat.format(actualDate);
     }
 
+    /**
+     *
+     * @return the month of the water purity report as an int
+     */
     public int getMonth() {
         return actualDate.getMonth();
     }
@@ -117,6 +171,10 @@ public class WaterPurityReport {
         this.date = date;
     }*/
 
+    /**
+     *
+     * @return the time of the water purity report
+     */
     public String getTime() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         return dateFormat.format(actualDate);
@@ -126,6 +184,10 @@ public class WaterPurityReport {
         this.time = time;
     }*/
 
+    /**
+     *
+     * @return the contaminant ppm of the water purity report
+     */
     public double getContamPPM() {
         return contamPPM;
     }
@@ -134,6 +196,10 @@ public class WaterPurityReport {
         this.contamPPM = contamPPM;
     }*/
 
+    /**
+     *
+     * @return the virus ppm of the water purity report
+     */
     public double getVirusPPM() {
         return virusPPM;
     }
@@ -142,6 +208,10 @@ public class WaterPurityReport {
         this.virusPPM = virusPPM;
     }*/
 
+    /**
+     *
+     * @return the report number of the water purity report
+     */
     public int getReportNum() {
         return reportNum;
     }
@@ -150,6 +220,10 @@ public class WaterPurityReport {
         this.reportNum = reportNum;
     }*/
 
+    /**
+     *
+     * @return the name of the person that submitted the water purity report
+     */
     public String getReporterName() {
         return reporterName;
     }
@@ -158,6 +232,10 @@ public class WaterPurityReport {
         this.reporterName = reporterName;
     }*/
 
+    /**
+     *
+     * @return the latitude position of the water purity report
+     */
     public double getLat() {
         return latitude;
     }
@@ -166,6 +244,10 @@ public class WaterPurityReport {
         this.latitude = latitude;
     }*/
 
+    /**
+     *
+     * @return the longitude position of the water purity report
+     */
     public double getLong() {
         return longitude;
     }
@@ -174,6 +256,10 @@ public class WaterPurityReport {
         this.longitude = longitude;
     }*/
 
+    /**
+     *
+     * @return the condition of the water of the water purity report
+     */
     public Condition getCondition() {
         return condition;
     }

@@ -7,7 +7,7 @@ public enum UserType {
     User ("Users", 'U'),
     Worker ("Workers", 'W'),
     Manager ("Managers", 'M'),
-    Administrator ("Adminstrators", 'A');
+    Administrator ("Administrators", 'A');
 
     UserType(String value, char code) {
 

@@ -9,7 +9,9 @@ import controller.RegistrationScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -18,6 +20,9 @@ import model.DatabaseInterface;
 import model.GenericUser;
 import model.UserLog;
 
+/**
+ * Launches the main application
+ */
 public class MainApplication extends Application {
     /** the main container for the application window */
     private Stage mainAppScreen;
@@ -31,9 +36,10 @@ public class MainApplication extends Application {
 
     private DatabaseInterface database;
 
-    /*
-    Initialize water source reports ArrayList here
-    Create water source report dummy data here
+    /**
+     *
+     * @param primaryStage the stage the application is displayed on
+     * @throws Exception catches any generic errors while starting the app
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -90,6 +96,9 @@ public class MainApplication extends Application {
         }
     }
 
+    /**
+     * switches to the login screen of the main app
+     */
     public void switchToLoginScreen() {
         try {
             // Pointing loader to login screen fxml file
@@ -121,6 +130,9 @@ public class MainApplication extends Application {
 
     }
 
+    /**
+     * switches to the home screen of the main app
+     */
     public void switchToHomeScreen() {
         try {
             // Pointing loader to login screen fxml file
@@ -147,6 +159,9 @@ public class MainApplication extends Application {
         }
     }
 
+    /**
+     * switches to the registration screen of the main app
+     */
     public void switchToRegisterScreen() {
         try {
             // Pointing loader to login screen fxml file
@@ -173,6 +188,10 @@ public class MainApplication extends Application {
         }
     }
 
+    /**
+     * Updates the user info with data from the database on user login
+     * @param fields the text fields of the user
+     */
     public void updateUserInfo(TextField... fields) {
 
         int userID = authenticatedUser.getID();
@@ -192,12 +211,25 @@ public class MainApplication extends Application {
                  fieldText[6], fieldText[7]);
     }
 
+    /**
+     *
+     * @return the rootLayout of the main application
+     */
     public BorderPane getRootLayout() {return rootLayout;}
 
+    /**
+     * reloads the home screen of the main app
+     */
     public void reloadHomeScreen() {
         initRootLayout(mainAppScreen);
     }
 
+    /**
+     * The main method that launches the app
+     *
+     * @param args arguments that change the conditions of launching
+     *             the main app
+     */
     public static void main(String[] args) {
         launch(args);
     }
@@ -212,7 +244,7 @@ public class MainApplication extends Application {
         authenticatedUser = null;
     }
 
-    public UserLog getUserlog() {
+    public UserLog getUserLog() {
         return userLog;
     }
 

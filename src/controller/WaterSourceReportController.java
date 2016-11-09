@@ -2,7 +2,11 @@ package controller;
 
 import fxapp.MainApplication;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import model.WaterSourceReport;
 import java.text.DateFormat;
@@ -160,15 +164,11 @@ public class WaterSourceReportController {
     }
 
     public static ArrayList<WaterSourceReport> getWaterSourceReportList() {
-        ArrayList<WaterSourceReport> curReports;
         return waterSourceReportList;
     }
 
     public static void initWaterReportList() {
-        waterSourceReportList = new ArrayList<WaterSourceReport>();
-    }
-
-    public static void makeWaterSrcReportDummyData() {
+        waterSourceReportList = new ArrayList<>();
     }
 
 }

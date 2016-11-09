@@ -10,7 +10,9 @@ import javafx.scene.control.ComboBox;
 import model.DatabaseInterface;
 import model.WaterPurityReport;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Collections;
@@ -45,9 +47,9 @@ public class HistoryGraphController {
     @FXML
     private Button displayGraphButton;
 
-    private HashSet<String> locationList = new HashSet<>();
-    private HashSet<String> yearList = new HashSet<>();
-    private HashSet<WaterPurityReport> matchList;
+    private Set<String> locationList = new HashSet<>();
+    private Set<String> yearList = new HashSet<>();
+    private Set<WaterPurityReport> matchList;
     private XYChart.Series series;
 
     /**
@@ -63,13 +65,16 @@ public class HistoryGraphController {
         ppmCombo.getItems().addAll("Virus", "Contaminant");
     }
 
+    /**
+     * This method is called when the fxml view is created
+     */
     @FXML
     public void initialize() {
         xAxis.setLabel("Months");
     }
 
     /**
-     * Method for initializing the combox that lists available locations
+     * Method for initializing the combo box that lists available locations
      * for history graph
      *
      */
@@ -118,7 +123,7 @@ public class HistoryGraphController {
 
     @FXML
     private void handleDisplayGraphButton() {
-        boolean contam = ppmCombo.getSelectionModel().getSelectedItem()
+        boolean contaminant = ppmCombo.getSelectionModel().getSelectedItem()
                 .equals("Contaminant");
         yAxis.setLabel("Contaminant/Virus PPM");
         xAxis.setLowerBound(0);
@@ -146,7 +151,7 @@ public class HistoryGraphController {
                 matchList.add(purityReport);
             }
         }
-        HashMap<Integer, WaterPurityReport> monthList = new HashMap<>();
+        Map<Integer, WaterPurityReport> monthList = new HashMap<>();
         for (WaterPurityReport purityReport : matchList) {
             int currMonth = purityReport.getMonth()+ 1;
             monthList.put(currMonth, purityReport);
@@ -160,7 +165,7 @@ public class HistoryGraphController {
 
         for (Object key: templist) {
             WaterPurityReport temp = monthList.get(key);
-            if (contam) {
+            if (contaminant) {
                 if (temp != null) {
                     series.getData().add(new XYChart.Data(key,
                             temp.getContamPPM()));
@@ -172,7 +177,7 @@ public class HistoryGraphController {
                 }
             }
         }
-        if (contam) {
+        if (contaminant) {
             series.setName("Location's (" + specifiedLat + ", " + specifiedLong
                     + ") Contaminant PPM in Year " + specifiedYear);
         } else {

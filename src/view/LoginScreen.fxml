@@ -5,28 +5,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.65"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.LoginScreenController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="91.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="289.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0"
+                             minWidth="10.0" prefWidth="91.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0"
+                             minWidth="10.0" prefWidth="289.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="143.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="200.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="139.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="143.0" minHeight="10.0"
+                          prefHeight="36.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="177.0" minHeight="10.0"
+                          prefHeight="63.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="0.0"
+                            prefHeight="0.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="200.0" minHeight="10.0"
+                          prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="10.0"
+                            prefHeight="139.0" vgrow="SOMETIMES" />
         </rowConstraints>
-         <children>
             <Label alignment="CENTER_RIGHT" text="Username:" />
-            <Label alignment="CENTER_RIGHT" text="Password:" GridPane.rowIndex="1" />
-            <TextField fx:id="usernameTextField" promptText="Enter Username" GridPane.columnIndex="1" />
-            <PasswordField fx:id="passwordField" promptText="Enter Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <children>
-                  <Button fx:id="loginButton" contentDisplay="RIGHT" defaultButton="true" mnemonicParsing="false" onAction="#handleLogInPressed" text="Log In">
+            <Label alignment="CENTER_RIGHT" text="Password:"
+                   GridPane.rowIndex="1" />
+            <TextField fx:id="usernameTextField" promptText="Enter Username"
+                       GridPane.columnIndex="1" />
+            <PasswordField fx:id="passwordField" promptText="Enter Password"
+                           GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0"
+                  GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Button contentDisplay="RIGHT"
+                          defaultButton="true" mnemonicParsing="false"
+                          onAction="#handleLogInPressed" text="Log In">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -40,18 +55,16 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-               </children>
             </HBox>
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <children>
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBackButtonPressed" text="Back">
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0"
+                  GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Button mnemonicParsing="false"
+                          onAction="#handleBackButtonPressed" text="Back">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin>
                   </Button>
-               </children>
             </HBox>
-         </children>
          <padding>
             <Insets left="125.0" right="95.0" top="40.0" />
          </padding>

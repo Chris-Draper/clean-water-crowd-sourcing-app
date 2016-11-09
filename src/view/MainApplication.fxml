@@ -4,11 +4,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.WelcomeScreenController">
    <center>
-      <VBox alignment="CENTER" prefHeight="270.0" prefWidth="408.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" prefHeight="12.0" prefWidth="171.0" text="Welcome to">
+      <VBox alignment="CENTER" prefHeight="270.0" prefWidth="408.0"
+            BorderPane.alignment="CENTER">
+            <Label alignment="CENTER" prefHeight="12.0" prefWidth="171.0"
+                   text="Welcome to">
                <font>
                   <Font size="32.0" />
                </font>
@@ -19,21 +24,23 @@
                </font>
             </Label>
             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="483.0">
-               <children>
-                  <Button fx:id="loginButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleLoginPressed" text="Login">
+                  <Button fx:id="loginButton" alignment="CENTER"
+                          mnemonicParsing="false"
+                          onAction="#handleLoginPressed" text="Login">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Label alignment="CENTER" prefHeight="32.0" prefWidth="28.0" text="or" />
-                  <Button fx:id="registerButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleRegisterPressed" text="Register">
+                  <Label alignment="CENTER" prefHeight="32.0"
+                         prefWidth="28.0" text="or" />
+                  <Button fx:id="registerButton" alignment="CENTER"
+                          mnemonicParsing="false"
+                          onAction="#handleRegisterPressed" text="Register">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-               </children>
             </HBox>
-         </children>
       </VBox>
    </center>
 </BorderPane>

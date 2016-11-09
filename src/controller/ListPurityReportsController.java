@@ -36,10 +36,16 @@ public class ListPurityReportsController {
 
     private int reportDisplayCounter = 0;
 
+    /**
+     * Clears the list of water purity reports
+     */
     public void clearList() {
         listItems.clear();
     }
 
+    /**
+     * Populates the lists of water purity reports with data from the database
+     */
     public void populateList() {
 
         int startReport = mainApplication.getDatabaseConn()
@@ -56,9 +62,12 @@ public class ListPurityReportsController {
 
     }
 
+    /**
+     * Loads and formats the data when the list purity reports button
+     * is clicked
+     */
     @FXML
     public void handleMouseClicked() {
-
 
         WaterPurityReport waterPurityReportData =
                 mainApplication.getDatabaseConn().getPurityReportInfo(
@@ -97,6 +106,11 @@ public class ListPurityReportsController {
 
     }
 
+    /**
+     * Loads the main application
+     *
+     * @param main the variable that references the main application
+     */
     public void setMainApplication(MainApplication main) {
         this.mainApplication = main;
     }

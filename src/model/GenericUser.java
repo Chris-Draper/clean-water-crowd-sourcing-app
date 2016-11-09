@@ -11,6 +11,10 @@ public abstract class GenericUser {
     private UserType userType;
     private int id;
     private final Date date;
+
+    //all these variables are not used in the current code so they are commented
+    //out in case we want to implement this feature in the future
+
     /*private String fullName;
     private String emailAddress;
     private String homeAddressNum;
@@ -20,6 +24,13 @@ public abstract class GenericUser {
     private String homeAddressZip;
     private String phoneNumber;*/
 
+    /**
+     * The parent class for all of the users in the application
+     *
+     * @param username the name of the GenericUser
+     * @param userType the type of the GenericUser
+     * @param id the id of the GenericUser
+     */
     public GenericUser(String username, UserType userType, int id) {
         this.username = username;
         this.userType = userType;
@@ -27,13 +38,32 @@ public abstract class GenericUser {
         this.date = new Date();
     }
 
+    /**
+     *
+     * @return The username of the GenericUser
+     */
     public String getUsername() { return username; }
 
+    /**
+     *
+     * @return The id of the GenericUser
+     */
     public int getID() { return id; }
 
+    /**
+     *
+     * @return The type of the GenericUser
+     */
     public UserType getUserType() { return userType; }
 
+    /**
+     *
+     * @return the date the GenericUser was created
+     */
     public Date getDate() { return date; }
+
+    //all these variables are not used in the current code so they are commented
+    //out in case we want to implement this feature in the future
 
     /*public void setFullName(String name) {this.fullName = name; }
 
