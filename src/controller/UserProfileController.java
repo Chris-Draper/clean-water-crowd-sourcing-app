@@ -68,6 +68,11 @@ public class UserProfileController {
         titleComboBox.getItems().addAll(userTypes);
     }
 
+    /**
+     * Updates the data within the main application
+     *
+     * @param mainApplication - a reference to the mainApp
+     */
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
         try {
@@ -113,6 +118,9 @@ public class UserProfileController {
                 .getUserType());
     }
 
+    /**
+     * Updates the user profiles on-click
+     */
     @FXML
     public void handleUpdateProfileButton() {
         mainApplication.updateUserInfo(nameTextField, emailTextField,

@@ -58,21 +58,22 @@ public class RegistrationScreenController {
     }
 
     private boolean isRegistrationInfoAcceptable(UserType type) {
-        if (usernameTextField.getText().equals("") || passwordTextField
-                .getText().equals("") || (type == null)) {
-            Alert alert = new Alert(Alert.AlertType.ERROR,
+        if (("").equals(usernameTextField.getText())
+            || ("").equals(passwordTextField.getText())
+            || (type == null)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
-            alert.showAndWait();
-            return false;
+                alert.showAndWait();
+                return false;
         }
         // Validate username is a valid username
          else if (!usernameTextField.getText().matches("[a-zA-Z0-9]+$")) {
             //enter another username
             Alert alert = new Alert(
-                    Alert.AlertType.ERROR,
-                    "Please re-enter username. Your username can not have"
-                    + "any special characters.",
-                    ButtonType.OK
+                Alert.AlertType.ERROR,
+                "Please re-enter username. Your username can not have"
+                + "any special characters.",
+                ButtonType.OK
             );
             alert.showAndWait();
             return false;

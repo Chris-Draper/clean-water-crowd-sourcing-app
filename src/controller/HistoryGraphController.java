@@ -47,8 +47,8 @@ public class HistoryGraphController {
     @FXML
     private Button displayGraphButton;
 
-    private Set<String> locationList = new HashSet<>();
-    private Set<String> yearList = new HashSet<>();
+    private final Set<String> locationList = new HashSet<>();
+    private final Set<String> yearList = new HashSet<>();
     private Set<WaterPurityReport> matchList;
     private XYChart.Series series;
 
@@ -123,8 +123,8 @@ public class HistoryGraphController {
 
     @FXML
     private void handleDisplayGraphButton() {
-        boolean contaminant = ppmCombo.getSelectionModel().getSelectedItem()
-                .equals("Contaminant");
+        boolean contaminant = "Contaminant".equals(ppmCombo.getSelectionModel()
+                .getSelectedItem());
         yAxis.setLabel("Contaminant/Virus PPM");
         xAxis.setLowerBound(0);
         xAxis.setUpperBound(12);
@@ -146,9 +146,10 @@ public class HistoryGraphController {
             int tempYear = Integer.parseInt(date.substring(0,4));
             double tempLat = purityReport.getLat();
             double tempLong = purityReport.getLong();
-            if (specifiedLat == tempLat && specifiedLong == tempLong &&
-                    specifiedYear == tempYear) {
-                matchList.add(purityReport);
+            if ((specifiedLat == tempLat) &&
+                (specifiedLong == tempLong) &&
+                (specifiedYear == tempYear)) {
+                    matchList.add(purityReport);
             }
         }
         Map<Integer, WaterPurityReport> monthList = new HashMap<>();

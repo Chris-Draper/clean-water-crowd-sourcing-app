@@ -29,9 +29,9 @@ public class ListPurityReportsController {
     @FXML
     private TextArea textArea;
 
-    private ObservableList listItems = FXCollections.observableArrayList();
+    private final ObservableList listItems = FXCollections.observableArrayList();
 
-    private ArrayList<WaterPurityReport> waterPurityReports =
+    private final ArrayList<WaterPurityReport> waterPurityReports =
             WaterPurityReportController.getWaterPurityReportList();
 
     private int reportDisplayCounter = 0;

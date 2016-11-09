@@ -28,11 +28,11 @@ public class ListWaterReportsController {
     @FXML
     private TextArea textArea;
 
-    private ObservableList listItems = FXCollections.observableArrayList();
+    private final ObservableList listItems = FXCollections.observableArrayList();
 
     private static int reportDisplayCounter = 0;
 
-    private ArrayList<WaterSourceReport> waterSourceReports =
+    private final ArrayList<WaterSourceReport> waterSourceReports =
             WaterSourceReportController.getWaterSourceReportList();
 
     /**

@@ -79,12 +79,14 @@ public class WaterPurityReportController {
 
     private GenericUser currentUser;
 
+    private Date date;
+
+    /**
+     * Creates the water purity list that is accessed by the Google Map
+     */
     public static void initWaterPurityList() {
         waterPurityReportList = new ArrayList<>();
     }
-
-    private Date date;
-
 
     @FXML
     private void initialize() {
@@ -149,27 +151,25 @@ public class WaterPurityReportController {
         }
     }
 
-
     @FXML
     private void handleCancelButton() {
-
     }
 
     private boolean isCompleted() {
         //ensure all text boxes are filled in
         boolean ans = true;
-        if (latTextField.getText().equals("")
-                || (longTextField.getText().equals(""))
-                || (virusTextField.getText().equals(""))
-                || (contTextField.getText().equals(""))
-                || (conditionComboBox.getValue() == null)) {
-            Alert alert = new Alert(
-                    Alert.AlertType.ERROR,
-                    "Please complete all fields",
-                    ButtonType.OK
-            );
-            alert.showAndWait();
-            ans = false;
+        if (("").equals(latTextField.getText())
+            || (("").equals(longTextField.getText()))
+            || (("").equals(virusTextField.getText()))
+            || (("").equals(contTextField.getText()))
+            || (conditionComboBox.getValue() == null)) {
+                Alert alert = new Alert(
+                        Alert.AlertType.ERROR,
+                        "Please complete all fields",
+                        ButtonType.OK
+                );
+                alert.showAndWait();
+                ans = false;
         }
         return ans;
     }
@@ -181,22 +181,38 @@ public class WaterPurityReportController {
         );
     }
 
+    /**
+     * Get the date of a water purity report
+     * @return returns the dte of aa water purity report
+     */
     public String getDate() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         Date dateObject = new Date();
         return dateFormat.format(dateObject);
     }
 
+    /**
+     * Sets the date of a water purity report
+     * @param dateTime - the date of the water purity report
+     */
     public void setDate(String dateTime) {
         this.date = date;
     }
 
+    /**
+     * Sets the time of the water purity report
+     * @return the time of the water purity report
+     */
     public String getTime() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date dateObject = new Date();
         return dateFormat.format(dateObject);
     }
 
+    /**
+     * Gives public access to the water purity reports list
+     * @return the water purity report list as an array list object
+     */
     public static ArrayList<WaterPurityReport> getWaterPurityReportList() {
         return waterPurityReportList;
     }
@@ -207,7 +223,6 @@ public class WaterPurityReportController {
      *
      * @param mainApplication the reference to the FX Application instance
      */
-
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
         currentUser = this.mainApplication.getAuthenticatedUser();

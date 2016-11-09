@@ -15,21 +15,24 @@ public class Administrator extends GenericUser {
         super(username, UserType.Administrator, id);
     }
 
+    /* These methods in the administrator class have been commented out. They
+    will be implemented once the administrator setter functionality is created
+    within the application */
     /**
      * Delete actual account of any User of any type
      */
-    private void deleteUser() {}
+    /*private void deleteUser() {}*/
 
     /**
      * Just stops user from SUBMITTING reports. That user can still view water
      * sources
      */
-    private void banUser() {}
+    /*private void banUser() {}*/
 
     /**
      * Unblock an account that has been locked for incorrect login attempts
      */
-    private void unlockUserAccount() {}
+    /*private void unlockUserAccount() {}*/
 
-    private void viewSecurityLog() {}
+    /*private void viewSecurityLog() {}*/
 }

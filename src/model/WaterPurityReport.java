@@ -13,14 +13,17 @@ public class WaterPurityReport {
     private String date;
     private Date actualDate;
     private Calendar calendar;
-    private String time;
-    private int reportNum;
-    private String reporterName;
-    private double latitude;
-    private double longitude;
-    private Condition condition;
-    private double virusPPM;
-    private double contamPPM;
+    /* The below fields have been made final as the setters used by
+    administrator accounts have not yet been implemented within
+    the application*/
+    private final String time;
+    private final int reportNum;
+    private final String reporterName;
+    private final double latitude;
+    private final double longitude;
+    private final Condition condition;
+    private final double virusPPM;
+    private final double contamPPM;
 
     /**
      * Creates a water purity report object
@@ -122,23 +125,34 @@ public class WaterPurityReport {
             this.description = description;
         }
 
+        /**
+         * @return a description stating if the water is safe, treatable,
+         * or unsafe
+         */
         public String getDescription() {
             return description;
         }
 
         String description;
 
+        /**
+         *
+         * @return The description of the water purity report returned
+         * as a string
+         */
         public String toString() {
             return description;
         }
     }
 
+    /*The water purity reports are not yet displayed in the Google Map so this
+    unused method has been commented out */
     /**
      *
      * @return the html formatted string displaying water purity report data in
      * the Google Map
      */
-    public String toHtmlFormat() {
+    /*public String toHtmlFormat() {
         return  "<strong>Report Number : " + this.reportNum + "</strong><br>" +
                 "<br>Report Date : " + this.date +
                 "<br>Report Time : " + this.time +
@@ -148,7 +162,7 @@ public class WaterPurityReport {
                 "<br>Report Virus : " + this.virusPPM +
                 "<br>Report contaminant : " + this.contamPPM +
                 "<br>Report Condition : " + this.condition;
-    }
+    }*/
 
     /**
      *

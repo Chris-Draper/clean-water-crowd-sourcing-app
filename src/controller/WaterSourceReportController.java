@@ -53,7 +53,10 @@ public class WaterSourceReportController {
 
     private static ArrayList<WaterSourceReport> waterSourceReportList;
 
-
+    /**
+     * Sets the main application
+     * @param mainApplication1 reference variable to the main app
+     */
     public void setMainApplication(MainApplication mainApplication1) {
         this.mainApplication = mainApplication1;
 
@@ -72,6 +75,7 @@ public class WaterSourceReportController {
                 .getMaxSourceReportNum() + 1;
         reportNumLabel.setText(reportSystemCount.toString());
     }
+
     @FXML
     private void initialize() {
         this.setReportWaterConditionData();
@@ -147,8 +151,8 @@ public class WaterSourceReportController {
     private boolean isCompleted() {
         //ensure all text boxes are filled in
         boolean ans = true;
-        if (reportSourceLat.getText().equals("")
-                || (reportSourceLong.getText().equals(""))
+        if (("").equals(reportSourceLat.getText())
+                || (("").equals(reportSourceLong.getText()))
                 || (reportWaterType.getValue() == null)
                 || (reportWaterCondition.getValue() == null)) {
 
@@ -163,10 +167,18 @@ public class WaterSourceReportController {
         return ans;
     }
 
+    /**
+     * Gives external classes access to the water source report list
+     * @return the list of water source reports
+     */
     public static ArrayList<WaterSourceReport> getWaterSourceReportList() {
         return waterSourceReportList;
     }
 
+    /**
+     * Creates an instance of the waterSourceReportList so that it can
+     * be accessed from other classes
+     */
     public static void initWaterReportList() {
         waterSourceReportList = new ArrayList<>();
     }

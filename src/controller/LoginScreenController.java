@@ -28,8 +28,8 @@ public class LoginScreenController {
 
     @FXML
     private void handleLogInPressed() {
-        if(usernameTextField.getText().equals("") || passwordField.getText()
-                .equals("")) {
+        if(("").equals(usernameTextField.getText())
+            || ("").equals(passwordField.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();

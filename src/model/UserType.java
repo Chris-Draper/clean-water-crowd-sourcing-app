@@ -18,7 +18,13 @@ public enum UserType {
     private final String value;
     private final char code;
 
+    /**
+     * @return the value of the UserType
+     */
     public String getValue() { return value; }
 
+    /**
+     * @return returns the code character that represents the UserType
+     */
     public char getCode() { return code; }
 }

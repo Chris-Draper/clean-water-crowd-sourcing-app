@@ -105,13 +105,13 @@ public class DatabaseInterface {
                 id = rs.getInt("id");
                 position = rs.getString("position");
 
-                if (position.equals("U")) {
+                if ("U".equals(position)) {
                     loggedInUser = new User(username, id);
-                } else if (position.equals("W")) {
+                } else if ("W".equals(position)) {
                     loggedInUser = new Worker(username, id);
-                } else if (position.equals("M")) {
+                } else if ("M".equals(position)) {
                     loggedInUser = new Manager(username, id);
-                } else if (position.equals("A")) {
+                } else if ("A".equals(position)) {
                     loggedInUser = new Administrator(username, id);
                 }
             }

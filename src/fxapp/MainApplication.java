@@ -200,7 +200,7 @@ public class MainApplication extends Application {
 
         for (int i=0; i < 8; i++) {
             String curField = fields[i].getText();
-            if (curField.equals("")) {
+            if (("").equals(curField)) {
                 fieldText[i] = "NULL";
             }
             else {

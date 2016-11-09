@@ -7,9 +7,12 @@ import java.util.Date;
  */
 public abstract class GenericUser {
 
-    private String username;
-    private UserType userType;
-    private int id;
+    /* these variables are set as final because the administrators setters
+    for the variables have not been implemented - should be changed once
+    the setters are implemented in the future */
+    private final String username;
+    private final UserType userType;
+    private final int id;
     private final Date date;
 
     //all these variables are not used in the current code so they are commented
