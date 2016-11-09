@@ -4,9 +4,12 @@ import fxapp.MainApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import model.*;
-import java.sql.SQLException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import model.GenericUser;
+import model.UserType;
 
 /**
  * Created by ChrisPolack on 9/27/16.

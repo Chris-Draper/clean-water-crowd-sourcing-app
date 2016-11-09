@@ -1,6 +1,11 @@
 package fxapp;
 
-import controller.*;
+import controller.LoginScreenController;
+import controller.WaterPurityReportController;
+import controller.WaterSourceReportController;
+import controller.WelcomeScreenController;
+import controller.HomeScreenController;
+import controller.RegistrationScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +17,6 @@ import java.sql.SQLException;
 import model.DatabaseInterface;
 import model.GenericUser;
 import model.UserLog;
-import model.WaterPurityReport;
 
 public class MainApplication extends Application {
     /** the main container for the application window */
@@ -65,19 +69,15 @@ public class MainApplication extends Application {
             mainAppScreen.show();
 
             if (database == null) {
-
                 // Attempt to connect to database, display error if failure
                 try {
-
                     database = new DatabaseInterface();
-
                 } catch (SQLException e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR,
                             "Error connecting to backend database.", ButtonType.OK);
                     alert.showAndWait();
                 }
             }
-
         } catch (IOException e) {
             //error on load, so log it
             System.out.println("Failed to find the fxml file for MainScreen.");
@@ -170,8 +170,9 @@ public class MainApplication extends Application {
 
         for (int i=0; i < 8; i++) {
             String curField = fields[i].getText();
-            if (curField.equals(""))
+            if (curField.equals("")) {
                 fieldText[i] = "NULL";
+            }
             else {
                 fieldText[i] = "'" + curField + "'";
             }

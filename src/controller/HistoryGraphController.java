@@ -2,7 +2,6 @@ package controller;
 
 import fxapp.MainApplication;
 import javafx.fxml.FXML;
-import javafx.scene.chart.Axis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -10,11 +9,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import model.DatabaseInterface;
 import model.WaterPurityReport;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Collections;
 
 /**
- * Created by nharper32 on 10/31/16.
+ * Controls the display of the history graph of water contamination
  */
 public class HistoryGraphController {
 
@@ -150,11 +152,14 @@ public class HistoryGraphController {
         for (Object key: templist) {
             WaterPurityReport temp = monthList.get(key);
             if (contam) {
-                if (temp != null) series.getData().add(new XYChart.Data(key, temp.getContamPPM()));
+                if (temp != null) {
+                    series.getData().add(new XYChart.Data(key, temp.getContamPPM()));
+                }
             } else {
-                if (temp != null) series.getData().add(new XYChart.Data(key, temp.getVirusPPM()));
+                if (temp != null) {
+                    series.getData().add(new XYChart.Data(key, temp.getVirusPPM()));
+                }
             }
-
         }
         if (contam) {
             series.setName("Location's (" + specifiedLat + ", " + specifiedLong + ") Contaminant PPM in Year " + specifiedYear);

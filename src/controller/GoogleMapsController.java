@@ -1,12 +1,15 @@
 package controller;
 
-/**
- * Created by Chris on 10/17/2016.
- */
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.event.UIEventType;
-import com.lynden.gmapsfx.javascript.object.*;
+import com.lynden.gmapsfx.javascript.object.GoogleMap;
+import com.lynden.gmapsfx.javascript.object.MapOptions;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.Marker;
+import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+import com.lynden.gmapsfx.javascript.object.InfoWindowOptions;
+import com.lynden.gmapsfx.javascript.object.InfoWindow;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import java.net.URL;
 import java.util.ArrayList;
@@ -16,6 +19,10 @@ import javafx.fxml.Initializable;
 import model.WaterSourceReport;
 import netscape.javascript.JSObject;
 
+/**
+ * Helps to create the google map and display the location pins of water source
+ * reports and water purity reports
+ */
 public class GoogleMapsController implements Initializable, MapComponentInitializedListener {
 
     @FXML

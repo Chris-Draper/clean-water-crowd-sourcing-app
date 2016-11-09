@@ -59,7 +59,7 @@
          </rowConstraints>
          <children>
             <Label text="Latitude:" />
-            <Label text="Longitutde:" GridPane.rowIndex="1" />
+            <Label text="Longitude:" GridPane.rowIndex="1" />
             <TextField fx:id="reportSourceLat" promptText="Latitude" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets right="350.0" />

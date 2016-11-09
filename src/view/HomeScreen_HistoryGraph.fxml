@@ -75,7 +75,7 @@
                   <Insets left="25.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Contiminant/Virus" GridPane.columnIndex="2">
+            <Label text="Contaminant/Virus" GridPane.columnIndex="2">
                <font>
                   <Font name="Helvetica Neue Light Italic" size="15.0" />
                </font>

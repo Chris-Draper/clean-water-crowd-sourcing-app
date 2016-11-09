@@ -1,22 +1,18 @@
 package controller;
 
 import fxapp.MainApplication;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import model.WaterSourceReport;
-import sun.applet.Main;
-
-import java.util.ArrayList;
-import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
- * Created by Chris on 10/11/2016.
+ * Controls the flow of information between the WaterSourceReport Model and
+ * the view
  */
 public class WaterSourceReportController {
 
@@ -48,9 +44,6 @@ public class WaterSourceReportController {
 
     @FXML
     private ComboBox<WaterSourceReport.WaterType> reportWaterType;
-
-    @FXML
-    private Button submitWaterSourceReportButton;
 
     private static Integer reportSystemCount;
 

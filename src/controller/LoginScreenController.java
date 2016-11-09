@@ -2,13 +2,14 @@ package controller;
 
 import fxapp.MainApplication;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.GenericUser;
-import model.UserLog;
-import java.sql.SQLException;
 
 /**
- * Created by sbuck on 9/21/2016.
+ * Controls the initial login screen showed on application start-up
  */
 public class LoginScreenController {
 

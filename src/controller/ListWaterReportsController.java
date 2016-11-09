@@ -3,19 +3,13 @@ package controller;
 import fxapp.MainApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import model.WaterPurityReport;
 import model.WaterSourceReport;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
