@@ -32,7 +32,8 @@ public class MainApplication extends Application {
 
     private GenericUser authenticatedUser;
 
-    private UserLog userLog = new UserLog();
+    // userLog functionality is not currently implemented
+    //private UserLog userLog = new UserLog();
 
     private DatabaseInterface database;
 
@@ -234,24 +235,48 @@ public class MainApplication extends Application {
         launch(args);
     }
 
+    /**
+     * Creates a user object that persist throughout the application
+     *
+     * @param authUser the user that has accessed the application
+     */
     public void setAuthenticatedUser(GenericUser authUser) {
         authenticatedUser = authUser;
     }
 
+    /**
+     *
+     * @return the authenticated user that has logged into the app
+     */
     public GenericUser getAuthenticatedUser() {return authenticatedUser;}
 
+    /**
+     * Sets the authenticated user to null once the user has logged out
+     */
     public void logoutUser() {
         authenticatedUser = null;
     }
 
-    public UserLog getUserLog() {
+    /**
+     * The userLog is currently not implemented
+     */
+    /*public UserLog getUserLog() {
         return userLog;
-    }
+    }*/
 
+    /**
+     * This method fetches the application database
+     *
+     * @return database - the database of the application
+     */
     public DatabaseInterface getDatabaseConn() {
         return database;
     }
 
+    /**
+     * Stops the application from accessing the database by closing
+     * the database connection
+     */
     @Override
     public void stop() {
         database.close();

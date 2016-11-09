@@ -146,12 +146,8 @@ public class DatabaseInterface {
         try {
             stmt = dbConn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
+            return rs.next();
 
-            if (rs.next()) {
-                return true;
-            } else {
-                return false;
-            }
         } catch (SQLException e ) {
             System.out.println(e);
         } finally {

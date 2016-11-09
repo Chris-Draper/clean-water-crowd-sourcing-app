@@ -98,6 +98,10 @@ public class RegistrationScreenController {
         return true;
     }
 
+    /**
+     * Reloads the home screen into the application view when the back
+     * button is pressed
+     */
     @FXML
     public void handleBackButtonPressed() {
         mainApplication.reloadHomeScreen();
