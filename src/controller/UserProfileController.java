@@ -76,8 +76,38 @@ public class UserProfileController {
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
         try {
-            fillProfile();
-        } catch (SQLException e) {
+            int userID = mainApplication.getAuthenticatedUser().getID();
+            String[] infoFields = mainApplication.getDatabaseConn()
+                    .getProfileInfo(userID);
+
+            if (infoFields[0] != null) {
+                nameTextField.setText(infoFields[0]);
+            }
+            if (infoFields[1] != null) {
+                emailTextField.setText(infoFields[1]);
+            }
+            if (infoFields[2] != null) {
+                addressNumField.setText(infoFields[2]);
+            }
+            if (infoFields[3] != null) {
+                streetNameField.setText(infoFields[3]);
+            }
+            if (infoFields[4] != null) {
+                zipField.setText(infoFields[4]);
+            }
+            if (infoFields[5] != null) {
+                cityField.setText(infoFields[5]);
+            }
+            if (infoFields[6] != null) {
+                stateField.setText(infoFields[6]);
+            }
+            if (infoFields[7] != null) {
+                phoneNumField.setText(infoFields[7]);
+            }
+
+            titleComboBox.setValue(mainApplication.getAuthenticatedUser()
+                    .getUserType());
+        } catch (Exception e) {
             System.out.println("Error closing statement after updating" +
                     " profile: " + e);
         }
@@ -85,41 +115,11 @@ public class UserProfileController {
 
     private void fillProfile() throws SQLException {
 
-        int userID = mainApplication.getAuthenticatedUser().getID();
-        String[] infoFields = mainApplication.getDatabaseConn()
-                .getProfileInfo(userID);
 
-        if (infoFields[0] != null) {
-            nameTextField.setText(infoFields[0]);
-        }
-        if (infoFields[1] != null) {
-            emailTextField.setText(infoFields[1]);
-        }
-        if (infoFields[2] != null) {
-            addressNumField.setText(infoFields[2]);
-        }
-        if (infoFields[3] != null) {
-            streetNameField.setText(infoFields[3]);
-        }
-        if (infoFields[4] != null) {
-            zipField.setText(infoFields[4]);
-        }
-        if (infoFields[5] != null) {
-            cityField.setText(infoFields[5]);
-        }
-        if (infoFields[6] != null) {
-            stateField.setText(infoFields[6]);
-        }
-        if (infoFields[7] != null) {
-            phoneNumField.setText(infoFields[7]);
-        }
-
-        titleComboBox.setValue(mainApplication.getAuthenticatedUser()
-                .getUserType());
     }
 
     /**
-     * Updates the user profiles on-click
+     * Updates the user profiles on
      */
     @FXML
     public void handleUpdateProfileButton() {

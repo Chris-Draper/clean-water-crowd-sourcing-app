@@ -11,17 +11,17 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controller.HomeScreenController">
    <top>
-      <MenuBar fx:id="topNavigation" BorderPane.alignment="CENTER">
-          <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
-                  <MenuItem fx:id="fileLogout" mnemonicParsing="false"
+      <MenuBar BorderPane.alignment="CENTER">
+          <Menu mnemonicParsing="false" text="File">
+                  <MenuItem mnemonicParsing="false"
                             onAction="#handleLogoutMenuPressed" text="Logout" />
-              <MenuItem fx:id="fileClose" mnemonicParsing="false"
+              <MenuItem mnemonicParsing="false"
                         onAction="#handleCloseMenuPressed" text="Close" />
           </Menu>
-          <Menu fx:id="editMenu" mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Edit">
               <MenuItem mnemonicParsing="false" text="Delete" />
           </Menu>
-          <Menu fx:id="helpMenu" mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="Help">
               <MenuItem mnemonicParsing="false" text="About" />
           </Menu>
       </MenuBar>

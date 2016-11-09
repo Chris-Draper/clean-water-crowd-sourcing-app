@@ -4,11 +4,7 @@ import fxapp.MainApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import model.UserType;
@@ -23,26 +19,6 @@ public class HomeScreenController {
 
     private BorderPane rootLayout;
 
-    private VBox rootVbox;
-
-    @FXML
-    private MenuBar topNavigation;
-
-    @FXML
-    private Menu fileMenu;
-
-    @FXML
-    private Menu editMenu;
-
-    @FXML
-    private Menu helpMenu;
-
-    @FXML
-    private javafx.scene.control.MenuItem fileLogout;
-
-    @FXML
-    private javafx.scene.control.MenuItem fileClose;
-
     private VBox listPurityReportVbox;
     private VBox listWaterReportVBox;
     private VBox purityReportVBox;
@@ -52,8 +28,6 @@ public class HomeScreenController {
     private VBox historyGraphVbox;
     private BorderPane googleMapBorderPane;
 
-    @FXML
-    private ToggleGroup sideNavigation;
     @FXML
     private ToggleButton homeButton;
 
@@ -77,9 +51,6 @@ public class HomeScreenController {
 
     @FXML
     private ToggleButton viewHistoryGraphButton;
-
-    @FXML
-    private Label welcomeMsg;
 
     private UserProfileController ctrl;
     private ListWaterReportsController ctrl_2;
@@ -126,6 +97,7 @@ public class HomeScreenController {
 
     private void loadVBoxs() {
         try {
+            //load the user profile screen
             FXMLLoader loader_1 = new FXMLLoader();
             loader_1.setLocation(MainApplication.class
                     .getResource("../view/HomeScreen_UserProfile.fxml"));
@@ -135,6 +107,7 @@ public class HomeScreenController {
             ctrl = loader_1.getController();
             ctrl.setMainApp(mainApplication);
 
+            // load the list water reports screen
             FXMLLoader loader_2 = new FXMLLoader();
             loader_2.setLocation(MainApplication.class
                     .getResource("../view/HomeScreen_ListWaterReports.fxml"));
@@ -143,6 +116,7 @@ public class HomeScreenController {
             ctrl_2 = loader_2.getController();
             ctrl_2.setMainApp(mainApplication);
 
+            //load the list water purity reports screen
             FXMLLoader loader_3 = new FXMLLoader();
             loader_3.setLocation(MainApplication.class
                     .getResource("../view/HomeScreen_WaterPurityReport.fxml"));
@@ -151,6 +125,7 @@ public class HomeScreenController {
             ctrl_3 = loader_3.getController();
             ctrl_3.setMainApp(mainApplication);
 
+            //load the water source report screen
             FXMLLoader loader_4 = new FXMLLoader();
             loader_4.setLocation(MainApplication.class
                     .getResource("../view/HomeScreen_WaterSourceReport.fxml"));
@@ -159,6 +134,7 @@ public class HomeScreenController {
             ctrl_4 = loader_4.getController();
             ctrl_4.setMainApplication(mainApplication);
 
+            // load the list water purity reports screen
             FXMLLoader loader_5 = new FXMLLoader();
             loader_5.setLocation(MainApplication.class
                     .getResource("../view/HomeScreen_ListPurityReports.fxml"));
@@ -167,11 +143,13 @@ public class HomeScreenController {
             ctrl_5 = loader_5.getController();
             ctrl_5.setMainApplication(mainApplication);
 
+            //load the init home screen
             FXMLLoader loader_6 = new FXMLLoader();
             loader_6.setLocation((MainApplication.class
                     .getResource("../view/InitHomeScreen.fxml")));
             welcomeMsgVBox = loader_6.load();
 
+            // load the history graph screen
             FXMLLoader loader_7 = new FXMLLoader();
             loader_7.setLocation(MainApplication.class
                     .getResource("../view/HomeScreen_HistoryGraph.fxml"));
@@ -196,9 +174,8 @@ public class HomeScreenController {
         }
     }
 
-
     @FXML
-    private void handleProfileButton(ActionEvent event) {
+    private void handleProfileButton() {
         if (profileButton.isSelected()) {
             if (profileButton.isSelected()) {
                 rootLayout.setCenter(userProfileVBox);
@@ -211,7 +188,7 @@ public class HomeScreenController {
     }
 
     @FXML
-    private void handleListButtonPressed(ActionEvent event) {
+    private void handleListButtonPressed() {
         if (listButton.isSelected()) {
             if (listButton.isSelected()) {
                 rootLayout.setCenter(listWaterReportVBox);
@@ -226,7 +203,7 @@ public class HomeScreenController {
     }
 
     @FXML
-    private void handlePurityReportButton(ActionEvent event) {
+    private void handlePurityReportButton() {
         if (purityReportButton.isSelected()) {
             if (purityReportButton.isSelected()) {
                 rootLayout.setCenter(purityReportVBox);
@@ -241,7 +218,7 @@ public class HomeScreenController {
     }
 
     @FXML
-    private void handleWaterSourceReportButton(ActionEvent event) {
+    private void handleWaterSourceReportButton() {
         if(waterSourceReportButton.isSelected()) {
             if(waterSourceReportButton.isSelected()) {
                 rootLayout.setCenter(waterReportVbox);
@@ -254,7 +231,7 @@ public class HomeScreenController {
     }
 
     @FXML
-    private void handleListPurityButtonPressed(ActionEvent event) {
+    private void handleListPurityButtonPressed() {
         if (listPurityButton.isSelected()) {
             if (listPurityButton.isSelected()) {
                 rootLayout.setCenter(listPurityReportVbox);
@@ -269,7 +246,7 @@ public class HomeScreenController {
     }
 
     @FXML
-    private void handleViewHistoryGraph(ActionEvent event) {
+    private void handleViewHistoryGraph() {
         if (viewHistoryGraphButton.isSelected()) {
             if (viewHistoryGraphButton.isSelected()) {
                 rootLayout.setCenter(historyGraphVbox);
@@ -282,9 +259,8 @@ public class HomeScreenController {
         }
     }
 
-
     @FXML
-    private void handleGoogleMapsButton(ActionEvent event) {
+    private void handleGoogleMapsButton() {
         try {
             googleMapBorderPane = FXMLLoader.load(getClass()
                     .getResource("../view/HomeScreen_GoogleMaps.fxml"));

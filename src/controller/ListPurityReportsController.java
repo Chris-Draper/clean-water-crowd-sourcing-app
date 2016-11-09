@@ -31,11 +31,6 @@ public class ListPurityReportsController {
 
     private final ObservableList listItems = FXCollections.observableArrayList();
 
-    private final ArrayList<WaterPurityReport> waterPurityReports =
-            WaterPurityReportController.getWaterPurityReportList();
-
-    private int reportDisplayCounter = 0;
-
     /**
      * Clears the list of water purity reports
      */
@@ -57,9 +52,6 @@ public class ListPurityReportsController {
             listItems.add(i);
             reportList.setItems(listItems);
         }
-
-        reportDisplayCounter = endReport - startReport;
-
     }
 
     /**
