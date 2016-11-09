@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by sbuck on 9/22/2016.
+ * Determines the type of a user account
  */
 public enum UserType {
     User ("Users", 'U'),
@@ -21,4 +21,4 @@ public enum UserType {
     public String getValue() { return value; }
 
     public char getCode() { return code; }
-};
+}

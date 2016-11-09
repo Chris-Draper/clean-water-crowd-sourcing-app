@@ -1,10 +1,16 @@
 package model;
 
 /**
- * Created by sbuck on 9/21/2016.
+ * The class for an Administrator level user account
  */
 public class Administrator extends GenericUser {
 
+    /**
+     * Creates an administrator user object
+     *
+     * @param username the login name of the user
+     * @param id the id number of the user
+     */
     public Administrator(String username, int id) {
         super(username, UserType.Administrator, id);
     }
@@ -15,7 +21,8 @@ public class Administrator extends GenericUser {
     private void deleteUser() {}
 
     /**
-     * Just stops user from SUBMITTING reports. That user can still view water sources
+     * Just stops user from SUBMITTING reports. That user can still view water
+     * sources
      */
     private void banUser() {}
 

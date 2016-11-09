@@ -11,7 +11,7 @@ import model.UserType;
 import java.sql.SQLException;
 
 /**
- * Created by nharper32 on 10/6/16.
+ * Controls the user profile view of the main application
  */
 public class UserProfileController {
 
@@ -27,7 +27,8 @@ public class UserProfileController {
 
     @FXML
     private ComboBox titleComboBox;
-    private final ObservableList<UserType> userTypes = FXCollections.observableArrayList();
+    private final ObservableList<UserType> userTypes =
+            FXCollections.observableArrayList();
 
     @FXML
     private TextField emailTextField;
@@ -68,14 +69,16 @@ public class UserProfileController {
         try {
             fillProfile();
         } catch (SQLException e) {
-            System.out.println("Error closing statement after updating profile: " + e);
+            System.out.println("Error closing statement after updating" +
+                    " profile: " + e);
         }
     }
 
     private void fillProfile() throws SQLException {
 
         int userID = mainApplication.getAuthenticatedUser().getID();
-        String[] infoFields = mainApplication.getDatabaseConn().getProfileInfo(userID);
+        String[] infoFields = mainApplication.getDatabaseConn()
+                .getProfileInfo(userID);
 
         if (infoFields[0] != null) {
             nameTextField.setText(infoFields[0]);
@@ -102,16 +105,20 @@ public class UserProfileController {
             phoneNumField.setText(infoFields[7]);
         }
 
-        titleComboBox.setValue(mainApplication.getAuthenticatedUser().getUserType());
+        titleComboBox.setValue(mainApplication.getAuthenticatedUser()
+                .getUserType());
     }
 
     @FXML
     public void handleUpdateProfileButton() {
+        mainApplication.updateUserInfo(nameTextField, emailTextField,
+                addressNumField, streetNameField, zipField, cityField,
+                stateField, phoneNumField);
 
-        mainApplication.updateUserInfo(nameTextField, emailTextField, addressNumField,
-                streetNameField, zipField, cityField, stateField, phoneNumField);
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Profile information saved.", ButtonType.OK);
+        Alert alert = new Alert(
+                Alert.AlertType.INFORMATION,
+                "Profile information saved.",
+                ButtonType.OK);
         alert.showAndWait();
     }
 }

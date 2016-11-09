@@ -46,7 +46,8 @@ public class MainApplication extends Application {
     }
 
     /**
-     * Initialize the main screen for the application.  Most other views will be shown in this screen.
+     * Initialize the main screen for the application.  Most other views
+     * will be shown in this screen.
      *
      * @param mainAppScreen  the main Stage window of the application
      */
@@ -54,7 +55,8 @@ public class MainApplication extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/MainApplication.fxml"));
+            loader.setLocation(MainApplication.class
+                    .getResource("../view/MainApplication.fxml"));
             rootLayout = loader.load();
 
             // Give the controller access to the main app.
@@ -73,8 +75,11 @@ public class MainApplication extends Application {
                 try {
                     database = new DatabaseInterface();
                 } catch (SQLException e) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR,
-                            "Error connecting to backend database.", ButtonType.OK);
+                    Alert alert = new Alert(
+                        Alert.AlertType.ERROR,
+                        "Error connecting to backend database.",
+                        ButtonType.OK
+                    );
                     alert.showAndWait();
                 }
             }
@@ -89,7 +94,8 @@ public class MainApplication extends Application {
         try {
             // Pointing loader to login screen fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/LoginScreen.fxml"));
+            loader.setLocation(MainApplication.class
+                    .getResource("../view/LoginScreen.fxml"));
             rootLayout = loader.load();
 
             // Give the controller access to the main app.
@@ -108,7 +114,8 @@ public class MainApplication extends Application {
 
         } catch (IOException e){
             //error on load, so log it
-            System.out.println("Failed to find the fxml file for Log in Screen!!");
+            System.out.println("Failed to find the fxml file for Log"
+                    + " in Screen!!");
             e.printStackTrace();
         }
 
@@ -118,7 +125,8 @@ public class MainApplication extends Application {
         try {
             // Pointing loader to login screen fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/HomeScreen_Main.fxml"));
+            loader.setLocation(MainApplication.class
+                    .getResource("../view/HomeScreen_Main.fxml"));
             rootLayout = loader.load();
 
             // Give the controller access to the main app.
@@ -143,7 +151,8 @@ public class MainApplication extends Application {
         try {
             // Pointing loader to login screen fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/RegistrationScreen.fxml"));
+            loader.setLocation(MainApplication.class
+                    .getResource("../view/RegistrationScreen.fxml"));
             rootLayout = loader.load();
 
             // Give the controller access to the main app.
@@ -158,7 +167,8 @@ public class MainApplication extends Application {
             mainAppScreen.setScene(scene);
             mainAppScreen.show();
         } catch (IOException e) {
-            System.out.println("Failed to find the fxml file for Registration Screen!");
+            System.out.println("Failed to find the fxml file for Registration"
+                    + " Screen!");
             e.printStackTrace();
         }
     }
@@ -210,9 +220,9 @@ public class MainApplication extends Application {
         return database;
     }
 
+    @Override
     public void stop() {
         database.close();
     }
-
 
 }

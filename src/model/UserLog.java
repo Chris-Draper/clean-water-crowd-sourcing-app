@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 /**
- * Created by nharper32 on 9/29/16.
+ * UserLog tracks all of the users that have accessed the application
  */
 public class UserLog {
 
@@ -24,9 +24,9 @@ public class UserLog {
 
     public GenericUser getCurrentUser(String userName) {
         GenericUser currentUser = null;
-        for(int i = 0; i < userLog.size(); i++) {
-            if(userLog.get(i).getUsername().equals(userName)) {
-                currentUser = userLog.get(i);
+        for(GenericUser genUser: userLog) {
+            if(genUser.getUsername().equals(userName)) {
+                currentUser = genUser;
             }
         }
         return currentUser;

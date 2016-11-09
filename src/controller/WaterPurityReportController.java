@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Created by sbuck on 10/22/2016.
+ * Controls the water purity report list view in the main app
  */
 public class WaterPurityReportController {
 
@@ -111,14 +111,16 @@ public class WaterPurityReportController {
            /* waterPurityReportList.add(new WaterPurityReport(
                     dateLabel.getText(), timeLabel.getText(),
                     reportNum, reporterNameLabel.getText(),
-                    reportLat, reportLong, conditionComboBox.getValue(), Double.parseDouble(virusTextField.getText()),
+                    reportLat, reportLong, conditionComboBox.getValue(),
+                    Double.parseDouble(virusTextField.getText()),
                     Double.parseDouble(contTextField.getText())
             ));*/
 
             waterPurityReportList.add(new WaterPurityReport(
                     date, timeLabel.getText(),
                     reportNum, reporterNameLabel.getText(),
-                    reportLat, reportLong, conditionComboBox.getValue(), Double.parseDouble(virusTextField.getText()),
+                    reportLat, reportLong, conditionComboBox.getValue(),
+                    Double.parseDouble(virusTextField.getText()),
                     Double.parseDouble(contTextField.getText())
             ));
 
@@ -132,7 +134,8 @@ public class WaterPurityReportController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
-            alert.setContentText("Your water Purity report was submitted successfully");
+            alert.setContentText("Your water Purity report was submitted"
+                    + " successfully");
             alert.showAndWait();
             reportNum++;
             dateLabel.setText(this.getDate());
@@ -155,11 +158,16 @@ public class WaterPurityReportController {
     private boolean isCompleted() {
         //ensure all text boxes are filled in
         boolean ans = true;
-        if (latTextField.getText().equals("") || longTextField.getText().equals("")
-                || virusTextField.getText().equals("") || contTextField.getText().equals("")
-                || conditionComboBox.getValue() == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR,
-                    "Please complete all fields", ButtonType.OK);
+        if (latTextField.getText().equals("")
+                || (longTextField.getText().equals(""))
+                || (virusTextField.getText().equals(""))
+                || (contTextField.getText().equals(""))
+                || (conditionComboBox.getValue() == null)) {
+            Alert alert = new Alert(
+                    Alert.AlertType.ERROR,
+                    "Please complete all fields",
+                    ButtonType.OK
+            );
             alert.showAndWait();
             ans = false;
         }
@@ -194,7 +202,8 @@ public class WaterPurityReportController {
     }
 
     /**
-     * allow for calling back to the mainApplication application code if necessary
+     * allow for calling back to the mainApplication application
+     * code if necessary
      *
      * @param mainApplication the reference to the FX Application instance
      */
@@ -204,7 +213,8 @@ public class WaterPurityReportController {
         currentUser = this.mainApplication.getAuthenticatedUser();
         reporterNameLabel.setText(currentUser.getUsername());
 
-        reportNum = mainApplication.getDatabaseConn().getMaxPurityReportNum() + 1;
+        reportNum = mainApplication.getDatabaseConn()
+                .getMaxPurityReportNum() + 1;
         reportNumLabel.setText(reportNum.toString());
     }
 

@@ -54,15 +54,18 @@ public class WaterSourceReportController {
         this.mainApplication = mainApplication1;
 
         int userID = mainApplication.getAuthenticatedUser().getID();
-        String[] infoFields = mainApplication.getDatabaseConn().getProfileInfo(userID);
+        String[] infoFields = mainApplication.getDatabaseConn()
+                .getProfileInfo(userID);
 
         if (infoFields[0] != null) {
             reporterName.setText(infoFields[0]);
         } else {
-            reporterName.setText(mainApplication.getAuthenticatedUser().getUsername());
+            reporterName.setText(mainApplication.getAuthenticatedUser()
+                    .getUsername());
         }
 
-        reportSystemCount = mainApplication.getDatabaseConn().getMaxSourceReportNum() + 1;
+        reportSystemCount = mainApplication.getDatabaseConn()
+                .getMaxSourceReportNum() + 1;
         reportNumLabel.setText(reportSystemCount.toString());
     }
     @FXML
@@ -107,7 +110,8 @@ public class WaterSourceReportController {
 
             waterSourceReportList.add(new WaterSourceReport(
                     reportDate.getText(), reportTime.getText(),
-                    Integer.parseInt(reportNumLabel.getText()), reporterName.getText(),
+                    Integer.parseInt(reportNumLabel.getText()),
+                    reporterName.getText(),
                     reportLat, reportLong, reportWaterType.getValue(),
                     reportWaterCondition.getValue()
             ));
@@ -122,7 +126,8 @@ public class WaterSourceReportController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
-            alert.setContentText("Your water source report was submitted successfully");
+            alert.setContentText("Your water source report was submitted"
+                    + " successfully");
             alert.showAndWait();
             reportSystemCount++;
             reportDate.setText(this.getDate());
@@ -138,11 +143,16 @@ public class WaterSourceReportController {
     private boolean isCompleted() {
         //ensure all text boxes are filled in
         boolean ans = true;
-        if (reportSourceLat.getText().equals("") || reportSourceLong.getText().equals("")
-                || reportWaterType.getValue() == null
-                || reportWaterCondition.getValue() == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR,
-                    "Please complete all fields", ButtonType.OK);
+        if (reportSourceLat.getText().equals("")
+                || (reportSourceLong.getText().equals(""))
+                || (reportWaterType.getValue() == null)
+                || (reportWaterCondition.getValue() == null)) {
+
+            Alert alert = new Alert(
+                Alert.AlertType.ERROR,
+                "Please complete all fields",
+                ButtonType.OK
+            );
             alert.showAndWait();
             ans = false;
         }
@@ -150,11 +160,7 @@ public class WaterSourceReportController {
     }
 
     public static ArrayList<WaterSourceReport> getWaterSourceReportList() {
-
         ArrayList<WaterSourceReport> curReports;
-
-
-
         return waterSourceReportList;
     }
 
@@ -163,8 +169,6 @@ public class WaterSourceReportController {
     }
 
     public static void makeWaterSrcReportDummyData() {
-
     }
-
 
 }

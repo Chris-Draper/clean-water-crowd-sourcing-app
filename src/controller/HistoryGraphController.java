@@ -51,7 +51,8 @@ public class HistoryGraphController {
     private XYChart.Series series;
 
     /**
-     * allow for calling back to the mainApplication application code if necessary
+     * allow for calling back to the mainApplication application code if
+     * necessary
      *
      * @param mainApplication the reference to the FX Application instance
      */
@@ -68,7 +69,8 @@ public class HistoryGraphController {
     }
 
     /**
-     * Method for initializing the combox that lists available locations for history graph
+     * Method for initializing the combox that lists available locations
+     * for history graph
      *
      */
     public void fillLocationList() {
@@ -77,7 +79,8 @@ public class HistoryGraphController {
         int minNum = database.getMinPurityReportNum();
         for (int i = minNum; i <= maxNum; i++) {
             WaterPurityReport purityReport = database.getPurityReportInfo(i);
-            String location = purityReport.getLat() + ", " + purityReport.getLong();
+            String location = purityReport.getLat() + ", " +
+                    purityReport.getLong();
             locationList.add(location);
             //System.out.println(i);
         }
@@ -85,7 +88,8 @@ public class HistoryGraphController {
     }
 
     /**
-     * Helper method for filling year combo box. Called when user selects location
+     * Helper method for filling year combo box. Called when user
+     * selects location
      *
      * @param location location selected by user
      */
@@ -95,7 +99,8 @@ public class HistoryGraphController {
         int minNum = database.getMinPurityReportNum();
         for (int i = minNum; i <= maxNum; i++) {
             WaterPurityReport purityReport = database.getPurityReportInfo(i);
-            String tempLocal = purityReport.getLat() + ", " + purityReport.getLong();
+            String tempLocal = purityReport.getLat() + ", " +
+                    purityReport.getLong();
             if (tempLocal.equals(location)) {
                 String date = purityReport.getDate();
                 String year = date.substring(0,4);
@@ -113,15 +118,18 @@ public class HistoryGraphController {
 
     @FXML
     private void handleDisplayGraphButton() {
-        boolean contam = ppmCombo.getSelectionModel().getSelectedItem().equals("Contaminant");
+        boolean contam = ppmCombo.getSelectionModel().getSelectedItem()
+                .equals("Contaminant");
         yAxis.setLabel("Contaminant/Virus PPM");
         xAxis.setLowerBound(0);
         xAxis.setUpperBound(12);
-        String locationEntry = (String) locationCombo.getSelectionModel().getSelectedItem();
+        String locationEntry = (String) locationCombo.getSelectionModel()
+                .getSelectedItem();
         String[] locationArr = locationEntry.split("[,]");
         double specifiedLat = Double.parseDouble(locationArr[0]);
         double specifiedLong = Double.parseDouble(locationArr[1]);
-        int specifiedYear = Integer.parseInt((String) yearCombo.getSelectionModel().getSelectedItem());
+        int specifiedYear = Integer.parseInt((String) yearCombo
+                .getSelectionModel().getSelectedItem());
 
         matchList = new HashSet<>();
 
@@ -133,7 +141,8 @@ public class HistoryGraphController {
             int tempYear = Integer.parseInt(date.substring(0,4));
             double tempLat = purityReport.getLat();
             double tempLong = purityReport.getLong();
-            if (specifiedLat == tempLat && specifiedLong == tempLong && specifiedYear == tempYear) {
+            if (specifiedLat == tempLat && specifiedLong == tempLong &&
+                    specifiedYear == tempYear) {
                 matchList.add(purityReport);
             }
         }
@@ -153,18 +162,22 @@ public class HistoryGraphController {
             WaterPurityReport temp = monthList.get(key);
             if (contam) {
                 if (temp != null) {
-                    series.getData().add(new XYChart.Data(key, temp.getContamPPM()));
+                    series.getData().add(new XYChart.Data(key,
+                            temp.getContamPPM()));
                 }
             } else {
                 if (temp != null) {
-                    series.getData().add(new XYChart.Data(key, temp.getVirusPPM()));
+                    series.getData().add(new XYChart.Data(key,
+                            temp.getVirusPPM()));
                 }
             }
         }
         if (contam) {
-            series.setName("Location's (" + specifiedLat + ", " + specifiedLong + ") Contaminant PPM in Year " + specifiedYear);
+            series.setName("Location's (" + specifiedLat + ", " + specifiedLong
+                    + ") Contaminant PPM in Year " + specifiedYear);
         } else {
-            series.setName("Location's (" + specifiedLat + ", " + specifiedLong + ") Virus PPM in Year " + specifiedYear);
+            series.setName("Location's (" + specifiedLat + ", " + specifiedLong
+                    + ") Virus PPM in Year " + specifiedYear);
         }
 
         historyGraph.getData().add(series);

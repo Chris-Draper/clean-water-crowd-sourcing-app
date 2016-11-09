@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by sbuck on 9/21/2016.
+ * The standard user class - child of GenericUser
  */
 public class User extends GenericUser {
 

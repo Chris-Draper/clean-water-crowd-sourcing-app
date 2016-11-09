@@ -8,7 +8,7 @@ import java.util.DoubleSummaryStatistics;
 import java.util.Properties;
 
 /**
- * Created by ChrisPolack on 10/4/16.
+ * Interface for connecting to the database
  */
 public class DatabaseInterface {
 
@@ -24,7 +24,7 @@ public class DatabaseInterface {
      * Creates a new connection interface that the main application
      * will use to communicate with the database backend.
      *
-     * @throws SQLException
+     * @throws SQLException exception thrown on database connection error
      */
     public DatabaseInterface() throws SQLException {
 
@@ -65,7 +65,8 @@ public class DatabaseInterface {
             rhost = "localhost";
 
             int assigned_port = session.setPortForwardingL(lport, rhost, rport);
-            System.out.println("localhost:" + assigned_port + " -> " + rhost + ":" + rport);
+            System.out.println("localhost:" + assigned_port + " -> "
+                    + rhost + ":" + rport);
         } catch (JSchException e) {
             System.out.println("Error establishing SSH tunnel: " + e);
         }
@@ -77,8 +78,8 @@ public class DatabaseInterface {
      *
      * @param username username of the user attempting to login
      * @param password password of the user attempting to login
-     * @return A user object of the appropriate role if the username and password
-     * are valid, and null otherwise.
+     * @return A user object of the appropriate role if the
+     * username and password are valid, and null otherwise.
      */
     public GenericUser verifyUser(String username, String password) {
 
@@ -168,14 +169,15 @@ public class DatabaseInterface {
      * @param position role of the account to be registered
      * @return true if successfully registered, false otherwise
      */
-    public boolean registerUser(String username, String password, UserType position) {
-
+    public boolean registerUser(String username, String password,
+                                UserType position) {
         Statement stmt = null;
 
         String query =
                 "INSERT INTO cleanwater.users" +
                 "(username, password, position)" +
-                "VALUES ('" + username + "', '" + password + "', '" + position.getCode() + "');";
+                "VALUES ('" + username + "', '" + password + "', '"
+                        + position.getCode() + "');";
 
         try {
             stmt = dbConn.createStatement();
@@ -304,17 +306,18 @@ public class DatabaseInterface {
      * @return whether or not the report was successfully stored
      */
     public boolean submitWaterSourceReport(String date, String time, String num,
-                                           String reporter, Double latitude, Double longitude,
+                                           String reporter, Double latitude,
+                                           Double longitude,
                                            String type, String condition) {
-
         Statement stmt = null;
 
         String query =
                 "INSERT INTO cleanwater.source_reports" +
-                        " (`id`, `date`, `time`, `reporter`, `latitude`, `longitude`, `type`, `condition`) " +
+                        " (`id`, `date`, `time`, `reporter`, `latitude`, " +
+                        "`longitude`, `type`, `condition`) " +
                         "VALUES (" + num + ", '" + date + "', '" + time +
-                        "', '" + reporter + "', " + latitude + ", " + longitude +
-                        ", '" + type + "', '" + condition + "');";
+                        "', '" + reporter + "', " + latitude + ", "
+                        + longitude + ", '" + type + "', '" + condition + "');";
         try {
             stmt = dbConn.createStatement();
             stmt.executeUpdate(query);
@@ -343,7 +346,6 @@ public class DatabaseInterface {
 
         Statement stmt = null;
         String query = "SELECT max(id) FROM cleanwater.source_reports";
-
         try {
             stmt = dbConn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -368,7 +370,6 @@ public class DatabaseInterface {
                 }
             }
         }
-
         return 0;
 
     }
@@ -446,12 +447,17 @@ public class DatabaseInterface {
                 reporter = rs.getString("reporter");
                 latitude = rs.getDouble("latitude");
                 longitude = rs.getDouble("longitude");
-                type = WaterSourceReport.WaterType.valueOf(rs.getString("type"));
-                condition = WaterSourceReport.WaterCondition.valueOf(rs.getString("condition"));
+                type = WaterSourceReport.WaterType.valueOf(
+                        rs.getString("type")
+                );
+                condition = WaterSourceReport.WaterCondition.valueOf(
+                        rs.getString("condition")
+                );
 
-                WaterSourceReport report = new WaterSourceReport(date, time, reportNum, reporter,
-                        latitude, longitude, type, condition);
-
+                WaterSourceReport report = new WaterSourceReport(date, time,
+                        reportNum, reporter, latitude, longitude, type,
+                        condition
+                );
                 return report;
             }
 
@@ -486,17 +492,18 @@ public class DatabaseInterface {
      * @return whether or not the report was successfully stored
      */
     public boolean submitWaterPurityReport(String date, String time, String num,
-                                           String reporter, Double latitude, Double longitude,
-                                           String condition, String virus, String contaminant) {
-
+                                           String reporter, Double latitude,
+                                           Double longitude, String condition,
+                                           String virus, String contaminant) {
         Statement stmt = null;
-
         String query =
                 "INSERT INTO cleanwater.purity_reports" +
-                        " (`id`, `date`, `time`, `reporter`, `latitude`, `longitude`, `virus`, `contaminant`, `condition`) " +
-                        "VALUES (" + num + ", '" + date + "', '" + time +
-                        "', '" + reporter + "', " + latitude + ", " + longitude +
-                        ", " + virus + ", " + contaminant + ", '" + condition + "');";
+                " (`id`, `date`, `time`, `reporter`, `latitude`, " +
+                "`longitude`, `virus`, `contaminant`, `condition`) " +
+                "VALUES (" + num + ", '" + date + "', '" + time +
+                "', '" + reporter + "', " + latitude + ", " + longitude
+                + ", " + virus + ", " + contaminant + ", '" + condition
+                + "');";
 
         try {
             stmt = dbConn.createStatement();
@@ -630,12 +637,14 @@ public class DatabaseInterface {
                 reporter = rs.getString("reporter");
                 latitude = rs.getDouble("latitude");
                 longitude = rs.getDouble("longitude");
-                condition = WaterPurityReport.Condition.valueOf(rs.getString("condition"));
+                condition = WaterPurityReport.Condition.valueOf(rs.getString(
+                        "condition"));
                 virusPPM = rs.getInt("virus");
                 contaminantPPM = rs.getInt("contaminant");
-                WaterPurityReport report = new WaterPurityReport(date, time, reportNum, reporter,
-                        latitude, longitude, condition, virusPPM, contaminantPPM);
-
+                WaterPurityReport report = new WaterPurityReport(date, time,
+                        reportNum, reporter, latitude, longitude, condition,
+                        virusPPM, contaminantPPM
+                );
                 return report;
             }
 

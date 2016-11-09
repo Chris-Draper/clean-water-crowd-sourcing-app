@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by Chris on 10/10/2016.
+ * The object that stores all of teh water source report data
  */
 public class WaterSourceReport {
 

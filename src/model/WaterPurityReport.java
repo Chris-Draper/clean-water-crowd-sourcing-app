@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by sbuck on 10/21/2016.
+ * creates the Water Purity Reports within the application
  */
 public class WaterPurityReport {
 
@@ -22,7 +22,10 @@ public class WaterPurityReport {
     private double virusPPM;
     private double contamPPM;
 
-    public WaterPurityReport(String time, int reportNum, String reporterName, double lat, double longit, WaterPurityReport.Condition condition, double virusPPM, double contamPPM) {
+    public WaterPurityReport(String time, int reportNum, String reporterName,
+                             double lat, double longit,
+                             WaterPurityReport.Condition condition,
+                             double virusPPM, double contamPPM) {
         this.time = time;
         this.reportNum = reportNum;
         this.reporterName = reporterName;
@@ -33,13 +36,23 @@ public class WaterPurityReport {
         this.contamPPM = contamPPM;
     }
 
-    public WaterPurityReport(Date date, String time, int reportNum, String reporterName, double lat, double longit, WaterPurityReport.Condition condition, double virusPPM, double contamPPM) {
-        this(time, reportNum, reporterName, lat, longit, condition, virusPPM, contamPPM);
+    public WaterPurityReport(Date date, String time, int reportNum,
+                             String reporterName, double lat, double longit,
+                             WaterPurityReport.Condition condition,
+                             double virusPPM, double contamPPM) {
+        this(time, reportNum, reporterName, lat, longit, condition, virusPPM,
+                contamPPM
+        );
         this.actualDate = date;
     }
 
-    public WaterPurityReport(String date, String time, int reportNum, String reporterName, double lat, double longit, WaterPurityReport.Condition condition, double virusPPM, double contamPPM) {
-        this(time, reportNum, reporterName, lat, longit, condition, virusPPM, contamPPM);
+    public WaterPurityReport(String date, String time, int reportNum,
+                             String reporterName, double lat, double longit,
+                             WaterPurityReport.Condition condition,
+                             double virusPPM, double contamPPM) {
+        this(time, reportNum, reporterName, lat, longit, condition,
+                virusPPM, contamPPM
+        );
         String[] arr = date.split("[-]");
         int year = Integer.parseInt(arr[0]);
         int month = Integer.parseInt(arr[1]);
@@ -47,7 +60,6 @@ public class WaterPurityReport {
         this.actualDate = new Date(year - 1900, month, day);
 
     }
-
 
     public String toString() {
         return "\n----------------------\n" +
@@ -118,55 +130,55 @@ public class WaterPurityReport {
         return contamPPM;
     }
 
-    public void setContamPPM(double contamPPM) {
+    /*public void setContamPPM(double contamPPM) {
         this.contamPPM = contamPPM;
-    }
+    }*/
 
     public double getVirusPPM() {
         return virusPPM;
     }
 
-    public void setVirusPPM(double virusPPM) {
+    /*public void setVirusPPM(double virusPPM) {
         this.virusPPM = virusPPM;
-    }
+    }*/
 
     public int getReportNum() {
         return reportNum;
     }
 
-    public void setReportNum(int reportNum) {
+    /*public void setReportNum(int reportNum) {
         this.reportNum = reportNum;
-    }
+    }*/
 
     public String getReporterName() {
         return reporterName;
     }
 
-    public void setReporterName(String reporterName) {
+    /*public void setReporterName(String reporterName) {
         this.reporterName = reporterName;
-    }
+    }*/
 
     public double getLat() {
         return latitude;
     }
 
-    public void setLat(double latitude) {
+    /*public void setLat(double latitude) {
         this.latitude = latitude;
-    }
+    }*/
 
     public double getLong() {
         return longitude;
     }
 
-    public void setLong(double longitude) {
+    /*public void setLong(double longitude) {
         this.longitude = longitude;
-    }
+    }*/
 
     public Condition getCondition() {
         return condition;
     }
 
-    public void setCondition(char c) {
+    /*public void setCondition(char c) {
         this.condition = condition;
-    }
+    }*/
 }

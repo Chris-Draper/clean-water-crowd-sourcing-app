@@ -14,7 +14,7 @@ import model.WaterPurityReport;
 import java.util.ArrayList;
 
 /**
- * Created by nharper32 on 10/24/16.
+ * The controller that displays the list view of the water purity reports
  */
 public class ListPurityReportsController {
 
@@ -31,7 +31,8 @@ public class ListPurityReportsController {
 
     private ObservableList listItems = FXCollections.observableArrayList();
 
-    private ArrayList<WaterPurityReport> waterPurityReports = WaterPurityReportController.getWaterPurityReportList();
+    private ArrayList<WaterPurityReport> waterPurityReports =
+            WaterPurityReportController.getWaterPurityReportList();
 
     private int reportDisplayCounter = 0;
 
@@ -41,8 +42,10 @@ public class ListPurityReportsController {
 
     public void populateList() {
 
-        int startReport = mainApplication.getDatabaseConn().getMinPurityReportNum();
-        int endReport = mainApplication.getDatabaseConn().getMaxPurityReportNum();
+        int startReport = mainApplication.getDatabaseConn()
+                .getMinPurityReportNum();
+        int endReport = mainApplication.getDatabaseConn()
+                .getMaxPurityReportNum();
 
         for (int i = startReport; i <= endReport; i++) {
             listItems.add(i);
@@ -58,7 +61,8 @@ public class ListPurityReportsController {
 
 
         WaterPurityReport waterPurityReportData =
-                mainApplication.getDatabaseConn().getPurityReportInfo((int) reportList.getSelectionModel().getSelectedItem());
+                mainApplication.getDatabaseConn().getPurityReportInfo(
+                        (int) reportList.getSelectionModel().getSelectedItem());
 
         if (waterPurityReportData == null) {
 
@@ -69,15 +73,24 @@ public class ListPurityReportsController {
         } else {
 
             textArea.setText(
-                    "Report Number: " + waterPurityReportData.getReportNum() + "\n\n" +
-                            "Location Lat: " + waterPurityReportData.getLat() + "\n" +
-                            "Location Long: " + waterPurityReportData.getLong() + "\n" +
-                            "Date of report: " + waterPurityReportData.getDate() + "\n" +
-                            "Time of report: " + waterPurityReportData.getTime() + "\n" +
-                            "Reported By: " + waterPurityReportData.getReporterName() + "\n" +
-                            "Report Virus : " + waterPurityReportData.getVirusPPM() + "\n" +
-                            "Report contaminant : " + waterPurityReportData.getContamPPM() + "\n" +
-                            "Water Condition: " + waterPurityReportData.getCondition().getDescription()
+                    "Report Number: " + waterPurityReportData.getReportNum()
+                            + "\n\n" + "Location Lat: "
+                            + waterPurityReportData.getLat()
+                            + "\n" + "Location Long: "
+                            + waterPurityReportData.getLong()
+                            + "\n" + "Date of report: "
+                            + waterPurityReportData.getDate()
+                            + "\n" + "Time of report: "
+                            + waterPurityReportData.getTime()
+                            + "\n" + "Reported By: "
+                            + waterPurityReportData .getReporterName()
+                            + "\n" + "Report Virus : "
+                            + waterPurityReportData.getVirusPPM()
+                            + "\n" + "Report contaminant : "
+                            + waterPurityReportData.getContamPPM()
+                            + "\n" + "Water Condition: "
+                            + waterPurityReportData.getCondition()
+                            .getDescription()
             );
             textArea.setWrapText(true);
         }

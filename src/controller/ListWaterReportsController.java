@@ -13,7 +13,7 @@ import model.WaterSourceReport;
 import java.util.ArrayList;
 
 /**
- * Created by sbuck on 10/17/2016.
+ * Controls the list view of the water reports
  */
 public class ListWaterReportsController {
 
@@ -32,7 +32,8 @@ public class ListWaterReportsController {
 
     private static int reportDisplayCounter = 0;
 
-    private ArrayList<WaterSourceReport> waterSourceReports = WaterSourceReportController.getWaterSourceReportList();
+    private ArrayList<WaterSourceReport> waterSourceReports =
+            WaterSourceReportController.getWaterSourceReportList();
 
 
     public void clearList() {
@@ -41,8 +42,10 @@ public class ListWaterReportsController {
 
     public void populateList() {
 
-        int startReport = mainApplication.getDatabaseConn().getMinSourceReportNum();
-        int endReport = mainApplication.getDatabaseConn().getMaxSourceReportNum();
+        int startReport = mainApplication.getDatabaseConn()
+                .getMinSourceReportNum();
+        int endReport = mainApplication.getDatabaseConn()
+                .getMaxSourceReportNum();
 
         for (int i = startReport; i <= endReport; i++) {
             listItems.add(i);
@@ -57,7 +60,8 @@ public class ListWaterReportsController {
     public void handleMouseClicked() {
 
         WaterSourceReport waterSourceReportData =
-                mainApplication.getDatabaseConn().getSourceReportInfo((int) listView.getSelectionModel().getSelectedItem());
+                mainApplication.getDatabaseConn().getSourceReportInfo(
+                        (int) listView.getSelectionModel().getSelectedItem());
 
         if (waterSourceReportData == null) {
 
@@ -68,14 +72,21 @@ public class ListWaterReportsController {
         } else {
 
             textArea.setText(
-                    "Report Number: " + waterSourceReportData.getReportNum() + "\n\n" +
-                            "Location Lat: " + waterSourceReportData.getLat() + "\n" +
-                            "Location Long: " + waterSourceReportData.getLong() + "\n" +
-                            "Date of report: " + waterSourceReportData.getDate() + "\n" +
-                            "Time of report: " + waterSourceReportData.getTime() + "\n" +
-                            "Reported By: " + waterSourceReportData.getReporterName() + "\n" +
-                            "Source Type: " + waterSourceReportData.getSourceType() + "\n" +
-                            "Water Condition: " + waterSourceReportData.getCondition()
+                    "Report Number: " + waterSourceReportData.getReportNum()
+                            + "\n\n" + "Location Lat: "
+                            + waterSourceReportData.getLat()
+                            + "\n" + "Location Long: "
+                            + waterSourceReportData.getLong()
+                            + "\n" + "Date of report: "
+                            + waterSourceReportData.getDate()
+                            + "\n" + "Time of report: "
+                            + waterSourceReportData.getTime()
+                            + "\n" + "Reported By: "
+                            + waterSourceReportData.getReporterName()
+                            + "\n" + "Source Type: "
+                            + waterSourceReportData.getSourceType()
+                            + "\n" + "Water Condition: "
+                            + waterSourceReportData.getCondition()
             );
             textArea.setWrapText(true);
         }

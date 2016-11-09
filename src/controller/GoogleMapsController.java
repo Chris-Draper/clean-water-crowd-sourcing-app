@@ -23,7 +23,8 @@ import netscape.javascript.JSObject;
  * Helps to create the google map and display the location pins of water source
  * reports and water purity reports
  */
-public class GoogleMapsController implements Initializable, MapComponentInitializedListener {
+public class GoogleMapsController implements Initializable,
+        MapComponentInitializedListener {
 
     @FXML
     private GoogleMapView mapView;
@@ -51,10 +52,12 @@ public class GoogleMapsController implements Initializable, MapComponentInitiali
 
         map = mapView.createMap(mapOptions);
 
-        ArrayList<WaterSourceReport> sourceList = WaterSourceReportController.getWaterSourceReportList();
+        ArrayList<WaterSourceReport> sourceList =
+                WaterSourceReportController.getWaterSourceReportList();
         for (WaterSourceReport waterSource: sourceList) {
             MarkerOptions markerOptions = new MarkerOptions();
-            LatLong location = new LatLong(waterSource.getLat(), waterSource.getLong());
+            LatLong location = new LatLong(waterSource.getLat(),
+                    waterSource.getLong());
 
             markerOptions.position(location)
                     .visible(Boolean.TRUE)
@@ -65,7 +68,8 @@ public class GoogleMapsController implements Initializable, MapComponentInitiali
             map.addUIEventHandler(marker,
                     UIEventType.click,
                     (JSObject obj) -> {
-                        InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+                        InfoWindowOptions infoWindowOptions = new
+                                InfoWindowOptions();
                         infoWindowOptions.content(waterSource.toHtmlFormat());
 
                         InfoWindow window = new InfoWindow(infoWindowOptions);

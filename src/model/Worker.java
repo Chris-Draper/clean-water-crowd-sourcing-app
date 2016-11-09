@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by sbuck on 9/21/2016.
+ * The worker user class type
  */
 public class Worker extends User {
 
