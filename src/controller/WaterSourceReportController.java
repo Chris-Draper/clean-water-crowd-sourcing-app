@@ -108,7 +108,8 @@ public class WaterSourceReportController {
 
     @FXML
     private void handleSubmitWaterSourceReport() {
-        if (isCompleted()) {
+        if (isCompleted(reportSourceLat.getText(), reportSourceLong.getText(),
+                reportWaterType.getValue(), reportWaterCondition.getValue())) {
             double reportLat = Double.parseDouble(reportSourceLat.getText());
             double reportLong = Double.parseDouble(reportSourceLong.getText());
 
@@ -139,18 +140,35 @@ public class WaterSourceReportController {
             reportSourceLong.clear();
             this.setReportWaterConditionData();
             this.setReportWaterType();
-        }
-    }
-
-    private boolean isCompleted() {
-        //ensure all text boxes are filled in
-        boolean ans = true;
-        if (reportSourceLat.getText().equals("") || reportSourceLong.getText().equals("")
-                || reportWaterType.getValue() == null
-                || reportWaterCondition.getValue() == null) {
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "Please complete all fields", ButtonType.OK);
             alert.showAndWait();
+        }
+    }
+
+    /**
+     *
+     * Helper that returns boolean as to whether fields are filled
+     * @param sourceLat string latitude
+     * @param sourceLong string longitude
+     * @param waterType object water type
+     * @param waterCondition object water condition
+     * @return boolean of whether fields are filled
+     */
+    public boolean isCompleted(String sourceLat, String sourceLong, Object waterType, Object waterCondition) {
+        //ensure all text boxes are filled in
+        boolean ans = true;
+        if (sourceLat.equals("")) {
+            ans = false;
+        }
+        if (sourceLong.equals("")) {
+            ans = false;
+        }
+        if (waterType == null) {
+            ans = false;
+        }
+        if (waterCondition == null) {
             ans = false;
         }
         return ans;
