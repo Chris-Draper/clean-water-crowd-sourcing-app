@@ -38,44 +38,31 @@ public class RegistrationScreenController {
     @FXML
     private void handleRegisterPressed() {
         UserType type = (UserType) positionComboBox.getSelectionModel().selectedItemProperty().getValue();
-        if (isRegistrationInfoAcceptable(type)) {
+        if (isRegistrationInfoAcceptable(usernameTextField.getText(), passwordTextField.getText(),
+                type, mainApplication.getDatabaseConn())) {
 
             GenericUser loggedInUser;
             mainApplication.getDatabaseConn().registerUser(usernameTextField.getText(), passwordTextField.getText(), type);
             loggedInUser = mainApplication.getDatabaseConn().verifyUser(usernameTextField.getText(), passwordTextField.getText());
             mainApplication.setAuthenticatedUser(loggedInUser);
             mainApplication.switchToHomeScreen();
+        } else {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "Your input is not valid. Please re-enter username and password.", ButtonType.OK);
+            alert.showAndWait();
         }
     }
 
-    private boolean isRegistrationInfoAcceptable(UserType type) {
-        if (usernameTextField.getText().equals("") || passwordTextField.getText().equals("") || type == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR,
-                    "Please complete all fields", ButtonType.OK);
-            alert.showAndWait();
+    public boolean isRegistrationInfoAcceptable(String username, String password, UserType type,
+                                                DatabaseInterface db) {
+        if (username.equals("") || password.equals("") || type == null) {
             return false;
-        }
-        // Validate username is a valid username
-         else if (!usernameTextField.getText().matches("[a-zA-Z0-9]+$")) { //enter another username
-            Alert alert = new Alert(Alert.AlertType.ERROR,
-                    "Please re-enter username. Your username" +
-                            " can not have any special characters.", ButtonType.OK);
-            alert.showAndWait();
+        } else if (!username.matches("[a-zA-Z0-9]+$")) {
             return false;
-        } else if (usernameTextField.getText().charAt(0) > 122
-                || usernameTextField.getText().charAt(0) < 65) {
-            Alert alert = new Alert(Alert.AlertType.ERROR,
-                    "Please re-enter username. The first letter" +
-                            " of your username must be a letter", ButtonType.OK);
-            alert.showAndWait();
+        } else if (!password.matches("[a-zA-Z0-9]+$")) {
             return false;
-
-            // Check database to see if user already exists
-        } else if (mainApplication.getDatabaseConn().hasAlreadyRegistered(usernameTextField.getText())) {
-            Alert alert = new Alert(Alert.AlertType.ERROR,
-                    "Please choose another username. The username" +
-                            " entered is already in the system.", ButtonType.OK);
-            alert.showAndWait();
+        } else if (db.hasAlreadyRegistered(username)) {
             return false;
         }
         return true;
