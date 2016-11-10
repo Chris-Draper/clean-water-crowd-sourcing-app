@@ -7,7 +7,7 @@ public class WaterSourceReport {
 
     /* Administrator setters have not yet been implemented so these variables
     have been made final */
-    private String date;
+    private final String date;
     private final String time;
     private final int reportNum;
     private final String reporterName;
@@ -24,7 +24,7 @@ public class WaterSourceReport {
             this.description = description;
         }
 
-        String description;
+        final String description;
 
         public String toString() {
             return description;
@@ -38,7 +38,7 @@ public class WaterSourceReport {
             this.description = description;
         }
 
-        String description;
+        final String description;
 
         public String toString() {
             return description;
@@ -104,6 +104,29 @@ public class WaterSourceReport {
                 "<br>Report Condition : " + this.condition;
     }
 
+    /**
+     *
+     * @return the water source report data formatted for display in the
+     * water source report list view
+     */
+    public String listFormatString() {
+        return ("Report Number: " + this.getReportNum()
+                + "\n\n" + "Location Lat: "
+                + this.getLat()
+                + "\n" + "Location Long: "
+                + this.getLong()
+                + "\n" + "Date of report: "
+                + this.getDate()
+                + "\n" + "Time of report: "
+                + this.getTime()
+                + "\n" + "Reported By: "
+                + this.getReporterName()
+                + "\n" + "Source Type: "
+                + this.getSourceType()
+                + "\n" + "Water Condition: "
+                + this.getCondition());
+    }
+
     //all the getter and setter methods are for future manager accounts
     /* THE SETTER METHODS THAT ARE UNUSED HAVE BEEN COMMENTED OUT SINCE
     MANAGER ACCOUNT FUNCTIONALITY HAS NOT BEEN IMPLEMENTED */
@@ -111,7 +134,7 @@ public class WaterSourceReport {
     /**
      * @return the water source report date
      */
-    public String getDate() {
+    private String getDate() {
         return date;
     }
 
@@ -127,7 +150,7 @@ public class WaterSourceReport {
      *
      * @return the time of the water source report
      */
-    public String getTime() {
+    private String getTime() {
         return time;
     }
 
@@ -151,7 +174,7 @@ public class WaterSourceReport {
      *
      * @return the name of the person that reported the water source
      */
-    public String getReporterName() {
+    private String getReporterName() {
         return reporterName;
     }
 
@@ -187,7 +210,7 @@ public class WaterSourceReport {
      *
      * @return the type of the water source
      */
-    public WaterType getSourceType() {
+    private WaterType getSourceType() {
         return waterType;
     }
 
@@ -199,7 +222,7 @@ public class WaterSourceReport {
      *
      * @return the condition of the water source
      */
-    public WaterCondition getCondition() {
+    private WaterCondition getCondition() {
         return condition;
     }
 

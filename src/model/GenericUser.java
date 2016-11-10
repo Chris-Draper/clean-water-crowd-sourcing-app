@@ -34,7 +34,7 @@ public abstract class GenericUser {
      * @param userType the type of the GenericUser
      * @param id the id of the GenericUser
      */
-    public GenericUser(String username, UserType userType, int id) {
+    GenericUser(String username, UserType userType, int id) {
         this.username = username;
         this.userType = userType;
         this.id = id;

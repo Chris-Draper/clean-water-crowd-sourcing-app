@@ -3,7 +3,7 @@ package model;
 /**
  * The manager user profile type
  */
-public class Manager extends Worker {
+class Manager extends Worker {
 
     /**
      * Creates a Manager account object

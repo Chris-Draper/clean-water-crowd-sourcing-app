@@ -3,7 +3,7 @@ package model;
 /**
  * The standard user class - child of GenericUser
  */
-public class User extends GenericUser {
+class User extends GenericUser {
 
     /**
      * Creates a User object - an account with the lowest level rights
@@ -22,7 +22,7 @@ public class User extends GenericUser {
      * @param userType - the type of the User
      * @param id - the id of the User
      */
-    public User(String username, UserType userType, int id) {
+    User(String username, UserType userType, int id) {
         super(username, userType, id);
     }
 

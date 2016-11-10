@@ -58,6 +58,8 @@ public class RegistrationScreenController {
     }
 
     private boolean isRegistrationInfoAcceptable(UserType type) {
+        final int maxUserCharValue = 122;
+        final int minUserCharValue = 65;
         if (("").equals(usernameTextField.getText())
             || ("").equals(passwordTextField.getText())
             || (type == null)) {
@@ -77,8 +79,8 @@ public class RegistrationScreenController {
             );
             alert.showAndWait();
             return false;
-        } else if ((usernameTextField.getText().charAt(0) > 122)
-                || (usernameTextField.getText().charAt(0) < 65)) {
+        } else if ((usernameTextField.getText().charAt(0) > maxUserCharValue)
+                || (usernameTextField.getText().charAt(0) < minUserCharValue)) {
             Alert alert = new Alert(
                     Alert.AlertType.ERROR,
                     "Please re-enter username. The first letter" +

@@ -2,19 +2,16 @@ package controller;
 
 import fxapp.MainApplication;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import model.GenericUser;
 import model.WaterPurityReport;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -43,8 +40,8 @@ public class WaterPurityReportController {
     @FXML
     private TextField longTextField;
 
-    @FXML
-    private GridPane addressGridPane;
+    /*@FXML
+    private GridPane addressGridPane; for future use*/
 
     @FXML
     private TextField virusTextField;
@@ -57,9 +54,7 @@ public class WaterPurityReportController {
 
     private static Integer reportNum;
 
-    private static ArrayList<WaterPurityReport> waterPurityReportList;
-
-    private GenericUser currentUser;
+    private static List<WaterPurityReport> waterPurityReportList;
 
     private Date date;
 
@@ -133,9 +128,9 @@ public class WaterPurityReportController {
         }
     }
 
-    @FXML
+    /*@FXML
     private void handleCancelButton() {
-    }
+    }*/
 
     private boolean isCompleted() {
         //ensure all text boxes are filled in
@@ -167,7 +162,7 @@ public class WaterPurityReportController {
      * Get the date of a water purity report
      * @return returns the dte of aa water purity report
      */
-    public String getDate() {
+    private String getDate() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         Date dateObject = new Date();
         return dateFormat.format(dateObject);
@@ -187,7 +182,7 @@ public class WaterPurityReportController {
      * Sets the time of the water purity report
      * @return the time of the water purity report
      */
-    public String getTime() {
+    private String getTime() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date dateObject = new Date();
         return dateFormat.format(dateObject);
@@ -201,7 +196,7 @@ public class WaterPurityReportController {
      */
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
-        currentUser = this.mainApplication.getAuthenticatedUser();
+        GenericUser currentUser = this.mainApplication.getAuthenticatedUser();
         reporterNameLabel.setText(currentUser.getUsername());
 
         reportNum = mainApplication.getDatabaseConn()

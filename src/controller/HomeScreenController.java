@@ -1,7 +1,6 @@
 package controller;
 
 import fxapp.MainApplication;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ToggleButton;
@@ -26,7 +25,6 @@ public class HomeScreenController {
     private VBox welcomeMsgVBox;
     private VBox waterReportVbox;
     private VBox historyGraphVbox;
-    private BorderPane googleMapBorderPane;
 
     @FXML
     private ToggleButton homeButton;
@@ -52,10 +50,7 @@ public class HomeScreenController {
     @FXML
     private ToggleButton viewHistoryGraphButton;
 
-    private UserProfileController ctrl;
     private ListWaterReportsController ctrl_2;
-    private WaterPurityReportController ctrl_3;
-    private WaterSourceReportController ctrl_4;
     private ListPurityReportsController ctrl_5;
     private HistoryGraphController ctrl_7;
 
@@ -65,7 +60,6 @@ public class HomeScreenController {
      *
      * @param mainApplication the reference to the FX Application instance
      */
-
     public void setMainApp(MainApplication mainApplication) {
         this.mainApplication = mainApplication;
         rootLayout = mainApplication.getRootLayout();
@@ -96,6 +90,9 @@ public class HomeScreenController {
     }
 
     private void loadVBoxs() {
+        UserProfileController ctrl;
+        WaterPurityReportController ctrl_3;
+        WaterSourceReportController ctrl_4;
         try {
             //load the user profile screen
             FXMLLoader loader_1 = new FXMLLoader();
@@ -160,8 +157,8 @@ public class HomeScreenController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Can't find Vboxs");
-            System.out.println(e);
+            //System.out.println("Can't find Vboxs");
+            //System.out.println(e);
         }
     }
 
@@ -262,12 +259,12 @@ public class HomeScreenController {
     @FXML
     private void handleGoogleMapsButton() {
         try {
-            googleMapBorderPane = FXMLLoader.load(getClass()
+            BorderPane googleMapBorderPane = FXMLLoader.load(getClass()
                     .getResource("../view/HomeScreen_GoogleMaps.fxml"));
             rootLayout.setCenter(googleMapBorderPane);
             googleMapsButton.setSelected(true);
         } catch (IOException e) {
-            System.out.println("Failed to open Google Maps View!");
+            //System.out.println("Failed to open Google Maps View!");
             e.printStackTrace();
         }
     }

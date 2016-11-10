@@ -10,7 +10,7 @@ import java.util.AbstractList;*/
 /**
  * UserLog tracks all of the users that have accessed the application
  */
-public class UserLog {
+class UserLog {
 
     /*private AbstractList<GenericUser> userLog;
 

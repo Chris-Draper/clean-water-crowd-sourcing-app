@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vbox2" alignment="TOP_CENTER" maxHeight="-Infinity"
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity"
       maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
       prefHeight="570.0" prefWidth="660.0"
       xmlns="http://javafx.com/javafx/8.0.65"
@@ -100,7 +100,7 @@
             <Insets left="50.0" />
          </padding>
       </GridPane>
-      <GridPane fx:id="addressGridPane">
+      <GridPane>
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.0" minWidth="10.0"
                              prefWidth="128.0" />
@@ -210,7 +210,7 @@
       </GridPane>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
             <VBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="152.0">
-                  <Button fx:id="submitButton" defaultButton="true"
+                  <Button defaultButton="true"
                           mnemonicParsing="false" onAction="#handleSubmitButton"
                           text="Submit">
                      <font>
@@ -220,8 +220,8 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="cancelButton" alignment="CENTER"
-                          mnemonicParsing="false" onAction="#handleCancelButton"
+                  <Button alignment="CENTER"
+                          mnemonicParsing="false"
                           prefHeight="37.0" prefWidth="121.0" text="Cancel">
                      <font>
                         <Font size="16.0" />

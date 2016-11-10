@@ -96,7 +96,7 @@
             <Insets />
          </VBox.margin>
       </GridPane>
-      <GridPane fx:id="addressGridPane">
+      <GridPane>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.0"
                                minWidth="10.0" prefWidth="128.0" />

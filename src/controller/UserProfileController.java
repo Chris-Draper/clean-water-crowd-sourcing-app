@@ -4,15 +4,11 @@ import fxapp.MainApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.VBox;
-import model.GenericUser;
 import model.UserType;
-import java.sql.SQLException;
 
 /**
  * Controls the user profile view of the main application
@@ -98,14 +94,9 @@ public class UserProfileController {
             titleComboBox.setValue(mainApplication.getAuthenticatedUser()
                     .getUserType());
         } catch (Exception e) {
-            System.out.println("Error closing statement after updating" +
-                    " profile: " + e);
+            //System.out.println("Error closing statement after updating" +
+            //        " profile: " + e);
         }
-    }
-
-    private void fillProfile() throws SQLException {
-
-
     }
 
     /**

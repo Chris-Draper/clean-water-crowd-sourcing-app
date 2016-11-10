@@ -3,7 +3,7 @@ package model;
 /**
  * The worker user class type
  */
-public class Worker extends User {
+class Worker extends User {
 
     /**
      * The class used to create the worker level user account
@@ -21,7 +21,7 @@ public class Worker extends User {
      * @param userType - the user type of the Worker
      * @param id - the id of the Worker
      */
-    public Worker(String username, UserType userType, int id) {
+    Worker(String username, UserType userType, int id) {
         super(username, userType, id);
     }
 }

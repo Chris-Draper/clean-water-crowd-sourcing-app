@@ -11,8 +11,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import model.WaterPurityReport;
 
-import java.util.ArrayList;
-
 /**
  * The controller that displays the list view of the water purity reports
  */
@@ -29,7 +27,8 @@ public class ListPurityReportsController {
     @FXML
     private TextArea textArea;
 
-    private final ObservableList listItems = FXCollections.observableArrayList();
+    private final ObservableList listItems
+            = FXCollections.observableArrayList();
 
     /**
      * Clears the list of water purity reports
@@ -74,24 +73,7 @@ public class ListPurityReportsController {
         } else {
 
             textArea.setText(
-                    "Report Number: " + waterPurityReportData.getReportNum()
-                            + "\n\n" + "Location Lat: "
-                            + waterPurityReportData.getLat()
-                            + "\n" + "Location Long: "
-                            + waterPurityReportData.getLong()
-                            + "\n" + "Date of report: "
-                            + waterPurityReportData.getDate()
-                            + "\n" + "Time of report: "
-                            + waterPurityReportData.getTime()
-                            + "\n" + "Reported By: "
-                            + waterPurityReportData .getReporterName()
-                            + "\n" + "Report Virus : "
-                            + waterPurityReportData.getVirusPPM()
-                            + "\n" + "Report contaminant : "
-                            + waterPurityReportData.getContamPPM()
-                            + "\n" + "Water Condition: "
-                            + waterPurityReportData.getCondition()
-                            .getDescription()
+                    waterPurityReportData.listFormatString()
             );
             textArea.setWrapText(true);
         }

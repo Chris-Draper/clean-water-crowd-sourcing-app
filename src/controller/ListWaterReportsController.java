@@ -8,10 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import model.WaterSourceReport;
-import java.util.ArrayList;
 
 /**
  * Controls the list view of the water reports
@@ -25,9 +22,8 @@ public class ListWaterReportsController {
 
     @FXML private TextArea textArea; //used on line 79
 
-    private final ObservableList listItems = FXCollections.observableArrayList();
-
-    private static int reportDisplayCounter = 0; //used on line 57
+    private final ObservableList listItems
+            = FXCollections.observableArrayList();
 
     /**
      * Clears the list of water purity reports
@@ -50,8 +46,6 @@ public class ListWaterReportsController {
             listItems.add(i);
             listView.setItems(listItems);
         }
-
-        reportDisplayCounter = endReport - startReport;
     }
 
     /**
@@ -74,21 +68,7 @@ public class ListWaterReportsController {
         } else {
 
             textArea.setText(
-                    "Report Number: " + waterSourceReportData.getReportNum()
-                            + "\n\n" + "Location Lat: "
-                            + waterSourceReportData.getLat()
-                            + "\n" + "Location Long: "
-                            + waterSourceReportData.getLong()
-                            + "\n" + "Date of report: "
-                            + waterSourceReportData.getDate()
-                            + "\n" + "Time of report: "
-                            + waterSourceReportData.getTime()
-                            + "\n" + "Reported By: "
-                            + waterSourceReportData.getReporterName()
-                            + "\n" + "Source Type: "
-                            + waterSourceReportData.getSourceType()
-                            + "\n" + "Water Condition: "
-                            + waterSourceReportData.getCondition()
+                    waterSourceReportData.listFormatString()
             );
             textArea.setWrapText(true);
         }

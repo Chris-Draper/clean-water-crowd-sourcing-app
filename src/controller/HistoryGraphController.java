@@ -22,8 +22,6 @@ import java.util.Collections;
  */
 public class HistoryGraphController {
 
-    private MainApplication mainApplication; //called on line 61
-
     private DatabaseInterface database;
 
     @FXML
@@ -49,7 +47,7 @@ public class HistoryGraphController {
 
     private final Set<String> locationList = new HashSet<>();
     private final Set<String> yearList = new HashSet<>();
-    private Set<WaterPurityReport> matchList;
+
     private XYChart.Series series;
 
     /**
@@ -59,7 +57,6 @@ public class HistoryGraphController {
      * @param mainApplication the reference to the FX Application instance
      */
     public void setMainApplication(MainApplication mainApplication) {
-        this.mainApplication = mainApplication;
         this.database = mainApplication.getDatabaseConn();
         fillLocationList();
         ppmCombo.getItems().addAll("Virus", "Contaminant");
@@ -127,7 +124,8 @@ public class HistoryGraphController {
                 .getSelectedItem());
         yAxis.setLabel("Contaminant/Virus PPM");
         xAxis.setLowerBound(0);
-        xAxis.setUpperBound(12);
+        final int graphUpperBound = 12;
+        xAxis.setUpperBound(graphUpperBound);
         String locationEntry = (String) locationCombo.getSelectionModel()
                 .getSelectedItem();
         String[] locationArr = locationEntry.split("[,]");
@@ -136,7 +134,7 @@ public class HistoryGraphController {
         int specifiedYear = Integer.parseInt((String) yearCombo
                 .getSelectionModel().getSelectedItem());
 
-        matchList = new HashSet<>();
+        Set<WaterPurityReport> matchList = new HashSet<>();
 
         int maxNum = database.getMaxPurityReportNum();
         int minNum = database.getMinPurityReportNum();

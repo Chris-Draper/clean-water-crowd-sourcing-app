@@ -12,7 +12,6 @@ import com.lynden.gmapsfx.javascript.object.InfoWindowOptions;
 import com.lynden.gmapsfx.javascript.object.InfoWindow;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,9 +37,11 @@ public class GoogleMapsController implements Initializable,
 
     @Override
     public void mapInitialized() {
+        final double latCenter = 33.78;
+        final double longCenter = -84.40;
         MapOptions mapOptions = new MapOptions();
 
-        mapOptions.center(new LatLong(33.78, -84.40))
+        mapOptions.center(new LatLong(latCenter, longCenter))
                 .mapType(MapTypeIdEnum.ROADMAP)
                 .overviewMapControl(false)
                 .panControl(false)

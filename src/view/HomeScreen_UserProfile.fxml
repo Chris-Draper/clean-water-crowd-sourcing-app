@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vbox2" alignment="TOP_CENTER" maxHeight="-Infinity"
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity"
       maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
       prefHeight="570.0" prefWidth="660.0"
       xmlns="http://javafx.com/javafx/8.0.65"
@@ -175,7 +175,7 @@
             </Label>
       </GridPane>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="83.0" prefWidth="660.0">
-            <Button fx:id="updateProfileButton" mnemonicParsing="false"
+            <Button mnemonicParsing="false"
                     onAction="#handleUpdateProfileButton"
                     prefHeight="40.0" prefWidth="110.0"
                     text="Update Profile">

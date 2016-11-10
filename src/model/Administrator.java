@@ -3,7 +3,7 @@ package model;
 /**
  * The class for an Administrator level user account
  */
-public class Administrator extends GenericUser {
+class Administrator extends GenericUser {
 
     /**
      * Creates an administrator user object

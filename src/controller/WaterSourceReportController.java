@@ -10,6 +10,7 @@ import javafx.scene.control.ButtonType;
 import model.WaterSourceReport;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -47,7 +48,7 @@ public class WaterSourceReportController {
 
     private static Integer reportSystemCount;
 
-    private static ArrayList<WaterSourceReport> waterSourceReportList;
+    private static List<WaterSourceReport> waterSourceReportList;
 
     /* for future implementation consider using
     import javafx.scene.layout.GridPane;
@@ -171,7 +172,7 @@ public class WaterSourceReportController {
      * Gives external classes access to the water source report list
      * @return the list of water source reports
      */
-    public static ArrayList<WaterSourceReport> getWaterSourceReportList() {
+    public static Iterable<WaterSourceReport> getWaterSourceReportList() {
         return waterSourceReportList;
     }
 

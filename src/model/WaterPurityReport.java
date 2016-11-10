@@ -34,10 +34,10 @@ public class WaterPurityReport {
      * @param virusPPM the virus parts per million value of the water
      * @param contamPPM the contaminant parts per million value of the water
      */
-    public WaterPurityReport(String time, int reportNum, String reporterName,
-                             double lat, double longit,
-                             WaterPurityReport.Condition condition,
-                             double virusPPM, double contamPPM) {
+    private WaterPurityReport(String time, int reportNum, String reporterName,
+                              double lat, double longit,
+                              WaterPurityReport.Condition condition,
+                              double virusPPM, double contamPPM) {
         this.time = time;
         this.reportNum = reportNum;
         this.reporterName = reporterName;
@@ -95,7 +95,8 @@ public class WaterPurityReport {
         int year = Integer.parseInt(arr[0]);
         int month = Integer.parseInt(arr[1]);
         int day = Integer.parseInt(arr[2]);
-        this.actualDate = new Date(year - 1900, month, day);
+        final int yearSubtract = 1900;
+        this.actualDate = new Date(year - yearSubtract, month, day);
     }
 
     /**
@@ -115,6 +116,31 @@ public class WaterPurityReport {
                 "\nReport Condition : " + this.condition;
     }
 
+    /**
+     *
+     * @return the water purity report data formatted as an html String
+     */
+    public String listFormatString() {
+        return ("Report Number: " + this.getReportNum()
+                + "\n\n" + "Location Lat: "
+                + this.getLat()
+                + "\n" + "Location Long: "
+                + this.getLong()
+                + "\n" + "Date of report: "
+                + this.getDate()
+                + "\n" + "Time of report: "
+                + this.getTime()
+                + "\n" + "Reported By: "
+                + this .getReporterName()
+                + "\n" + "Report Virus : "
+                + this.getVirusPPM()
+                + "\n" + "Report contaminant : "
+                + this.getContamPPM()
+                + "\n" + "Water Condition: "
+                + this.getCondition()
+                .getDescription());
+    }
+
     public enum Condition {
         S("Safe"), T("Treatable"), U("Unsafe");
 
@@ -130,7 +156,7 @@ public class WaterPurityReport {
             return description;
         }
 
-        String description;
+        final String description;
 
         /**
          *
@@ -186,7 +212,7 @@ public class WaterPurityReport {
      *
      * @return the time of the water purity report
      */
-    public String getTime() {
+    private String getTime() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         return dateFormat.format(actualDate);
     }
@@ -223,7 +249,7 @@ public class WaterPurityReport {
      *
      * @return the report number of the water purity report
      */
-    public int getReportNum() {
+    private int getReportNum() {
         return reportNum;
     }
 
@@ -235,7 +261,7 @@ public class WaterPurityReport {
      *
      * @return the name of the person that submitted the water purity report
      */
-    public String getReporterName() {
+    private String getReporterName() {
         return reporterName;
     }
 
@@ -271,7 +297,7 @@ public class WaterPurityReport {
      *
      * @return the condition of the water of the water purity report
      */
-    public Condition getCondition() {
+    private Condition getCondition() {
         return condition;
     }
 

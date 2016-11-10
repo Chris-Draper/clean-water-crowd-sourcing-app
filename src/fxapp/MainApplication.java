@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import model.DatabaseInterface;
 import model.GenericUser;
-import model.UserLog;
 
 /**
  * Launches the main application
@@ -92,7 +91,8 @@ public class MainApplication extends Application {
             }
         } catch (IOException e) {
             //error on load, so log it
-            System.out.println("Failed to find the fxml file for MainScreen.");
+            //System.out.println("Failed to find the fxml file
+            // for MainScreen.");
             e.printStackTrace();
         }
     }
@@ -124,8 +124,8 @@ public class MainApplication extends Application {
 
         } catch (IOException e){
             //error on load, so log it
-            System.out.println("Failed to find the fxml file for Log"
-                    + " in Screen!!");
+            //System.out.println("Failed to find the fxml file for Log"
+            //        + " in Screen!!");
             e.printStackTrace();
         }
 
@@ -155,7 +155,8 @@ public class MainApplication extends Application {
             mainAppScreen.show();
 
         } catch (IOException e) {
-            System.out.println("Failed to find the fxml file for Home Screen!");
+            //System.out.println("Failed to find the fxml file
+            // for Home Screen!");
             e.printStackTrace();
         }
     }
@@ -183,8 +184,8 @@ public class MainApplication extends Application {
             mainAppScreen.setScene(scene);
             mainAppScreen.show();
         } catch (IOException e) {
-            System.out.println("Failed to find the fxml file for Registration"
-                    + " Screen!");
+            //System.out.println("Failed to find the fxml file for Registration"
+            //        + " Screen!");
             e.printStackTrace();
         }
     }
