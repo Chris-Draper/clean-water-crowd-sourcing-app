@@ -24,7 +24,7 @@ public class HistoryGraphController {
     private DatabaseInterface database;
 
     @FXML
-    private LineChart historyGraph;
+    private LineChart<Integer, Double> historyGraph;
 
     @FXML
     private NumberAxis xAxis;
@@ -44,7 +44,7 @@ public class HistoryGraphController {
     private final Collection<String> locationList = new HashSet<>();
     private final Collection<String> yearList = new HashSet<>();
 
-    private XYChart.Series series;
+    private XYChart.Series<Integer, Double> series;
 
     /**
      * allow for calling back to the mainApplication application code if
@@ -154,20 +154,20 @@ public class HistoryGraphController {
         if (series != null) {
             historyGraph.getData().clear();
         }
-        series = new XYChart.Series();
+        series = new XYChart.Series<>();
         List<Integer> templist = new ArrayList<>(monthList.keySet());
         Collections.sort(templist);
 
-        for (Object key: templist) {
+        for (Integer key: templist) {
             WaterPurityReport temp = monthList.get(key);
             if (contaminant) {
                 if (temp != null) {
-                    series.getData().add(new XYChart.Data(key,
+                    series.getData().add(new XYChart.Data<>(key,
                             temp.getContamPPM()));
                 }
             } else {
                 if (temp != null) {
-                    series.getData().add(new XYChart.Data(key,
+                    series.getData().add(new XYChart.Data<>(key,
                             temp.getVirusPPM()));
                 }
             }
