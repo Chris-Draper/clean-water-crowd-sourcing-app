@@ -16,7 +16,7 @@ public class LoginScreenController {
     private MainApplication mainApplication;
 
     @FXML
-    private TextField usernameTextField;
+    private TextField usernameTextField; //does not need to be assigned
 
     @FXML
     private PasswordField passwordField;

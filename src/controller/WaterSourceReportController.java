@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.GridPane;
 import model.WaterSourceReport;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,9 +22,6 @@ public class WaterSourceReportController {
     private MainApplication mainApplication;
 
     @FXML
-    private GridPane addressGridPane;
-
-    @FXML
     private Label reporterName;
 
     @FXML
@@ -35,7 +31,7 @@ public class WaterSourceReportController {
     private TextField reportSourceLong;
 
     @FXML
-    private Label reportNumLabel;
+    private Label reportNumLabel; //used on line 76
 
     @FXML
     private Label reportDate;
@@ -52,6 +48,10 @@ public class WaterSourceReportController {
     private static Integer reportSystemCount;
 
     private static ArrayList<WaterSourceReport> waterSourceReportList;
+
+    /* for future implementation consider using
+    import javafx.scene.layout.GridPane;
+    @FXML private GridPane gridPane for google maps */
 
     /**
      * Sets the main application

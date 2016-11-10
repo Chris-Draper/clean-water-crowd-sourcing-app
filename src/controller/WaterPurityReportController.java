@@ -53,24 +53,6 @@ public class WaterPurityReportController {
     private TextField contTextField;
 
     @FXML
-    private RadioButton safeButton;
-
-    @FXML
-    private RadioButton treatableButton;
-
-    @FXML
-    private RadioButton unsafeButton;
-
-    @FXML
-    private VBox vbox2;
-
-    @FXML
-    private Button submitButton;
-
-    @FXML
-    private Button cancelButton;
-
-    @FXML
     private ComboBox<WaterPurityReport.Condition> conditionComboBox;
 
     private static Integer reportNum;
@@ -191,13 +173,15 @@ public class WaterPurityReportController {
         return dateFormat.format(dateObject);
     }
 
+    /*This method has not yet been implemented yet because the functionality
+    of administrator accounts has not yet been created */
     /**
      * Sets the date of a water purity report
      * @param dateTime - the date of the water purity report
      */
-    public void setDate(String dateTime) {
-        this.date = date;
-    }
+    /*public void setDate(Date dateTime) {
+        this.date = dateTime;
+    }*/
 
     /**
      * Sets the time of the water purity report
@@ -207,14 +191,6 @@ public class WaterPurityReportController {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Date dateObject = new Date();
         return dateFormat.format(dateObject);
-    }
-
-    /**
-     * Gives public access to the water purity reports list
-     * @return the water purity report list as an array list object
-     */
-    public static ArrayList<WaterPurityReport> getWaterPurityReportList() {
-        return waterPurityReportList;
     }
 
     /**

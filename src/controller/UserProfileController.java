@@ -21,11 +21,6 @@ public class UserProfileController {
 
     private MainApplication mainApplication;
 
-    private VBox rootLayout;
-
-    @FXML
-    private Button updateProfileButton;
-
     @FXML
     private TextField nameTextField;
 
@@ -54,11 +49,6 @@ public class UserProfileController {
 
     @FXML
     private TextField phoneNumField;
-
-    @FXML
-    private VBox vbox2;
-
-    private GenericUser currentUser;
 
     @FXML
     private void initialize() {

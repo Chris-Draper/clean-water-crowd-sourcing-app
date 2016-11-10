@@ -9,6 +9,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import model.WaterSourceReport;
 import java.util.ArrayList;
 
@@ -20,20 +21,13 @@ public class ListWaterReportsController {
     private MainApplication mainApplication;
 
     @FXML
-    private VBox listWaterReportVBox;
-
-    @FXML
     private ListView listView;
 
-    @FXML
-    private TextArea textArea;
+    @FXML private TextArea textArea; //used on line 79
 
     private final ObservableList listItems = FXCollections.observableArrayList();
 
-    private static int reportDisplayCounter = 0;
-
-    private final ArrayList<WaterSourceReport> waterSourceReports =
-            WaterSourceReportController.getWaterSourceReportList();
+    private static int reportDisplayCounter = 0; //used on line 57
 
     /**
      * Clears the list of water purity reports

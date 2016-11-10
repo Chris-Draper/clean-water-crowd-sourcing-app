@@ -2,7 +2,6 @@ package model;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -10,9 +9,7 @@ import java.util.Date;
  */
 public class WaterPurityReport {
 
-    private String date;
     private Date actualDate;
-    private Calendar calendar;
     /* The below fields have been made final as the setters used by
     administrator accounts have not yet been implemented within
     the application*/

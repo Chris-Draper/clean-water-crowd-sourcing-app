@@ -22,7 +22,7 @@ import java.util.Collections;
  */
 public class HistoryGraphController {
 
-    private MainApplication mainApplication;
+    private MainApplication mainApplication; //called on line 61
 
     private DatabaseInterface database;
 

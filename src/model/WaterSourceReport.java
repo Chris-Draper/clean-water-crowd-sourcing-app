@@ -119,9 +119,9 @@ public class WaterSourceReport {
      * Sets the date of the water source report
      * @param dateTime - the new water source report date
      */
-    public void setDate(String dateTime) {
+    /*public void setDate(String dateTime) {
         this.date = dateTime;
-    }
+    }*/
 
     /**
      *

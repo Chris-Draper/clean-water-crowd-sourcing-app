@@ -65,6 +65,22 @@ public abstract class GenericUser {
      */
     public Date getDate() { return date; }
 
+    /**
+     * Test to see if two GenericUsers are equal to each other
+     *
+     * @param o the GenericUser you are testing for comparison
+     * @return true if the GenericUsers match, false if they do not match
+     */
+    public boolean equals(Object o) {
+        if(o == null) {
+            return false;
+        } else {
+            GenericUser user = (GenericUser) o;
+            return (this.getUsername().equals(user.getUsername()))
+                    && (this.id == user.getID());
+        }
+    }
+
     //all these variables are not used in the current code so they are commented
     //out in case we want to implement this feature in the future
 
@@ -118,15 +134,4 @@ public abstract class GenericUser {
     }
 
     public String getPhoneNumber() {return phoneNumber; }*/
-
-    public boolean equals(Object o) {
-        if(o == null) {
-            return false;
-        } else {
-            GenericUser user = (GenericUser) o;
-            return (this.getUsername().equals(user.getUsername()))
-                    && (this.id == user.getID());
-        }
-    }
-
 }
