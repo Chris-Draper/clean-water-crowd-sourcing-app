@@ -1,4 +1,4 @@
 .DS_Store
 out/
 .idea/
-model/AdministratorTest.java
+src/model/AdministratorTest
