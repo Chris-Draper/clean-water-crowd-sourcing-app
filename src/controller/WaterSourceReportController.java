@@ -46,7 +46,7 @@ public class WaterSourceReportController {
     @FXML
     private ComboBox<WaterSourceReport.WaterType> reportWaterType;
 
-    private static Integer reportSystemCount;
+    private Integer reportSystemCount;
 
     private static List<WaterSourceReport> waterSourceReportList;
 
@@ -138,7 +138,8 @@ public class WaterSourceReportController {
             alert.setContentText("Your water source report was submitted"
                     + " successfully");
             alert.showAndWait();
-            reportSystemCount++;
+            reportSystemCount = mainApplication.getDatabaseConn()
+                    .getMaxSourceReportNum() + 1;
             reportDate.setText(this.getDate());
             reportTime.setText(this.getTime());
             reportNumLabel.setText(reportSystemCount.toString());

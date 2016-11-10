@@ -137,8 +137,7 @@ public class WaterPurityReport {
                 + "\n" + "Report contaminant : "
                 + this.getContamPPM()
                 + "\n" + "Water Condition: "
-                + this.getCondition()
-                .getDescription());
+                + this.getCondition());
     }
 
     public enum Condition {
@@ -146,14 +145,6 @@ public class WaterPurityReport {
 
         Condition (String description) {
             this.description = description;
-        }
-
-        /**
-         * @return a description stating if the water is safe, treatable,
-         * or unsafe
-         */
-        public String getDescription() {
-            return description;
         }
 
         final String description;

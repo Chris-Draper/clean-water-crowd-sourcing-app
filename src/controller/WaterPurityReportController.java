@@ -11,8 +11,6 @@ import model.GenericUser;
 import model.WaterPurityReport;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -52,24 +50,13 @@ public class WaterPurityReportController {
     @FXML
     private ComboBox<WaterPurityReport.Condition> conditionComboBox;
 
-    private static Integer reportNum;
-
-    private static List<WaterPurityReport> waterPurityReportList;
-
-    private Date date;
-
-    /**
-     * Creates the water purity list that is accessed by the Google Map
-     */
-    public static void initWaterPurityList() {
-        waterPurityReportList = new ArrayList<>();
-    }
+    private Integer reportNum;
 
     @FXML
     private void initialize() {
 
         //set text for all labels based on person doing this
-        date = new Date();
+        Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateLabel.setText(dateFormat.format(date));
         dateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -87,22 +74,6 @@ public class WaterPurityReportController {
             double reportLat = Double.parseDouble(latTextField.getText());
             double reportLong = Double.parseDouble(longTextField.getText());
 
-           /* waterPurityReportList.add(new WaterPurityReport(
-                    dateLabel.getText(), timeLabel.getText(),
-                    reportNum, reporterNameLabel.getText(),
-                    reportLat, reportLong, conditionComboBox.getValue(),
-                    Double.parseDouble(virusTextField.getText()),
-                    Double.parseDouble(contTextField.getText())
-            ));*/
-
-            waterPurityReportList.add(new WaterPurityReport(
-                    date, timeLabel.getText(),
-                    reportNum, reporterNameLabel.getText(),
-                    reportLat, reportLong, conditionComboBox.getValue(),
-                    Double.parseDouble(virusTextField.getText()),
-                    Double.parseDouble(contTextField.getText())
-            ));
-
             mainApplication.getDatabaseConn().submitWaterPurityReport(
                     dateLabel.getText(), timeLabel.getText(),
                     reportNumLabel.getText(), reporterNameLabel.getText(),
@@ -116,7 +87,8 @@ public class WaterPurityReportController {
             alert.setContentText("Your water Purity report was submitted"
                     + " successfully");
             alert.showAndWait();
-            reportNum++;
+            reportNum = mainApplication.getDatabaseConn()
+                    .getMaxPurityReportNum() + 1;
             dateLabel.setText(this.getDate());
             timeLabel.setText(this.getTime());
             reportNumLabel.setText(reportNum.toString());

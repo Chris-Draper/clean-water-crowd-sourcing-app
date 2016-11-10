@@ -48,7 +48,6 @@ public class MainApplication extends Application {
         initRootLayout(mainAppScreen);
 
         WaterSourceReportController.initWaterReportList();
-        WaterPurityReportController.initWaterPurityList();
     }
 
     /**

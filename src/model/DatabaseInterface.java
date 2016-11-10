@@ -18,7 +18,7 @@ public class DatabaseInterface {
     private Connection dbConn;
 
     // SSH Variables
-    public Session session;
+    private Session session;
 
     /**
      * Creates a new connection interface that the main application
@@ -94,10 +94,11 @@ public class DatabaseInterface {
                 id = rs.getInt("id");
                 position = rs.getString("position");
 
+                //This is going to be jank - fix later
                 if ("U".equals(position)) {
                     loggedInUser = new User(username, id);
                 } else if ("W".equals(position)) {
-                    loggedInUser = new Worker(username, id);
+                    loggedInUser = new Worker(username, UserType.Worker, id);
                 } else if ("M".equals(position)) {
                     loggedInUser = new Manager(username, id);
                 } else if ("A".equals(position)) {
@@ -115,8 +116,8 @@ public class DatabaseInterface {
                     //System.out.println("Failed to close statement.");
                 }
             }
-            return loggedInUser;
         }
+        return loggedInUser;
     }
 
     /**
@@ -158,9 +159,8 @@ public class DatabaseInterface {
      * @param username username of the user attempting to register
      * @param password password that will be associated with the account
      * @param position role of the account to be registered
-     * @return true if successfully registered, false otherwise
      */
-    public boolean registerUser(String username, String password,
+    public void registerUser(String username, String password,
                                 UserType position) {
         Statement stmt = null;
 
@@ -173,10 +173,8 @@ public class DatabaseInterface {
         try {
             stmt = dbConn.createStatement();
             stmt.executeUpdate(query);
-            return true;
         } catch (SQLException e) {
             //System.out.println("Error creating new user: " + e);
-            return false;
         } finally {
             if (stmt != null) {
                 try {
@@ -294,9 +292,8 @@ public class DatabaseInterface {
      * @param longitude longitude of the water source
      * @param type type of the water source
      * @param condition condition of the water source
-     * @return whether or not the report was successfully stored
      */
-    public boolean submitWaterSourceReport(String date, String time, String num,
+    public void submitWaterSourceReport(String date, String time, String num,
                                            String reporter, Double latitude,
                                            Double longitude,
                                            String type, String condition) {
@@ -312,10 +309,8 @@ public class DatabaseInterface {
         try {
             stmt = dbConn.createStatement();
             stmt.executeUpdate(query);
-            return true;
         } catch (SQLException e) {
             //System.out.println("Error creating new water report: " + e);
-            return false;
         } finally {
             if (stmt != null) {
                 try {
@@ -479,9 +474,8 @@ public class DatabaseInterface {
      * @param condition condition of the water
      * @param virus ppm of viruses in the water
      * @param contaminant ppm of contaminants in the water
-     * @return whether or not the report was successfully stored
      */
-    public boolean submitWaterPurityReport(String date, String time, String num,
+    public void submitWaterPurityReport(String date, String time, String num,
                                            String reporter, Double latitude,
                                            Double longitude, String condition,
                                            String virus, String contaminant) {
@@ -498,11 +492,9 @@ public class DatabaseInterface {
         try {
             stmt = dbConn.createStatement();
             stmt.executeUpdate(query);
-            return true;
         } catch (SQLException e) {
             //System.out.println("Error creating new water purity report: "
             // + e);
-            return false;
         } finally {
             if (stmt != null) {
                 try {
