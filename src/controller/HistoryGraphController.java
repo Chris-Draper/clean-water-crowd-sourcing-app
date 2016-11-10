@@ -5,17 +5,16 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import model.DatabaseInterface;
 import model.WaterPurityReport;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Collections;
+import java.util.Map;
 
 /**
  * Controls the display of the history graph of water contamination
@@ -34,19 +33,16 @@ public class HistoryGraphController {
     private NumberAxis yAxis;
 
     @FXML
-    private ComboBox locationCombo;
+    private ComboBox<String> locationCombo;
 
     @FXML
-    private ComboBox yearCombo;
+    private ComboBox<String> yearCombo;
 
     @FXML
-    private ComboBox ppmCombo;
+    private ComboBox<String> ppmCombo;
 
-    @FXML
-    private Button displayGraphButton;
-
-    private final Set<String> locationList = new HashSet<>();
-    private final Set<String> yearList = new HashSet<>();
+    private final Collection<String> locationList = new HashSet<>();
+    private final Collection<String> yearList = new HashSet<>();
 
     private XYChart.Series series;
 
@@ -114,7 +110,7 @@ public class HistoryGraphController {
 
     @FXML
     private void handleSelectedLocation() {
-        String location = (String) locationCombo.getValue();
+        String location = locationCombo.getValue();
         fillYearList(location);
     }
 
@@ -126,15 +122,15 @@ public class HistoryGraphController {
         xAxis.setLowerBound(0);
         final int graphUpperBound = 12;
         xAxis.setUpperBound(graphUpperBound);
-        String locationEntry = (String) locationCombo.getSelectionModel()
+        String locationEntry = locationCombo.getSelectionModel()
                 .getSelectedItem();
         String[] locationArr = locationEntry.split("[,]");
         double specifiedLat = Double.parseDouble(locationArr[0]);
         double specifiedLong = Double.parseDouble(locationArr[1]);
-        int specifiedYear = Integer.parseInt((String) yearCombo
+        int specifiedYear = Integer.parseInt(yearCombo
                 .getSelectionModel().getSelectedItem());
 
-        Set<WaterPurityReport> matchList = new HashSet<>();
+        Collection<WaterPurityReport> matchList = new HashSet<>();
 
         int maxNum = database.getMaxPurityReportNum();
         int minNum = database.getMinPurityReportNum();
@@ -159,7 +155,7 @@ public class HistoryGraphController {
             historyGraph.getData().clear();
         }
         series = new XYChart.Series();
-        List templist = new ArrayList<>(monthList.keySet());
+        List<Integer> templist = new ArrayList<>(monthList.keySet());
         Collections.sort(templist);
 
         for (Object key: templist) {

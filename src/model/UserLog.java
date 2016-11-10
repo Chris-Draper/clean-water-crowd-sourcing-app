@@ -1,24 +1,24 @@
-package model;
+/*package model;
 
 //This class was causing errors because its methods are not called within the
 //application. The methods have been commented out until the feature is used
 
-/*import java.util.LinkedList;
+import java.util.LinkedList;
 import java.util.ListIterator;
-import java.util.AbstractList;*/
+import java.util.AbstractList;
 
 /**
  * UserLog tracks all of the users that have accessed the application
  */
-class UserLog {
+/*class UserLog {
 
-    /*private AbstractList<GenericUser> userLog;
+    private AbstractList<GenericUser> userLog;
 
     public UserLog() {
         this.userLog = new LinkedList<>();
     }
 
-    /*public void addUser(GenericUser user) {
+    public void addUser(GenericUser user) {
         userLog.add(user);
     }
 
@@ -45,6 +45,6 @@ class UserLog {
             }
         }
         return false;
-    } */
+    }
 
-}
+}*/

@@ -77,7 +77,9 @@ public class MainApplication extends Application {
             mainAppScreen.show();
 
             if (database == null) {
-                // Attempt to connect to database, display error if failure
+                // Attempt to connect to database - something besides an
+                // SQL Exception is thrown in the try block because we have
+                // gotten this error before when wifi is off
                 try {
                     database = new DatabaseInterface();
                 } catch (SQLException e) {

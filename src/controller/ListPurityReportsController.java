@@ -8,7 +8,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.VBox;
 import model.WaterPurityReport;
 
 /**
@@ -19,15 +18,12 @@ public class ListPurityReportsController {
     private MainApplication mainApplication;
 
     @FXML
-    private VBox listPurityReportVBox;
-
-    @FXML
-    private ListView reportList;
+    private ListView<Integer> reportList;
 
     @FXML
     private TextArea textArea;
 
-    private final ObservableList listItems
+    private final ObservableList<Integer> listItems
             = FXCollections.observableArrayList();
 
     /**
@@ -62,7 +58,7 @@ public class ListPurityReportsController {
 
         WaterPurityReport waterPurityReportData =
                 mainApplication.getDatabaseConn().getPurityReportInfo(
-                        (int) reportList.getSelectionModel().getSelectedItem());
+                        reportList.getSelectionModel().getSelectedItem());
 
         if (waterPurityReportData == null) {
 

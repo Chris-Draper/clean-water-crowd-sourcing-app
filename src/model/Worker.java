@@ -6,6 +6,15 @@ package model;
 class Worker extends User {
 
     /**
+     * @param username - the username of the Worker
+     * @param userType - the user type of the Worker
+     * @param id - the id of the Worker
+     */
+    Worker(String username, UserType userType, int id) {
+        super(username, userType, id);
+    }
+
+    /**
      * The class used to create the worker level user account
      *
      * @param username - the username of the Worker
@@ -15,13 +24,4 @@ class Worker extends User {
         super(username, UserType.Worker, id);
     }
 
-    /**
-     *
-     * @param username - the username of the Worker
-     * @param userType - the user type of the Worker
-     * @param id - the id of the Worker
-     */
-    Worker(String username, UserType userType, int id) {
-        super(username, userType, id);
-    }
 }

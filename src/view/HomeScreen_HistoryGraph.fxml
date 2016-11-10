@@ -83,7 +83,7 @@
                   <Insets left="25.0" />
                </GridPane.margin>
             </Label>
-            <Button fx:id="displayGraphButton" defaultButton="true"
+            <Button defaultButton="true"
                     mnemonicParsing="false" onAction="#handleDisplayGraphButton"
                     prefHeight="66.0" prefWidth="141.0" text="Display Graph"
                     GridPane.columnIndex="2" GridPane.rowIndex="2">

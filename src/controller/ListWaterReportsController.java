@@ -18,11 +18,11 @@ public class ListWaterReportsController {
     private MainApplication mainApplication;
 
     @FXML
-    private ListView listView;
+    private ListView<Integer> listView;
 
     @FXML private TextArea textArea; //used on line 79
 
-    private final ObservableList listItems
+    private final ObservableList<Integer> listItems
             = FXCollections.observableArrayList();
 
     /**
@@ -57,7 +57,7 @@ public class ListWaterReportsController {
 
         WaterSourceReport waterSourceReportData =
                 mainApplication.getDatabaseConn().getSourceReportInfo(
-                        (int) listView.getSelectionModel().getSelectedItem());
+                        listView.getSelectionModel().getSelectedItem());
 
         if (waterSourceReportData == null) {
 

@@ -8,9 +8,6 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import java.io.ByteArrayInputStream;
-import java.util.Base64;
-import java.util.DoubleSummaryStatistics;
 import java.util.Properties;
 
 /**
@@ -18,13 +15,10 @@ import java.util.Properties;
  */
 public class DatabaseInterface {
 
-    public Connection dbConn;
+    private Connection dbConn;
 
     // SSH Variables
-    static int lport;
-    static String rhost;
-    static int rport;
-    Session session;
+    public Session session;
 
     /**
      * Creates a new connection interface that the main application
@@ -34,31 +28,15 @@ public class DatabaseInterface {
      */
     public DatabaseInterface() throws SQLException {
 
-        establishSSH();
-
-        Properties connProperties = new Properties();
-        connProperties.put("user", "root");
-        connProperties.put("password", "db4321");
-
-        try {
-            dbConn = DriverManager.getConnection(
-                    ("jdbc:mysql://" + rhost +":" + lport + "/"),
-                    connProperties);
-        } catch (SQLException e) {
-            System.out.println("Error connecting to database: " + e);
-            throw e;
-        }
-    }
-
-    private void establishSSH() {
-
+        //Begin establish ssh
         String sshUser = "root";
         String sshPassword = "hackstreet1234";
         String sshHost = "107.170.19.158";
-        int port=22;
+        final int port = 22;
+        final int lport = 1234;
+        final String rhost = "localhost";
 
         try {
-
             JSch jsch = new JSch();
 
             session = jsch.getSession(sshUser, sshHost, port);
@@ -66,15 +44,26 @@ public class DatabaseInterface {
             session.setConfig("StrictHostKeyChecking", "no");
             session.connect();
 
-            lport = 1234;
-            rport = 3306;
-            rhost = "localhost";
-
-            int assigned_port = session.setPortForwardingL(lport, rhost, rport);
-            System.out.println("localhost:" + assigned_port + " -> "
-                    + rhost + ":" + rport);
+            final int rport = 3306;
+            session.setPortForwardingL(lport, rhost, rport);
+            /*System.out.println("localhost:" + assigned_port + " -> "
+                 + rhost + ":" + rport);*/
         } catch (JSchException e) {
-            System.out.println("Error establishing SSH tunnel: " + e);
+            //System.out.println("Error establishing SSH tunnel: " + e);
+        }
+
+        Properties connProperties = new Properties();
+        connProperties.put("user", "root");
+        connProperties.put("password", "db4321");
+        //end establish ssh
+
+        try {
+            dbConn = DriverManager.getConnection(
+                    ("jdbc:mysql://" + rhost +":" + lport + "/"),
+                    connProperties);
+        } catch (SQLException e) {
+           // System.out.println("Error connecting to database: " + e);
+            //throw e;
         }
     }
 
@@ -116,14 +105,14 @@ public class DatabaseInterface {
                 }
             }
         } catch (SQLException e ) {
-            System.out.println(e);
+            //System.out.println(e);
             return null;
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Failed to close statement.");
+                    //System.out.println("Failed to close statement.");
                 }
             }
             return loggedInUser;
@@ -149,13 +138,13 @@ public class DatabaseInterface {
             return rs.next();
 
         } catch (SQLException e ) {
-            System.out.println(e);
+            //System.out.println(e);
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Failed to close statement.");
+                    //System.out.println("Failed to close statement.");
                 }
             }
         }
@@ -186,14 +175,14 @@ public class DatabaseInterface {
             stmt.executeUpdate(query);
             return true;
         } catch (SQLException e) {
-            System.out.println("Error creating new user: " + e);
+            //System.out.println("Error creating new user: " + e);
             return false;
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Failed to close statement.");
+                    //System.out.println("Failed to close statement.");
                 }
             }
         }
@@ -233,13 +222,13 @@ public class DatabaseInterface {
             stmt = dbConn.createStatement();
             stmt.executeUpdate(query);
         } catch (SQLException e) {
-            System.out.println("Error creating new user: " + e);
+            //System.out.println("Error creating new user: " + e);
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Failed to close statement.");
+                    //System.out.println("Failed to close statement.");
                 }
             }
         }
@@ -278,13 +267,13 @@ public class DatabaseInterface {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error updating profile information: " + e);
+            //System.out.println("Error updating profile information: " + e);
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Failed to close statement.");
+                    //System.out.println("Failed to close statement.");
                 }
             }
         }
@@ -325,14 +314,14 @@ public class DatabaseInterface {
             stmt.executeUpdate(query);
             return true;
         } catch (SQLException e) {
-            System.out.println("Error creating new water report: " + e);
+            //System.out.println("Error creating new water report: " + e);
             return false;
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Error closing statement.");
+                    //System.out.println("Error closing statement.");
                 }
             }
         }
@@ -358,17 +347,17 @@ public class DatabaseInterface {
                 maxNum = rs.getInt("max(id)");
                 return maxNum;
             } else {
-                System.out.println("Error");
+                //System.out.println("Error");
                 return 0;
             }
         } catch (SQLException e ) {
-            System.out.println(e);
+            //System.out.println(e);
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Failed to close statement.");
+                    //System.out.println("Failed to close statement.");
                 }
             }
         }
@@ -397,17 +386,17 @@ public class DatabaseInterface {
                 minNum = rs.getInt("min(id)");
                 return minNum;
             } else {
-                System.out.println("Error");
+                //System.out.println("Error");
                 return 0;
             }
         } catch (SQLException e ) {
-            System.out.println(e);
+            //System.out.println(e);
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Failed to close statement.");
+                    //System.out.println("Failed to close statement.");
                 }
             }
         }
@@ -456,21 +445,20 @@ public class DatabaseInterface {
                         rs.getString("condition")
                 );
 
-                WaterSourceReport report = new WaterSourceReport(date, time,
+                return new WaterSourceReport(date, time,
                         reportNum, reporter, latitude, longitude, type,
                         condition
                 );
-                return report;
             }
 
         } catch (SQLException e) {
-            System.out.println("Error updating profile information: " + e);
+            //System.out.println("Error updating profile information: " + e);
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Error closing connection");
+                    //System.out.println("Error closing connection");
                 }
             }
         }
@@ -512,14 +500,15 @@ public class DatabaseInterface {
             stmt.executeUpdate(query);
             return true;
         } catch (SQLException e) {
-            System.out.println("Error creating new water purity report: " + e);
+            //System.out.println("Error creating new water purity report: "
+            // + e);
             return false;
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Error closing statement.");
+                    //System.out.println("Error closing statement.");
                 }
             }
         }
@@ -546,17 +535,17 @@ public class DatabaseInterface {
                 minNum = rs.getInt("min(id)");
                 return minNum;
             } else {
-                System.out.println("Error");
+                //System.out.println("Error");
                 return 0;
             }
         } catch (SQLException e ) {
-            System.out.println(e);
+            //System.out.println(e);
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Failed to close statement.");
+                    //System.out.println("Failed to close statement.");
                 }
             }
         }
@@ -586,17 +575,17 @@ public class DatabaseInterface {
                 maxNum = rs.getInt("max(id)");
                 return maxNum;
             } else {
-                System.out.println("Error");
+                //System.out.println("Error");
                 return 0;
             }
         } catch (SQLException e ) {
-            System.out.println(e);
+            //System.out.println(e);
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Failed to close statement.");
+                    //System.out.println("Failed to close statement.");
                 }
             }
         }
@@ -643,21 +632,20 @@ public class DatabaseInterface {
                         "condition"));
                 virusPPM = rs.getInt("virus");
                 contaminantPPM = rs.getInt("contaminant");
-                WaterPurityReport report = new WaterPurityReport(date, time,
+                return new WaterPurityReport(date, time,
                         reportNum, reporter, latitude, longitude, condition,
                         virusPPM, contaminantPPM
                 );
-                return report;
             }
 
         } catch (SQLException e) {
-            System.out.println("Error updating profile information: " + e);
+            //System.out.println("Error updating profile information: " + e);
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    System.out.println("Error closing connection");
+                    //System.out.println("Error closing connection");
                 }
             }
         }

@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import model.UserType;
 
+import java.util.Collections;
+
 /**
  * Controls the user profile view of the main application
  */
@@ -21,7 +23,7 @@ public class UserProfileController {
     private TextField nameTextField;
 
     @FXML
-    private ComboBox titleComboBox;
+    private ComboBox<UserType> titleComboBox;
     private final ObservableList<UserType> userTypes =
             FXCollections.observableArrayList();
 
@@ -48,9 +50,7 @@ public class UserProfileController {
 
     @FXML
     private void initialize() {
-        for (UserType userType: UserType.values()) {
-            userTypes.add(userType);
-        }
+        Collections.addAll(userTypes, UserType.values());
         titleComboBox.getItems().addAll(userTypes);
     }
 

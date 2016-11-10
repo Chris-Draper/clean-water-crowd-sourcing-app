@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import model.GenericUser;
 import model.UserType;
 
+import java.util.Collections;
+
 /**
  * Controls the registration screen of the main application
  */
@@ -25,23 +27,21 @@ public class RegistrationScreenController {
     private TextField passwordTextField;
 
     @FXML
-    private ComboBox positionComboBox;
+    private ComboBox<UserType> positionComboBox;
     private final ObservableList<UserType> userTypes =
             FXCollections.observableArrayList();
 
 
     @FXML
     private void initialize() {
-        for (UserType userType: UserType.values()) {
-            userTypes.add(userType);
-        }
+        Collections.addAll(userTypes, UserType.values());
         positionComboBox.getItems().addAll(userTypes);
 
     }
 
     @FXML
     private void handleRegisterPressed() {
-        UserType type = (UserType) positionComboBox.getSelectionModel()
+        UserType type = positionComboBox.getSelectionModel()
                 .selectedItemProperty().getValue();
         if (isRegistrationInfoAcceptable(type)) {
 
