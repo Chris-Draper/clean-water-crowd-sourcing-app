@@ -1,7 +1,6 @@
 package fxapp;
 
 import controller.LoginScreenController;
-import controller.WaterPurityReportController;
 import controller.WaterSourceReportController;
 import controller.WelcomeScreenController;
 import controller.HomeScreenController;
