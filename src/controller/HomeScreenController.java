@@ -125,7 +125,7 @@ public class HomeScreenController {
     private void loadVBoxs() {
         try {
             FXMLLoader loader_1 = new FXMLLoader();
-            loader_1.setLocation(MainApplication.class.getResource("../view/HomeScreen_UserProfile.fxml"));
+            loader_1.setLocation(MainApplication.class.getResource("/view/HomeScreen_UserProfile.fxml"));
             userProfileVBox = loader_1.load();
 
             // Give the controller access to the main app.
@@ -133,39 +133,39 @@ public class HomeScreenController {
             ctrl.setMainApp(mainApplication);
 
             FXMLLoader loader_2 = new FXMLLoader();
-            loader_2.setLocation(MainApplication.class.getResource("../view/HomeScreen_ListWaterReports.fxml"));
+            loader_2.setLocation(MainApplication.class.getResource("/view/HomeScreen_ListWaterReports.fxml"));
             listWaterReportVBox = loader_2.load();
 
             ctrl_2 = loader_2.getController();
             ctrl_2.setMainApp(mainApplication);
 
             FXMLLoader loader_3 = new FXMLLoader();
-            loader_3.setLocation(MainApplication.class.getResource("../view/HomeScreen_WaterPurityReport.fxml"));
+            loader_3.setLocation(MainApplication.class.getResource("/view/HomeScreen_WaterPurityReport.fxml"));
             purityReportVBox = loader_3.load();
 
             ctrl_3 = loader_3.getController();
             ctrl_3.setMainApp(mainApplication);
 
             FXMLLoader loader_4 = new FXMLLoader();
-            loader_4.setLocation(MainApplication.class.getResource("../view/HomeScreen_WaterSourceReport.fxml"));
+            loader_4.setLocation(MainApplication.class.getResource("/view/HomeScreen_WaterSourceReport.fxml"));
             waterReportVbox = loader_4.load();
 
             ctrl_4 = loader_4.getController();
             ctrl_4.setMainApplication(mainApplication);
 
             FXMLLoader loader_5 = new FXMLLoader();
-            loader_5.setLocation(MainApplication.class.getResource("../view/HomeScreen_ListPurityReports.fxml"));
+            loader_5.setLocation(MainApplication.class.getResource("/view/HomeScreen_ListPurityReports.fxml"));
             listPurityReportVbox = loader_5.load();
 
             ctrl_5 = loader_5.getController();
             ctrl_5.setMainApplication(mainApplication);
 
             FXMLLoader loader_6 = new FXMLLoader();
-            loader_6.setLocation((MainApplication.class.getResource("../view/InitHomeScreen.fxml")));
+            loader_6.setLocation((MainApplication.class.getResource("/view/InitHomeScreen.fxml")));
             welcomeMsgVBox = loader_6.load();
 
             FXMLLoader loader_7 = new FXMLLoader();
-            loader_7.setLocation(MainApplication.class.getResource("../view/HomeScreen_HistoryGraph.fxml"));
+            loader_7.setLocation(MainApplication.class.getResource("/view/HomeScreen_HistoryGraph.fxml"));
             historyGraphVbox = loader_7.load();
 
             ctrl_7 = loader_7.getController();
@@ -277,7 +277,7 @@ public class HomeScreenController {
     @FXML
     private void handleGoogleMapsButton(ActionEvent event) {
         try {
-            googleMapBorderPane = FXMLLoader.load(getClass().getResource("../view/HomeScreen_GoogleMaps.fxml"));
+            googleMapBorderPane = FXMLLoader.load(getClass().getResource("/view/HomeScreen_GoogleMaps.fxml"));
             rootLayout.setCenter(googleMapBorderPane);
             googleMapsButton.setSelected(true);
         } catch (IOException e) {

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import model.DatabaseInterface;
 import model.GenericUser;
 import model.UserLog;
+import com.jcraft.jsch.JSchException;
 import model.WaterPurityReport;
 
 public class MainApplication extends Application {
@@ -50,7 +51,7 @@ public class MainApplication extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/MainApplication.fxml"));
+            loader.setLocation(MainApplication.class.getResource("/view/MainApplication.fxml"));
             rootLayout = loader.load();
 
             // Give the controller access to the main app.
@@ -89,7 +90,7 @@ public class MainApplication extends Application {
         try {
             // Pointing loader to login screen fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/LoginScreen.fxml"));
+            loader.setLocation(MainApplication.class.getResource("/view/LoginScreen.fxml"));
             rootLayout = loader.load();
 
             // Give the controller access to the main app.
@@ -118,7 +119,7 @@ public class MainApplication extends Application {
         try {
             // Pointing loader to login screen fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/HomeScreen_Main.fxml"));
+            loader.setLocation(MainApplication.class.getResource("/view/HomeScreen_Main.fxml"));
             rootLayout = loader.load();
 
             // Give the controller access to the main app.
@@ -143,7 +144,7 @@ public class MainApplication extends Application {
         try {
             // Pointing loader to login screen fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../view/RegistrationScreen.fxml"));
+            loader.setLocation(MainApplication.class.getResource("/view/RegistrationScreen.fxml"));
             rootLayout = loader.load();
 
             // Give the controller access to the main app.
