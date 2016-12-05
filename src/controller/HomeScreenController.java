@@ -53,6 +53,11 @@ public class HomeScreenController {
     private ListWaterReportsController ctrl_2;
     private ListPurityReportsController ctrl_5;
     private HistoryGraphController ctrl_7;
+    private GoogleMapsController ctrl_8;
+
+    private FXMLLoader loader_8;
+
+    BorderPane googleMapBorderPane;
 
     /**
      * allow for calling back to the mainApplication application code
@@ -154,6 +159,16 @@ public class HomeScreenController {
 
             ctrl_7 = loader_7.getController();
             ctrl_7.setMainApplication(mainApplication);
+
+            // load the history graph screen
+            loader_8 = new FXMLLoader();
+            loader_8.setLocation(MainApplication.class
+                    .getResource("../view/HomeScreen_GoogleMaps.fxml"));
+            googleMapBorderPane = loader_8.load();
+
+
+            ctrl_8 = loader_8.getController();
+            ctrl_8.setMainApplication(mainApplication);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -258,15 +273,16 @@ public class HomeScreenController {
 
     @FXML
     private void handleGoogleMapsButton() {
-        try {
-            BorderPane googleMapBorderPane = FXMLLoader.load(getClass()
-                    .getResource("../view/HomeScreen_GoogleMaps.fxml"));
-            rootLayout.setCenter(googleMapBorderPane);
+        if (googleMapsButton.isSelected()) {
+            if (googleMapsButton.isSelected()) {
+                ctrl_8.loadReports();
+                ctrl_8.mapInitialized();
+                rootLayout.setCenter(googleMapBorderPane);
+            } else {
+                rootLayout.setCenter(googleMapBorderPane);
+            }
+        } else {
             googleMapsButton.setSelected(true);
-        } catch (IOException e) {
-            //System.out.println("Failed to open Google Maps View!");
-            e.printStackTrace();
         }
     }
-
 }

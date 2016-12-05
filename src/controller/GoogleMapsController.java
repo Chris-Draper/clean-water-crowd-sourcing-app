@@ -12,7 +12,11 @@ import com.lynden.gmapsfx.javascript.object.InfoWindowOptions;
 import com.lynden.gmapsfx.javascript.object.InfoWindow;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import fxapp.MainApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import model.WaterSourceReport;
@@ -29,6 +33,10 @@ public class GoogleMapsController implements Initializable,
     private GoogleMapView mapView;
 
     private GoogleMap map;
+
+    private MainApplication mainApplication;
+
+    private List<WaterSourceReport> waterSourceList;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,16 +61,23 @@ public class GoogleMapsController implements Initializable,
 
         map = mapView.createMap(mapOptions);
 
-        Iterable<WaterSourceReport> sourceList =
-                WaterSourceReportController.getWaterSourceReportList();
-        for (WaterSourceReport waterSource: sourceList) {
+        System.out.println(waterSourceList.size());
+
+        for (int i = 0; i < waterSourceList.size(); i++) {
+
+            WaterSourceReport waterSource = waterSourceList.get(i);
+
             MarkerOptions markerOptions = new MarkerOptions();
             LatLong location = new LatLong(waterSource.getLat(),
                     waterSource.getLong());
 
+            System.out.println(location);
+
             markerOptions.position(location)
                     .visible(Boolean.TRUE)
                     .title("Water Source : " + waterSource.getReportNum());
+
+            System.out.println(markerOptions);
 
             Marker marker = new Marker(markerOptions);
 
@@ -79,5 +94,29 @@ public class GoogleMapsController implements Initializable,
 
             map.addMarker(marker);
         }
+    }
+
+    public void loadReports() {
+
+        waterSourceList = new ArrayList<>();
+
+        int startReport = mainApplication.getDatabaseConn()
+                .getMinSourceReportNum();
+        int endReport = mainApplication.getDatabaseConn()
+                .getMaxSourceReportNum();
+
+        for (int i = startReport; i <= endReport; i++) {
+            waterSourceList.add(mainApplication.getDatabaseConn().getSourceReportInfo(i));
+        }
+
+    }
+
+    /**
+     * allow for calling back to the mainApplication application
+     * code if necessary
+     * @param mainApplication   the reference to the FX Application instance
+     * */
+    public void setMainApplication(MainApplication mainApplication) {
+        this.mainApplication = mainApplication;
     }
 }
